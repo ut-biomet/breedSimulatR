@@ -1,125 +1,50 @@
-#' Specie class
+#' R6 Class Representing a Specie
 #'
-#' An R6 class defining a specie.
+#' @description
+#' Specie object store specific information of one specie.
 #'
-#'@section Class Constructor:
-#' \describe{
-#'     \item{\code{new(nChr, lchr, specName = "Undefinded", ploidy = NA, mutRate = NA, recombRate = NA,}}{
-#'         \itemize{
-#'             \item{Generate a new specie}
-#'             \item{\bold{Args:}}{
-#'                 \itemize{
-#'                     \item{\bold{\code{nChr}}: [numeric] Number of chromosomes / ploidy
-#'                  }
-#'                     \item{\bold{\code{lchr}}: [numeric] Length of each chromosomes
-#'                  }
-#'                     \item{\bold{\code{specName}}: [str] specie's name
-#'                  }
-#'                     \item{\bold{\code{ploidy}}: [numeric] the number of possible alleles at one locus
-#'                  }
-#'                     \item{\bold{\code{mutRate}}: [numeric] Mutation rate at each base
-#'                  }
-#'                     \item{\bold{\code{recombRate}}: [numeric] Mutation rate at each base
-#'                  }
-#'                     \item{\bold{\code{chrNames}}: [str] Names of the chromosomes
-#'                  }
-#'                     \item{\bold{\code{verbose}}: [bool]Display info
-#'                  }
-#'                 }
-#'             }
-#'             \item{\bold{Returns:}}{
-#'                 \itemize{
-#'                     \item{New "specie" object}
-#'                 }
-#'             }
-#'         }
-#'     }
-#' }
-#'
-#'
-#'@section Public Methods:
-#' \describe{
-#'     \item{\code{getChrLength(chr)}}{
-#'         \itemize{
-#'             \item{Get the chromosome length}
-#'             \item{\bold{Args:}}{
-#'                 \itemize{
-#'                     \item{\bold{\code{chr}}: [str or numeric] chromosome ids
-#'                  }
-#'                 }
-#'             }
-#'             \item{\bold{Returns:}}{
-#'                 \itemize{
-#'                     \item{Named vector of the chromosomes length}
-#'                 }
-#'             }
-#'         }
-#'     }
-#' }
-#'
-#'
-#'@section Public Fields:
-#' \describe{
-#'     \item{\bold{\code{specName}}}{: [str] Specie's name}
-#'     \item{\bold{\code{nChr}}}{: [numeric] Number of chromosomes}
-#'     \item{\bold{\code{ploidy}}}{: [numeric] Number of possible alleles at one locus}
-#'     \item{\bold{\code{lchr}}}{: [numeric] length of all chromosomes}
-#'     \item{\bold{\code{mutRate}}}{: [numeric] Mutation rate at each base}
-#'     \item{\bold{\code{chrNames}}}{: [str] Names of the chromosomes}
-#'     \item{\bold{\code{recombRate}}}{: [numeric] Mutation rate at each base}
-#' }
-#'
-#'
-#'@section Special Methods:
-#' \describe{
-#'     \item{\code{clone(deep = FALSE)}}{
-#'         \itemize{
-#'             \item{Method for copying an object. See \href{https://adv-r.hadley.nz/r6.html#r6-semantics}{emph{Advanced R}} for the intricacies of R6 reference semantics.}
-#'             \item{\bold{Args:}}{
-#'                 \itemize{
-#'                     \item{\bold{\code{deep}}: logical. Whether to recursively clone nested R6 objects.
-#'                  }
-#'                 }
-#'             }
-#'             \item{\bold{Returns:}}{
-#'                 \itemize{
-#'                     \item{Cloned object of this class.}
-#'                 }
-#'             }
-#'         }
-#'     }
-#'     \item{\code{print()}}{
-#'         \itemize{
-#'             \item{Display information about the object}
-#'         }
-#'     }
-#' }
-#'
-#' @return
-#' Specie R6 object
-#'
-#' @examples
-#' mySpec <- specie$new(nChr = 3,
-#'                      lchr = c(100, 150, 200),
-#'                      specName = "Geneticae Exempulus",
-#'                      ploidy = 2,
-#'                      mutRate = 10^-8,
-#'                      recombRate = 10^-7)
-#' print(mySpec)
+# @details
+# Details: Specie object store specific information of one specie.
 #'
 #' @export
 #' @import R6
 specie <- R6::R6Class(
   "Specie",
   public = list(
+    #' @field specName [str] Specie's name
     specName = "Undefinded",
+    #' @field nChr [numeric] Number of chromosomes
     nChr = NA,
+    #' @field ploidy [numeric] Number of possible alleles at one locus
     ploidy = NA,
+    #' @field lchr [numeric] length of all chromosomes
     lchr = NA,
+    #' @field mutRate [numeric] Mutation rate at each base
     mutRate = NA,
+    #' @field chrNames [str] Names of the chromosomes
     chrNames = NA,
+    #' @field recombRate [numeric] Recombination rate at each base
     recombRate = NA,
 
+    #' @description
+    #' Create a new specie object.
+    #' @param nChr [numeric] Number of chromosomes
+    #' @param lchr [numeric] length of all chromosomes
+    #' @param specName [str] Specie's name (optional)
+    #' @param ploidy [numeric] Number of possible alleles at one locus (optional)
+    #' @param mutRate [numeric] Mutation rate at each base (optional)
+    #' @param recombRate [numeric] Recombination rate at each base (optional)
+    #' @param chrNames [str] Names of the chromosomes (optional)
+    #' @param verbose [bool] Display info (optional)
+    #' @return A new `specie` object.
+    #' @examples
+    #' mySpec <- specie$new(nChr = 3,
+    #'                      lchr = c(100, 150, 200),
+    #'                      specName = "Geneticae Exempulus",
+    #'                      ploidy = 2,
+    #'                      mutRate = 10^-8,
+    #'                      recombRate = 10^-7)
+    #' print(mySpec)
     initialize = function(nChr,
                           lchr,
                           specName = "Undefinded",
@@ -156,6 +81,8 @@ specie <- R6::R6Class(
       if (verbose) cat(paste("A new species has emerged:", self$specName, "!\n\n"))
     },
 
+    #' @description
+    #' Display information about the object
     print = function() {
       cat(paste0(
         "Name: ", self$specName, "\n",
@@ -169,6 +96,13 @@ specie <- R6::R6Class(
                        chrLength = self$lchr))
     },
 
+    #' @description
+    #' Get the chromosomes length
+    #' @param chr [str or numeric] chromosome ids
+    #' @examples
+    #' mySpec$getChrLength()
+    #' mySpec$getChrLength(2)
+    #' mySpec$getChrLength("Chr3")
     getChrLength = function(chr = NA) {
 
       # quick return:
