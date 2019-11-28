@@ -14,6 +14,9 @@ LazyData: true
 RoxygenNote: 7.0.1
 Description: R package providing classes and functions to simulate easily breeding processes.
 Depends: R6
-Suggests: 
+Imports: plotly
+Suggests:
+    devtools,
+    roxygen2,
     testthat,
     covr
