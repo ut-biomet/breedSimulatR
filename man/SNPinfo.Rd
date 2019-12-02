@@ -34,6 +34,20 @@ SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
 SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 
 ## ------------------------------------------------
+## Method `SNPinfo$nSNP`
+## ------------------------------------------------
+
+SNPs$nSNP()
+SNPs$nSNP(c("Chr2","Chr3"))
+
+## ------------------------------------------------
+## Method `SNPinfo$getInfo`
+## ------------------------------------------------
+
+SNPs$getInfo("SNP01")
+SNPs$getInfo(c("SNP01", "SNP03"))
+
+## ------------------------------------------------
 ## Method `SNPinfo$plot`
 ## ------------------------------------------------
 
@@ -137,11 +151,20 @@ Get the number of SNPs per chromosomes
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{SNPs$nSNP()
+SNPs$nSNP(c("Chr2","Chr3"))
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getInfo"></a>}}
 \subsection{Method \code{getInfo()}}{
-Get information about a specifique SNP
+Get information about specifique SNPs
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{SNPinfo$getInfo(SNPid)}\if{html}{\out{</div>}}
 }
@@ -149,10 +172,19 @@ Get information about a specifique SNP
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{chr}}{[str or numeric] chromosome ids}
+\item{\code{SNPid}}{[str] SNP ids}
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{SNPs$getInfo("SNP01")
+SNPs$getInfo(c("SNP01", "SNP03"))
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}

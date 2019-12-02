@@ -21,7 +21,8 @@ SNPinfo <- R6::R6Class(
     #'  }
     SNPcoord = data.frame(chr = c(),
                           pos = c(),
-                          SNPid = c()),
+                          SNPid = c(),
+                          stringsAsFactors = FALSE),
 
     #' @field specie [specie class] Specie of the SNPs
     #'   (see:\link[breedSimulatR]{specie})
@@ -66,6 +67,17 @@ SNPinfo <- R6::R6Class(
                 all(levels(SNPcoord$chr) %in% specie$chrNames),
                 length(SNPcoord$SNPid) == length(unique(SNPcoord$SNPid)))
 
+      # remove factors
+      SNPcoord[, sapply(SNPcoord, is.factor)] <- lapply(SNPcoord[, sapply(SNPcoord, is.factor)], as.character)
+
+      # convert to integer
+      SNPcoord$pos <- as.integer(SNPcoord$pos)
+
+      # sort position in increasing order (needed for the function
+      # "findInterval" in individual's generateGametes method)
+      SNPcoord <- SNPcoord[order(SNPcoord$pos),]
+
+
       self$SNPcoord <- SNPcoord
       self$specie <- specie
       self$SNPcoordList <- split(SNPcoord,
@@ -76,6 +88,8 @@ SNPinfo <- R6::R6Class(
     #' Get the number of SNPs per chromosomes
     #' @param chr [str or numeric] chromosome id
     #' @examples
+    #' SNPs$nSNP()
+    #' SNPs$nSNP(c("Chr2","Chr3"))
     nSNP = function(chr=NA) {
 
       if (length(chr) == 1 && is.na(chr)) return(nrow(self$SNPcoord))
@@ -90,9 +104,11 @@ SNPinfo <- R6::R6Class(
 
     },
     #' @description
-    #' Get information about a specifique SNP
-    #' @param chr [str or numeric] chromosome ids
+    #' Get information about specifique SNPs
+    #' @param SNPid [str] SNP ids
     #' @examples
+    #' SNPs$getInfo("SNP01")
+    #' SNPs$getInfo(c("SNP01", "SNP03"))
     getInfo = function(SNPid) {
       self$SNPcoord[match(SNPid, self$SNPcoord$SNPid),]
     },
@@ -134,6 +150,7 @@ SNPinfo <- R6::R6Class(
                       })) %>%
         plotly::add_markers(x = rep(names(ends), 2),
                             y = c(ends, rep(0,length(ends))),
+                            alpha = 1,
                             name = "Chromosome's edges",
                             hoverinfo = 'text',
                             text = paste(rep(names(ends), 2),
