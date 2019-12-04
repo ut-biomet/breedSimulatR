@@ -2,6 +2,7 @@
 
 export(SNPinfo)
 export(haplotype)
+export(individual)
 export(specie)
 import(R6)
 import(plotly)
