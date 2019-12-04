@@ -1,10 +1,7 @@
 image: rocker/verse
 
 stages:
-  - document
-  - check
-  - test
-  - deploy
+  - TestPackage
 
 before_script:
   - apt-get update
@@ -12,26 +9,26 @@ before_script:
   - r -e 'devtools::install_deps()'
 
 documentation:
-  stage: document
+  stage: TestPackage
   script:
     - r -e 'devtools::document()'
 
 check:
-  stage: check
+  stage: TestPackage
   script:
     - r -e 'devtools::check()'
 
 unittests:
-  stage: test
+  stage: TestPackage
   script:
     - r -e 'devtools::test()'
 
 codecov:
-  stage: test
+  stage: TestPackage
   script:
     - r -e 'covr::codecov()'
 
 install:
-  stage: deploy
+  stage: TestPackage
   script:
     - r -e 'devtools::install()'
