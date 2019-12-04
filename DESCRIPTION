@@ -11,7 +11,7 @@ Maintainers@R: person("Julien", "Diot",
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.1
+RoxygenNote: 7.0.2
 Description: R package providing classes and functions to simulate easily breeding processes.
 Depends: R6
 Imports: plotly

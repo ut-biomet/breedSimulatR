@@ -6,14 +6,17 @@
 
 
 test_that("specie initialization", {
-  mySpec <- specie$new(nChr = 3,
-                       lchr = c(100, 150, 200),
-                       specName = "Geneticae Exempulus",
-                       ploidy = 2,
-                       mutRate = 10^-8,
-                       recombRate = 10^-7,
-                       chrNames = c("C1", "C2", "C3"),
-                       verbose = F)
+
+  expect_error({mySpec <- specie$new(nChr = 3,
+                                     lchr = c(100, 150, 200),
+                                     specName = "Geneticae Exempulus",
+                                     ploidy = 2,
+                                     mutRate = 10^-8,
+                                     recombRate = 10^-7,
+                                     chrNames = c("C1", "C2", "C3"),
+                                     verbose = F)},
+               NA)
+
 
   expect_identical(mySpec$specName, "Geneticae Exempulus")
   expect_identical(mySpec$nChr, 3)
@@ -25,17 +28,32 @@ test_that("specie initialization", {
   expect_identical(mySpec$recombRate, 10^-7)
   expect_output(specie$new(1, 10, verbose = T), "A new species has emerged: Undefinded !")
   expect_output(specie$new(1, 10, verbose = F), NA)
+
+  expect_error(specie$new(nChr = 3.5,
+                          lchr = c(100, 150, 200),
+                          verbose = F),
+               "nChr must be integer.")
+  expect_error(specie$new(nChr = 3,
+                          lchr = c(100, 150.2, 200),
+                          verbose = F),
+               "lchr must be integers.")
 })
 
 
 test_that("specie initialization without optional values", {
+
+  expect_error(specie$new(nChr = 3,
+                          lchr = c(100, 150, 200),
+                          verbose = F),
+               NA)
+
   mySpec <- specie$new(nChr = 3,
                        lchr = c(100, 150, 200),
                        verbose = F)
 
   expect_identical(mySpec$specName, "Undefinded")
   expect_identical(mySpec$nChr, 3)
-  expect_identical(mySpec$ploidy, NA)
+  expect_identical(mySpec$ploidy, 2)
   expect_identical(as.numeric(mySpec$lchr), c(100, 150, 200))
   expect_identical(names(mySpec$lchr), c("Chr1", "Chr2", "Chr3"))
   expect_identical(mySpec$mutRate, NA)
@@ -67,5 +85,5 @@ test_that("specie's \"print\" methods", {
                        lchr = c(100, 150, 200),
                        verbose = F)
 
-  expect_output(print(mySpec), "Name: Undefinded\\nNumber of Chromosomes: 3\\nPloidy: NA\\nMutation rate : NA\\nRecombination Rate: NA\\nChromosome length:\\n     chrNames chrLength\\nChr1     Chr1       100\\nChr2     Chr2       150\\nChr3     Chr3       200")
+  expect_output(print(mySpec), "Name: Undefinded\\nNumber of Chromosomes: 3\\nPloidy: 2\\nMutation rate : NA\\nRecombination Rate: NA\\nChromosome length:\\n     chrNames chrLength\\nChr1     Chr1       100\\nChr2     Chr2       150\\nChr3     Chr3       200")
 })

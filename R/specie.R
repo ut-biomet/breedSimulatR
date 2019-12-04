@@ -54,11 +54,19 @@ specie <- R6::R6Class(
                           chrNames = NA,
                           verbose = T){
       if (!is.numeric(nChr)) stop("nChr must be numeric.")
+      if (floor(nChr) - nChr != 0) stop("nChr must be integer.")
       if (!is.numeric(lchr)) stop("lchr must be numeric.")
+      if (any(floor(lchr) - lchr != 0)) stop("lchr must be integers.")
       if (length(lchr) != 1 && length(lchr) != nChr){
         stop(paste("length(lchr) must be equal to 1 (all chr have the same",
                    "size) or equal to nChr."))
       }
+      if (is.na(ploidy)){
+        message('"ploidy" was not specify. The ploidy had been set to "2"')
+        ploidy <- 2
+      }
+
+
       self$specName = specName
       self$nChr = nChr
       self$ploidy = ploidy
