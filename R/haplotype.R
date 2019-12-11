@@ -7,8 +7,6 @@
 
 
 
-#### CODE ####
-
 #' R6 Class representing an haplotype
 #'
 #' @description

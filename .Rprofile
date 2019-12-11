@@ -76,7 +76,6 @@ report <- function(x = package_coverage(),
       "  - testthat\n",
       "  - covr\n",
       "  - breedSimulatR\n",
-      "    -R6",
       "\n"))
 
 

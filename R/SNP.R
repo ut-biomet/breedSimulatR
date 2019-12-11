@@ -1,3 +1,12 @@
+# Author: Julien Diot juliendiot@ut-biomet.org
+# 2019 The University of Tokyo
+#
+# Description:
+# Definition of SNPinfo class
+
+
+
+
 #' R6 Class representing a set of SNP markers
 #'
 #' @description

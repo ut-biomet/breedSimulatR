@@ -7,8 +7,6 @@
 
 
 
-#### CODE ####
-
 #' An R6 class representing an individual
 #'
 #' @description

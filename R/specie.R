@@ -1,3 +1,12 @@
+# Author: Julien Diot juliendiot@ut-biomet.org
+# 2019 The University of Tokyo
+#
+# Description:
+# Definition of populqtion class
+
+
+
+
 #' R6 Class Representing a Specie
 #'
 #' @description
