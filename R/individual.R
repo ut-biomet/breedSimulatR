@@ -141,19 +141,16 @@ individual <- R6::R6Class(
   ),
   private = list(
     # @description
-    # Check the number if the chromosomes between `haplo` and `specie` is the same
-    #
+    # Check the number of chromosomes between `haplo` and `specie` is the
+    # same
     # @return boolean
     checkHaplo = function(){
       if (length(self$haplo$values) != self$specie$nChr) {
-        stop(paste0("Number of chromosomes in haplo is; ", length(self$haplo$values), " but must be equal to: ",
+        stop(paste0("Number of chromosomes in haplo is; ",
+                    length(self$haplo$values), " but must be equal to: ",
                     self$specie$nChr, " (number of chr of ",
                     self$specie$name, ")"))
       }
     }
   )
 )
-
-
-
-
