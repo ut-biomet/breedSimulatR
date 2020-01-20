@@ -3,6 +3,7 @@
 export(SNPinfo)
 export(haplotype)
 export(individual)
+export(makeCrosses)
 export(specie)
 import(R6)
 import(plotly)
