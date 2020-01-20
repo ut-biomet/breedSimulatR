@@ -1,5 +1,5 @@
 # Author: Julien Diot juliendiot@ut-biomet.org
-# 2019 The University of Tokyo
+# 2019 / 2020 The University of Tokyo
 #
 # Description:
 # Definition of SNPinfo class
