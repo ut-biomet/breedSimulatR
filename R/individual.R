@@ -88,8 +88,7 @@ individual <- R6::R6Class(
 
     #' @description Get the number of SNPs per chromosomes
     #' @param n [float] number of gemetes to create (default: 1)
-    #' @return list of gametes. A gamete is a list of haplotype for all
-    #'   chromosomes
+    #' @return list of gametes. A gamete is a named vectors with value 0 or 1.
     #' @examples
     #' myInd$generateGametes()
     #' myInd$generateGametes(2)
@@ -98,7 +97,7 @@ individual <- R6::R6Class(
         if (is.na(self$specie$recombRate)) {
           stop('specie$recombRate must be specify in order to generate gemtes')
         }
-        mapply(function(haplo, SNPcoord) {
+        gamete <- mapply(function(haplo, SNPcoord) {
           chrName <- SNPcoord$chr[1]
           chrLen <- self$specie$lchr[chrName]
 
@@ -112,11 +111,11 @@ individual <- R6::R6Class(
             Rpos <- .Internal(sample(chrLen, nRecomb, F, NULL))
           }
 
-          gamete <- integer(ncol(haplo))
+          gamHaplo <- integer(ncol(haplo))
           # split SNP beetween two chromosome
           if (length(Rpos) == 0) {
             g <- (runif(1) < 0.5) + 1
-            gamete <- haplo[g, ]
+            gamHaplo <- haplo[g, ]
           } else {
             ids <- unique(c(0,
                             sort(findInterval(Rpos, SNPcoord$pos)),
@@ -124,18 +123,24 @@ individual <- R6::R6Class(
             )
             g <- (runif(1) < 0.5) + 1
             for (i in seq_len(length(ids) - 1)) {
-              gamete[(ids[[i]] + 1):ids[[i + 1]]] <-
+              gamHaplo[(ids[[i]] + 1):ids[[i + 1]]] <-
                 haplo[g, (ids[[i]] + 1):ids[[i + 1]]]
               g <- -g + 3
             }
           }
-          names(gamete) <- colnames(haplo)
-          gamete
+          names(gamHaplo) <- colnames(haplo)
+          gamHaplo
         },
         self$haplo$values,
         self$haplo$SNPinfo$SNPcoordList,
         SIMPLIFY = F)
+
+        gamete <- do.call(c, gamete)
+        names(gamete) <- sub(".*(?=\\.).", "", names(gamete), perl = TRUE)
+        gamete
+
       })
+
       gametes
     }
   ),

@@ -99,24 +99,28 @@ test_that("individual gametes generation", {
                           haplo = haplo,
                           verbose = F)
 
+  # return a list of gametes
   expect_is(myInd$generateGametes(), "list")
   expect_equal(length(myInd$generateGametes()), 1)
   expect_equal(length(myInd$generateGametes(3)), 3)
-  expect_equal(length(unlist(myInd$generateGametes())), SNPs$nSNP())
+
+  expect_is(myInd$generateGametes()[[1]], "integer")
+
+  expect_equal(length(myInd$generateGametes()[[1]]), SNPs$nSNP())
 
   # check for markers names of the gamete
-  for (chr in mySpec$chrNames) {
-    expect_equal(names(myInd$generateGametes()[[1]][[chr]]),
-                 colnames(myInd$haplo$values[[chr]]))
-  }
+  expect_equal(names(myInd$generateGametes()[[1]]),
+               names(myInd$haplo$allelDose))
 
-  geno <- unlist(myInd$generateGametes())
-  names(geno) <- sub(".*(?=\\.).", "", names(geno), perl = TRUE)
+
+  # geno <- unlist(myInd$generateGametes())
+  # names(geno) <- sub(".*(?=\\.).", "", names(geno), perl = TRUE)
 
   # test the markers names are similar (nessesary for the next test)
-  expect_true(all(colnames(do.call(cbind, myInd$haplo$values)) == names(geno)))
-  c1 <- geno == do.call(cbind, myInd$haplo$values)[1,]
-  c2 <- geno == do.call(cbind, myInd$haplo$values)[2,]
+  gam <- myInd$generateGametes()[[1]]
+  # expect_true(all(colnames(do.call(cbind, myInd$haplo$values)) == names(gam)))
+  c1 <- gam == do.call(cbind, myInd$haplo$values)[1,]
+  c2 <- gam == do.call(cbind, myInd$haplo$values)[2,]
 
   # check gamete genotype is in the individual genotye
   expect_true(all(c1 | c2))

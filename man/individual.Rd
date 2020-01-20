@@ -165,8 +165,7 @@ Get the number of SNPs per chromosomes
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-list of gametes. A gamete is a list of haplotype for all
-  chromosomes
+list of gametes. A gamete is a named vectors with value 0 or 1.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
