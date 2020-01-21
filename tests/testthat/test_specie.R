@@ -2,7 +2,7 @@
 # 2019 / 2020 The University of Tokyo
 #
 # Description:
-# Test file for the specie class
+# Test file for the Specie class
 
 
 test_that("specie initialization", {

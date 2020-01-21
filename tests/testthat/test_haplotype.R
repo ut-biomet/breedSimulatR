@@ -7,32 +7,23 @@
 
 # set.seed(8241) # for reproductible RNG
 
+##### Initialisation functions ####
+source("src/functionsForTests.R")
 
-test_that("haplotype initialisation", {
-  # create specie
-  mySpec <- specie$new(nChr = 3,
-                       lchr = c(100, 150, 200),
-                       ploidy = 2,
-                       recombRate = 0.004,
-                       verbose = F)
 
-  # simulate SNP
-  SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
-                                 rep("Chr2", 4),
-                                 rep("Chr3", 5)),
-                         pos = c(c(1,sample(100, 2)),
-                                 c(3,sample(150, 3)),
-                                 c(2,sample(200, 4))),
-                         SNPid = sprintf(fmt = paste0("SNP%0", 2,"i"),
-                                         1:(3 + 4 + 5)))
-  # create SNPinfo object
-  SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 
-  # simulate haplotype
-  rawHaplo <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = T), nrow = 2)
-  colnames(rawHaplo) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
-                                1:(3 + 4 + 5))
+#### TESTS ####
+test_that("haplotype normal initialisation", {
+  #### Initialisation:
+  mySpec <- create_spec()
+  SNPs <- create_SNP(mySpec)
+  # simulate haplotype data
+  rawHaplo <- matrix(sample(c(0, 1), SNPs$nSNP() * mySpec$ploidy, replace = T),
+                     nrow = mySpec$ploidy)
+  colnames(rawHaplo) <- SNPs$SNPcoord$SNPid
 
+
+  #### Tests:
   # create haplotype object
   expect_error({haplo <- haplotype$new(SNPinfo = SNPs,
                                        haplo = rawHaplo)},
@@ -40,44 +31,51 @@ test_that("haplotype initialisation", {
 
   expect_is(haplo$SNPinfo, "SNPinfo")
   expect_is(haplo$values, "list")
-  expect_equal(length(haplo$values), 3)
-  expect_equal(names(haplo$values), c("Chr1", "Chr2", "Chr3"))
+  expect_equal(length(haplo$values), mySpec$nChr)
+  expect_equal(names(haplo$values), mySpec$chrNames)
   expect_is(unlist(haplo$values), "integer")
   expect_equal(haplo$allelDose, colSums(rawHaplo)[names(haplo$allelDose)])
 })
 
-test_that("haplotype initialisation errors", {
-  # create specie
-  mySpec <- specie$new(nChr = 3,
-                       lchr = c(100, 150, 200),
-                       ploidy = 2,
-                       recombRate = 0.004,
-                       verbose = F)
-
-  # simulate SNP
-  SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
-                                 rep("Chr2", 4),
-                                 rep("Chr3", 5)),
-                         pos = c(c(1,sample(100, 2)),
-                                 c(3,sample(150, 3)),
-                                 c(2,sample(200, 4))),
-                         SNPid = sprintf(fmt = paste0("SNP%0", 2,"i"),
-                                         1:(3 + 4 + 5)))
-  # create SNPinfo object
-  SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
-
+test_that("haplotype particular initialisation", {
+  #### Initialisation:
+  mySpec <- create_spec()
+  SNPs <- create_SNP(mySpec)
   # simulate haplotype
-  rawHaplo <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = T), nrow = 2)
+  rawHaplo <- matrix(sample(c(0, 1), SNPs$nSNP() * mySpec$ploidy, replace = T),
+                     nrow = mySpec$ploidy)
+  colnames(rawHaplo) <- SNPs$SNPcoord$SNPid
+  rawHaploInit <- rawHaplo
 
-
-
+  #### Tests:
+  # OK with some missing data in rawHaplo
+  rawHaplo[sample(length(rawHaplo), 10)] <- NA
   expect_error(haplotype$new(SNPinfo = SNPs,
                              haplo = rawHaplo),
-               "haplo must be a named matrix")
+               NA)
+  rawHaplo <- rawHaploInit
 
-  rawHaplo <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = T), nrow = 2)
-  colnames(rawHaplo) <- rep("toto", ncol(rawHaplo))
+  # ERROR if some markers not in SNPinfo:
+  colnames(rawHaplo)[sample(SNPs$nSNP(), 10)] <- paste("wrong Name", 1:10)
   expect_error(haplotype$new(SNPinfo = SNPs,
                              haplo = rawHaplo),
                "colnames\\(haplo\\) must be the names of the markers")
+  rawHaplo <- rawHaploInit
+
+  # ERROR if markers not specified:
+  colnames(rawHaplo) <- NULL
+  expect_error(haplotype$new(SNPinfo = SNPs,
+                             haplo = rawHaplo),
+               "haplo must be a named matrix")
+  rawHaplo <- rawHaploInit
+
+  # ERROR if markers in "haplo" are a subset of the markers in "SNPs":
+  # TODO for improvment this can error could be remove inf the future in the
+  # subset is included in "SNPs"
+  rawHaplo <- rawHaplo[,sample(ncol(rawHaplo), ncol(rawHaplo) - 10)]
+  expect_error(haplotype$new(SNPinfo = SNPs,
+                             haplo = rawHaplo),
+               "ncol\\(haplo\\) must be equal to the number of markers in SNPinfo")
+  rawHaplo <- rawHaploInit
+
 })

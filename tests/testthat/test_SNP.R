@@ -8,23 +8,33 @@
 # set.seed(6705) # for reproductible RNG
 
 
+##### Initialisation functions ####
+source("src/functionsForTests.R")
+
+
+
+#### TESTS ####
 test_that("SNPinfo initialization", {
-  # create specie
-  mySpec <- specie$new(nChr = 3,
-                       lchr = c(100, 150, 200),
-                       verbose = F)
+  #### Initialisation:
+  mySpec <- create_spec()
+  nMarkers <- round(mySpec$lchr/10)
 
-  # simulate SNP
-  SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
-                                 rep("Chr2", 4),
-                                 rep("Chr3", 5)),
-                         pos = c(c(1,sample(100, 2)),
-                                 c(3,sample(150, 3)),
-                                 c(2,sample(200, 4))),
-                         SNPid = sprintf(fmt = paste0("SNP%0", 2,"i"),
-                                         1:(3 + 4 + 5)),
-                         stringsAsFactors = FALSE)
+  # generate positions
+  pos <- unlist(sapply(seq(mySpec$nChr),
+                       function(chr){
+                         sample(mySpec$lchr[chr], nMarkers[chr])
+                       }))
 
+  # generate arbitrary SNPid
+  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
+                   sample(sum(nMarkers)*50, sum(nMarkers)))
+
+  # SNP coordinates data.frame
+  SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
+                         pos = pos,
+                         SNPid = SNPid)
+
+  #### Tests:
   # create SNPinfo object
   expect_error({SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)},
                NA)
@@ -32,9 +42,9 @@ test_that("SNPinfo initialization", {
   expect_identical(SNPs$specie, mySpec)
   expect_is(SNPs$SNPcoord, "data.frame")
   expect_is(SNPs$SNPcoordList, "list")
-  expect_equal(length(SNPs$SNPcoordList), 3)
+  expect_equal(length(SNPs$SNPcoordList), mySpec$nChr)
   expect_identical(names(SNPs$SNPcoordList), mySpec$chrNames)
-  expect_equal(SNPs$nSNP(), 3 + 4 + 5)
+  expect_equal(SNPs$nSNP(), sum(nMarkers))
 
   # check SNPs$SNPcoord is sorted increasingly for all chromosomes (needed for
   # the function "findInterval" in individual's generateGametes method)
@@ -45,142 +55,163 @@ test_that("SNPinfo initialization", {
 })
 
 test_that("SNPinfo stringAsFactor",{
-  # create specie
-  mySpec <- specie$new(nChr = 3,
-                       lchr = c(100, 150, 200),
-                       verbose = F)
+  #### Initialisation:
+  mySpec <- create_spec()
+  nMarkers <- round(mySpec$lchr/10)
 
-  # simulate SNP
-  SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
-                                 rep("Chr2", 4),
-                                 rep("Chr3", 5)),
-                         pos = c(c(1,sample(100, 2)),
-                                 c(3,sample(150, 3)),
-                                 c(2,sample(200, 4))),
-                         SNPid = sprintf(fmt = paste0("SNP%0", 2,"i"),
-                                         1:(3 + 4 + 5)),
+  # generate positions
+  pos <- unlist(sapply(seq(mySpec$nChr),
+                       function(chr){
+                         sample(mySpec$lchr[chr], nMarkers[chr])
+                       }))
+
+  # generate arbitrary SNPid
+  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
+                   sample(sum(nMarkers)*50, sum(nMarkers)))
+
+  # SNP coordinates data.frame
+  SNPcoord_SAF_T <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
+                         pos = pos,
+                         SNPid = SNPid,
                          stringsAsFactors = TRUE)
+  SNPcoord_SAF_F <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
+                               pos = pos,
+                               SNPid = SNPid,
+                               stringsAsFactors = FALSE)
 
   # create SNPinfo object
-  SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
+  SNPs_SAF_T <- SNPinfo$new(SNPcoord = SNPcoord_SAF_T, specie = mySpec)
+  SNPs_SAF_F <- SNPinfo$new(SNPcoord = SNPcoord_SAF_F, specie = mySpec)
 
-  expect_error(expect_identical(SNPs$SNPcoord, SNPcoord))
-  expect_is(SNPs$SNPcoord$SNPid, "character")
-  expect_is(SNPs$SNPcoord$chr, "character")
-  expect_is(SNPs$SNPcoord$pos, "integer")
+  #### Tests:
+  expect_error(expect_identical(SNPs_SAF_T$SNPcoord, SNPcoord_SAF_T))
+  expect_equal(summary(SNPs_SAF_T$SNPcoord), summary(SNPcoord_SAF_F))
+  expect_equal(SNPs_SAF_T, SNPs_SAF_F)
 })
 
-
-
-
-
-
 test_that("SNPinfo nSNP method", {
-  # create specie
-  mySpec <- specie$new(nChr = 3,
-                       lchr = c(100, 150, 200),
-                       verbose = F)
+  #### Initialisation:
+  mySpec <- create_spec(nChr = 3)
+  nMarkers <- round(mySpec$lchr/10)
 
-  # simulate SNP
-  SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
-                                 rep("Chr2", 4),
-                                 rep("Chr3", 5)),
-                         pos = c(c(1,sample(100, 2)),
-                                 c(3,sample(150, 3)),
-                                 c(2,sample(200, 4))),
-                         SNPid = sprintf(fmt = paste0("SNP%0", 2,"i"),
-                                         1:(3 + 4 + 5)))
+  # generate positions
+  pos <- unlist(sapply(seq(mySpec$nChr),
+                       function(chr){
+                         sample(mySpec$lchr[chr], nMarkers[chr])
+                       }))
+
+  # generate arbitrary SNPid
+  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
+                   sample(sum(nMarkers)*50, sum(nMarkers)))
+
+  # SNP coordinates data.frame
+  SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
+                         pos = pos,
+                         SNPid = SNPid)
 
   # create SNPinfo object
   SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 
-  expect_equal(SNPs$nSNP(), 3 + 4 + 5)
+  #### Tests:
+  expect_equal(SNPs$nSNP(), sum(nMarkers))
   expect_named(SNPs$nSNP(1))
-  expect_equal(as.numeric(SNPs$nSNP(1)), 3)
-  expect_equal(as.numeric(SNPs$nSNP("Chr2")), 4)
-  expect_equal(as.numeric(SNPs$nSNP(c("Chr2", "Chr3"))), c(4, 5))
-
-
+  expect_equal(SNPs$nSNP(1), nMarkers[1])
+  expect_equal(SNPs$nSNP("Chr2"), nMarkers[2])
+  expect_equal(SNPs$nSNP(c("Chr2", "Chr3")), nMarkers[c(2, 3)])
 })
 
 
 test_that("SNPinfo getInfo method", {
-  # create specie
-  mySpec <- specie$new(nChr = 3,
-                       lchr = c(100, 150, 200),
-                       verbose = F)
+  #### Initialisation:
+  mySpec <- create_spec(nChr = 3)
+  nMarkers <- round(mySpec$lchr/10)
 
-  # simulate SNP
-  SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
-                                 rep("Chr2", 4),
-                                 rep("Chr3", 5)),
-                         pos = c(c(1,sample(100, 2)),
-                                 c(3,sample(150, 3)),
-                                 c(2,sample(200, 4))),
-                         SNPid = sprintf(fmt = paste0("SNP%0", 2,"i"),
-                                         1:(3 + 4 + 5)),
-                         stringsAsFactors = F)
+  # generate positions
+  pos <- unlist(sapply(seq(mySpec$nChr),
+                       function(chr){
+                         sample(mySpec$lchr[chr], nMarkers[chr])
+                       }))
+
+  # generate arbitrary SNPid
+  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
+                   sample(sum(nMarkers)*50, sum(nMarkers)))
+
+  # SNP coordinates data.frame
+  SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
+                         pos = pos,
+                         SNPid = SNPid)
 
   # create SNPinfo object
   SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 
-
-  expect_identical(SNPs$getInfo("SNP01"), SNPs$SNPcoord[1, ])
-  expect_equal(SNPs$getInfo(sprintf(fmt = paste0("SNP%0", 2, "i"),
-                                    1:(3 + 4 + 5))),
-               SNPcoord)
+  snp <- sample(SNPid, 1)
+  expect_identical(SNPs$getInfo(snp),
+                   SNPs$SNPcoord[SNPs$SNPcoord$SNPid == snp, ])
+  snps <- sort(sample(SNPid, 10))
+  ref <- SNPs$SNPcoord[SNPs$SNPcoord$SNPid %in% snps, ]
+  ref <- ref[order(ref$SNPid), ]
+  expect_equal(SNPs$getInfo(snps),
+               ref)
 })
 
 
 test_that("SNPinfo plot method", {
-  # create specie
-  mySpec <- specie$new(nChr = 3,
-                       lchr = c(100, 150, 200),
-                       verbose = F)
+  #### Initialisation:
+  mySpec <- create_spec(nChr = 3)
+  nMarkers <- round(mySpec$lchr/10)
 
-  # simulate SNP
-  SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
-                                 rep("Chr2", 4),
-                                 rep("Chr3", 5)),
-                         pos = c(c(1,sample(100, 2)),
-                                 c(3,sample(150, 3)),
-                                 c(2,sample(200, 4))),
-                         SNPid = sprintf(fmt = paste0("SNP%0", 2,"i"),
-                                         1:(3 + 4 + 5)))
+  # generate positions
+  pos <- unlist(sapply(seq(mySpec$nChr),
+                       function(chr){
+                         sample(mySpec$lchr[chr], nMarkers[chr])
+                       }))
+
+  # generate arbitrary SNPid
+  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
+                   sample(sum(nMarkers)*50, sum(nMarkers)))
+
+  # SNP coordinates data.frame
+  SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
+                         pos = pos,
+                         SNPid = SNPid)
 
   # create SNPinfo object
   SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
-  p <- SNPs$plot(alpha = 1)
 
+
+  expect_error({p <- SNPs$plot(alpha = 1)}, NA)
   expect_is(p, "plotly")
-
 })
 
 
 
 test_that("specie's \"print\" methods", {
-  # create specie
-  mySpec <- specie$new(nChr = 3,
-                       lchr = c(100, 150, 200),
-                       verbose = F)
+  #### Initialisation:
+  mySpec <- create_spec(nChr = 20)
+  nMarkers <- round(mySpec$lchr/10)
 
-  # simulate SNP
-  SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
-                                 rep("Chr2", 4),
-                                 rep("Chr3", 5)),
-                         pos = c(c(1,sample(100, 2)),
-                                 c(3,sample(150, 3)),
-                                 c(2,sample(200, 4))),
-                         SNPid = sprintf(fmt = paste0("SNP%0", 2,"i"),
-                                         1:(3 + 4 + 5)))
+  # generate positions
+  pos <- unlist(sapply(seq(mySpec$nChr),
+                       function(chr){
+                         sample(mySpec$lchr[chr], nMarkers[chr])
+                       }))
+
+  # generate arbitrary SNPid
+  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
+                   sample(sum(nMarkers)*50, sum(nMarkers)))
+
+  # SNP coordinates data.frame
+  SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
+                         pos = pos,
+                         SNPid = SNPid)
 
   # create SNPinfo object
   SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 
   expect_output(print(SNPs), "specie: Undefinded")
-  expect_output(print(SNPs), "12 Markers on 3 chromosomes :")
-  expect_output(print(SNPs), "Chr1 Chr2 Chr3")
-  expect_output(print(SNPs), "   3    4    5")
+  expect_output(print(SNPs),
+                paste(sum(nMarkers),
+                      "Markers on",
+                      mySpec$nChr, "chromosomes :"))
   expect_output(print(SNPs), "SNPcoord:")
-  expect_output(print(SNPs), "    chr pos SNPid")
 })
