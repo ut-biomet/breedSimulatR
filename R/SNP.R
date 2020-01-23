@@ -132,7 +132,9 @@ SNPinfo <- R6::R6Class(
       ))
       print(self$nSNP(self$specie$chrNames))
       cat("SNPcoord:\n")
-      print(self$SNPcoord)
+      df <- self$SNPcoord
+      df <- df[order(df$SNPid),]
+      print(df)
     },
 
     #' @description
