@@ -20,20 +20,10 @@ test_that("makeSingleCross", {
   SNPs <- create_SNP(mySpec)
   haplo1 <- create_haplo(SNPs)
   haplo2 <- create_haplo(SNPs)
+  myInds <- create_inds(list(haplo1, haplo2))
+  myInd1 <- myInds[[1]]
+  myInd2 <- myInds[[2]]
 
-  # create individuals
-  myInd1 <- individual$new(name = "Ind 1",
-                          specie = mySpec,
-                          parent1 = "OkaaSan1",
-                          parent2 = "OtouSan1",
-                          haplo = haplo1,
-                          verbose = F)
-  myInd2 <- individual$new(name = "Ind 2",
-                           specie = mySpec,
-                           parent1 = "OkaaSan2",
-                           parent2 = "OtouSan2",
-                           haplo = haplo2,
-                           verbose = F)
 
 
   #### Tests:
@@ -81,16 +71,7 @@ test_that("makeCrosses", {
   haploList <- lapply(seq(nInds), function(x){
     create_haplo(SNPs)
   })
-
-  indList <- mapply(function(haplo, id){
-    myInd <- individual$new(name = paste("Ind", id),
-                            specie = mySpec,
-                            parent1 = paste("OkaaSan", id),
-                            parent2 = paste("OtouSan", id),
-                            haplo = haplo,
-                            verbose = F)
-  },
-  haploList, c(1:nInds))
+  indList <- create_inds(haploList)
 
 
   # nOff <- 2

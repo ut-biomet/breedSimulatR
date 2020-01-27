@@ -10,11 +10,13 @@
 create_spec <- function(nChr = round(runif(1, 1, 10)),
                         lchr = round(pmax(rnorm(nChr, 450, 50), 200)),# at least 200 markers
                         ploidy = 2,
-                        recombRate = 3/sum(lchr)){
+                        recombRate = 3/sum(lchr),
+                        name = "Undefinded"){
   specie$new(nChr = nChr,
              lchr = lchr,
              ploidy = ploidy,
              recombRate = recombRate,
+             specName = name,
              verbose = F)
 }
 
@@ -45,4 +47,27 @@ create_haplo <- function(SNPs){
   colnames(rawHaplo) <- SNPs$SNPcoord$SNPid
   haplo <- haplotype$new(SNPinfo = SNPs,
                          haplo = rawHaplo)
+}
+
+
+create_inds <- function(haploList){
+  if (class(haploList)[1]  == "Haplotype") {
+    haploList <- list(haploList)
+  }
+
+  spec <- haploList[[1]]$SNPinfo$specie
+  inds <- mapply(function(haplo, id){
+    myInd <- individual$new(name = paste("Ind", id),
+                            specie = spec,
+                            parent1 = paste("OkaaSan", id),
+                            parent2 = paste("OtouSan", id),
+                            haplo = haplo,
+                            verbose = F)
+  },
+  haploList, c(1:length(haploList)))
+
+  if (length(inds) == 1) {
+    return(inds[[1]])
+  }
+  inds
 }
