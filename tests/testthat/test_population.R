@@ -22,8 +22,10 @@ test_that("population initialisation", {
   haploList <- lapply(seq(nInds), function(x){
     create_haplo(SNPs)
   })
-  indList <-  create_inds(haploList)
+  indList <- create_inds(haploList)
 
+
+  #### Tests:
   expect_error({myPop <- population$new(name = "My Population 1",
                           inds = indList,
                           verbose = FALSE)},
@@ -31,6 +33,16 @@ test_that("population initialisation", {
   expect_equal(myPop$nInd, nInds)
   expect_is(myPop$inds, "list")
   expect_equal(length(myPop$inds), myPop$nInd)
+
+
+  # check individuals' id in the object pop (names(myPop$inds)) do not depend of
+  # the id of the individuals in the input list (names(indList)) :
+  names(indList) <- paste("toto", 1:length(indList))
+  myPop <- population$new(name = "My Population 1",
+                          inds = indList,
+                          verbose = FALSE)
+  expect_equal(names(myPop$inds),
+               as.character(sapply(indList, function(x){x$name})))
 
 
 })
@@ -48,6 +60,8 @@ test_that("population add individuals", {
   ind2 <-  create_inds(haplo2)
   ind2$name <- "Ind 2"
 
+
+  #### Tests:
   expect_error({myPop <- population$new(name = "My Population 1",
                                         inds = list(ind1, ind2),
                                         verbose = FALSE)},
@@ -96,7 +110,7 @@ test_that("population remove individuals", {
                           inds = indList,
                           verbose = FALSE)
 
-  # checks
+  #### Tests:
   expect_error(myPop$remInds("Ind 3"), NA)
   expect_warning(myPop$remInds("Ind 3"),
                  "Some individuals to remove are not in the population:")
@@ -105,7 +119,3 @@ test_that("population remove individuals", {
                  "Some individuals to remove are not in the population:")
 
 })
-
-
-
-
