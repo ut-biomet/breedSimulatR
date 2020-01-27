@@ -18,7 +18,7 @@ check:
   script:
     - r -e 'devtools::build()'
     - cd ..
-    - R CMD check --as-cran breedSimulatR_0.0.1.tar.gz
+    - R CMD check --as-cran breedSimulatR_*.tar.gz
 
 unittests:
   stage: TestPackage
