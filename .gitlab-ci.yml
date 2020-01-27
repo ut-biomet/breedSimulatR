@@ -11,7 +11,7 @@ before_script:
 documentation:
   stage: TestPackage
   script:
-    - r -e 'devtools::document()'
+    - Rscript tools/Check_documentation.R
 
 check:
   stage: TestPackage
