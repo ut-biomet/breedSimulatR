@@ -14,8 +14,57 @@
 #' @param verbose print informations
 #'
 #' @return list of new individuals
+#' @export
 #'
 #' @examples
+#' # create specie:
+#' mySpec <- specie$new(nChr = 3,
+#'                      lchr = c(100, 150, 200),
+#'                      recombRate = 0.006,
+#'                      verbose = FALSE)
+#'
+#' # simulate SNP:
+#' SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
+#'                                rep("Chr2", 4),
+#'                                rep("Chr3", 5)),
+#'                        pos = c(sample(100, 3),
+#'                                sample(150, 4),
+#'                                sample(200, 5)),
+#'                        SNPid = sprintf(fmt = paste0("SNP%0", 2,"i"),
+#'                                        1:(3 + 4 + 5)))
+#'
+#' # create SNPinfo object:
+#' SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
+#'
+#'
+#' # simulate haplotype:
+#' rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+#' colnames(rawHaplo1) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
+#'                               1:(3 + 4 + 5))
+#' haplo1 <- haplotype$new(SNPinfo = SNPs,
+#'                        haplo = rawHaplo1)
+#' rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+#' colnames(rawHaplo2) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
+#'                               1:(3 + 4 + 5))
+#' haplo2 <- haplotype$new(SNPinfo = SNPs,
+#'                        haplo = rawHaplo2)
+#'
+#'
+#' # create individuals:
+#' myInd1 <-  individual$new(name = "Ind 1",
+#'                          specie = mySpec,
+#'                          parent1 = "OkaaSan",
+#'                          parent2 = "OtouSan",
+#'                          haplo = haplo1,
+#'                          verbose = FALSE)
+#' myInd2 <-  individual$new(name = "Ind 2",
+#'                          specie = mySpec,
+#'                          parent1 = "OkaaSan",
+#'                          parent2 = "OtouSan",
+#'                          haplo = haplo2,
+#'                          verbose = FALSE)
+#' offspring <- makeSingleCross(myInd1, myInd2, names = "off 1")
+#' offspring
 makeSingleCross <- function(ind1, ind2, n = 1, names = NULL, verbose = T){
 
   #  Names
@@ -71,6 +120,73 @@ makeSingleCross <- function(ind1, ind2, n = 1, names = NULL, verbose = T){
 #' @export
 #'
 #' @examples
+#' # create specie:
+#' mySpec <- specie$new(nChr = 3,
+#'                      lchr = c(100, 150, 200),
+#'                      recombRate = 0.006,
+#'                      verbose = FALSE)
+#'
+#' # simulate SNP:
+#' SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
+#'                                rep("Chr2", 4),
+#'                                rep("Chr3", 5)),
+#'                        pos = c(sample(100, 3),
+#'                                sample(150, 4),
+#'                                sample(200, 5)),
+#'                        SNPid = sprintf(fmt = paste0("SNP%0", 2,"i"),
+#'                                        1:(3 + 4 + 5)))
+#'
+#' # create SNPinfo object:
+#' SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
+#'
+#'
+#' # simulate haplotype:
+#' rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+#' colnames(rawHaplo1) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
+#'                               1:(3 + 4 + 5))
+#' haplo1 <- haplotype$new(SNPinfo = SNPs,
+#'                        haplo = rawHaplo1)
+#' rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+#' colnames(rawHaplo2) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
+#'                               1:(3 + 4 + 5))
+#' haplo2 <- haplotype$new(SNPinfo = SNPs,
+#'                        haplo = rawHaplo2)
+#' rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+#' colnames(rawHaplo3) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
+#'                               1:(3 + 4 + 5))
+#' haplo3 <- haplotype$new(SNPinfo = SNPs,
+#'                        haplo = rawHaplo3)
+#'
+#'
+#' # create individuals:
+#' myInd1 <-  individual$new(name = "Ind 1",
+#'                          specie = mySpec,
+#'                          parent1 = "OkaaSan",
+#'                          parent2 = "OtouSan",
+#'                          haplo = haplo1,
+#'                          verbose = FALSE)
+#' myInd2 <-  individual$new(name = "Ind 2",
+#'                          specie = mySpec,
+#'                          parent1 = "OkaaSan",
+#'                          parent2 = "OtouSan",
+#'                          haplo = haplo2,
+#'                          verbose = FALSE)
+#' myInd3 <-  individual$new(name = "Ind 3",
+#'                          specie = mySpec,
+#'                          parent1 = "OkaaSan",
+#'                          parent2 = "OtouSan",
+#'                          haplo = haplo3,
+#'                          verbose = FALSE)
+#' myPop <- population$new(name = "My Population 1",
+#'                         inds = list(myInd1, myInd2, myInd3),
+#'                         verbose = FALSE)
+#'
+#' crossToDo <- data.frame(ind1 = c("Ind 1", "Ind 1", "Ind 2"),
+#'                          ind2 = c("Ind 2", "Ind 3", "Ind 3"),
+#'                          n = 1,
+#'                          names = c("Off 1-2", "Off 1-3", "Off 2-3"))
+#'
+#' makeCrosses(crossToDo, myPop)
 makeCrosses <- function(crosses, pop){
 
   # checks
