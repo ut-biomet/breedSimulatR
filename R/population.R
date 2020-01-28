@@ -24,6 +24,7 @@ population <- R6::R6Class(
     #'   (see:\link[breedSimulatR]{specie})
     specie = NULL,
     #' @field inds [list] list of population's individuals
+    inds = list(),
     #' @description Create a new population object.
     #' @param name [string] name of the population
     #' @param inds [individual class or list] list of individuals of the
@@ -31,6 +32,55 @@ population <- R6::R6Class(
     #' @param verbose [boolean] display information
     #' @return A new `population` object.
     #' @examples
+    #' # create specie:
+    #' mySpec <- specie$new(nChr = 3,
+    #'                      lchr = c(100, 150, 200),
+    #'                      recombRate = 0.006,
+    #'                      verbose = FALSE)
+    #'
+    #' # simulate SNP:
+    #' SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
+    #'                                rep("Chr2", 4),
+    #'                                rep("Chr3", 5)),
+    #'                        pos = c(sample(100, 3),
+    #'                                sample(150, 4),
+    #'                                sample(200, 5)),
+    #'                        SNPid = sprintf(fmt = paste0("SNP%0", 2,"i"),
+    #'                                        1:(3 + 4 + 5)))
+    #'
+    #' # create SNPinfo object:
+    #' SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
+    #'
+    #'
+    #' # simulate haplotype:
+    #' rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+    #' colnames(rawHaplo1) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
+    #'                               1:(3 + 4 + 5))
+    #' haplo1 <- haplotype$new(SNPinfo = SNPs,
+    #'                        haplo = rawHaplo1)
+    #' rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+    #' colnames(rawHaplo2) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
+    #'                               1:(3 + 4 + 5))
+    #' haplo2 <- haplotype$new(SNPinfo = SNPs,
+    #'                        haplo = rawHaplo2)
+    #'
+    #'
+    #' # create individuals:
+    #' myInd1 <-  individual$new(name = "Ind 1",
+    #'                          specie = mySpec,
+    #'                          parent1 = "OkaaSan",
+    #'                          parent2 = "OtouSan",
+    #'                          haplo = haplo1,
+    #'                          verbose = FALSE)
+    #' myInd2 <-  individual$new(name = "Ind 2",
+    #'                          specie = mySpec,
+    #'                          parent1 = "OkaaSan",
+    #'                          parent2 = "OtouSan",
+    #'                          haplo = haplo2,
+    #'                          verbose = FALSE)
+    #' myPop <- population$new(name = "My Population 1",
+    #'                         inds = list(myInd1, myInd2),
+    #'                         verbose = FALSE)
     initialize = function(name = "New Pop",
                           inds = list(),
                           verbose = T){
@@ -53,20 +103,41 @@ population <- R6::R6Class(
     #' @param inds [individual class or list] list of individuals of the
     #'     population (see:\link[breedSimulatR]{individual})
     #' @examples
-    addInds = function(inds, verbose = T){
+    #' # create new individual
+    #'
+    #' rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+    #' colnames(rawHaplo3) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
+    #'                               1:(3 + 4 + 5))
+    #' haplo3 <- haplotype$new(SNPinfo = SNPs,
+    #'                        haplo = rawHaplo3)
+    #' myInd3 <-  individual$new(name = "Ind 3",
+    #'                          specie = mySpec,
+    #'                          parent1 = "OkaaSan",
+    #'                          parent2 = "OtouSan",
+    #'                          haplo = haplo1,
+    #'                          verbose = FALSE)
+    #'
+    #' # add individual
+    #' print(myPop)
+    #' myPop$addInds(myInd3)
+    #' print(myPop)
+    addInds = function(inds){
       # checks
       if (class(inds)[1] == "individual") {
         inds <- list(inds)
       }
-
       lapply(inds, private$addInd)
-      NULL
+
+      invisible(NULL)
 
     },
     #' @description Remove individuals from the population
     #' @param indsNames [character] character vercor of the individuals' names
     #' @examples
-    remInds = function(indsNames, verbose = T){
+    #' print(myPop)
+    #' myPop$remInds("Ind 2")
+    #' print(myPop)
+    remInds = function(indsNames){
 
       # check
       if (class(indsNames) != "character") {
@@ -80,10 +151,10 @@ population <- R6::R6Class(
       }
 
       self$inds[indsNames] <- NULL
-
+      invisible(NULL)
     },
     #' @description
-    #' Display information about the object
+    #' Display informations about the object
     print = function() {
       cat(paste0(
         "Population: ", self$name, "\n",
@@ -102,10 +173,9 @@ population <- R6::R6Class(
 
   ),
   private = list(
-    #' @description Add new individual to the population
-    #' @param ind [individual class] individual (see:\link[breedSimulatR]{individual})
-    #' @return NULL
-    #' @examples
+    # @description Add new individual to the population
+    # @param ind [individual class] individual (see:\link[breedSimulatR]{individual})
+    # @return NULL
     addInd = function(ind) {
 
       # checks class

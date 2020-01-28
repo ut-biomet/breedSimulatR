@@ -6,6 +6,93 @@
 \description{
 population object store specific information about one individual
 }
+\examples{
+
+## ------------------------------------------------
+## Method `population$new`
+## ------------------------------------------------
+
+# create specie:
+mySpec <- specie$new(nChr = 3,
+                     lchr = c(100, 150, 200),
+                     recombRate = 0.006,
+                     verbose = FALSE)
+
+# simulate SNP:
+SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
+                               rep("Chr2", 4),
+                               rep("Chr3", 5)),
+                       pos = c(sample(100, 3),
+                               sample(150, 4),
+                               sample(200, 5)),
+                       SNPid = sprintf(fmt = paste0("SNP\%0", 2,"i"),
+                                       1:(3 + 4 + 5)))
+
+# create SNPinfo object:
+SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
+
+
+# simulate haplotype:
+rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+colnames(rawHaplo1) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
+                              1:(3 + 4 + 5))
+haplo1 <- haplotype$new(SNPinfo = SNPs,
+                       haplo = rawHaplo1)
+rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+colnames(rawHaplo2) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
+                              1:(3 + 4 + 5))
+haplo2 <- haplotype$new(SNPinfo = SNPs,
+                       haplo = rawHaplo2)
+
+
+# create individuals:
+myInd1 <-  individual$new(name = "Ind 1",
+                         specie = mySpec,
+                         parent1 = "OkaaSan",
+                         parent2 = "OtouSan",
+                         haplo = haplo1,
+                         verbose = FALSE)
+myInd2 <-  individual$new(name = "Ind 2",
+                         specie = mySpec,
+                         parent1 = "OkaaSan",
+                         parent2 = "OtouSan",
+                         haplo = haplo2,
+                         verbose = FALSE)
+myPop <- population$new(name = "My Population 1",
+                        inds = list(myInd1, myInd2),
+                        verbose = FALSE)
+
+## ------------------------------------------------
+## Method `population$addInds`
+## ------------------------------------------------
+
+# create new individual
+
+rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+colnames(rawHaplo3) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
+                              1:(3 + 4 + 5))
+haplo3 <- haplotype$new(SNPinfo = SNPs,
+                       haplo = rawHaplo3)
+myInd3 <-  individual$new(name = "Ind 3",
+                         specie = mySpec,
+                         parent1 = "OkaaSan",
+                         parent2 = "OtouSan",
+                         haplo = haplo1,
+                         verbose = FALSE)
+
+# add individual
+print(myPop)
+myPop$addInds(myInd3)
+print(myPop)
+
+## ------------------------------------------------
+## Method `population$remInds`
+## ------------------------------------------------
+
+print(myPop)
+myPop$remInds("Ind 2")
+print(myPop)
+}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
@@ -21,8 +108,6 @@ population object store specific information about one individual
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{inds}}{[list] list of population's individuals}
-
 \item{\code{nInd}}{[numeric] number of individual in the population}
 }
 \if{html}{\out{</div>}}
@@ -60,13 +145,69 @@ population (see:\link[breedSimulatR]{individual})}
 \subsection{Returns}{
 A new `population` object.
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{# create specie:
+mySpec <- specie$new(nChr = 3,
+                     lchr = c(100, 150, 200),
+                     recombRate = 0.006,
+                     verbose = FALSE)
+
+# simulate SNP:
+SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
+                               rep("Chr2", 4),
+                               rep("Chr3", 5)),
+                       pos = c(sample(100, 3),
+                               sample(150, 4),
+                               sample(200, 5)),
+                       SNPid = sprintf(fmt = paste0("SNP\%0", 2,"i"),
+                                       1:(3 + 4 + 5)))
+
+# create SNPinfo object:
+SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
+
+
+# simulate haplotype:
+rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+colnames(rawHaplo1) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
+                              1:(3 + 4 + 5))
+haplo1 <- haplotype$new(SNPinfo = SNPs,
+                       haplo = rawHaplo1)
+rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+colnames(rawHaplo2) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
+                              1:(3 + 4 + 5))
+haplo2 <- haplotype$new(SNPinfo = SNPs,
+                       haplo = rawHaplo2)
+
+
+# create individuals:
+myInd1 <-  individual$new(name = "Ind 1",
+                         specie = mySpec,
+                         parent1 = "OkaaSan",
+                         parent2 = "OtouSan",
+                         haplo = haplo1,
+                         verbose = FALSE)
+myInd2 <-  individual$new(name = "Ind 2",
+                         specie = mySpec,
+                         parent1 = "OkaaSan",
+                         parent2 = "OtouSan",
+                         haplo = haplo2,
+                         verbose = FALSE)
+myPop <- population$new(name = "My Population 1",
+                        inds = list(myInd1, myInd2),
+                        verbose = FALSE)
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-addInds"></a>}}
 \subsection{Method \code{addInds()}}{
 Add individuals to the population
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{population$addInds(inds, verbose = T)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{population$addInds(inds)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -77,13 +218,38 @@ population (see:\link[breedSimulatR]{individual})}
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{# create new individual
+
+rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+colnames(rawHaplo3) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
+                              1:(3 + 4 + 5))
+haplo3 <- haplotype$new(SNPinfo = SNPs,
+                       haplo = rawHaplo3)
+myInd3 <-  individual$new(name = "Ind 3",
+                         specie = mySpec,
+                         parent1 = "OkaaSan",
+                         parent2 = "OtouSan",
+                         haplo = haplo1,
+                         verbose = FALSE)
+
+# add individual
+print(myPop)
+myPop$addInds(myInd3)
+print(myPop)
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-remInds"></a>}}
 \subsection{Method \code{remInds()}}{
 Remove individuals from the population
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{population$remInds(indsNames, verbose = T)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{population$remInds(indsNames)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -93,11 +259,21 @@ Remove individuals from the population
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{print(myPop)
+myPop$remInds("Ind 2")
+print(myPop)
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
 \subsection{Method \code{print()}}{
-Display information about the object
+Display informations about the object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{population$print()}\if{html}{\out{</div>}}
 }
