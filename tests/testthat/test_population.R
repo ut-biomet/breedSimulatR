@@ -48,7 +48,26 @@ test_that("population initialisation", {
 })
 
 
-#### TESTS ####
+
+test_that("population initialisation particular cases", {
+  #### Initialisation
+  mySpec <- create_spec()
+  SNPs <- create_SNP(mySpec)
+  nInds <- 5
+  haploList <- lapply(seq(nInds), function(x){
+    create_haplo(SNPs)
+  })
+  indList <- create_inds(haploList)
+
+  # check initialisation with one individual
+  expect_error({myPop <- population$new(name = "My Population 1",
+                                        inds = indList[[1]],
+                                        verbose = FALSE)},
+               NA)
+
+
+})
+
 test_that("population add individuals", {
   #### Initialisation
   mySpec <- create_spec()
