@@ -28,7 +28,7 @@ unittests:
 codecov:
   stage: TestPackage
   script:
-    - r -e 'covr::codecov()'
+    - r -e 'covr::codecov(quiet = FALSE)'
 
 install:
   stage: TestPackage
