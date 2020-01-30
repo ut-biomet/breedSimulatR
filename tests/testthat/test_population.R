@@ -33,7 +33,8 @@ test_that("population initialisation", {
   expect_equal(myPop$nInd, nInds)
   expect_is(myPop$inds, "list")
   expect_equal(length(myPop$inds), myPop$nInd)
-
+  expect_is(myPop$genoMat, "matrix")
+  expect_equal(dim(myPop$genoMat), c(myPop$nInd, SNPs$nSNP()))
 
   # check individuals' id in the object pop (names(myPop$inds)) do not depend of
   # the id of the individuals in the input list (names(indList)) :

@@ -81,11 +81,14 @@ population <- R6::R6Class(
     #' myPop <- population$new(name = "My Population 1",
     #'                         inds = list(myInd1, myInd2),
     #'                         verbose = FALSE)
-    initialize = function(name = "New Pop",
+    initialize = function(name = NULL,
                           inds = list(),
                           verbose = T){
       # checks
-      name <- as.character(name)
+
+      if (is.null(name)) {
+        name <- "Unspecified"
+      } else name <- as.character(name)
 
       if (class(inds)[1] == "individual") {
         inds <- list(inds)
@@ -97,7 +100,7 @@ population <- R6::R6Class(
       for (ind in inds) {
         private$addInd(ind)
       }
-      if (verbose) cat(paste("A new population created:", self$name, "!"))
+      if (verbose) cat(paste("A new population created:", self$name, "!\n"))
     },
     #' @description Add individuals to the population
     #' @param inds [individual class or list] list of individuals of the
@@ -169,6 +172,13 @@ population <- R6::R6Class(
     #' @field nInd [numeric] number of individual in the population
     nInd = function(){
       length(self$inds)
+    },
+    #' @field genotypes [matrix] matrix of all the genotypes of the population
+    #'   encoded in allel doses. (individuals in row and markers in column)
+    genoMat = function(){
+      t(sapply(self$inds, function(ind){
+        ind$haplo$allelDose
+      }))
     }
 
   ),
