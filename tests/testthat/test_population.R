@@ -45,6 +45,11 @@ test_that("population initialisation", {
   expect_equal(names(myPop$inds),
                as.character(sapply(indList, function(x){x$name})))
 
+  # check initialisation without parameters
+  expect_error({myPop <- population$new(verbose = FALSE)}, NA)
+  expect_is(myPop$inds, "list")
+  expect_equal(myPop$nInd, 0)
+  expect_equal(length(myPop$inds), myPop$nInd)
 
 })
 
@@ -69,7 +74,9 @@ test_that("population initialisation particular cases", {
 
 })
 
-test_that("population add individuals", {
+
+
+test_that("population errors", {
   #### Initialisation
   mySpec <- create_spec()
   SNPs <- create_SNP(mySpec)
@@ -114,6 +121,26 @@ test_that("population add individuals", {
 })
 
 
+test_that("population add individuals", {
+  #### Initialisation
+  mySpec <- create_spec()
+  SNPs <- create_SNP(mySpec)
+  nInds <- 6
+  haploList <- lapply(seq(nInds), function(x){
+    create_haplo(SNPs)
+  })
+  indList <-  create_inds(haploList)
+
+  myPop <- population$new(name = "My Population 1",
+                          inds = indList[1:3],
+                          verbose = FALSE)
+
+  #### Tests:
+  expect_error(myPop$addInds(inds = indList[[4]]), NA)
+  expect_error(myPop$addInds(inds = indList[5:6]), NA)
+
+
+})
 
 #### TESTS ####
 test_that("population remove individuals", {
@@ -173,5 +200,14 @@ test_that("population creation", {
   expect_equal(myPop$nInd, nrow(geno))
   expect_equal(names(myPop$inds), row.names(geno))
   expect_equal(myPop$genoMat, as.matrix(geno[, sort(colnames(geno))]))
+
+  expect_error({myPop <- createPop(geno = geno,
+                                   SNPinfo = SNPs,
+                                   indNames = "My Inds - ",
+                                   popName = "My pop",
+                                   verbose = FALSE)},
+               NA)
+  expect_true(all(grepl("My Inds - ", names(myPop$inds))))
+  expect_equal(row.names(myPop$genoMat), names(myPop$inds))
 
 })
