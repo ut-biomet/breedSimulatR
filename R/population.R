@@ -212,3 +212,74 @@ population <- R6::R6Class(
     }
   )
 )
+
+
+
+
+
+#' Create population object from genotype data.frame
+#'
+#' @param geno [data.frame] genotype of the individuals encoded in allele dose.
+#'   All individuals should be homozygotes. (value 0 or 2)
+#' @param SNPinfo [SNPinfo object] information about the individuals haplotypes'
+#'   SNPs (see:\link[breedSimulatR]{SNPinfo})
+#' @param indNames NULL or character string vector specifying the individuals
+#'   names. If NULL, \code{rownames(geno)} will be used.
+#' @param popName [character string] population's name.
+#' @param verbose [boolean] display information
+#' @return population object (see:\link[breedSimulatR]{population})
+#' @export
+#'
+#' @examples
+createPop <- function(geno, SNPinfo, indNames = NULL, popName = NULL, verbose = TRUE) {
+
+  # check parameters:
+  if (any(!colnames(geno) %in% SNPinfo$SNPcoord$SNPid)) {
+    stop('Some markers of "geno" are not in "SNPinfo"')
+  }
+
+  if (any(!SNPinfo$SNPcoord$SNPid %in% colnames(geno))) {
+    warning('Some markers of "SNPinfo" are not in "geno"')
+  }
+
+  if (is.null(indNames)) {
+    if (is.null(rownames(geno))) {
+      stop('"rownames(geno)" is NULL, please specify "indNames"')
+    } else indNames <- rownames(geno)
+  } else if (length(indNames) == 1) {
+    indNames <- sprintf(
+      fmt = paste0(indNames,
+                   "%0", floor(log10(nrow(geno))) + 1, "i"),
+      seq(nrow(geno)))
+  } else if (length(indNames) != nrow(geno)) {
+    stop(paste0("length(indNames) = ", length(indNames),
+                '\n"length(indNames)" must be equal to "1" or "nrow(geno)"'))
+  }
+
+  if (!all.equal(unique(indNames), indNames)) {
+    stop('All values of "indNames" must be different')
+  }
+
+  if (!all(unique(unlist(geno)) %in% c(0,2))) {
+    stop(paste0('Some values of "geno" are different from 0 or 2.\n',
+                'All individulas must be homozygotes and genotypes must be ',
+                'encoded as allele doses'))
+  }
+  listInds <- mapply(function(haplo, name) {
+    haplo <- as.matrix(haplo, drop = FALSE)
+    individual$new(
+      name = name,
+      specie = SNPinfo$specie,
+      parent1 = NA,
+      parent2 = NA,
+      haplo = haplotype$new(SNPinfo, rbind(haplo, haplo) / 2),
+      verbose = F
+    )
+  },
+  haplo = split(geno, seq(nrow(geno))),
+  name = indNames
+  )
+
+  population$new(name = popName, inds = listInds, verbose = verbose)
+
+}

@@ -139,3 +139,39 @@ test_that("population remove individuals", {
                  "Some individuals to remove are not in the population:")
 
 })
+
+
+test_that("population creation", {
+  #### Initialisation
+  mySpec <- create_spec(nChr = 10, lchr = 10^6)
+
+  if (interactive()) {
+    snpCoord <- read.csv(file = "tests/testthat/src/snpCoord.csv", header = T)
+  } else snpCoord <- read.csv(file = "src/snpCoord.csv", header = T)
+  SNPs <- SNPinfo$new(SNPcoord = snpCoord, specie = mySpec)
+
+  if (interactive()) {
+    geno <- read.csv(file = "tests/testthat/src/genotype.csv",
+                     header = T,
+                     row.names = 1)
+  } else {
+    geno <- read.csv(file = "src/genotype.csv",
+                     header = T,
+                     row.names = 1)
+  }
+  expect_true(all(dim(geno) > 2))
+  expect_equal(ncol(geno), SNPs$nSNP())
+
+
+  # TEST:
+  expect_error({myPop <- createPop(geno = geno,
+                                   SNPinfo = SNPs,
+                                   indNames = NULL,
+                                   popName = "My pop",
+                                   verbose = FALSE)},
+               NA)
+  expect_equal(myPop$nInd, nrow(geno))
+  expect_equal(names(myPop$inds), row.names(geno))
+  expect_equal(myPop$genoMat, as.matrix(geno[, sort(colnames(geno))]))
+
+})
