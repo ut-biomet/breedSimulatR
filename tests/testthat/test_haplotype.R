@@ -34,6 +34,7 @@ test_that("haplotype normal initialisation", {
   expect_equal(length(haplo$values), mySpec$nChr)
   expect_equal(names(haplo$values), mySpec$chrNames)
   expect_is(unlist(haplo$values), "integer")
+  expect_equal(length(haplo$allelDose), SNPs$nSNP())
   expect_equal(haplo$allelDose, colSums(rawHaplo)[names(haplo$allelDose)])
 })
 
