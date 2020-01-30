@@ -173,7 +173,7 @@ population <- R6::R6Class(
     nInd = function(){
       length(self$inds)
     },
-    #' @field genotypes [matrix] matrix of all the genotypes of the population
+    #' @field genoMat [matrix] matrix of all the genotypes of the population
     #'   encoded in allel doses. (individuals in row and markers in column)
     genoMat = function(){
       t(sapply(self$inds, function(ind){

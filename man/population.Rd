@@ -109,6 +109,9 @@ print(myPop)
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{nInd}}{[numeric] number of individual in the population}
+
+\item{\code{genoMat}}{[matrix] matrix of all the genotypes of the population
+encoded in allel doses. (individuals in row and markers in column)}
 }
 \if{html}{\out{</div>}}
 }
@@ -127,7 +130,7 @@ print(myPop)
 \subsection{Method \code{new()}}{
 Create a new population object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{population$new(name = "New Pop", inds = list(), verbose = T)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{population$new(name = NULL, inds = list(), verbose = T)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
