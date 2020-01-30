@@ -231,6 +231,11 @@ population <- R6::R6Class(
 #' @export
 #'
 #' @examples
+#' print(example_genotypes[1:5, 1:10])
+#' print(example_SNPs)
+#' example_pop <- createPop(geno = example_genotypes,
+#'                          SNPinfo = example_SNPs,
+#'                          popName = "Example population")
 createPop <- function(geno, SNPinfo, indNames = NULL, popName = NULL, verbose = TRUE) {
 
   # check parameters:

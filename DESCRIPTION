@@ -14,7 +14,9 @@ LazyData: true
 RoxygenNote: 7.0.2
 Description: R package providing classes and functions to simulate breeding
     schemes.
-Depends: R6
+Depends: 
+    R (>= 3.2.0),
+    R6
 Imports: plotly
 Suggests:
     devtools,
