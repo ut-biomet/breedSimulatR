@@ -54,6 +54,41 @@ test_that("SNPinfo initialization", {
 
 })
 
+test_that("SNPinfo errors", {
+  #### Initialisation:
+  mySpec <- create_spec(nChr = 5)
+  nMarkers <- round(mySpec$lchr/10)
+
+  # generate positions
+  pos <- unlist(sapply(seq(mySpec$nChr),
+                       function(chr){
+                         sample(mySpec$lchr[chr], nMarkers[chr])
+                       }))
+
+  # generate arbitrary SNPid
+  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
+                   sample(sum(nMarkers)*50, sum(nMarkers)))
+
+  # Test differents chromosome names than those in specie
+  chrNames <- c("toto", mySpec$chrNames[-1])
+  SNPcoord <- data.frame(chr = rep(chrNames, times = nMarkers),
+                         pos = pos,
+                         SNPid = SNPid)
+  expect_error({SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)},
+               '"Chromosomes\'names specified in "SNPcoord" do not match those specified in "specie"')
+
+  SNPcoord <- data.frame(chr = rep(chrNames, times = nMarkers),
+                         pos = pos,
+                         SNPid = SNPid,
+                         stringsAsFactors = FALSE)
+  expect_error({SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)},
+               '"Chromosomes\'names specified in "SNPcoord" do not match those specified in "specie"')
+
+})
+
+
+
+
 test_that("SNPinfo stringAsFactor",{
   #### Initialisation:
   mySpec <- create_spec()
@@ -185,7 +220,7 @@ test_that("SNPinfo plot method", {
 
 
 
-test_that("specie's \"print\" methods", {
+test_that("SNPinfo's \"print\" methods", {
   #### Initialisation:
   mySpec <- create_spec(nChr = 20)
   nMarkers <- round(mySpec$lchr/10)

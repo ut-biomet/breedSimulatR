@@ -72,9 +72,29 @@ SNPinfo <- R6::R6Class(
     #' # create SNPinfo object
     #' SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
     initialize = function(SNPcoord, specie) {
-      stopifnot(all(colnames(SNPcoord) %in% c("chr", "pos", "SNPid")),
-                all(levels(SNPcoord$chr) %in% specie$chrNames),
-                length(SNPcoord$SNPid) == length(unique(SNPcoord$SNPid)))
+
+      # CHECKS:
+      # parameters classes
+      if (class(specie)[1] != "Specie") {
+        stop('"class(specie)" must be "Specie"')
+      }
+      if (class(SNPcoord) != "data.frame") {
+        stop('"class(SNPcoord)" must be "data.frame"')
+      }
+      # SNPcoord's colnames
+      if (!all(colnames(SNPcoord) %in% c("chr", "pos", "SNPid"))) {
+        stop('"colnames(SNPcoord)" must be "chr", "pos" and "SNPid"')
+      }
+      if (!all(unique(SNPcoord$chr) %in% specie$chrNames)) {
+        stop(paste0('"Chromosomes\'names specified in "SNPcoord" do not match those specified in "specie"\n',
+                    'unique(SNPcoord$chr) = ', paste0(unique(SNPcoord$chr), collapse = " "), '\n',
+                    'specie$chrNames = ', paste0(specie$chrNames, collapse = " ")))
+      }
+      if (length(SNPcoord$SNPid) != length(unique(SNPcoord$SNPid))) {
+        stop('Some markers appear several times in "SNPcoord"')
+      }
+
+
 
       # remove factors
       SNPcoord[, sapply(SNPcoord, is.factor)] <- lapply(SNPcoord[, sapply(SNPcoord, is.factor)], as.character)
