@@ -2,7 +2,7 @@
 % Please edit documentation in R/population.R
 \name{population}
 \alias{population}
-\title{An R6 class representing a population}
+\title{R6 class representing a population}
 \description{
 population object store specific information about one individual
 }
