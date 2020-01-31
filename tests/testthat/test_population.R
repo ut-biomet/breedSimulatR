@@ -9,7 +9,9 @@
 
 
 ##### Initialisation functions ####
-source("src/functionsForTests.R")
+if (interactive()) {
+  source("tests/testthat/src/functionsForTests.R")
+} else source("src/functionsForTests.R")
 
 
 
