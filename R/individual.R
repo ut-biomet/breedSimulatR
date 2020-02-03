@@ -7,7 +7,7 @@
 
 
 
-#' An R6 class representing an individual
+#' R6 class representing an individual
 #'
 #' @description
 #' individual object store specific information about one individual

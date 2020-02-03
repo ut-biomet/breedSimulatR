@@ -2,7 +2,7 @@
 % Please edit documentation in R/individual.R
 \name{individual}
 \alias{individual}
-\title{An R6 class representing an individual}
+\title{R6 class representing an individual}
 \description{
 individual object store specific information about one individual
 }
