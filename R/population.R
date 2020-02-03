@@ -85,7 +85,6 @@ population <- R6::R6Class(
                           inds = list(),
                           verbose = T){
       # checks
-
       if (is.null(name)) {
         name <- "Unspecified"
       } else name <- as.character(name)
@@ -96,11 +95,20 @@ population <- R6::R6Class(
         stop("inds must be an individual object or a list of individuals objects")
       }
 
+      if (verbose) {
+        cat("Create population: Add individuals...\n")
+        i <- 1
+        tot <- length(inds)
+      }
       self$name = name
       for (ind in inds) {
+        if (verbose) {
+          cat(paste0("\r", round(i/tot*100), "%"))
+          i <- i + 1
+        }
         private$addInd(ind)
       }
-      if (verbose) cat(paste("A new population created:", self$name, "!\n"))
+      if (verbose) cat(paste("\nA new population created:", self$name, "!\n"))
     },
     #' @description Add individuals to the population
     #' @param inds [individual class or list] list of individuals of the
@@ -237,7 +245,9 @@ population <- R6::R6Class(
 #'                          SNPinfo = example_SNPs,
 #'                          popName = "Example population")
 createPop <- function(geno, SNPinfo, indNames = NULL, popName = NULL, verbose = TRUE) {
-
+  if (verbose) {
+    cat("Create population: Initialisation...\n")
+  }
   # check parameters:
   if (any(!colnames(geno) %in% SNPinfo$SNPcoord$SNPid)) {
     stop('Some markers of "geno" are not in "SNPinfo"')
@@ -270,21 +280,37 @@ createPop <- function(geno, SNPinfo, indNames = NULL, popName = NULL, verbose = 
                 'All individulas must be homozygotes and genotypes must be ',
                 'encoded as allele doses'))
   }
-  listInds <- mapply(function(haplo, name) {
-    haplo <- as.matrix(haplo, drop = FALSE)
-    individual$new(
-      name = name,
+
+  listInds <- list()
+  geno <- as.matrix(geno)
+
+  if (verbose) {
+    cat("Create population: Create individuals...\n")
+    prog <- 0
+    nInd <- nrow(geno)
+  }
+
+  for (i in seq(nrow(geno))) {
+    if (verbose) {
+      prog <- i/nInd
+      cat(paste0("\r", round(prog*100), "%"))
+    }
+
+    haplo <- geno[i,]
+    listInds[[i]] <- individual$new(
+      name = indNames[i],
       specie = SNPinfo$specie,
       parent1 = NA,
       parent2 = NA,
       haplo = haplotype$new(SNPinfo, rbind(haplo, haplo) / 2),
       verbose = F
     )
-  },
-  haplo = split(geno, seq(nrow(geno))),
-  name = indNames
-  )
+  }
 
+  if (verbose) {
+    cat("\nCreate population: Create population object...\n")
+    prog <- 0
+  }
   population$new(name = popName, inds = listInds, verbose = verbose)
 
 }
