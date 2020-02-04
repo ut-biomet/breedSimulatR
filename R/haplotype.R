@@ -84,19 +84,17 @@ haplotype <- R6::R6Class(
 
       self$SNPinfo <- SNPinfo
 
-      self$values <- lapply(SNPinfo$specie$chrNames, function(chr){
-
-        h <- haplo[, SNPinfo$SNPcoord[SNPinfo$SNPcoord$chr == chr, "SNPid"]]
+      self$values <- list()
+      for (chr in SNPinfo$specie$chrNames) {
+        h <- haplo[, SNPinfo$ids[[chr]]]
         mode(h) <- "integer"
-
         rownames(h) <- sprintf(
           fmt = paste0("h%0",
                        floor(log10(SNPinfo$specie$ploidy)) + 1,
                        "i"),
           c(1:SNPinfo$specie$ploidy))
-        h
-      })
-      names(self$values) <- SNPinfo$specie$chrNames
+        self$values[[chr]] <- h
+      }
 
     }),
 

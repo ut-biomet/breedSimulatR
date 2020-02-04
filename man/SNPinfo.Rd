@@ -70,6 +70,8 @@ SNPs$plot(alpha = 1)
 
 \item{\code{SNPcoordList}}{[list] Named list of dataframes with the coordinate
 of all SNPs. for each chromosomes}
+
+\item{\code{ids}}{[list] Named list of the SNP ids for all chromosomes}
 }
 \if{html}{\out{</div>}}
 }

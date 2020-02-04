@@ -41,6 +41,9 @@ SNPinfo <- R6::R6Class(
     #'   of all SNPs. for each chromosomes
     SNPcoordList = list(),
 
+    #' @field ids [list] Named list of the SNP ids for all chromosomes
+    ids = list(),
+
     #' @description
     #' Create a new SNPinfo object.
     #' @param SNPcoord [data.frame] Coordinate of all SNPs.
@@ -94,8 +97,6 @@ SNPinfo <- R6::R6Class(
         stop('Some markers appear several times in "SNPcoord"')
       }
 
-
-
       # remove factors
       SNPcoord[, sapply(SNPcoord, is.factor)] <- lapply(SNPcoord[, sapply(SNPcoord, is.factor)], as.character)
 
@@ -111,6 +112,12 @@ SNPinfo <- R6::R6Class(
       self$specie <- specie
       self$SNPcoordList <- split(SNPcoord,
                                  SNPcoord$chr)
+
+      self$ids <- lapply(specie$chrNames, function(chr){
+        SNPcoord[SNPcoord$chr == chr, "SNPid"]
+      })
+      names(self$ids) <- specie$chrNames
+
     },
 
     #' @description
