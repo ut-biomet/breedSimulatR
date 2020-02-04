@@ -104,12 +104,7 @@ individual <- R6::R6Class(
           # number of recombination events:
           nRecomb <- rbinom(1, chrLen, self$specie$recombRate)
 
-          # recombination place (optimized)
-          if (nRecomb <= chrLen/2 && chrLen > 1e7) {
-            Rpos <- .Internal(sample2(chrLen, nRecomb))
-          } else {
-            Rpos <- .Internal(sample(chrLen, nRecomb, F, NULL))
-          }
+          Rpos <- sample.int(chrLen, nRecomb)
 
           gamHaplo <- integer(ncol(haplo))
           # split SNP beetween two chromosome
