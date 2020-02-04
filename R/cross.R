@@ -190,6 +190,9 @@ makeSingleCross <- function(ind1, ind2, n = 1, names = NULL, verbose = T){
 makeCrosses <- function(crosses, pop){
 
   # checks
+  if (!all(colnames(crosses)%in%c("ind1", "ind2", "n", "names"))) {
+    stop('colnames(crosses) must be "ind1", "ind2", "n", "names".')
+  }
   crosses$ind1 <- as.character(crosses$ind1)
   crosses$ind2 <- as.character(crosses$ind2)
   crosses$names <- as.character(crosses$names)
