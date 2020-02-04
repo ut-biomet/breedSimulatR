@@ -135,8 +135,8 @@ individual <- R6::R6Class(
         self$haplo$SNPinfo$SNPcoordList,
         SIMPLIFY = F)
 
-        gamete <- do.call(c, gamete)
-        names(gamete) <- sub(".*(?=\\.).", "", names(gamete), perl = TRUE)
+        gamete <- unlist(gamete, use.names = F)
+        names(gamete) <- names(self$haplo$allelDose)
         gamete
 
       })
