@@ -88,11 +88,7 @@ haplotype <- R6::R6Class(
       for (chr in SNPinfo$specie$chrNames) {
         h <- haplo[, SNPinfo$ids[[chr]]]
         mode(h) <- "integer"
-        rownames(h) <- sprintf(
-          fmt = paste0("h%0",
-                       floor(log10(SNPinfo$specie$ploidy)) + 1,
-                       "i"),
-          c(1:SNPinfo$specie$ploidy))
+        rownames(h) <- .charSeq("h", c(1:SNPinfo$specie$ploidy))
         self$values[[chr]] <- h
       }
 

@@ -26,8 +26,7 @@ test_that("SNPinfo initialization", {
                        }))
 
   # generate arbitrary SNPid
-  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
-                   sample(sum(nMarkers)*50, sum(nMarkers)))
+  SNPid <- .charSeq("SNP", sample(sum(nMarkers)*50, sum(nMarkers)))
 
   # SNP coordinates data.frame
   SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
@@ -66,9 +65,7 @@ test_that("SNPinfo errors", {
                        }))
 
   # generate arbitrary SNPid
-  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
-                   sample(sum(nMarkers)*50, sum(nMarkers)))
-
+  SNPid <- .charSeq("SNP", sample(sum(nMarkers)*50, sum(nMarkers)))
   # Test differents chromosome names than those in specie
   chrNames <- c("toto", mySpec$chrNames[-1])
   SNPcoord <- data.frame(chr = rep(chrNames, times = nMarkers),
@@ -101,8 +98,7 @@ test_that("SNPinfo stringAsFactor",{
                        }))
 
   # generate arbitrary SNPid
-  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
-                   sample(sum(nMarkers)*50, sum(nMarkers)))
+  SNPid <- .charSeq("SNP", sample(sum(nMarkers)*50, sum(nMarkers)))
 
   # SNP coordinates data.frame
   SNPcoord_SAF_T <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
@@ -136,8 +132,7 @@ test_that("SNPinfo nSNP method", {
                        }))
 
   # generate arbitrary SNPid
-  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
-                   sample(sum(nMarkers)*50, sum(nMarkers)))
+  SNPid <- .charSeq("SNP", sample(sum(nMarkers)*50, sum(nMarkers)))
 
   # SNP coordinates data.frame
   SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
@@ -168,8 +163,7 @@ test_that("SNPinfo getInfo method", {
                        }))
 
   # generate arbitrary SNPid
-  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
-                   sample(sum(nMarkers)*50, sum(nMarkers)))
+  SNPid <- .charSeq("SNP", sample(sum(nMarkers)*50, sum(nMarkers)))
 
   # SNP coordinates data.frame
   SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
@@ -202,8 +196,7 @@ test_that("SNPinfo plot method", {
                        }))
 
   # generate arbitrary SNPid
-  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
-                   sample(sum(nMarkers)*50, sum(nMarkers)))
+  SNPid <- .charSeq("SNP", sample(sum(nMarkers)*50, sum(nMarkers)))
 
   # SNP coordinates data.frame
   SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
@@ -232,8 +225,7 @@ test_that("SNPinfo's \"print\" methods", {
                        }))
 
   # generate arbitrary SNPid
-  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarkers)*50)),"i"),
-                   sample(sum(nMarkers)*50, sum(nMarkers)))
+  SNPid <- .charSeq("SNP", sample(sum(nMarkers)*50, sum(nMarkers)))
 
   # SNP coordinates data.frame
   SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),

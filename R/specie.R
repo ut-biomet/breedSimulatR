@@ -82,10 +82,7 @@ specie <- R6::R6Class(
       self$mutRate = mutRate
       self$recombRate = recombRate
       if (all(is.na(chrNames))) {
-        self$chrNames <- sprintf(fmt = paste0("Chr%0",
-                                              floor(log10(self$nChr)) + 1,
-                                              "i"),
-                                 1:self$nChr)
+        self$chrNames <- .charSeq("Chr", 1:self$nChr)
       } else {
         self$chrNames <- chrNames
       }

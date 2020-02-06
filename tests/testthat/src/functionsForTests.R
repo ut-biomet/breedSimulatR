@@ -31,8 +31,7 @@ create_SNP <- function(spec){
   }
 
   # generate arbitrary SNPid
-  SNPid <- sprintf(fmt = paste0("SNP%0", ceiling(log10(sum(nMarker)*50)),"i"),
-                   sample(sum(nMarker)*50, sum(nMarker)))
+  SNPid <- .charSeq("SNP", sample(sum(nMarker)*50, sum(nMarker)))
   SNPcoord <- data.frame(chr = rep(spec$chrNames, times = nMarker),
                          pos = pos,
                          SNPid = SNPid)
@@ -71,3 +70,5 @@ create_inds <- function(haploList){
   }
   inds
 }
+
+.charSeq <- breedSimulatR:::.charSeq
