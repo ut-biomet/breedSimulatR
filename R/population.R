@@ -239,10 +239,17 @@ population <- R6::R6Class(
 #' @export
 #'
 #' @examples
-#' print(example_genotypes[1:5, 1:10])
-#' print(example_SNPs)
-#' example_pop <- createPop(geno = example_genotypes,
-#'                          SNPinfo = example_SNPs,
+#' mySpec <- specie$new(nChr = 10,
+#'                      lchr = 10^6,
+#'                      specName = "Geneticae Exempli",
+#'                      ploidy = 2,
+#'                      recombRate = 3/10^6)
+#' SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
+#'                     specie = mySpec)
+#'
+#' print(exampleData$genotypes[1:5, 1:10])
+#' example_pop <- createPop(geno = exampleData$genotypes,
+#'                          SNPinfo = SNPs,
 #'                          popName = "Example population")
 createPop <- function(geno, SNPinfo, indNames = NULL, popName = NULL, verbose = TRUE) {
   if (verbose) {

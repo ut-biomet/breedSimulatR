@@ -8,53 +8,55 @@ library(dplyr)
 library(breedSimulatR)
 
 # load genotype data:
-geno <- read.table("tools/data/genotypes.txt.gz", header = T, sep = "\t")
+example_genotypes <- read.table("tools/data/genotypes.txt.gz", header = T, sep = "\t")
 
 # load snp coordinates:
-snpCoord <- read.table("tools/data/snp_coords.txt.gz", header = T, sep = "\t")
-snpCoord$SNPid <- row.names(snpCoord)
-snpCoord$chr <- gsub("c", "C", snpCoord$chr)
-snpCoord$chr <- gsub("Chr(?=\\d$)", "Chr0", snpCoord$chr, perl = TRUE)
+example_snpCoord <- read.table("tools/data/snp_coords.txt.gz", header = T, sep = "\t")
 
+# load snp effects:
+snpEffects <- read.table("tools/data/snpEffects.txt", header = T, sep = "\t")
+example_snpEffects <- snpEffects$x
+names(example_snpEffects) <- rownames(snpEffects)
 
 # check homogeneity between geno and snp cood
-if (any(!colnames(geno) %in% snpCoord$SNPid)) {
-  stop('Some markers of "geno" are not in "snpCoord".')
+if (any(!colnames(example_genotypes) %in% example_snpCoord$SNPid)) {
+  stop('Some markers of "example_genotypes" are not in "example_snpCoord".')
 }
 
-if (any(!snpCoord$SNPid %in% colnames(geno))) {
-  warning('Some markers of "snpCoord" are not in "geno".')
+if (any(!example_snpCoord$SNPid %in% colnames(example_genotypes))) {
+  warning('Some markers of "example_snpCoord" are not in "example_genotypes".')
 }
 
 
 # create specie
-snpCoord %>%
-  group_by(chr) %>%
-  summarise(len = max(pos))
-
-example_Specie <- specie$new(specName = "Statisticae exempli",
+example_specie <- specie$new(specName = "Statisticae exempli",
                              nChr = 10,
-                             lchr = 1000000,
+                             lchr = 1e6,
                              ploidy = 2,
-                             recombRate = 3/1000000)
+                             recombRate = 3/1e6)
 
-example_SNPs <- SNPinfo$new(SNPcoord = snpCoord,
-                            specie = example_Specie)
+# create SNPinfo
+example_SNPs <- SNPinfo$new(SNPcoord = example_snpCoord,
+                            specie = example_specie)
 
-example_pop <- createPop(geno = geno,
+# create pop
+example_pop <- createPop(geno = example_genotypes,
                          SNPinfo = example_SNPs,
                          popName = "Example population")
 
-example_genotypes <- geno
+
+# checks
+stopifnot(all.equal(as.matrix(example_genotypes[,sort(colnames(example_genotypes))]), example_pop$genoMat))
+stopifnot(all.equal(names(example_snpEffects), colnames(example_pop$genoMat)))
 
 
-all.equal(as.matrix(geno[,sort(colnames(geno))]), example_pop$genoMat)
-colnames(geno)[1:5]
-colnames(example_pop$genoMat)[1:5]
-length(example_pop$inds$Coll0001$haplo$allelDose)
+
+exampleData <- list(
+  snpCoord = example_snpCoord,
+  genotypes = example_genotypes,
+  snpEffects = example_snpEffects
+)
 
 
-# usethis::use_data(example_Specie, overwrite = TRUE)
-# usethis::use_data(example_SNPs, overwrite = TRUE)
-# usethis::use_data(example_pop, overwrite = TRUE)
-# usethis::use_data(example_genotypes, overwrite = TRUE)
+file.remove(list.files("data/", full.names = TRUE))
+usethis::use_data(exampleData, overwrite = TRUE)
