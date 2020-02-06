@@ -144,8 +144,6 @@ For this example, we will use the function `selectBV`, which returns the names o
 
 Then, the function `randomMate` will generate the crossing table.
 
-This function must return a data.frame specifying the crosses. 
-
 ```{r example_4.1}
 exampleData$snpEffects
 (selectedInds <- selectBV(pop = initPop,

@@ -147,8 +147,6 @@ names of the best individuals according to their breeding values.
 
 Then, the function `randomMate` will generate the crossing table.
 
-This function must return a data.frame specifying the crosses.
-
 ``` r
 exampleData$snpEffects
 #>    snp00006    snp00009    snp00011    snp00018    snp00026    snp00031 
@@ -166,8 +164,8 @@ exampleData$snpEffects
                           n = 120,
                           names = "generation_1"))
 #>       ind1     ind2 n            names
-#> 1 Coll0059 Coll0028 1 generation_1-001
-#> 2 Coll0080 Coll0080 1 generation_1-002
+#> 1 Coll0028 Coll0059 1 generation_1-001
+#> 2 Coll0070 Coll0086 1 generation_1-002
 #>  [ reached 'max' / getOption("max.print") -- omitted 118 rows ]
 ```
 
