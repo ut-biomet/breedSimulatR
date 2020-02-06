@@ -213,3 +213,23 @@ test_that("population creation", {
   expect_equal(row.names(myPop$genoMat), names(myPop$inds))
 
 })
+
+
+test_that("population $genoMat", {
+  #### Initialisation
+  mySpec <- create_spec()
+  SNPs <- create_SNP(mySpec)
+  nInds <- 5
+  haploList <- lapply(seq(nInds), function(x){
+    create_haplo(SNPs)
+  })
+
+  indList <-  create_inds(haploList)
+
+  myPop <- population$new(name = "My Population 1",
+                          inds = indList,
+                          verbose = FALSE)
+
+  expect_equal(rownames(myPop$genoMat), names(myPop$inds))
+
+})

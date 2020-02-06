@@ -82,3 +82,25 @@ test_that("haplotype particular initialisation", {
   rawHaplo <- rawHaploInit
 
 })
+
+test_that("same haplotype for clones", {
+  # clone generated with haplotype in a different order
+
+  #### Initialisation:
+  mySpec <- create_spec()
+  SNPs <- create_SNP(mySpec)
+  # simulate haplotype data
+  rawHaplo1 <- matrix(sample(c(0, 1), SNPs$nSNP() * mySpec$ploidy, replace = T),
+                     nrow = mySpec$ploidy)
+  colnames(rawHaplo1) <- SNPs$SNPcoord$SNPid
+  rawHaplo2 <- rawHaplo1[,sample(colnames(rawHaplo1))]
+
+  #### Tests:
+  # create haplotype object
+  h1 <- haplotype$new(SNPinfo = SNPs, haplo = rawHaplo1)
+  h2 <- haplotype$new(SNPinfo = SNPs, haplo = rawHaplo2)
+  expect_equal(h1, h2)
+  expect_equal(h1$allelDose, h2$allelDose)
+  expect_equal(h1$values, h2$values)
+
+})
