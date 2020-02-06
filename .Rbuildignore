@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 .gitlab-ci.yml
 ^tools/
+^README\.Rmd$

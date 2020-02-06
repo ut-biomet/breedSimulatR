@@ -2,15 +2,24 @@ Package: breedSimulatR
 Type: Package
 Title: R Breeding Simulator 
 Version: 0.0.1
-Authors@R: person("Julien", "Diot",
-    email = "juliendiot@ut-biomet.org",
-    role = c("aut", "cre"))
+Date: 2020-01-31
+Authors@R: c(
+    person("Julien", "Diot",
+        email = "juliendiot@ut-biomet.org",
+        role = c("aut", "cre")),
+    person("Hiroyoshi", "Iwata",
+        email = "aiwata@mail.ecc.u-tokyo.ac.jp",
+        role = c("aut", "ctb"))
+        )
 Maintainers@R: person("Julien", "Diot",
     email = "juliendiot@ut-biomet.org",
     role = c("aut", "cre"))
 License: MIT + file LICENSE
+Copyright: The University of Tokyo, Laboratory of Biometry and Bioinfomatics.
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/ut-biomet/breedSimulatR
+BugReports: https://github.com/ut-biomet/breedSimulatR/issues
 RoxygenNote: 7.0.2
 Description: R package providing classes and functions to simulate breeding
     schemes.
@@ -22,4 +31,7 @@ Suggests:
     devtools,
     roxygen2,
     testthat,
-    covr
+    covr,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
