@@ -32,6 +32,8 @@
 #'   A Serious Game that Puts Students in the Breeder’s Seat. Crop Science.
 #'   \href{https://dl.sciencesocieties.org/publications/cs/abstracts/59/4/1374}{DOI 10.2135/cropsci2019.03.0183le}
 #'
+#' @aliases genotypes snpCoord snpEffects
+#'
 #' @examples
 #' exampleData$genotypes
 #' exampleData$snpCoord

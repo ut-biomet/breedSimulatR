@@ -22,7 +22,7 @@
 #'                      lchr = 1e6,
 #'                      ploidy = 2,
 #'                      recombRate = 3/1e6)
-#' SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord, specie = specie_statEx)
+#' SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord, specie = mySpec)
 #' initPop <- createPop(geno = exampleData$genotypes,
 #'                      SNPinfo = SNPs,
 #'                      popName = "Initial population")
