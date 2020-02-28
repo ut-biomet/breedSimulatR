@@ -32,7 +32,7 @@ This object is a named list containing 3 elements:
   \item{\code{snpCoord} (\code{data.frame}): }{ Coordinates of the 3333
   individuals' markers. This data.frame contains 3 columns: \code{chr},
   \code{pos} and \code{SNPid}.}
-  \item{\code{snpEffects} (\code{numeric}): }{ "Ture" effects of the 3333
+  \item{\code{snpEffects} (\code{numeric}): }{ "true" effects of the 3333
   individuals' markers about a fictitious quantitative trait based on an
   additive architecture.}
 }

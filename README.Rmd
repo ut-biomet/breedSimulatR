@@ -71,7 +71,7 @@ The package contains some example data that we will use for this example. These 
 
 - `exampleData$genotypes`: `data.frame` containing the genotypic data encoded in allele doses of `r nrow(dta$genotypes)` fictitious individuals with `r ncol(dta$genotypes)` SNP markers. These individuals have 10 chromosomes of length 10^6 bases pairs.
 - `exampleData$snpCoord`: `data.frame` containing the coordinates of the `r ncol(dta$genotypes)` individuals' markers. This data.frame contains 3 columns: `chr`, `pos` and `SNPid`.
-- `exampleData$snpEffects `: `numeric` vector containing the "ture" effects of the `r ncol(dta$genotypes)` individuals' markers about a fictitious quantitative trait based on an additive architecture.
+- `exampleData$snpEffects `: `numeric` vector containing the "true" effects of the `r ncol(dta$genotypes)` individuals' markers about a fictitious quantitative trait based on an additive architecture.
 
 
 #### initialisation
