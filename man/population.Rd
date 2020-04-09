@@ -112,6 +112,8 @@ print(myPop)
 
 \item{\code{genoMat}}{[matrix] matrix of all the genotypes of the population
 encoded in allel doses. (individuals in row and markers in column)}
+
+\item{\code{maf}}{[named vector] minor allele frequency}
 }
 \if{html}{\out{</div>}}
 }
@@ -127,6 +129,7 @@ encoded in allel doses. (individuals in row and markers in column)}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new population object.
 \subsection{Usage}{
@@ -207,6 +210,7 @@ myPop <- population$new(name = "My Population 1",
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-addInds"></a>}}
+\if{latex}{\out{\hypertarget{method-addInds}{}}}
 \subsection{Method \code{addInds()}}{
 Add individuals to the population
 \subsection{Usage}{
@@ -249,6 +253,7 @@ print(myPop)
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-remInds"></a>}}
+\if{latex}{\out{\hypertarget{method-remInds}{}}}
 \subsection{Method \code{remInds()}}{
 Remove individuals from the population
 \subsection{Usage}{
@@ -275,6 +280,7 @@ print(myPop)
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
 Display informations about the object
 \subsection{Usage}{
@@ -284,6 +290,7 @@ Display informations about the object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

@@ -233,3 +233,28 @@ test_that("population $genoMat", {
   expect_equal(rownames(myPop$genoMat), names(myPop$inds))
 
 })
+
+
+
+
+test_that("population $maf", {
+  #### Initialisation
+  mySpec <- create_spec()
+  SNPs <- create_SNP(mySpec)
+  nInds <- 20
+  haploList <- lapply(seq(nInds), function(x){
+    create_haplo(SNPs)
+  })
+
+  indList <-  create_inds(haploList)
+
+  myPop <- population$new(name = "My Population 1",
+                          inds = indList,
+                          verbose = FALSE)
+
+  expect_error(myPop$maf, NA)
+  expect_is(myPop$maf, "numeric")
+  expect_true(all(myPop$maf <= 0.5))
+  expect_equal(sort(names(myPop$maf)),
+               sort(SNPs$SNPcoord$SNPid))
+})
