@@ -58,6 +58,7 @@ mySpec$getChrLength("Chr3")
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new specie object.
 \subsection{Usage}{
@@ -114,6 +115,7 @@ print(mySpec)
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
 Display information about the object
 \subsection{Usage}{
@@ -123,6 +125,7 @@ Display information about the object
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getChrLength"></a>}}
+\if{latex}{\out{\hypertarget{method-getChrLength}{}}}
 \subsection{Method \code{getChrLength()}}{
 Get the chromosomes length
 \subsection{Usage}{
@@ -149,6 +152,7 @@ mySpec$getChrLength("Chr3")
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

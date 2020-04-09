@@ -41,7 +41,13 @@ test_that("selectBV", {
   expect_equal(length(selectedInds), nSel)
   expect_equal(unique(selectedInds), selectedInds)
 
-  bestId <- order(myPop$genoMat %*% snpEffects)
-  expect_equal(selectedInds, rownames(myPop$genoMat)[bestId[1:nSel]])
+  bv <- myPop$genoMat %*% snpEffects
+  bv <- as.numeric(bv)
+  names(bv) <- rownames(myPop$genoMat)
+
+  expect_equivalent(bv[selectedInds[1]], max(bv))
+
+  bv <- sort(bv, decreasing = T)
+  expect_equal(selectedInds, names(bv)[1:nSel])
 
 })

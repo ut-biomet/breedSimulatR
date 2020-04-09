@@ -51,7 +51,7 @@ example. These data are stored in the varaible `exampleData`.
   - `exampleData$snpCoord`: `data.frame` containing the coordinates of
     the 3333 individuals’ markers. This data.frame contains 3 columns:
     `chr`, `pos` and `SNPid`.
-  - `exampleData$snpEffects`: `numeric` vector containing the “ture”
+  - `exampleData$snpEffects`: `numeric` vector containing the “true”
     effects of the 3333 individuals’ markers about a fictitious
     quantitative trait based on an additive architecture.
 
@@ -147,8 +147,6 @@ names of the best individuals according to their breeding values.
 
 Then, the function `randomMate` will generate the crossing table.
 
-This function must return a data.frame specifying the crosses.
-
 ``` r
 exampleData$snpEffects
 #>    snp00006    snp00009    snp00011    snp00018    snp00026    snp00031 
@@ -166,8 +164,8 @@ exampleData$snpEffects
                           n = 120,
                           names = "generation_1"))
 #>       ind1     ind2 n            names
-#> 1 Coll0059 Coll0028 1 generation_1-001
-#> 2 Coll0080 Coll0080 1 generation_1-002
+#> 1 Coll0087 Coll0070 1 generation_1-001
+#> 2 Coll0080 Coll0034 1 generation_1-002
 #>  [ reached 'max' / getOption("max.print") -- omitted 118 rows ]
 ```
 
@@ -311,8 +309,8 @@ Developing R Packages Easier</em>.R package version 2.2.1,
 
 <li>
 
-Wickham H, Danenberg P, CsÃ¡rdi G, Eugster M (2019).<em>roxygen2:
-In-Line Documentation for R</em>.R package version 7.0.2,
+Wickham H, Danenberg P, Csárdi G, Eugster M (2019).<em>roxygen2: In-Line
+Documentation for R</em>.R package version 7.0.2,
 <a href="https://CRAN.R-project.org/package=roxygen2">https://CRAN.R-project.org/package=roxygen2</a>.
 
 </li>
@@ -366,7 +364,7 @@ version 3.4.0,
 <li>
 
 Xie Y (2020).<em>knitr: A General-Purpose Package for Dynamic Report
-Generation in R</em>.R package version 1.27,
+Generation in R</em>.R package version 1.28,
 <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
 
 </li>

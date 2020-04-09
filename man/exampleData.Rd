@@ -7,7 +7,9 @@
 \alias{snpCoord}
 \alias{snpEffects}
 \title{Example of data}
-\format{An object of class \code{list} of length 3.}
+\format{
+An object of class \code{list} of length 3.
+}
 \source{
 These data are simulated and was generated using the serious game
   "PlantBreedGame" available on GitHub:
@@ -32,7 +34,7 @@ This object is a named list containing 3 elements:
   \item{\code{snpCoord} (\code{data.frame}): }{ Coordinates of the 3333
   individuals' markers. This data.frame contains 3 columns: \code{chr},
   \code{pos} and \code{SNPid}.}
-  \item{\code{snpEffects} (\code{numeric}): }{ "Ture" effects of the 3333
+  \item{\code{snpEffects} (\code{numeric}): }{ "true" effects of the 3333
   individuals' markers about a fictitious quantitative trait based on an
   additive architecture.}
 }
