@@ -32,5 +32,5 @@
 selectBV <- function(pop, SNPeffects, n){
   SNPeffects <- SNPeffects[colnames(pop$genoMat)]
   BV <- as.numeric(pop$genoMat %*% SNPeffects)
-  names(pop$inds)[order(BV)][1:n]
+  names(pop$inds)[order(BV, decreasing = TRUE)][1:n]
 }
