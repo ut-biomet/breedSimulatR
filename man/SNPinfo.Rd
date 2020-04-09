@@ -88,6 +88,7 @@ of all SNPs. for each chromosomes}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new SNPinfo object.
 \subsection{Usage}{
@@ -140,6 +141,7 @@ SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-nSNP"></a>}}
+\if{latex}{\out{\hypertarget{method-nSNP}{}}}
 \subsection{Method \code{nSNP()}}{
 Get the number of SNPs per chromosomes
 \subsection{Usage}{
@@ -165,6 +167,7 @@ SNPs$nSNP(c("Chr2","Chr3"))
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-getInfo"></a>}}
+\if{latex}{\out{\hypertarget{method-getInfo}{}}}
 \subsection{Method \code{getInfo()}}{
 Get information about specifique SNPs
 \subsection{Usage}{
@@ -190,6 +193,7 @@ SNPs$getInfo(c("SNP01", "SNP03"))
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
 Display summary information about the object: specie, number of SNP, SNP coordinates.
 \subsection{Usage}{
@@ -199,6 +203,7 @@ Display summary information about the object: specie, number of SNP, SNP coordin
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-plot"></a>}}
+\if{latex}{\out{\hypertarget{method-plot}{}}}
 \subsection{Method \code{plot()}}{
 plot chromosome map using the \pkg{plotly} package
 \subsection{Usage}{
@@ -223,6 +228,7 @@ plot chromosome map using the \pkg{plotly} package
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

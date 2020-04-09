@@ -20,7 +20,7 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/ut-biomet/breedSimulatR
 BugReports: https://github.com/ut-biomet/breedSimulatR/issues
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Description: R package providing classes and functions to simulate breeding
     schemes.
 Depends: 

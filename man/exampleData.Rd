@@ -7,7 +7,9 @@
 \alias{snpCoord}
 \alias{snpEffects}
 \title{Example of data}
-\format{An object of class \code{list} of length 3.}
+\format{
+An object of class \code{list} of length 3.
+}
 \source{
 These data are simulated and was generated using the serious game
   "PlantBreedGame" available on GitHub:
