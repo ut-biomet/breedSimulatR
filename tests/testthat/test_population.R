@@ -237,7 +237,7 @@ test_that("population $genoMat", {
 
 
 
-test_that("population $maf", {
+test_that("population allele freq", {
   #### Initialisation
   mySpec <- create_spec()
   SNPs <- create_SNP(mySpec)
@@ -252,9 +252,26 @@ test_that("population $maf", {
                           inds = indList,
                           verbose = FALSE)
 
+  expect_error(myPop$af, NA)
   expect_error(myPop$maf, NA)
+
+  expect_is(myPop$af, "numeric")
   expect_is(myPop$maf, "numeric")
+
+  expect_true(all(myPop$af >= 0))
+  expect_true(all(myPop$maf >= 0))
+
+  expect_true(all(myPop$af <= 1))
   expect_true(all(myPop$maf <= 0.5))
+
+  expect_equal(myPop$af[myPop$af <= 0.5], myPop$maf[myPop$af <= 0.5])
+  expect_equal(myPop$af[myPop$af >= 0.5], 1 - myPop$maf[myPop$af >= 0.5])
+
+  expect_equal(sort(names(myPop$af)),
+               sort(SNPs$SNPcoord$SNPid))
   expect_equal(sort(names(myPop$maf)),
                sort(SNPs$SNPcoord$SNPid))
+
+  expect_equal(names(myPop$af), colnames(myPop$genoMat))
+  expect_equal(names(myPop$maf), colnames(myPop$genoMat))
 })

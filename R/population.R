@@ -188,14 +188,22 @@ population <- R6::R6Class(
         ind$haplo$allelDose
       }))
     },
-    #' @field maf [named vector] minor allele frequency
-    maf = function(){
+
+    #' @field af [named vector] allele frequency
+    af = function(){
       ploidy <- self$specie$ploidy
       stopifnot(ploidy %in% c(1,2))
 
       geno <- self$genoMat
       freq <- colSums(geno) / (self$nInd * ploidy)
-      freq <- 0.5 - abs(freq - 0.5)
+      freq
+    },
+
+    #' @field maf [named vector] minor allele frequency
+    maf = function(){
+      ploidy <- self$specie$ploidy
+      stopifnot(ploidy %in% c(1,2))
+      freq <- 0.5 - abs(self$af - 0.5)
       freq
     }
 

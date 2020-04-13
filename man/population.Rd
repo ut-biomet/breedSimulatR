@@ -113,6 +113,8 @@ print(myPop)
 \item{\code{genoMat}}{[matrix] matrix of all the genotypes of the population
 encoded in allel doses. (individuals in row and markers in column)}
 
+\item{\code{af}}{[named vector] allele frequency}
+
 \item{\code{maf}}{[named vector] minor allele frequency}
 }
 \if{html}{\out{</div>}}
