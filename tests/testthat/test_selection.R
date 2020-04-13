@@ -15,7 +15,7 @@ if (interactive()) {
 
 
 
-#### TESTS randomMate ####
+#### TESTS selectBV ####
 test_that("selectBV", {
   #### Initialisation
   mySpec <- create_spec(lchr = 5000)
@@ -49,5 +49,36 @@ test_that("selectBV", {
 
   bv <- sort(bv, decreasing = T)
   expect_equal(selectedInds, names(bv)[1:nSel])
+
+})
+
+
+#### TESTS selectWBV ####
+test_that("selectWBV", {
+  #### Initialisation
+  mySpec <- create_spec(lchr = 5000)
+  SNPs <- create_SNP(mySpec)
+  nInds <- 100
+  haploList <- lapply(seq(nInds), function(x){
+    create_haplo(SNPs)
+  })
+  indList <- create_inds(haploList)
+  myPop <- population$new(name = "My Population 1",
+                          inds = indList,
+                          verbose = FALSE)
+
+  snpEffects <- rnorm(SNPs$nSNP(),mean = 0, sd = 42/sqrt(SNPs$nSNP()))
+  names(snpEffects) <- colnames(myPop$genoMat)
+
+  nSel <- 10
+
+  #### Tests:
+  expect_error({selectedInds <- selectWBV(myPop, snpEffects, nSel)},
+               NA)
+  expect_is(selectedInds, "character")
+  expect_equal(length(selectedInds), nSel)
+  expect_equal(unique(selectedInds), selectedInds)
+
+  warning("calculation's results not checked !")
 
 })
