@@ -154,7 +154,7 @@ myInd <-  individual$new(name = "Ind 1",
 \if{html}{\out{<a id="method-generateGametes"></a>}}
 \if{latex}{\out{\hypertarget{method-generateGametes}{}}}
 \subsection{Method \code{generateGametes()}}{
-Get the number of SNPs per chromosomes
+Generate Gametes
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{individual$generateGametes(n = 1)}\if{html}{\out{</div>}}
 }

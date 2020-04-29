@@ -86,7 +86,7 @@ individual <- R6::R6Class(
       if (verbose) cat(paste("A new ind is borned:", self$name, "!"))
     },
 
-    #' @description Get the number of SNPs per chromosomes
+    #' @description Generate Gametes
     #' @param n [float] number of gemetes to create (default: 1)
     #' @return list of gametes. A gamete is a named vectors with value 0 or 1.
     #' @examples
