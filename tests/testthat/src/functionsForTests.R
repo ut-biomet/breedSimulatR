@@ -20,9 +20,14 @@ create_spec <- function(nChr = round(runif(1, 1, 10)),
              verbose = F)
 }
 
-create_SNP <- function(spec){
+create_SNP <- function(spec, nMarker = NULL){
 
-  nMarker <- round(spec$lchr/10)
+  if (is.null(nMarker)) {
+    nMarker <- round(spec$lchr/10)
+  } else {
+    stopifnot(all(nMarker < spec$lchr))
+    nMarker <- rep(nMarker, spec$nChr)
+  }
 
   # generate arbitrary marker position
   pos <- c()
@@ -40,8 +45,16 @@ create_SNP <- function(spec){
   SNPs
 }
 
-create_haplo <- function(SNPs){
-  rawHaplo <- matrix(sample(c(0, 1), SNPs$nSNP() * SNPs$specie$ploidy, replace = T),
+create_haplo <- function(SNPs, af = NULL){
+
+  if (is.null(af)) {
+    af <- 0.5
+  } else {
+    stopifnot(length(af) == SNPs$nSNP())
+  }
+
+  rawHaplo <- matrix(rbinom(SNPs$nSNP() * SNPs$specie$ploidy, 1,
+                            af),
                      nrow = SNPs$specie$ploidy)
   colnames(rawHaplo) <- SNPs$SNPcoord$SNPid
   haplo <- haplotype$new(SNPinfo = SNPs,
