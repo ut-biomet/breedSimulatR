@@ -29,15 +29,15 @@ test_that("makeSingleCross", {
 
 
   #### Tests:
-  expect_error(makeSingleCross(myInd1, myInd2), NA)
-  expect_error(makeSingleCross(myInd1, myInd2, 2), NA)
+  expect_error(makeSingleCross(myInd1, myInd2, "newInd"), NA)
+  expect_error(makeSingleCross(myInd1, myInd2, "newInd", 2), NA)
 
-  expect_is(makeSingleCross(myInd1, myInd2), "list")
-  expect_equal(length(makeSingleCross(myInd1, myInd2)), 1)
-  expect_equal(length(makeSingleCross(myInd1, myInd2, n = 3)), 3)
-  expect_is(makeSingleCross(myInd1, myInd2)[[1]], "individual")
+  expect_is(makeSingleCross(myInd1, myInd2, "newInd"), "list")
+  expect_equal(length(makeSingleCross(myInd1, myInd2, "newInd")), 1)
+  expect_equal(length(makeSingleCross(myInd1, myInd2, "newInd", n = 3)), 3)
+  expect_is(makeSingleCross(myInd1, myInd2, "newInd")[[1]], "individual")
 
-  expect_error(makeSingleCross(myInd1, myInd2, 2, "new Ind"), NA)
+  expect_error(makeSingleCross(myInd1, myInd2))
 
   newInd <- makeSingleCross(myInd1, myInd2, names = "New", verbose = F)[[1]]
   expect_identical(newInd$name, "New")

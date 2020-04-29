@@ -4,16 +4,16 @@
 \alias{makeSingleCross}
 \title{Cross two individuals together}
 \usage{
-makeSingleCross(ind1, ind2, n = 1, names = NULL, verbose = TRUE)
+makeSingleCross(ind1, ind2, names, n = 1, verbose = TRUE)
 }
 \arguments{
 \item{ind1}{parent 1}
 
 \item{ind2}{parent 2}
 
-\item{n}{number of descendants}
-
 \item{names}{names of the descendants}
+
+\item{n}{number of descendants}
 
 \item{verbose}{print informations}
 }

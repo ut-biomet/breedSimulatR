@@ -9,8 +9,8 @@
 #'
 #' @param ind1 parent 1
 #' @param ind2 parent 2
-#' @param n number of descendants
 #' @param names names of the descendants
+#' @param n number of descendants
 #' @param verbose print informations
 #'
 #' @return list of new individuals
@@ -67,13 +67,11 @@
 #'                          verbose = FALSE)
 #' offspring <- makeSingleCross(myInd1, myInd2, names = "off 1")
 #' offspring
-makeSingleCross <- function(ind1, ind2, n = 1, names = NULL, verbose = TRUE){
+makeSingleCross <- function(ind1, ind2, names, n = 1, verbose = TRUE){
 
   #  Names
   if (is.null(names) || is.na(names)) {
-    names <- paste0(ind1$name," x ", ind2$name,
-                    "_", as.numeric(Sys.time())*10^5)
-    names <- paste0(names, "-", c(1:n))
+    stop('"names" should be provided')
   }
 
   if (length(names) != n) {
@@ -226,12 +224,19 @@ makeCrosses <- function(crosses, pop){
   if (!all(crosses$n == floor(crosses$n))) {
     stop(paste0('Column n should be integer values'))
   }
+  # names
+  if (any(is.na(crosses$name))) {
+    noNames <- crosses[is.na(crosses$name),]
+    noNames$name <- paste(noNames$ind1, "x", noNames$ind2, "-",
+                          seq_len(nrow(noNames)), "-")
+    crosses[is.na(crosses$name),"names"] <- noNames$name
+  }
 
   newInds <- mapply(makeSingleCross,
                     pop$inds[crosses$ind1],
                     pop$inds[crosses$ind2],
-                    crosses$n,
                     crosses$name,
+                    crosses$n,
                     USE.NAMES = FALSE )
 
   newInds <- unlist(newInds)
