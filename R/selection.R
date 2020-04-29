@@ -10,8 +10,8 @@
 #'
 #' @param pop (population object) Population of individuals to select
 #'   (see:\link[breedSimulatR]{population})
-#' @param SNPeffects (numeric vector) effect of the genetic markers
 #' @param n (integer) number of individuals to select
+#' @param SNPeffects (numeric vector) effect of the genetic markers
 #'
 #' @return character vector of the selected individulas' names
 #' @export
@@ -29,8 +29,12 @@
 #' selectBV(pop = initPop,
 #'          SNPeffects = exampleData$snpEffects,
 #'          n = 10)
-selectBV <- function(pop, SNPeffects, n){
-  SNPeffects <- SNPeffects[colnames(pop$genoMat)]
+selectBV <- function(pop, n, SNPeffects){
+
+  if (!all(colnames(SNPeffects) == colnames(pop$genoMat))) {
+    SNPeffects <- SNPeffects[colnames(pop$genoMat)]
+  }
+
   BV <- as.numeric(pop$genoMat %*% SNPeffects)
   names(pop$inds)[order(BV, decreasing = TRUE)][1:n]
 }
@@ -40,8 +44,8 @@ selectBV <- function(pop, SNPeffects, n){
 #'
 #' @param pop (population object) Population of individuals to select
 #'   (see:\link[breedSimulatR]{population})
-#' @param SNPeffects (numeric vector) effect of the genetic markers
 #' @param n (integer) number of individuals to select
+#' @param SNPeffects (numeric vector) effect of the genetic markers
 #'
 #' @return character vector of the selected individulas' names
 #' @references Jannink, Jean-Luc. “Dynamics of Long-Term Genomic Selection.”
@@ -62,9 +66,11 @@ selectBV <- function(pop, SNPeffects, n){
 #' selectWBV(pop = initPop,
 #'          SNPeffects = exampleData$snpEffects,
 #'          n = 10)
-selectWBV <- function(pop, SNPeffects, n){
+selectWBV <- function(pop, n, SNPeffects){
 
-  SNPeffects <- SNPeffects[colnames(pop$genoMat)]
+  if (!all(colnames(SNPeffects) == colnames(pop$genoMat))) {
+    SNPeffects <- SNPeffects[colnames(pop$genoMat)]
+  }
 
   favAllel <- as.numeric(SNPeffects > 0)
 

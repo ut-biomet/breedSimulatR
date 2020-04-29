@@ -4,15 +4,15 @@
 \alias{selectBV}
 \title{Selection according to breeding values}
 \usage{
-selectBV(pop, SNPeffects, n)
+selectBV(pop, n, SNPeffects)
 }
 \arguments{
 \item{pop}{(population object) Population of individuals to select
 (see:\link[breedSimulatR]{population})}
 
-\item{SNPeffects}{(numeric vector) effect of the genetic markers}
-
 \item{n}{(integer) number of individuals to select}
+
+\item{SNPeffects}{(numeric vector) effect of the genetic markers}
 }
 \value{
 character vector of the selected individulas' names

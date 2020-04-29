@@ -35,7 +35,7 @@ test_that("selectBV", {
   nSel <- 10
 
   #### Tests:
-  expect_error({selectedInds <- selectBV(myPop, snpEffects, nSel)},
+  expect_error({selectedInds <- selectBV(myPop, nSel, snpEffects)},
                NA)
   expect_is(selectedInds, "character")
   expect_equal(length(selectedInds), nSel)
@@ -73,7 +73,7 @@ test_that("selectWBV", {
   nSel <- 10
 
   #### Tests:
-  expect_error({selectedInds <- selectWBV(myPop, snpEffects, nSel)},
+  expect_error({selectedInds <- selectWBV(myPop, nSel, snpEffects)},
                NA)
   expect_is(selectedInds, "character")
   expect_equal(length(selectedInds), nSel)
