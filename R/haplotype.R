@@ -63,8 +63,8 @@ haplotype <- R6::R6Class(
         stop('class(SNPinfo)[1] != "SNPinfo"\n"SNPinfo" must be a SNPinfo object see: ?SNPinfo')
       }
       # haplo class
-      if (class(haplo) != "matrix"){
-        stop('class(haplo) != "matrix"\n"haplo" must be a matrix')
+      if (!is(haplo,"matrix")){
+        stop('is(haplo,"matrix") is FALSE\n"haplo" must be a matrix')
       }
       # haplo ploidy
       if (nrow(haplo) != SNPinfo$specie$ploidy) {
