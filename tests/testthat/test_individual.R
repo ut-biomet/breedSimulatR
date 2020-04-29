@@ -10,6 +10,7 @@
 
 ##### Initialisation functions ####
 if (interactive()) {
+  devtools::load_all()
   source("tests/testthat/src/functionsForTests.R")
 } else source("src/functionsForTests.R")
 

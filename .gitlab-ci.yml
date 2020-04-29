@@ -1,36 +1,20 @@
-image: rocker/verse
+image: rocker/tidyverse
 
 stages:
-  - TestPackage
+    - build
+    - test
 
-before_script:
-  - apt-get update
-  - r -e 'install.packages(c("devtools", "roxygen2", "testthat", "covr", "R6", "plotly"))'
-  - r -e 'devtools::install_deps()'
+building:
+    stage: build
+    script:
+        - R -e "remotes::install_deps(dependencies = TRUE)"
+        - R -e 'devtools::check()'
 
-documentation:
-  stage: TestPackage
-  script:
-    - Rscript tools/Check_documentation.R
-
-check:
-  stage: TestPackage
-  script:
-    - r -e 'devtools::build()'
-    - cd ..
-    - R CMD check --as-cran breedSimulatR_*.tar.gz
-
-unittests:
-  stage: TestPackage
-  script:
-    - r -e 'devtools::test()'
-
-codecov:
-  stage: TestPackage
-  script:
-    - Rscript tools/codecov.R
-
-install:
-  stage: TestPackage
-  script:
-    - r -e 'devtools::install()'
+testing:
+    stage: test
+    allow_failure: true
+    when: on_success
+    script:
+        - R -e "remotes::install_deps(dependencies = TRUE)"
+        - Rscript -e 'install.packages("DT")'
+        - Rscript -e 'covr::codecov(quiet = FALSE)'

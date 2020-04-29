@@ -1,37 +1,44 @@
-Package: breedSimulatR
 Type: Package
-Title: R Breeding Simulator 
-Version: 0.0.1
+Package: breedSimulatR
+Title: R Breeding Simulator
+Version: 0.1.1
 Date: 2020-01-31
-Authors@R: c(
-    person("Julien", "Diot",
-        email = "juliendiot@ut-biomet.org",
-        role = c("aut", "cre")),
-    person("Hiroyoshi", "Iwata",
-        email = "aiwata@mail.ecc.u-tokyo.ac.jp",
-        role = c("aut", "ctb"))
-        )
-Maintainers@R: person("Julien", "Diot",
-    email = "juliendiot@ut-biomet.org",
-    role = c("aut", "cre"))
+Authors@R: 
+    c(person(given = "Julien",
+             family = "Diot",
+             role = c("aut", "cre"),
+             email = "juliendiot@ut-biomet.org"),
+      person(given = "Hiroyoshi",
+             family = "Iwata",
+             role = c("aut", "ctb"),
+             email = "aiwata@mail.ecc.u-tokyo.ac.jp"))
+Description: R package providing classes and functions to
+    simulate breeding schemes.
 License: MIT + file LICENSE
-Copyright: The University of Tokyo, Laboratory of Biometry and Bioinfomatics.
-Encoding: UTF-8
-LazyData: true
 URL: https://github.com/ut-biomet/breedSimulatR
 BugReports: https://github.com/ut-biomet/breedSimulatR/issues
-RoxygenNote: 7.1.0
-Description: R package providing classes and functions to simulate breeding
-    schemes.
 Depends: 
-    R (>= 3.2.0),
+    R (>= 3.2.0)
+Imports: 
+    plotly,
     R6
-Imports: plotly
 Suggests:
-    devtools,
-    roxygen2,
-    testthat,
     covr,
+    devtools,
     knitr,
-    rmarkdown
-VignetteBuilder: knitr
+    microbenchmark,
+    pkgdown,
+    rmarkdown,
+    roxygen2,
+    spelling,
+    testthat
+VignetteBuilder: 
+    knitr
+Copyright: The University of Tokyo, Laboratory of Biometry and
+    Bioinfomatics.
+Encoding: UTF-8
+Language: en-US
+LazyData: true
+Maintainers@R: person("Julien", "Diot", email =
+    "juliendiot@ut-biomet.org", role = c("aut", "cre"))
+RoxygenNote: 7.1.0

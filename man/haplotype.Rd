@@ -40,8 +40,8 @@ haplo <- haplotype$new(SNPinfo = SNPs,
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{SNPinfo}}{[SNPinfo class] information about the haplotype's SNPs
-(see:\link[breedSimulatR]{SNPinfo})}
+\item{\code{SNPinfo}}{[SNPinfo class] information about the haplotype of the
+SNPs (see:\link[breedSimulatR]{SNPinfo})}
 
 \item{\code{values}}{[list] list haplotype values}
 }

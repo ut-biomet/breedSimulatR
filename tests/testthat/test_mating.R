@@ -7,6 +7,10 @@
 
 # set.seed(9552) # for reproductible RNG
 
+if (interactive()) {
+  devtools::load_all()
+}
+
 validCrossTable <- function(crossTable){
   expect_is(crossTable, "data.frame")
   expect_equal(colnames(crossTable), c("ind1", "ind2", "n", "names"))

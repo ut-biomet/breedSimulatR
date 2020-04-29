@@ -33,12 +33,14 @@ SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 
 
 # simulate haplotype:
-rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                    nrow = 2)
 colnames(rawHaplo1) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo1 <- haplotype$new(SNPinfo = SNPs,
                        haplo = rawHaplo1)
-rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                    nrow = 2)
 colnames(rawHaplo2) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo2 <- haplotype$new(SNPinfo = SNPs,
@@ -68,7 +70,8 @@ myPop <- population$new(name = "My Population 1",
 
 # create new individual
 
-rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                    nrow = 2)
 colnames(rawHaplo3) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo3 <- haplotype$new(SNPinfo = SNPs,
@@ -111,7 +114,9 @@ print(myPop)
 \item{\code{nInd}}{[numeric] number of individual in the population}
 
 \item{\code{genoMat}}{[matrix] matrix of all the genotypes of the population
-encoded in allel doses. (individuals in row and markers in column)}
+encoded in allele doses. (individuals in row and markers in column)}
+
+\item{\code{af}}{[named vector] allele frequency}
 
 \item{\code{maf}}{[named vector] minor allele frequency}
 }
@@ -133,7 +138,7 @@ encoded in allel doses. (individuals in row and markers in column)}
 \subsection{Method \code{new()}}{
 Create a new population object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{population$new(name = NULL, inds = list(), verbose = T)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{population$new(name = NULL, inds = list(), verbose = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -174,12 +179,14 @@ SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 
 
 # simulate haplotype:
-rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                    nrow = 2)
 colnames(rawHaplo1) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo1 <- haplotype$new(SNPinfo = SNPs,
                        haplo = rawHaplo1)
-rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                    nrow = 2)
 colnames(rawHaplo2) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo2 <- haplotype$new(SNPinfo = SNPs,
@@ -229,7 +236,8 @@ population (see:\link[breedSimulatR]{individual})}
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{# create new individual
 
-rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                    nrow = 2)
 colnames(rawHaplo3) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo3 <- haplotype$new(SNPinfo = SNPs,
@@ -263,7 +271,7 @@ Remove individuals from the population
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{indsNames}}{[character] character vercor of the individuals' names}
+\item{\code{indsNames}}{[character] character vetcor of the individuals' names}
 }
 \if{html}{\out{</div>}}
 }

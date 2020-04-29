@@ -9,7 +9,10 @@
 
 
 ##### Initialisation functions ####
-source("src/functionsForTests.R")
+if (interactive()) {
+  devtools::load_all()
+  source("tests/testthat/src/functionsForTests.R")
+} else source("src/functionsForTests.R")
 
 
 
@@ -20,7 +23,7 @@ test_that("SNPinfo initialization", {
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(sapply(seq(mySpec$nChr),
+  pos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))
@@ -59,7 +62,7 @@ test_that("SNPinfo errors", {
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(sapply(seq(mySpec$nChr),
+  pos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))
@@ -72,14 +75,16 @@ test_that("SNPinfo errors", {
                          pos = pos,
                          SNPid = SNPid)
   expect_error({SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)},
-               '"Chromosomes\'names specified in "SNPcoord" do not match those specified in "specie"')
+               paste('"Chromosomes\'names specified in "SNPcoord"',
+                     'do not match those specified in "specie"'))
 
   SNPcoord <- data.frame(chr = rep(chrNames, times = nMarkers),
                          pos = pos,
                          SNPid = SNPid,
                          stringsAsFactors = FALSE)
   expect_error({SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)},
-               '"Chromosomes\'names specified in "SNPcoord" do not match those specified in "specie"')
+               paste('"Chromosomes\'names specified in "SNPcoord"',
+                     'do not match those specified in "specie"'))
 
 })
 
@@ -92,7 +97,7 @@ test_that("SNPinfo stringAsFactor",{
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(sapply(seq(mySpec$nChr),
+  pos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))
@@ -126,7 +131,7 @@ test_that("SNPinfo nSNP method", {
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(sapply(seq(mySpec$nChr),
+  pos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))
@@ -157,7 +162,7 @@ test_that("SNPinfo getInfo method", {
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(sapply(seq(mySpec$nChr),
+  pos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))
@@ -190,7 +195,7 @@ test_that("SNPinfo plot method", {
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(sapply(seq(mySpec$nChr),
+  pos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))
@@ -219,7 +224,7 @@ test_that("SNPinfo's \"print\" methods", {
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(sapply(seq(mySpec$nChr),
+  pos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))

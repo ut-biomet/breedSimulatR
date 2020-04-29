@@ -1,0 +1,38 @@
+url: https://ut-biomet.github.io/breedSimulatR
+
+navbar:
+  structure:
+    left:
+      - home
+      - intro
+      - reference
+      - articles
+      - tutorials
+      - news
+    right: github
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/ut-biomet/breedSimulatR/
+
+reference:
+  - title: All functions
+    contents:
+      - "`SNPinfo`"
+      - "`createPop`"
+      - "`exampleData`"
+      - "`haplotype`"
+      - "`individual`"
+      - "`makeCrosses`"
+      - "`makeSingleCross`"
+      - "`population`"
+      - "`randomMate`"
+      - "`selectBV`"
+      - "`selectWBV`"
+      - "`specie`"

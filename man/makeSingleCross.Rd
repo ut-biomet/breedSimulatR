@@ -4,16 +4,16 @@
 \alias{makeSingleCross}
 \title{Cross two individuals together}
 \usage{
-makeSingleCross(ind1, ind2, n = 1, names = NULL, verbose = T)
+makeSingleCross(ind1, ind2, names, n = 1, verbose = TRUE)
 }
 \arguments{
 \item{ind1}{parent 1}
 
 \item{ind2}{parent 2}
 
-\item{n}{number of descendants}
-
 \item{names}{names of the descendants}
+
+\item{n}{number of descendants}
 
 \item{verbose}{print informations}
 }
@@ -45,12 +45,14 @@ SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 
 
 # simulate haplotype:
-rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                    nrow = 2)
 colnames(rawHaplo1) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo1 <- haplotype$new(SNPinfo = SNPs,
                        haplo = rawHaplo1)
-rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                    nrow = 2)
 colnames(rawHaplo2) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo2 <- haplotype$new(SNPinfo = SNPs,

@@ -27,7 +27,8 @@ individual <- R6::R6Class(
     parent1 = NULL,
     #' @field parent2 [string] Name of the individual's parent
     parent2 = NULL,
-    #' @field haplo [haplotype class] Haplotype of the individual (see: \link[breedSimulatR]{haplotype})
+    #' @field haplo [haplotype class] Haplotype of the individual (see:
+    #'   \link[breedSimulatR]{haplotype})
     haplo = NULL,
 
     #' @description Create a new individual object.
@@ -60,7 +61,8 @@ individual <- R6::R6Class(
     #' # create SNPinfo object
     #' SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
     #' # simulate haplotype
-    #' rawHaplo <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+    #' rawHaplo <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+    #'                    nrow = 2)
     #' colnames(rawHaplo) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
     #'                               1:(3 + 4 + 5))
     #' haplo <- haplotype$new(SNPinfo = SNPs,
@@ -76,18 +78,18 @@ individual <- R6::R6Class(
                           parent1 = NA,
                           parent2 = NA,
                           haplo = NA,
-                          verbose = T){
-      self$name = name
-      self$specie = specie
-      self$parent1 = parent1
-      self$parent2 = parent2
-      self$haplo = haplo
+                          verbose = TRUE){
+      self$name <- name
+      self$specie <- specie
+      self$parent1 <- parent1
+      self$parent2 <- parent2
+      self$haplo <- haplo
       private$checkHaplo()
       if (verbose) cat(paste("A new ind is borned:", self$name, "!"))
     },
 
-    #' @description Get the number of SNPs per chromosomes
-    #' @param n [float] number of gemetes to create (default: 1)
+    #' @description Generate Gametes
+    #' @param n [float] number of gametes to create (default: 1)
     #' @return list of gametes. A gamete is a named vectors with value 0 or 1.
     #' @examples
     #' myInd$generateGametes()
@@ -128,9 +130,9 @@ individual <- R6::R6Class(
         },
         self$haplo$values,
         self$haplo$SNPinfo$SNPcoordList,
-        SIMPLIFY = F)
+        SIMPLIFY = FALSE)
 
-        gamete <- unlist(gamete, use.names = F)
+        gamete <- unlist(gamete, use.names = FALSE)
         names(gamete) <- names(self$haplo$allelDose)
         gamete
 

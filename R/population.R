@@ -53,12 +53,14 @@ population <- R6::R6Class(
     #'
     #'
     #' # simulate haplotype:
-    #' rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+    #' rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+    #'                     nrow = 2)
     #' colnames(rawHaplo1) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
     #'                               1:(3 + 4 + 5))
     #' haplo1 <- haplotype$new(SNPinfo = SNPs,
     #'                        haplo = rawHaplo1)
-    #' rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+    #' rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+    #'                     nrow = 2)
     #' colnames(rawHaplo2) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
     #'                               1:(3 + 4 + 5))
     #' haplo2 <- haplotype$new(SNPinfo = SNPs,
@@ -83,7 +85,7 @@ population <- R6::R6Class(
     #'                         verbose = FALSE)
     initialize = function(name = NULL,
                           inds = list(),
-                          verbose = T){
+                          verbose = TRUE){
       # checks
       if (is.null(name)) {
         name <- "Unspecified"
@@ -92,7 +94,8 @@ population <- R6::R6Class(
       if (class(inds)[1] == "individual") {
         inds <- list(inds)
       } else if (class(inds) != "list") {
-        stop("inds must be an individual object or a list of individuals objects")
+        stop(paste("inds must be an individual object or a list of",
+                   "individuals objects"))
       }
 
       if (verbose) {
@@ -100,7 +103,7 @@ population <- R6::R6Class(
         i <- 1
         tot <- length(inds)
       }
-      self$name = name
+      self$name <- name
       for (ind in inds) {
         if (verbose) {
           cat(paste0("\r", round(i/tot*100), "%"))
@@ -116,7 +119,8 @@ population <- R6::R6Class(
     #' @examples
     #' # create new individual
     #'
-    #' rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+    #' rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+    #'                     nrow = 2)
     #' colnames(rawHaplo3) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
     #'                               1:(3 + 4 + 5))
     #' haplo3 <- haplotype$new(SNPinfo = SNPs,
@@ -143,7 +147,7 @@ population <- R6::R6Class(
 
     },
     #' @description Remove individuals from the population
-    #' @param indsNames [character] character vercor of the individuals' names
+    #' @param indsNames [character] character vetcor of the individuals' names
     #' @examples
     #' print(myPop)
     #' myPop$remInds("Ind 2")
@@ -182,27 +186,43 @@ population <- R6::R6Class(
       length(self$inds)
     },
     #' @field genoMat [matrix] matrix of all the genotypes of the population
-    #'   encoded in allel doses. (individuals in row and markers in column)
+    #'   encoded in allele doses. (individuals in row and markers in column)
     genoMat = function(){
-      t(sapply(self$inds, function(ind){
-        ind$haplo$allelDose
-      }))
+      if (length(self$inds) > 0) {
+        t(vapply(self$inds, function(ind){
+          ind$haplo$allelDose
+        }, vector(mode = "numeric",
+                  length = length(self$inds[[1]]$haplo$allelDose)))
+        )
+      } else {
+        NULL
+      }
+
     },
-    #' @field maf [named vector] minor allele frequency
-    maf = function(){
+
+    #' @field af [named vector] allele frequency
+    af = function(){
       ploidy <- self$specie$ploidy
       stopifnot(ploidy %in% c(1,2))
 
       geno <- self$genoMat
       freq <- colSums(geno) / (self$nInd * ploidy)
-      freq <- 0.5 - abs(freq - 0.5)
+      freq
+    },
+
+    #' @field maf [named vector] minor allele frequency
+    maf = function(){
+      ploidy <- self$specie$ploidy
+      stopifnot(ploidy %in% c(1,2))
+      freq <- 0.5 - abs(self$af - 0.5)
       freq
     }
 
   ),
   private = list(
     # @description Add new individual to the population
-    # @param ind [individual class] individual (see:\link[breedSimulatR]{individual})
+    # @param ind [individual class] individual
+    #   (see:\link[breedSimulatR]{individual})
     # @return NULL
     addInd = function(ind) {
 
@@ -215,13 +235,14 @@ population <- R6::R6Class(
       if (is.null(self$specie)) {
         self$specie <- ind$specie
       } else if (!isTRUE(all.equal(self$specie, ind$specie))) {
-        stop(paste("Individual of a different species than the population's one.\n",
-                   "Please add", self$specie$name, "individuals."))
+        stop(paste("Individual of a different species than the population's",
+                   "one.\nPlease add", self$specie$name, "individuals."))
       }
 
       # check name
       if (ind$name %in% names(self$inds)) {
-        stop(paste("Individual with the same name already exists in the population:", ind$name))
+        stop(paste("Individual with the same name already exists",
+                   "in the population:", ind$name))
       }
 
       # add new individual
@@ -261,7 +282,11 @@ population <- R6::R6Class(
 #' example_pop <- createPop(geno = exampleData$genotypes,
 #'                          SNPinfo = SNPs,
 #'                          popName = "Example population")
-createPop <- function(geno, SNPinfo, indNames = NULL, popName = NULL, verbose = TRUE) {
+createPop <- function(geno,
+                      SNPinfo,
+                      indNames = NULL,
+                      popName = NULL,
+                      verbose = TRUE) {
   if (verbose) {
     cat("Create population: Initialisation...\n")
   }
@@ -320,7 +345,7 @@ createPop <- function(geno, SNPinfo, indNames = NULL, popName = NULL, verbose = 
       parent1 = NA,
       parent2 = NA,
       haplo = haplotype$new(SNPinfo, rbind(haplo, haplo) / 2),
-      verbose = F
+      verbose = FALSE
     )
   }
 

@@ -31,7 +31,8 @@ SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
 # create SNPinfo object
 SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 # simulate haplotype
-rawHaplo <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                   nrow = 2)
 colnames(rawHaplo) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo <- haplotype$new(SNPinfo = SNPs,
@@ -62,7 +63,8 @@ myInd$generateGametes(2)
 
 \item{\code{parent2}}{[string] Name of the individual's parent}
 
-\item{\code{haplo}}{[haplotype class] Haplotype of the individual (see: \link[breedSimulatR]{haplotype})}
+\item{\code{haplo}}{[haplotype class] Haplotype of the individual (see:
+\link[breedSimulatR]{haplotype})}
 }
 \if{html}{\out{</div>}}
 }
@@ -86,7 +88,7 @@ Create a new individual object.
   parent1 = NA,
   parent2 = NA,
   haplo = NA,
-  verbose = T
+  verbose = TRUE
 )}\if{html}{\out{</div>}}
 }
 
@@ -133,7 +135,8 @@ SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
 # create SNPinfo object
 SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 # simulate haplotype
-rawHaplo <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                   nrow = 2)
 colnames(rawHaplo) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo <- haplotype$new(SNPinfo = SNPs,
@@ -154,7 +157,7 @@ myInd <-  individual$new(name = "Ind 1",
 \if{html}{\out{<a id="method-generateGametes"></a>}}
 \if{latex}{\out{\hypertarget{method-generateGametes}{}}}
 \subsection{Method \code{generateGametes()}}{
-Get the number of SNPs per chromosomes
+Generate Gametes
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{individual$generateGametes(n = 1)}\if{html}{\out{</div>}}
 }
@@ -162,7 +165,7 @@ Get the number of SNPs per chromosomes
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{n}}{[float] number of gemetes to create (default: 1)}
+\item{\code{n}}{[float] number of gametes to create (default: 1)}
 }
 \if{html}{\out{</div>}}
 }

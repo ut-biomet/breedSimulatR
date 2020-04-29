@@ -3,3 +3,10 @@
 .gitlab-ci.yml
 ^tools/
 ^README\.Rmd$
+^dev_history\.R$
+^LICENSE\.md$
+^\.gitlab-ci\.yml$
+^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

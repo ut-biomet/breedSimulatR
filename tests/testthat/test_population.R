@@ -10,6 +10,7 @@
 
 ##### Initialisation functions ####
 if (interactive()) {
+  devtools::load_all()
   source("tests/testthat/src/functionsForTests.R")
 } else source("src/functionsForTests.R")
 
@@ -40,12 +41,13 @@ test_that("population initialisation", {
 
   # check individuals' id in the object pop (names(myPop$inds)) do not depend of
   # the id of the individuals in the input list (names(indList)) :
-  names(indList) <- paste("toto", 1:length(indList))
+  names(indList) <- paste("toto", seq_along(indList))
   myPop <- population$new(name = "My Population 1",
                           inds = indList,
                           verbose = FALSE)
   expect_equal(names(myPop$inds),
-               as.character(sapply(indList, function(x){x$name})))
+               as.character(vapply(indList, function(x){x$name},
+                                   "character")))
 
   # check initialisation without parameters
   expect_error({myPop <- population$new(verbose = FALSE)}, NA)
@@ -101,7 +103,8 @@ test_that("population errors", {
   expect_error({myPop <- population$new(name = "My Population 1",
                                         inds = list(ind1, ind2),
                                         verbose = FALSE)},
-                "Individual with the same name already exists in the population:")
+                paste("Individual with the same name already",
+                      "exists in the population:"))
 
 
 
@@ -237,7 +240,7 @@ test_that("population $genoMat", {
 
 
 
-test_that("population $maf", {
+test_that("population allele freq", {
   #### Initialisation
   mySpec <- create_spec()
   SNPs <- create_SNP(mySpec)
@@ -252,9 +255,26 @@ test_that("population $maf", {
                           inds = indList,
                           verbose = FALSE)
 
+  expect_error(myPop$af, NA)
   expect_error(myPop$maf, NA)
+
+  expect_is(myPop$af, "numeric")
   expect_is(myPop$maf, "numeric")
+
+  expect_true(all(myPop$af >= 0))
+  expect_true(all(myPop$maf >= 0))
+
+  expect_true(all(myPop$af <= 1))
   expect_true(all(myPop$maf <= 0.5))
+
+  expect_equal(myPop$af[myPop$af <= 0.5], myPop$maf[myPop$af <= 0.5])
+  expect_equal(myPop$af[myPop$af >= 0.5], 1 - myPop$maf[myPop$af >= 0.5])
+
+  expect_equal(sort(names(myPop$af)),
+               sort(SNPs$SNPcoord$SNPid))
   expect_equal(sort(names(myPop$maf)),
                sort(SNPs$SNPcoord$SNPid))
+
+  expect_equal(names(myPop$af), colnames(myPop$genoMat))
+  expect_equal(names(myPop$maf), colnames(myPop$genoMat))
 })
