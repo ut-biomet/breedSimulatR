@@ -70,7 +70,7 @@ Create a new specie object.
   mutRate = NA,
   recombRate = NA,
   chrNames = NA,
-  verbose = T
+  verbose = TRUE
 )}\if{html}{\out{</div>}}
 }
 
@@ -83,7 +83,8 @@ Create a new specie object.
 
 \item{\code{specName}}{[str] Specie's name (optional)}
 
-\item{\code{ploidy}}{[numeric] Number of possible alleles at one locus (optional)}
+\item{\code{ploidy}}{[numeric] Number of possible alleles at one locus
+(optional)}
 
 \item{\code{mutRate}}{[numeric] Mutation rate at each base (optional)}
 

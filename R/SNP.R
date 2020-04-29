@@ -9,11 +9,11 @@
 
 #' R6 Class representing a set of SNP markers
 #'
-#' @description
-#' SNPinfo object store specific information of a set of SNP markers
+#' @description SNPinfo object store specific information of a set of SNP
+#' markers
 #'
-#' @details
-#' This class is usefull for setting the Haplotype class. (see: \code{\link[breedSimulatR]{haplotype}})
+#' @details This class is useful for setting the Haplotype class. (see:
+#' \code{\link[breedSimulatR]{haplotype}})
 #'
 #' @export
 #' @import R6
@@ -44,17 +44,14 @@ SNPinfo <- R6::R6Class(
     #' @field ids [list] Named list of the SNP ids for all chromosomes
     ids = list(),
 
-    #' @description
-    #' Create a new SNPinfo object.
+    #' @description Create a new SNPinfo object.
     #' @param SNPcoord [data.frame] Coordinate of all SNPs.
     #'
-    #' 3 columns:
-    #' \itemize{
-    #'  \item{\code{chr}:} {Chromosome holding the SNP}
-    #'  \item{\code{pos}:} {SNP position on the chromosome}
-    #'  \item{\code{SNPid}:} {SNP's IDs}
-    #'  }
-    #' @param specie [specie class] Specie of the SNPs (see:\link[breedSimulatR]{specie})
+    #'   3 columns: \itemize{ \item{\code{chr}:} {Chromosome holding the SNP}
+    #'   \item{\code{pos}:} {SNP position on the chromosome}
+    #'   \item{\code{SNPid}:} {SNP's IDs} }
+    #' @param specie [specie class] Specie of the SNPs
+    #'   (see:\link[breedSimulatR]{specie})
     #' @return A new `SNPinfo` object.
     #' @examples
     #' # create specie
@@ -89,16 +86,20 @@ SNPinfo <- R6::R6Class(
         stop('"colnames(SNPcoord)" must be "chr", "pos" and "SNPid"')
       }
       if (!all(unique(SNPcoord$chr) %in% specie$chrNames)) {
-        stop(paste0('"Chromosomes\'names specified in "SNPcoord" do not match those specified in "specie"\n',
-                    'unique(SNPcoord$chr) = ', paste0(unique(SNPcoord$chr), collapse = " "), '\n',
-                    'specie$chrNames = ', paste0(specie$chrNames, collapse = " ")))
+        stop(paste0('"Chromosomes\'names specified in "SNPcoord" do ',
+                    'not match those specified in "specie"\n',
+                    'unique(SNPcoord$chr) = ',
+                    paste0(unique(SNPcoord$chr), collapse = " "), '\n',
+                    'specie$chrNames = ',
+                    paste0(specie$chrNames, collapse = " ")))
       }
       if (length(SNPcoord$SNPid) != length(unique(SNPcoord$SNPid))) {
         stop('Some markers appear several times in "SNPcoord"')
       }
 
       # remove factors
-      SNPcoord[, sapply(SNPcoord, is.factor)] <- lapply(SNPcoord[, sapply(SNPcoord, is.factor)], as.character)
+      SNPcoord[, vapply(SNPcoord, is.factor, TRUE)] <-
+        lapply(SNPcoord[, vapply(SNPcoord, is.factor, TRUE)], as.character)
 
       # convert to integer
       SNPcoord$pos <- as.integer(SNPcoord$pos)
@@ -136,11 +137,12 @@ SNPinfo <- R6::R6Class(
         chr <- self$specie$chrNames[chr]
       }
       stopifnot(chr %in% self$specie$chrNames)
-      sapply(chr, function(chr) nrow(self$SNPcoord[self$SNPcoord$chr == chr,]))
+      vapply(chr, function(chr) nrow(self$SNPcoord[self$SNPcoord$chr == chr,]),
+             1)
 
     },
     #' @description
-    #' Get information about specifique SNPs
+    #' Get information about specific SNPs
     #' @param SNPid [str] SNP ids
     #' @examples
     #' SNPs$getInfo("SNP01")
@@ -149,8 +151,8 @@ SNPinfo <- R6::R6Class(
       self$SNPcoord[match(SNPid, self$SNPcoord$SNPid),]
     },
 
-    #' @description
-    #' Display summary information about the object: specie, number of SNP, SNP coordinates.
+    #' @description Display summary information about the object: specie, number
+    #' of SNP, SNP coordinates.
     print = function() {
       cat(paste0(
         "specie: ", self$specie$specName, "\n",

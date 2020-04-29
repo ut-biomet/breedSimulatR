@@ -28,11 +28,14 @@ knitr::opts_chunk$set(
 
 
 
-<!-- badges DEV : start -->
-[![pipeline status](https://gitlab.com/juliendiot42/breedSimulatR/badges/dev/pipeline.svg)](https://gitlab.com/juliendiot42/breedSimulatR/commits/dev)
-[![codecov](https://codecov.io/gh/ut-biomet/breedSimulatR/branch/dev/graph/badge.svg?token=4Uxp1ySLIn)](https://codecov.io/gh/ut-biomet/breedSimulatR)
+<!-- badges: start -->
+[![pipeline status](https://gitlab.com/juliendiot42/breedSimulatR/badges/master/pipeline.svg)](https://gitlab.com/juliendiot42/breedSimulatR/commits/master)
+[![codecov](https://codecov.io/gh/ut-biomet/breedSimulatR/branch/master/graph/badge.svg?token=4Uxp1ySLIn)](https://codecov.io/gh/ut-biomet/breedSimulatR)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![last-commit](https://img.shields.io/github/last-commit/ut-biomet/breedSimulatR.svg)](https://github.com/ut-biomet/breedSimulatR/commits/master)
 [![CRAN status](https://www.r-pkg.org/badges/version/breedSimulatR)](https://CRAN.R-project.org/package=breedSimulatR)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R build status](https://github.com/ut-biomet/breedSimulatR/workflows/R-CMD-check/badge.svg)](https://github.com/ut-biomet/breedSimulatR/actions)
 <!-- badges: end -->
 
 R package providing classes and functions to simulate breeding schemes.
@@ -65,7 +68,7 @@ dta <- breedSimulatR::exampleData
 
 This is a basic example which shows how to use the package. 
 
-The package contains some example data that we will use for this example. These data are stored in the varaible `exampleData`.
+The package contains some example data that we will use for this example. These data are stored in the variable `exampleData`.
 
 `exampleData` is a list containing 3 elements:
 
@@ -74,7 +77,7 @@ The package contains some example data that we will use for this example. These 
 - `exampleData$snpEffects `: `numeric` vector containing the "true" effects of the `r ncol(dta$genotypes)` individuals' markers about a fictitious quantitative trait based on an additive architecture.
 
 
-#### initialisation
+#### initialization
 
 First we must load the package:
 ```{r example_0.1, include=FALSE}
@@ -117,7 +120,7 @@ SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
 print(SNPs)
 ```
 
-#### Population initialisation
+#### Population initialization
 
 We can now generate an initial population from genotypic data.
 
@@ -138,7 +141,7 @@ initPop <- createPop(geno = exampleData$genotypes,
 
 #### Selection Simulation
 
-In order to perform crossing, we must specify wich individuals must be mate together. Therefore, we must create functions which generate a crossing table from our population.
+In order to perform crossing, we must specify which individuals must be mate together. Therefore, we must create functions which generate a crossing table from our population.
 
 For this example, we will use the function `selectBV`, which returns the names of the best individuals according to their breeding values.
 
@@ -155,10 +158,10 @@ exampleData$snpEffects
                           names = "generation_1"))
 ```
 
-We can now generate the offsprings:
+We can now generate the offspring:
 
 ```{r example_4.2, results='hide'}
-newPop <- population$new(name = "1st offsprings",
+newPop <- population$new(name = "1st offspring",
                          inds = makeCrosses(crosses = crossTable, pop = initPop))
 ```
 ```{r example_4.3}
@@ -224,7 +227,7 @@ cat(ref)
 cat("</ul>")
 ```
 
-`breedSimulatR` package or its devellopment required the following R packages:
+`breedSimulatR` package or its development required the following R packages:
 
 ```{r References_1, echo=FALSE, results = 'asis'}
 desc <- read.dcf(file.path(getwd(), "DESCRIPTION"))
@@ -272,7 +275,7 @@ Flutre T, Diot J, and David J (2019). <em>PlantBreedGame</em>: A Serious Game th
 The `breedSimulatR` package as a whole is licensed under the MIT.
 See the [LICENSE](LICENSE) file for more details.
 
-:copyright: The copyright holder is [The Univerity of Tokyo](https://www.u-tokyo.ac.jp/en/), 
+:copyright: The copyright holder is [The University of Tokyo](https://www.u-tokyo.ac.jp/en/), 
 Laboratory of Biometry and Bioinformatics.
 
 <img src="man/figures/UTlogo-sm.jpg" style="display: block; margin: auto;"/>

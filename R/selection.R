@@ -13,7 +13,7 @@
 #' @param n (integer) number of individuals to select
 #' @param SNPeffects (numeric vector) effect of the genetic markers
 #'
-#' @return character vector of the selected individulas' names
+#' @return character vector of the selected individuals' names
 #' @export
 #'
 #' @examples
@@ -47,7 +47,7 @@ selectBV <- function(pop, n, SNPeffects){
 #' @param n (integer) number of individuals to select
 #' @param SNPeffects (numeric vector) effect of the genetic markers
 #'
-#' @return character vector of the selected individulas' names
+#' @return character vector of the selected individuals' names
 #' @references Jannink, Jean-Luc. “Dynamics of Long-Term Genomic Selection.”
 #'   Genetics Selection Evolution 42, no. 1 (December 2010).
 #'   https://doi.org/10.1186/1297-9686-42-35.

@@ -4,10 +4,12 @@
 \alias{SNPinfo}
 \title{R6 Class representing a set of SNP markers}
 \description{
-SNPinfo object store specific information of a set of SNP markers
+SNPinfo object store specific information of a set of SNP
+markers
 }
 \details{
-This class is usefull for setting the Haplotype class. (see: \code{\link[breedSimulatR]{haplotype}})
+This class is useful for setting the Haplotype class. (see:
+\code{\link[breedSimulatR]{haplotype}})
 }
 \examples{
 
@@ -100,14 +102,12 @@ Create a new SNPinfo object.
 \describe{
 \item{\code{SNPcoord}}{[data.frame] Coordinate of all SNPs.
 
-3 columns:
-\itemize{
- \item{\code{chr}:} {Chromosome holding the SNP}
- \item{\code{pos}:} {SNP position on the chromosome}
- \item{\code{SNPid}:} {SNP's IDs}
- }}
+  3 columns: \itemize{ \item{\code{chr}:} {Chromosome holding the SNP}
+  \item{\code{pos}:} {SNP position on the chromosome}
+  \item{\code{SNPid}:} {SNP's IDs} }}
 
-\item{\code{specie}}{[specie class] Specie of the SNPs (see:\link[breedSimulatR]{specie})}
+\item{\code{specie}}{[specie class] Specie of the SNPs
+(see:\link[breedSimulatR]{specie})}
 }
 \if{html}{\out{</div>}}
 }
@@ -169,7 +169,7 @@ SNPs$nSNP(c("Chr2","Chr3"))
 \if{html}{\out{<a id="method-getInfo"></a>}}
 \if{latex}{\out{\hypertarget{method-getInfo}{}}}
 \subsection{Method \code{getInfo()}}{
-Get information about specifique SNPs
+Get information about specific SNPs
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{SNPinfo$getInfo(SNPid)}\if{html}{\out{</div>}}
 }
@@ -195,7 +195,8 @@ SNPs$getInfo(c("SNP01", "SNP03"))
 \if{html}{\out{<a id="method-print"></a>}}
 \if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
-Display summary information about the object: specie, number of SNP, SNP coordinates.
+Display summary information about the object: specie, number
+of SNP, SNP coordinates.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{SNPinfo$print()}\if{html}{\out{</div>}}
 }

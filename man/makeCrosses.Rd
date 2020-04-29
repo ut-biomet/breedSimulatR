@@ -8,8 +8,8 @@ makeCrosses(crosses, pop)
 }
 \arguments{
 \item{crosses}{data.frame with crossing instructions: parents names
-\code{ind1} \code{ind2}, number of descendents \code{n} and names of
-descendents \code{names}}
+\code{ind1} \code{ind2}, number of descendant \code{n} and names of
+descendant \code{names}}
 
 \item{pop}{list of individuals containing the parents}
 }
@@ -41,17 +41,20 @@ SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 
 
 # simulate haplotype:
-rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                    nrow = 2)
 colnames(rawHaplo1) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo1 <- haplotype$new(SNPinfo = SNPs,
                        haplo = rawHaplo1)
-rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                    nrow = 2)
 colnames(rawHaplo2) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo2 <- haplotype$new(SNPinfo = SNPs,
                        haplo = rawHaplo2)
-rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+                    nrow = 2)
 colnames(rawHaplo3) <- sprintf(fmt = paste0("SNP\%0", 2,"i"),
                               1:(3 + 4 + 5))
 haplo3 <- haplotype$new(SNPinfo = SNPs,

@@ -10,6 +10,7 @@
 
 ##### Initialisation functions ####
 if (interactive()) {
+  devtools::load_all()
   source("tests/testthat/src/functionsForTests.R")
 } else source("src/functionsForTests.R")
 
@@ -40,12 +41,13 @@ test_that("population initialisation", {
 
   # check individuals' id in the object pop (names(myPop$inds)) do not depend of
   # the id of the individuals in the input list (names(indList)) :
-  names(indList) <- paste("toto", 1:length(indList))
+  names(indList) <- paste("toto", seq_along(indList))
   myPop <- population$new(name = "My Population 1",
                           inds = indList,
                           verbose = FALSE)
   expect_equal(names(myPop$inds),
-               as.character(sapply(indList, function(x){x$name})))
+               as.character(vapply(indList, function(x){x$name},
+                                   "character")))
 
   # check initialisation without parameters
   expect_error({myPop <- population$new(verbose = FALSE)}, NA)
@@ -101,7 +103,8 @@ test_that("population errors", {
   expect_error({myPop <- population$new(name = "My Population 1",
                                         inds = list(ind1, ind2),
                                         verbose = FALSE)},
-                "Individual with the same name already exists in the population:")
+                paste("Individual with the same name already",
+                      "exists in the population:"))
 
 
 

@@ -38,12 +38,14 @@
 #'
 #'
 #' # simulate haplotype:
-#' rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+#' rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+#'                     nrow = 2)
 #' colnames(rawHaplo1) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
 #'                               1:(3 + 4 + 5))
 #' haplo1 <- haplotype$new(SNPinfo = SNPs,
 #'                        haplo = rawHaplo1)
-#' rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+#' rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+#'                     nrow = 2)
 #' colnames(rawHaplo2) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
 #'                               1:(3 + 4 + 5))
 #' haplo2 <- haplotype$new(SNPinfo = SNPs,
@@ -65,7 +67,7 @@
 #'                          verbose = FALSE)
 #' offspring <- makeSingleCross(myInd1, myInd2, names = "off 1")
 #' offspring
-makeSingleCross <- function(ind1, ind2, n = 1, names = NULL, verbose = T){
+makeSingleCross <- function(ind1, ind2, n = 1, names = NULL, verbose = TRUE){
 
   #  Names
   if (is.null(names) || is.na(names)) {
@@ -90,7 +92,7 @@ makeSingleCross <- function(ind1, ind2, n = 1, names = NULL, verbose = T){
   haplo <- mapply(function(g1, g2){
     rbind(g1, g2)
   }, gam1, gam2,
-  SIMPLIFY = F)
+  SIMPLIFY = FALSE)
 
   newInds <- lapply(c(1:n), function(i){
     individual$new(name = names[[i]],
@@ -98,7 +100,7 @@ makeSingleCross <- function(ind1, ind2, n = 1, names = NULL, verbose = T){
                    parent1 = ind1$name,
                    parent2 = ind2$name,
                    haplo = haplotype$new(ind1$haplo$SNPinfo, haplo[[i]]),
-                   verbose = F)
+                   verbose = FALSE)
   })
 
   names(newInds) <- names
@@ -112,8 +114,8 @@ makeSingleCross <- function(ind1, ind2, n = 1, names = NULL, verbose = T){
 #' Proceed to several crosses
 #'
 #' @param crosses data.frame with crossing instructions: parents names
-#' \code{ind1} \code{ind2}, number of descendents \code{n} and names of
-#' descendents \code{names}
+#' \code{ind1} \code{ind2}, number of descendant \code{n} and names of
+#' descendant \code{names}
 #' @param pop list of individuals containing the parents
 #'
 #' @return list of new individuals
@@ -141,17 +143,20 @@ makeSingleCross <- function(ind1, ind2, n = 1, names = NULL, verbose = T){
 #'
 #'
 #' # simulate haplotype:
-#' rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+#' rawHaplo1 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+#'                     nrow = 2)
 #' colnames(rawHaplo1) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
 #'                               1:(3 + 4 + 5))
 #' haplo1 <- haplotype$new(SNPinfo = SNPs,
 #'                        haplo = rawHaplo1)
-#' rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+#' rawHaplo2 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+#'                     nrow = 2)
 #' colnames(rawHaplo2) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
 #'                               1:(3 + 4 + 5))
 #' haplo2 <- haplotype$new(SNPinfo = SNPs,
 #'                        haplo = rawHaplo2)
-#' rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE), nrow = 2)
+#' rawHaplo3 <- matrix(sample(c(0, 1), (3 + 4 + 5) * 2, replace = TRUE),
+#'                     nrow = 2)
 #' colnames(rawHaplo3) <- sprintf(fmt = paste0("SNP%0", 2,"i"),
 #'                               1:(3 + 4 + 5))
 #' haplo3 <- haplotype$new(SNPinfo = SNPs,
@@ -232,10 +237,15 @@ makeCrosses <- function(crosses, pop){
   newInds <- unlist(newInds)
 
   # offsprings names do not already exist in population
-  if (any(sapply(newInds, function(x){x$name}) %in% names(pop$inds))) {
-    nameInPop <- unique(crosses$names[which(crosses$names %in% names(pop$inds))])
+  if (any(vapply(newInds, function(x){x$name}, "character")%in%names(pop$inds))){
+    nameInPop <-
+      unique(crosses$names[which(crosses$names %in% names(pop$inds))])
     nameInPop <- paste(nameInPop, collapse = '" ; "')
-    message(paste0('Offspring names already exist in the population: "', nameInPop, '"'))
+    message(paste0(
+      'Offspring names already exist in the population: "',
+      nameInPop,
+      '"'
+    ))
   }
 
   newInds

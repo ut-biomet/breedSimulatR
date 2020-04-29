@@ -18,8 +18,8 @@
 haplotype <- R6::R6Class(
   "Haplotype",
   public = list(
-    #' @field SNPinfo [SNPinfo class] information about the haplotype's SNPs
-    #'   (see:\link[breedSimulatR]{SNPinfo})
+    #' @field SNPinfo [SNPinfo class] information about the haplotype of the
+    #'   SNPs (see:\link[breedSimulatR]{SNPinfo})
     SNPinfo = NULL,
     #' @field values [list] list haplotype values
     values = NULL,
@@ -59,27 +59,35 @@ haplotype <- R6::R6Class(
       # checks
 
       # SNPinfo class
-      if (class(SNPinfo)[1] != "SNPinfo"){
-        stop('class(SNPinfo)[1] != "SNPinfo"\n"SNPinfo" must be a SNPinfo object see: ?SNPinfo')
+      if (class(SNPinfo)[1] != "SNPinfo") {
+        stop(paste('class(SNPinfo)[1] != "SNPinfo"\n"SNPinfo" must be a',
+             'SNPinfo object see: ?SNPinfo'))
       }
       # haplo class
-      if (!is(haplo,"matrix")){
+      if (!is(haplo,"matrix")) {
         stop('is(haplo,"matrix") is FALSE\n"haplo" must be a matrix')
       }
       # haplo ploidy
       if (nrow(haplo) != SNPinfo$specie$ploidy) {
-        stop('nrow(haplo) != SNPinfo$specie$ploidy\nnrow(haplo) must be equal to the specie ploidy')
+        stop(
+          paste('nrow(haplo) != SNPinfo$specie$ploidy\nnrow(haplo) must be',
+             'equal to the specie ploidy'))
       }
       # number of markers
       if (ncol(haplo) != nrow(SNPinfo$SNPcoord)) {
-        stop('ncol(haplo) != nrow(SNPinfo$SNPcoord)\nncol(haplo) must be equal to the number of markers in SNPinfo')
+        stop(paste(
+          'ncol(haplo) != nrow(SNPinfo$SNPcoord)\nncol(haplo) must be equal to',
+          'the number of markers in SNPinfo'))
       }
       # markers names
       if (is.null(colnames(haplo))) {
         stop('colnames(haplo) is NULL\nhaplo must be a named matrix')
       }
       if (!all(colnames(haplo) %in% SNPinfo$SNPcoord$SNPid)) {
-        stop('all(colnames(haplo) %in% SNPinfo$specie$chrNames) is false\ncolnames(haplo) must be the names of the markers')
+        stop(paste(
+          'all(colnames(haplo) %in% SNPinfo$specie$chrNames)',
+          'is false\ncolnames(haplo) must be the names of the markers'
+        ))
       }
 
       self$SNPinfo <- SNPinfo

@@ -8,10 +8,11 @@
 
 ##### Initialisation functions ####
 create_spec <- function(nChr = round(runif(1, 1, 10)),
-                        lchr = round(pmax(rnorm(nChr, 450, 50), 200)),# at least 200 markers
+                        lchr = round(pmax(rnorm(nChr, 450, 50), 200)),# > 200
                         ploidy = 2,
-                        recombRate = 3/sum(lchr),
-                        name = "Undefinded"){
+                        recombRate = 3 / sum(lchr),
+                        name = "Undefinded") {
+
   specie$new(nChr = nChr,
              lchr = lchr,
              ploidy = ploidy,
@@ -76,7 +77,7 @@ create_inds <- function(haploList){
                             haplo = haplo,
                             verbose = F)
   },
-  haploList, c(1:length(haploList)))
+  haploList, c(seq_along(haploList)))
 
   if (length(inds) == 1) {
     return(inds[[1]])

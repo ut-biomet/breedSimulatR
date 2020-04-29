@@ -3,15 +3,20 @@
 
 # breedSimulatR
 
-<!-- badges DEV : start -->
+<!-- badges: start -->
 
 [![pipeline
-status](https://gitlab.com/juliendiot42/breedSimulatR/badges/dev/pipeline.svg)](https://gitlab.com/juliendiot42/breedSimulatR/commits/dev)
-[![codecov](https://codecov.io/gh/ut-biomet/breedSimulatR/branch/dev/graph/badge.svg?token=4Uxp1ySLIn)](https://codecov.io/gh/ut-biomet/breedSimulatR)
+status](https://gitlab.com/juliendiot42/breedSimulatR/badges/master/pipeline.svg)](https://gitlab.com/juliendiot42/breedSimulatR/commits/master)
+[![codecov](https://codecov.io/gh/ut-biomet/breedSimulatR/branch/master/graph/badge.svg?token=4Uxp1ySLIn)](https://codecov.io/gh/ut-biomet/breedSimulatR)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![last-commit](https://img.shields.io/github/last-commit/ut-biomet/breedSimulatR.svg)](https://github.com/ut-biomet/breedSimulatR/commits/master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/breedSimulatR)](https://CRAN.R-project.org/package=breedSimulatR)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R build
+status](https://github.com/ut-biomet/breedSimulatR/workflows/R-CMD-check/badge.svg)](https://github.com/ut-biomet/breedSimulatR/actions)
 <!-- badges: end -->
 
 R package providing classes and functions to simulate breeding schemes.
@@ -23,7 +28,7 @@ R package providing classes and functions to simulate breeding schemes.
 
 ``` r
 if (!require("devtools")) {
-  install.packages("devtools")
+    install.packages("devtools")
 }
 devtools::install_github("ut-biomet/breedSimulatR")
 ```
@@ -40,7 +45,7 @@ help(package = breedSimulatR)
 This is a basic example which shows how to use the package.
 
 The package contains some example data that we will use for this
-example. These data are stored in the varaible `exampleData`.
+example. These data are stored in the variable `exampleData`.
 
 `exampleData` is a list containing 3 elements:
 
@@ -55,7 +60,7 @@ example. These data are stored in the varaible `exampleData`.
     effects of the 3333 individuals’ markers about a fictitious
     quantitative trait based on an additive architecture.
 
-#### initialisation
+#### initialization
 
 First we must load the package:
 
@@ -70,11 +75,8 @@ Let’s specify the specie:
 
 ``` r
 # create specie object
-specie_statEx <- specie$new(specName = "Statisticae exempli",
-                        nChr = 10,
-                        lchr = 1e6,
-                        ploidy = 2,
-                        recombRate = 3/1e6)
+specie_statEx <- specie$new(specName = "Statisticae exempli", nChr = 10, lchr = 1e+06, 
+    ploidy = 2, recombRate = 3/1e+06)
 #> A new species has emerged: Statisticae exempli !
 ```
 
@@ -98,8 +100,7 @@ head(exampleData$snpCoord)
 
 ``` r
 # create SNPinfo object
-SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
-                    specie = specie_statEx)
+SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord, specie = specie_statEx)
 print(SNPs)
 #> specie: Statisticae exempli
 #> 3333 Markers on 10 chromosomes :
@@ -113,7 +114,7 @@ print(SNPs)
 #>  [ reached 'max' / getOption("max.print") -- omitted 3330 rows ]
 ```
 
-#### Population initialisation
+#### Population initialization
 
 We can now generate an initial population from genotypic data.
 
@@ -122,7 +123,7 @@ and create the `population` object:
 
 ``` r
 # data preview
-exampleData$genotypes[1:3,1:5]
+exampleData$genotypes[1:3, 1:5]
 #>          snp00006 snp00009 snp00011 snp00018 snp00026
 #> Coll0001        2        2        2        0        2
 #> Coll0002        0        2        2        2        0
@@ -131,14 +132,12 @@ exampleData$genotypes[1:3,1:5]
 
 ``` r
 # create population object
-initPop <- createPop(geno = exampleData$genotypes,
-                     SNPinfo = SNPs,
-                     popName = "Initial population")
+initPop <- createPop(geno = exampleData$genotypes, SNPinfo = SNPs, popName = "Initial population")
 ```
 
 #### Selection Simulation
 
-In order to perform crossing, we must specify wich individuals must be
+In order to perform crossing, we must specify which individuals must be
 mate together. Therefore, we must create functions which generate a
 crossing table from our population.
 
@@ -154,31 +153,28 @@ exampleData$snpEffects
 #>    snp00035    snp00036    snp00049    snp00052 
 #> -0.06519311  0.04378479  0.15264373 -0.19802910 
 #>  [ reached getOption("max.print") -- omitted 3323 entries ]
-(selectedInds <- selectBV(pop = initPop,
-                          SNPeffects = exampleData$snpEffects,
-                          n = 10))
-#>  [1] "Coll0028" "Coll0063" "Coll0034" "Coll0086" "Coll0059" "Coll0080"
-#>  [7] "Coll0070" "Coll0021" "Coll0087" "Coll0027"
+(selectedInds <- selectBV(pop = initPop, SNPeffects = exampleData$snpEffects, n = 10))
+#>  [1] "Coll0068" "Coll0008" "Coll0074" "Coll0016" "Coll0020" "Coll0045"
+#>  [7] "Coll0079" "Coll0002" "Coll0046" "Coll0097"
 
-(crossTable <- randomMate(inds = selectedInds,
-                          n = 120,
-                          names = "generation_1"))
+(crossTable <- randomMate(inds = selectedInds, n = 120, names = "generation_1"))
 #>       ind1     ind2 n            names
-#> 1 Coll0087 Coll0070 1 generation_1-001
-#> 2 Coll0080 Coll0034 1 generation_1-002
+#> 1 Coll0016 Coll0016 1 generation_1-001
+#> 2 Coll0097 Coll0045 1 generation_1-002
 #>  [ reached 'max' / getOption("max.print") -- omitted 118 rows ]
 ```
 
-We can now generate the offsprings:
+We can now generate the
+offspring:
 
 ``` r
-newPop <- population$new(name = "1st offsprings",
-                         inds = makeCrosses(crosses = crossTable, pop = initPop))
+newPop <- population$new(name = "1st offspring", inds = makeCrosses(crosses = crossTable, 
+    pop = initPop))
 ```
 
 ``` r
 newPop
-#> Population: 1st offsprings
+#> Population: 1st offspring
 #> Species: Statisticae exempli
 #> Number of individuals: 120
 ```
@@ -235,7 +231,7 @@ feedbacks.
 
 <li>
 
-R Core Team (2019).<em>R: A Language and Environment for Statistical
+R Core Team (2020).<em>R: A Language and Environment for Statistical
 Computing</em>.R Foundation for Statistical Computing, Vienna,
 Austria.<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 
@@ -243,7 +239,7 @@ Austria.<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 
 </ul>
 
-`breedSimulatR` package or its devellopment required the following R
+`breedSimulatR` package or its development required the following R
 packages:
 
 <ul>
@@ -274,62 +270,9 @@ Semantics</em>.R package version 2.4.1,
 
 <li>
 
-Sievert C (2018).<em>plotly for
-R</em>.<a href="https://plotly-r.com">https://plotly-r.com</a>.
-
-</li>
-
-</ul>
-
-</li>
-
-<li>
-
-<b> devtools </b>
-
-<ul>
-
-<li>
-
-Wickham H, Hester J, Chang W (2019).<em>devtools: Tools to Make
-Developing R Packages Easier</em>.R package version 2.2.1,
-<a href="https://CRAN.R-project.org/package=devtools">https://CRAN.R-project.org/package=devtools</a>.
-
-</li>
-
-</ul>
-
-</li>
-
-<li>
-
-<b> roxygen2 </b>
-
-<ul>
-
-<li>
-
-Wickham H, Danenberg P, Csárdi G, Eugster M (2019).<em>roxygen2: In-Line
-Documentation for R</em>.R package version 7.0.2,
-<a href="https://CRAN.R-project.org/package=roxygen2">https://CRAN.R-project.org/package=roxygen2</a>.
-
-</li>
-
-</ul>
-
-</li>
-
-<li>
-
-<b> testthat </b>
-
-<ul>
-
-<li>
-
-Wickham H (2011).“testthat: Get Started with Testing.”<em>The R
-Journal</em>, <b>3</b>,
-5–10.<a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf">https://journal.r-project.org/archive/2011-1/RJournal\_2011-1\_Wickham.pdf</a>.
+Sievert C (2020).<em>Interactive Web-Based Data Visualization with R,
+plotly, and shiny</em>.Chapman and Hall/CRC.ISBN 9781138331457,
+<a href="https://plotly-r.com">https://plotly-r.com</a>.
 
 </li>
 
@@ -345,9 +288,27 @@ Journal</em>, <b>3</b>,
 
 <li>
 
-Hester J (2019).<em>covr: Test Coverage for Packages</em>.R package
-version 3.4.0,
+Hester J (2020).<em>covr: Test Coverage for Packages</em>.R package
+version 3.5.0,
 <a href="https://CRAN.R-project.org/package=covr">https://CRAN.R-project.org/package=covr</a>.
+
+</li>
+
+</ul>
+
+</li>
+
+<li>
+
+<b> devtools </b>
+
+<ul>
+
+<li>
+
+Wickham H, Hester J, Chang W (2020).<em>devtools: Tools to Make
+Developing R Packages Easier</em>.R package version 2.3.0,
+<a href="https://CRAN.R-project.org/package=devtools">https://CRAN.R-project.org/package=devtools</a>.
 
 </li>
 
@@ -392,6 +353,42 @@ Computational Research</em>.Chapman and Hall/CRC.ISBN 978-1466561595,
 
 <li>
 
+<b> microbenchmark </b>
+
+<ul>
+
+<li>
+
+Mersmann O (2019).<em>microbenchmark: Accurate Timing Functions</em>.R
+package version 1.4-7,
+<a href="https://CRAN.R-project.org/package=microbenchmark">https://CRAN.R-project.org/package=microbenchmark</a>.
+
+</li>
+
+</ul>
+
+</li>
+
+<li>
+
+<b> pkgdown </b>
+
+<ul>
+
+<li>
+
+Wickham H, Hesselberth J (2020).<em>pkgdown: Make Static HTML
+Documentation for a Package</em>.R package version 1.5.1,
+<a href="https://CRAN.R-project.org/package=pkgdown">https://CRAN.R-project.org/package=pkgdown</a>.
+
+</li>
+
+</ul>
+
+</li>
+
+<li>
+
 <b> rmarkdown </b>
 
 <ul>
@@ -410,6 +407,60 @@ R</em>.R package version 2.1,
 Xie Y, Allaire J, Grolemund G (2018).<em>R Markdown: The Definitive
 Guide</em>.Chapman and Hall/CRC, Boca Raton, Florida.ISBN 9781138359338,
 <a href="https://bookdown.org/yihui/rmarkdown">https://bookdown.org/yihui/rmarkdown</a>.
+
+</li>
+
+</ul>
+
+</li>
+
+<li>
+
+<b> roxygen2 </b>
+
+<ul>
+
+<li>
+
+Wickham H, Danenberg P, Csárdi G, Eugster M (2020).<em>roxygen2: In-Line
+Documentation for R</em>.R package version 7.1.0,
+<a href="https://CRAN.R-project.org/package=roxygen2">https://CRAN.R-project.org/package=roxygen2</a>.
+
+</li>
+
+</ul>
+
+</li>
+
+<li>
+
+<b> spelling </b>
+
+<ul>
+
+<li>
+
+Ooms J, Hester J (2019).<em>spelling: Tools for Spell Checking in
+R</em>.R package version 2.1,
+<a href="https://CRAN.R-project.org/package=spelling">https://CRAN.R-project.org/package=spelling</a>.
+
+</li>
+
+</ul>
+
+</li>
+
+<li>
+
+<b> testthat </b>
+
+<ul>
+
+<li>
+
+Wickham H (2011).“testthat: Get Started with Testing.”<em>The R
+Journal</em>, <b>3</b>,
+5–10.<a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf">https://journal.r-project.org/archive/2011-1/RJournal\_2011-1\_Wickham.pdf</a>.
 
 </li>
 
@@ -449,7 +500,7 @@ Game that Puts Students in the Breeder’s Seat. <em>Crop Science.</em>
 The `breedSimulatR` package as a whole is licensed under the MIT. See
 the [LICENSE](LICENSE) file for more details.
 
-:copyright: The copyright holder is [The Univerity of
+:copyright: The copyright holder is [The University of
 Tokyo](https://www.u-tokyo.ac.jp/en/), Laboratory of Biometry and
 Bioinformatics.
 

@@ -15,7 +15,7 @@ selectWBV(pop, n, SNPeffects)
 \item{SNPeffects}{(numeric vector) effect of the genetic markers}
 }
 \value{
-character vector of the selected individulas' names
+character vector of the selected individuals' names
 }
 \description{
 Selection according to weighted breeding values

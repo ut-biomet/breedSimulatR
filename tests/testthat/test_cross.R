@@ -10,6 +10,7 @@
 
 ##### Initialisation functions ####
 if (interactive()) {
+  devtools::load_all()
   source("tests/testthat/src/functionsForTests.R")
 } else source("src/functionsForTests.R")
 
@@ -94,13 +95,13 @@ test_that("makeCrosses", {
   expect_error({newInds <- makeCrosses(crossToDo, myPop)}, NA)
   expect_is(newInds, "list")
   expect_equal(length(newInds), sum(crossToDo$n))
-  sapply(newInds, function(x){
+  lapply(newInds, function(x){
     expect_is(x, "individual")
   })
 
 
   # check offspring names are unique
-  offNames <- as.character(sapply(newInds, function(x){x$name}))
+  offNames <- as.character(vapply(newInds, function(x){x$name}, "character"))
   expect_is(offNames, "character")
   expect_true(length(offNames) == length(unique(offNames)))
 
@@ -130,7 +131,7 @@ test_that("makeCrosses particular cases", {
 
   expect_error({listOff <- makeCrosses(crossToDo, myPop)}, NA)
   expect_is(listOff, "list")
-  sapply(listOff, function(x){
+  lapply(listOff, function(x){
     expect_is(x, "individual")
   })
 
@@ -141,7 +142,7 @@ test_that("makeCrosses particular cases", {
                           n = c(1,1,5),
                           names = NA)
   listOff <- makeCrosses(crossToDo, myPop)
-  offNames <- as.character(sapply(listOff, function(x){x$name}))
+  offNames <- as.character(vapply(listOff, function(x){x$name}, "character"))
   expect_true(length(offNames) == length(unique(offNames)))
 
 })

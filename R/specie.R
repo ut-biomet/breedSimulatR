@@ -35,12 +35,12 @@ specie <- R6::R6Class(
     #' @field recombRate [numeric] Recombination rate at each base
     recombRate = NA,
 
-    #' @description
-    #' Create a new specie object.
+    #' @description Create a new specie object.
     #' @param nChr [numeric] Number of chromosomes
     #' @param lchr [numeric] length of all chromosomes
     #' @param specName [str] Specie's name (optional)
-    #' @param ploidy [numeric] Number of possible alleles at one locus (optional)
+    #' @param ploidy [numeric] Number of possible alleles at one locus
+    #'   (optional)
     #' @param mutRate [numeric] Mutation rate at each base (optional)
     #' @param recombRate [numeric] Recombination rate at each base (optional)
     #' @param chrNames [str] Names of the chromosomes (optional)
@@ -61,7 +61,7 @@ specie <- R6::R6Class(
                           mutRate = NA,
                           recombRate = NA,
                           chrNames = NA,
-                          verbose = T){
+                          verbose = TRUE){
       if (!is.numeric(nChr)) stop("nChr must be numeric.")
       if (floor(nChr) - nChr != 0) stop("nChr must be integer.")
       if (!is.numeric(lchr)) stop("lchr must be numeric.")
@@ -76,11 +76,11 @@ specie <- R6::R6Class(
       }
 
 
-      self$specName = specName
-      self$nChr = nChr
-      self$ploidy = ploidy
-      self$mutRate = mutRate
-      self$recombRate = recombRate
+      self$specName <- specName
+      self$nChr <- nChr
+      self$ploidy <- ploidy
+      self$mutRate <- mutRate
+      self$recombRate <- recombRate
       if (all(is.na(chrNames))) {
         self$chrNames <- .charSeq("Chr", 1:self$nChr)
       } else {
@@ -88,13 +88,14 @@ specie <- R6::R6Class(
       }
 
       if (length(lchr) == 1) {
-        self$lchr = rep(lchr, nChr)
+        self$lchr <- rep(lchr, nChr)
       } else {
-        self$lchr = lchr
+        self$lchr <- lchr
       }
       names(self$lchr) <- self$chrNames
 
-      if (verbose) cat(paste("A new species has emerged:", self$specName, "!\n\n"))
+      if (verbose) cat(paste("A new species has emerged:", self$specName,
+                             "!\n\n"))
     },
 
     #' @description

@@ -4,6 +4,10 @@
 # Description:
 # Test file for the Specie class
 
+if (interactive()) {
+  devtools::load_all()
+}
+
 
 test_that("specie initialization", {
 
@@ -26,7 +30,8 @@ test_that("specie initialization", {
   expect_identical(mySpec$mutRate, 10^-8)
   expect_identical(mySpec$chrNames, c("C1", "C2", "C3"))
   expect_identical(mySpec$recombRate, 10^-7)
-  expect_output(specie$new(1, 10, verbose = T), "A new species has emerged: Undefinded !")
+  expect_output(specie$new(1, 10, verbose = T), paste("A new species has",
+                                                      "emerged: Undefinded !"))
   expect_output(specie$new(1, 10, verbose = F), NA)
 
   expect_error(specie$new(nChr = 3.5,
@@ -85,5 +90,12 @@ test_that("specie's \"print\" methods", {
                        lchr = c(100, 150, 200),
                        verbose = F)
 
-  expect_output(print(mySpec), "Name: Undefinded\\nNumber of Chromosomes: 3\\nPloidy: 2\\nMutation rate : NA\\nRecombination Rate: NA\\nChromosome length:\\n     chrNames chrLength\\nChr1     Chr1       100\\nChr2     Chr2       150\\nChr3     Chr3       200")
+  expect_output(print(mySpec), paste("Name: Undefinded\\nNumber of",
+                                     "Chromosomes: 3\\nPloidy: 2\\nMutation",
+                                     "rate : NA\\nRecombination Rate:",
+                                     "NA\\nChromosome length:\\n",
+                                     "    chrNames chrLength\\nChr1",
+                                     "    Chr1       100\\nChr2",
+                                     "    Chr2       150\\nChr3",
+                                     "    Chr3       200"))
 })
