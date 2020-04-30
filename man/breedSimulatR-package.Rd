@@ -18,11 +18,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Julien Diot \email{juliendiot@ut-biomet.org}
+\strong{Maintainer}: Julien Diot \email{juliendiot@ut-biomet.org} (\href{https://orcid.org/0000-0002-8738-2034}{ORCID})
 
-Authors:
+Other contributors:
 \itemize{
-  \item Hiroyoshi Iwata \email{aiwata@mail.ecc.u-tokyo.ac.jp} [contributor]
+  \item Hiroyoshi Iwata \email{aiwata@mail.ecc.u-tokyo.ac.jp} [thesis advisor]
 }
 
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/cross.R
 \name{makeCrosses}
 \alias{makeCrosses}
-\title{Proceed to several crosses}
+\title{Proceed several crosses}
 \usage{
 makeCrosses(crosses, pop)
 }
@@ -17,7 +17,7 @@ descendant \code{names}}
 list of new individuals
 }
 \description{
-Proceed to several crosses
+Proceed several crosses
 }
 \examples{
 # create specie:
