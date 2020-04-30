@@ -74,8 +74,8 @@ usethis::use_version()
 
 #### pkgdown ####
 
-# pkgdown::build_site()
-# pkgdown::template_navbar()
-# pkgdown::template_reference()
+pkgdown::build_site()
+pkgdown::template_navbar()
+pkgdown::template_reference()
 # pkgdown::clean_site()
 

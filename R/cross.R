@@ -109,7 +109,7 @@ makeSingleCross <- function(ind1, ind2, names, n = 1, verbose = TRUE){
 
 
 
-#' Proceed to several crosses
+#' Proceed several crosses
 #'
 #' @param crosses data.frame with crossing instructions: parents names
 #' \code{ind1} \code{ind2}, number of descendant \code{n} and names of

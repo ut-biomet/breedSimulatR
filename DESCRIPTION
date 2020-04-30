@@ -7,10 +7,11 @@ Authors@R:
     c(person(given = "Julien",
              family = "Diot",
              role = c("aut", "cre"),
-             email = "juliendiot@ut-biomet.org"),
+             email = "juliendiot@ut-biomet.org",
+             comment=c(ORCID="0000-0002-8738-2034")),
       person(given = "Hiroyoshi",
              family = "Iwata",
-             role = c("aut", "ctb"),
+             role = c("ths"),
              email = "aiwata@mail.ecc.u-tokyo.ac.jp"))
 Description: R package providing classes and functions to
     simulate breeding schemes.
