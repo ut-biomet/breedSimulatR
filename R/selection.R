@@ -30,7 +30,7 @@
 #'          SNPeffects = exampleData$snpEffects,
 #'          n = 10)
 selectBV <- function(pop, n, SNPeffects){
-
+  # TODO integrate "trait" object
   if (!all(colnames(SNPeffects) == colnames(pop$genoMat))) {
     SNPeffects <- SNPeffects[colnames(pop$genoMat)]
   }
@@ -67,7 +67,7 @@ selectBV <- function(pop, n, SNPeffects){
 #'          SNPeffects = exampleData$snpEffects,
 #'          n = 10)
 selectWBV <- function(pop, n, SNPeffects){
-
+  # TODO integrate "trait" object
   if (!all(colnames(SNPeffects) == colnames(pop$genoMat))) {
     SNPeffects <- SNPeffects[colnames(pop$genoMat)]
   }
