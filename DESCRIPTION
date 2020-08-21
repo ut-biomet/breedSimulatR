@@ -8,10 +8,10 @@ Authors@R:
              family = "Diot",
              role = c("aut", "cre"),
              email = "juliendiot@ut-biomet.org",
-             comment=c(ORCID="0000-0002-8738-2034")),
+             comment = c(ORCID = "0000-0002-8738-2034")),
       person(given = "Hiroyoshi",
              family = "Iwata",
-             role = c("ths"),
+             role = "ths",
              email = "aiwata@mail.ecc.u-tokyo.ac.jp"))
 Description: R package providing classes and functions to
     simulate breeding schemes.
@@ -27,7 +27,6 @@ Suggests:
     covr,
     devtools,
     knitr,
-    microbenchmark,
     pkgdown,
     rmarkdown,
     roxygen2,
@@ -42,4 +41,4 @@ Language: en-US
 LazyData: true
 Maintainers@R: person("Julien", "Diot", email =
     "juliendiot@ut-biomet.org", role = c("aut", "cre"))
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1

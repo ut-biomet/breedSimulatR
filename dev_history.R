@@ -42,9 +42,11 @@ library(testthat)
 
 #### Used regularly ####
 
+document()
+
 load_all()
 
-document()
+
 
 use_tidy_description()
 attachment::att_to_description(extra.suggests = c(

@@ -21,7 +21,6 @@ SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
                     specie = mySpec)
 
 myTrait <- trait$new(name = "myTrait",
-                     class = "quantitative",
                      qtn = sample(SNPs$SNPcoord$SNPid, 100),
                      qtnEff = rnorm(100, sd = 0.5))
 
@@ -40,13 +39,13 @@ myTrait$gv(example_pop)
 \describe{
 \item{\code{name}}{[string] Name of the trait}
 
-\item{\code{class}}{"qualitative" or "quantitative"}
+\item{\code{class}}{"qualitative" or "quantitative" trait ("qualitative" not
+implemented yet)}
 
-\item{\code{arch}}{Genetic architecture}
+\item{\code{qtn}}{[character vector] names of the causal quantitative trait
+nucleotides (\code{length(qtn) == length(qtnEff)} must be \code{true})}
 
-\item{\code{qtn}}{[character vector] list of the quantitative trait nucleotides}
-
-\item{\code{qtnEff}}{[character vector] quantitative trait nucleotides effects}
+\item{\code{qtnEff}}{[numeric vector] quantitative trait nucleotides effects}
 }
 \if{html}{\out{</div>}}
 }
@@ -68,26 +67,24 @@ Create a new trait object.
 \if{html}{\out{<div class="r">}}\preformatted{trait$new(
   name = NULL,
   class = "quantitative",
-  arch = "additive",
   qtn = NULL,
-  qtnEff = NULL
+  qtnEff = NULL,
+  vg = NULL,
+  afs = NULL
 )}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{name}}{[] name description}
+\item{\code{name}}{[character] name of the trait}
 
 \item{\code{class}}{"quantitative" or "qualitative"}
 
-\item{\code{arch}}{"arch Genetic architecture}
+\item{\code{qtn}}{[character vector] list of the quantitative trait
+nucleotides names implied in the trait}
 
-\item{\code{qtn}}{qtn [character vector] list of the quantitative trait
-nucleotides}
-
-\item{\code{qtnEff}}{qtnEff [numeric vector] quantitative trait nucleotides
-effects}
+\item{\code{qtnEff}}{[numeric vector] quantitative trait nucleotides effects (see details for more information).}
 }
 \if{html}{\out{</div>}}
 }
@@ -110,7 +107,6 @@ SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
                     specie = mySpec)
 
 myTrait <- trait$new(name = "myTrait",
-                     class = "quantitative",
                      qtn = sample(SNPs$SNPcoord$SNPid, 100),
                      qtnEff = rnorm(100, sd = 0.5))
 }
@@ -132,7 +128,7 @@ Calculate the genetic values of a population
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{pop}}{[population class] population
-(see:\link[breedSimulatR]{population})}
+(see: \link[breedSimulatR]{population})}
 }
 \if{html}{\out{</div>}}
 }
