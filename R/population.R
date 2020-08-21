@@ -9,7 +9,7 @@
 #' R6 class representing a population
 #'
 #' @description
-#' population object store specific information about one individual
+#' population object store specific information about group of several individuals
 #'
 #'
 #' @export
