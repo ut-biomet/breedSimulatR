@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedSimulatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@
     <p>Selection according to weighted breeding values</p>
     </div>
 
-    <pre class="usage"><span class='fu'>selectWBV</span>(<span class='no'>pop</span>, <span class='no'>n</span>, <span class='no'>SNPeffects</span>)</pre>
+    <pre class="usage"><span class='fu'>selectWBV</span>(<span class='kw'>pop</span>, <span class='kw'>n</span>, <span class='kw'>SNPeffects</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,23 +150,26 @@
   https://doi.org/10.1186/1297-9686-42-35.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mySpec</span> <span class='kw'>&lt;-</span> <span class='no'>specie</span>$<span class='fu'>new</span>(<span class='kw'>specName</span> <span class='kw'>=</span> <span class='st'>"Statisticae exempli"</span>,
-                     <span class='kw'>nChr</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-                     <span class='kw'>lchr</span> <span class='kw'>=</span> <span class='fl'>1e6</span>,
-                     <span class='kw'>ploidy</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-                     <span class='kw'>recombRate</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>1e6</span>)</div><div class='output co'>#&gt; A new species has emerged: Statisticae exempli !
-#&gt; </div><div class='input'><span class='no'>SNPs</span> <span class='kw'>&lt;-</span> <span class='no'>SNPinfo</span>$<span class='fu'>new</span>(<span class='kw'>SNPcoord</span> <span class='kw'>=</span> <span class='no'>exampleData</span>$<span class='no'>snpCoord</span>, <span class='kw'>specie</span> <span class='kw'>=</span> <span class='no'>mySpec</span>)
-<span class='no'>initPop</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='createPop.html'>createPop</a></span>(<span class='kw'>geno</span> <span class='kw'>=</span> <span class='no'>exampleData</span>$<span class='no'>genotypes</span>,
-                     <span class='kw'>SNPinfo</span> <span class='kw'>=</span> <span class='no'>SNPs</span>,
-                     <span class='kw'>popName</span> <span class='kw'>=</span> <span class='st'>"Initial population"</span>)</div><div class='output co'>#&gt; Create population: Initialisation...
+    <pre class="examples"><div class='input'><span class='kw'>mySpec</span> <span class='op'>&lt;-</span> <span class='kw'>specie</span><span class='op'>$</span><span class='fu'>new</span>(specName = <span class='st'>"Statisticae exempli"</span>,
+                     nChr = <span class='fl'>10</span>,
+                     lchr = <span class='fl'>1e6</span>,
+                     ploidy = <span class='fl'>2</span>,
+                     recombRate = <span class='fl'>3</span><span class='op'>/</span><span class='fl'>1e6</span>)
+</div><div class='output co'>#&gt; A new species has emerged: Statisticae exempli !
+#&gt; </div><div class='input'><span class='kw'>SNPs</span> <span class='op'>&lt;-</span> <span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span>(SNPcoord = <span class='kw'>exampleData</span><span class='op'>$</span><span class='kw'>snpCoord</span>, specie = <span class='kw'>mySpec</span>)
+<span class='kw'>initPop</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createPop.html'>createPop</a></span>(geno = <span class='kw'>exampleData</span><span class='op'>$</span><span class='kw'>genotypes</span>,
+                     SNPinfo = <span class='kw'>SNPs</span>,
+                     popName = <span class='st'>"Initial population"</span>)
+</div><div class='output co'>#&gt; Create population: Initialisation...
 #&gt; Create population: Create individuals...
 #&gt; 1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99%100%
 #&gt; Create population: Create population object...
 #&gt; Create population: Add individuals...
 #&gt; 1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99%100%
-#&gt; A new population created: Initial population !</div><div class='input'><span class='fu'>selectWBV</span>(<span class='kw'>pop</span> <span class='kw'>=</span> <span class='no'>initPop</span>,
-         <span class='kw'>SNPeffects</span> <span class='kw'>=</span> <span class='no'>exampleData</span>$<span class='no'>snpEffects</span>,
-         <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] "Coll0068" "Coll0079" "Coll0008" "Coll0020" "Coll0036" "Coll0049"
+#&gt; A new population created: Initial population !</div><div class='input'><span class='fu'>selectWBV</span>(pop = <span class='kw'>initPop</span>,
+         SNPeffects = <span class='kw'>exampleData</span><span class='op'>$</span><span class='kw'>snpEffects</span>,
+         n = <span class='fl'>10</span>)
+</div><div class='output co'>#&gt;  [1] "Coll0068" "Coll0079" "Coll0008" "Coll0020" "Coll0036" "Coll0049"
 #&gt;  [7] "Coll0016" "Coll0002" "Coll0083" "Coll0074"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

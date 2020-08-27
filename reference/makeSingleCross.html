@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedSimulatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@
     <p>Cross two individuals together</p>
     </div>
 
-    <pre class="usage"><span class='fu'>makeSingleCross</span>(<span class='no'>ind1</span>, <span class='no'>ind2</span>, <span class='no'>names</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>makeSingleCross</span>(<span class='kw'>ind1</span>, <span class='kw'>ind2</span>, <span class='kw'>names</span>, n = <span class='fl'>1</span>, verbose = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,54 +153,56 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># create specie:</span>
-<span class='no'>mySpec</span> <span class='kw'>&lt;-</span> <span class='no'>specie</span>$<span class='fu'>new</span>(<span class='kw'>nChr</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-                     <span class='kw'>lchr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span>),
-                     <span class='kw'>recombRate</span> <span class='kw'>=</span> <span class='fl'>0.006</span>,
-                     <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>"ploidy" was not specify. The ploidy had been set to "2"</span></div><div class='input'>
+<span class='kw'>mySpec</span> <span class='op'>&lt;-</span> <span class='kw'>specie</span><span class='op'>$</span><span class='fu'>new</span>(nChr = <span class='fl'>3</span>,
+                     lchr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span>),
+                     recombRate = <span class='fl'>0.006</span>,
+                     verbose = <span class='fl'>FALSE</span>)
+</div><div class='output co'>#&gt; <span class='message'>"ploidy" was not specify. The ploidy had been set to "2"</span></div><div class='input'>
 <span class='co'># simulate SNP:</span>
-<span class='no'>SNPcoord</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>chr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Chr1"</span>, <span class='fl'>3</span>),
+<span class='kw'>SNPcoord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(chr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Chr1"</span>, <span class='fl'>3</span>),
                                <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Chr2"</span>, <span class='fl'>4</span>),
                                <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Chr3"</span>, <span class='fl'>5</span>)),
-                       <span class='kw'>pos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>100</span>, <span class='fl'>3</span>),
+                       pos = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>100</span>, <span class='fl'>3</span>),
                                <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>150</span>, <span class='fl'>4</span>),
                                <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>200</span>, <span class='fl'>5</span>)),
-                       <span class='kw'>SNPid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='kw'>fmt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"SNP%0"</span>, <span class='fl'>2</span>,<span class='st'>"i"</span>),
-                                       <span class='fl'>1</span>:(<span class='fl'>3</span> + <span class='fl'>4</span> + <span class='fl'>5</span>)))
+                       SNPid = <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(fmt = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"SNP%0"</span>, <span class='fl'>2</span>,<span class='st'>"i"</span>),
+                                       <span class='fl'>1</span><span class='op'>:</span>(<span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>4</span> <span class='op'>+</span> <span class='fl'>5</span>)))
 
 <span class='co'># create SNPinfo object:</span>
-<span class='no'>SNPs</span> <span class='kw'>&lt;-</span> <span class='no'>SNPinfo</span>$<span class='fu'>new</span>(<span class='kw'>SNPcoord</span> <span class='kw'>=</span> <span class='no'>SNPcoord</span>, <span class='kw'>specie</span> <span class='kw'>=</span> <span class='no'>mySpec</span>)
+<span class='kw'>SNPs</span> <span class='op'>&lt;-</span> <span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span>(SNPcoord = <span class='kw'>SNPcoord</span>, specie = <span class='kw'>mySpec</span>)
 
 
 <span class='co'># simulate haplotype:</span>
-<span class='no'>rawHaplo1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>), (<span class='fl'>3</span> + <span class='fl'>4</span> + <span class='fl'>5</span>) * <span class='fl'>2</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-                    <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>rawHaplo1</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='kw'>fmt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"SNP%0"</span>, <span class='fl'>2</span>,<span class='st'>"i"</span>),
-                              <span class='fl'>1</span>:(<span class='fl'>3</span> + <span class='fl'>4</span> + <span class='fl'>5</span>))
-<span class='no'>haplo1</span> <span class='kw'>&lt;-</span> <span class='no'>haplotype</span>$<span class='fu'>new</span>(<span class='kw'>SNPinfo</span> <span class='kw'>=</span> <span class='no'>SNPs</span>,
-                       <span class='kw'>haplo</span> <span class='kw'>=</span> <span class='no'>rawHaplo1</span>)
-<span class='no'>rawHaplo2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>), (<span class='fl'>3</span> + <span class='fl'>4</span> + <span class='fl'>5</span>) * <span class='fl'>2</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-                    <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>rawHaplo2</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='kw'>fmt</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"SNP%0"</span>, <span class='fl'>2</span>,<span class='st'>"i"</span>),
-                              <span class='fl'>1</span>:(<span class='fl'>3</span> + <span class='fl'>4</span> + <span class='fl'>5</span>))
-<span class='no'>haplo2</span> <span class='kw'>&lt;-</span> <span class='no'>haplotype</span>$<span class='fu'>new</span>(<span class='kw'>SNPinfo</span> <span class='kw'>=</span> <span class='no'>SNPs</span>,
-                       <span class='kw'>haplo</span> <span class='kw'>=</span> <span class='no'>rawHaplo2</span>)
+<span class='kw'>rawHaplo1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>), (<span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>4</span> <span class='op'>+</span> <span class='fl'>5</span>) <span class='op'>*</span> <span class='fl'>2</span>, replace = <span class='fl'>TRUE</span>),
+                    nrow = <span class='fl'>2</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>rawHaplo1</span>) <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(fmt = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"SNP%0"</span>, <span class='fl'>2</span>,<span class='st'>"i"</span>),
+                              <span class='fl'>1</span><span class='op'>:</span>(<span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>4</span> <span class='op'>+</span> <span class='fl'>5</span>))
+<span class='kw'>haplo1</span> <span class='op'>&lt;-</span> <span class='kw'>haplotype</span><span class='op'>$</span><span class='fu'>new</span>(SNPinfo = <span class='kw'>SNPs</span>,
+                       haplo = <span class='kw'>rawHaplo1</span>)
+<span class='kw'>rawHaplo2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>), (<span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>4</span> <span class='op'>+</span> <span class='fl'>5</span>) <span class='op'>*</span> <span class='fl'>2</span>, replace = <span class='fl'>TRUE</span>),
+                    nrow = <span class='fl'>2</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>rawHaplo2</span>) <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(fmt = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"SNP%0"</span>, <span class='fl'>2</span>,<span class='st'>"i"</span>),
+                              <span class='fl'>1</span><span class='op'>:</span>(<span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>4</span> <span class='op'>+</span> <span class='fl'>5</span>))
+<span class='kw'>haplo2</span> <span class='op'>&lt;-</span> <span class='kw'>haplotype</span><span class='op'>$</span><span class='fu'>new</span>(SNPinfo = <span class='kw'>SNPs</span>,
+                       haplo = <span class='kw'>rawHaplo2</span>)
 
 
 <span class='co'># create individuals:</span>
-<span class='no'>myInd1</span> <span class='kw'>&lt;-</span>  <span class='no'>individual</span>$<span class='fu'>new</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"Ind 1"</span>,
-                         <span class='kw'>specie</span> <span class='kw'>=</span> <span class='no'>mySpec</span>,
-                         <span class='kw'>parent1</span> <span class='kw'>=</span> <span class='st'>"OkaaSan"</span>,
-                         <span class='kw'>parent2</span> <span class='kw'>=</span> <span class='st'>"OtouSan"</span>,
-                         <span class='kw'>haplo</span> <span class='kw'>=</span> <span class='no'>haplo1</span>,
-                         <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>myInd2</span> <span class='kw'>&lt;-</span>  <span class='no'>individual</span>$<span class='fu'>new</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"Ind 2"</span>,
-                         <span class='kw'>specie</span> <span class='kw'>=</span> <span class='no'>mySpec</span>,
-                         <span class='kw'>parent1</span> <span class='kw'>=</span> <span class='st'>"OkaaSan"</span>,
-                         <span class='kw'>parent2</span> <span class='kw'>=</span> <span class='st'>"OtouSan"</span>,
-                         <span class='kw'>haplo</span> <span class='kw'>=</span> <span class='no'>haplo2</span>,
-                         <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>offspring</span> <span class='kw'>&lt;-</span> <span class='fu'>makeSingleCross</span>(<span class='no'>myInd1</span>, <span class='no'>myInd2</span>, <span class='kw'>names</span> <span class='kw'>=</span> <span class='st'>"off 1"</span>)
-<span class='no'>offspring</span></div><div class='output co'>#&gt; $`off 1`
+<span class='kw'>myInd1</span> <span class='op'>&lt;-</span>  <span class='kw'>individual</span><span class='op'>$</span><span class='fu'>new</span>(name = <span class='st'>"Ind 1"</span>,
+                         specie = <span class='kw'>mySpec</span>,
+                         parent1 = <span class='st'>"OkaaSan"</span>,
+                         parent2 = <span class='st'>"OtouSan"</span>,
+                         haplo = <span class='kw'>haplo1</span>,
+                         verbose = <span class='fl'>FALSE</span>)
+<span class='kw'>myInd2</span> <span class='op'>&lt;-</span>  <span class='kw'>individual</span><span class='op'>$</span><span class='fu'>new</span>(name = <span class='st'>"Ind 2"</span>,
+                         specie = <span class='kw'>mySpec</span>,
+                         parent1 = <span class='st'>"OkaaSan"</span>,
+                         parent2 = <span class='st'>"OtouSan"</span>,
+                         haplo = <span class='kw'>haplo2</span>,
+                         verbose = <span class='fl'>FALSE</span>)
+<span class='kw'>offspring</span> <span class='op'>&lt;-</span> <span class='fu'>makeSingleCross</span>(<span class='kw'>myInd1</span>, <span class='kw'>myInd2</span>, names = <span class='st'>"off 1"</span>)
+<span class='kw'>offspring</span>
+</div><div class='output co'>#&gt; $`off 1`
 #&gt; &lt;individual&gt;
 #&gt;   Public:
 #&gt;     clone: function (deep = FALSE) 

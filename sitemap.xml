@@ -28,6 +28,9 @@
     <loc>https://ut-biomet.github.io/breedSimulatR//reference/makeSingleCross.html</loc>
   </url>
   <url>
+    <loc>https://ut-biomet.github.io/breedSimulatR//reference/phenotyper.html</loc>
+  </url>
+  <url>
     <loc>https://ut-biomet.github.io/breedSimulatR//reference/population.html</loc>
   </url>
   <url>
@@ -41,5 +44,8 @@
   </url>
   <url>
     <loc>https://ut-biomet.github.io/breedSimulatR//reference/specie.html</loc>
+  </url>
+  <url>
+    <loc>https://ut-biomet.github.io/breedSimulatR//reference/trait.html</loc>
   </url>
 </urlset>

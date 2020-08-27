@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedSimulatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@
     <p>Random Mating</p>
     </div>
 
-    <pre class="usage"><span class='fu'>randomMate</span>(<span class='no'>inds</span>, <span class='no'>n</span>, <span class='no'>names</span>)</pre>
+    <pre class="usage"><span class='fu'>randomMate</span>(<span class='kw'>inds</span>, <span class='kw'>n</span>, <span class='kw'>names</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,19 +144,20 @@
     <p><code>data.frame</code> of the crossing table</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>nCross</span> <span class='kw'>&lt;-</span> <span class='fl'>10</span>
-<span class='no'>inds</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"ind-"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>))
-<span class='no'>names</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"newInd-"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span>:<span class='no'>nCross</span>))
-<span class='fu'>randomMate</span>(<span class='no'>inds</span>, <span class='no'>nCross</span>, <span class='no'>names</span>)</div><div class='output co'>#&gt;     ind1  ind2 n     names
-#&gt; 1  ind-4 ind-4 1  newInd-1
-#&gt; 2  ind-2 ind-2 1  newInd-2
-#&gt; 3  ind-2 ind-2 1  newInd-3
-#&gt; 4  ind-4 ind-1 1  newInd-4
-#&gt; 5  ind-3 ind-2 1  newInd-5
-#&gt; 6  ind-2 ind-4 1  newInd-6
-#&gt; 7  ind-2 ind-5 1  newInd-7
-#&gt; 8  ind-4 ind-2 1  newInd-8
-#&gt; 9  ind-4 ind-2 1  newInd-9
+    <pre class="examples"><div class='input'><span class='kw'>nCross</span> <span class='op'>&lt;-</span> <span class='fl'>10</span>
+<span class='kw'>inds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"ind-"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>))
+<span class='kw'>names</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"newInd-"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>1</span><span class='op'>:</span><span class='kw'>nCross</span>))
+<span class='fu'>randomMate</span>(<span class='kw'>inds</span>, <span class='kw'>nCross</span>, <span class='kw'>names</span>)
+</div><div class='output co'>#&gt;     ind1  ind2 n     names
+#&gt; 1  ind-2 ind-3 1  newInd-1
+#&gt; 2  ind-3 ind-1 1  newInd-2
+#&gt; 3  ind-5 ind-5 1  newInd-3
+#&gt; 4  ind-3 ind-5 1  newInd-4
+#&gt; 5  ind-5 ind-2 1  newInd-5
+#&gt; 6  ind-4 ind-1 1  newInd-6
+#&gt; 7  ind-2 ind-1 1  newInd-7
+#&gt; 8  ind-5 ind-3 1  newInd-8
+#&gt; 9  ind-3 ind-2 1  newInd-9
 #&gt; 10 ind-5 ind-2 1 newInd-10</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

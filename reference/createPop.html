@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedSimulatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@
     <p>Create population object from genotype data.frame</p>
     </div>
 
-    <pre class="usage"><span class='fu'>createPop</span>(<span class='no'>geno</span>, <span class='no'>SNPinfo</span>, <span class='kw'>indNames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>popName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>createPop</span>(<span class='kw'>geno</span>, <span class='kw'>SNPinfo</span>, indNames = <span class='kw'>NULL</span>, popName = <span class='kw'>NULL</span>, verbose = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,15 +155,17 @@ names. If NULL, <code><a href='https://rdrr.io/r/base/colnames.html'>rownames(ge
     <p>population object (see:<a href='population.html'>population</a>)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mySpec</span> <span class='kw'>&lt;-</span> <span class='no'>specie</span>$<span class='fu'>new</span>(<span class='kw'>nChr</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-                     <span class='kw'>lchr</span> <span class='kw'>=</span> <span class='fl'>10</span>^<span class='fl'>6</span>,
-                     <span class='kw'>specName</span> <span class='kw'>=</span> <span class='st'>"Geneticae Exempli"</span>,
-                     <span class='kw'>ploidy</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-                     <span class='kw'>recombRate</span> <span class='kw'>=</span> <span class='fl'>3</span>/<span class='fl'>10</span>^<span class='fl'>6</span>)</div><div class='output co'>#&gt; A new species has emerged: Geneticae Exempli !
-#&gt; </div><div class='input'><span class='no'>SNPs</span> <span class='kw'>&lt;-</span> <span class='no'>SNPinfo</span>$<span class='fu'>new</span>(<span class='kw'>SNPcoord</span> <span class='kw'>=</span> <span class='no'>exampleData</span>$<span class='no'>snpCoord</span>,
-                    <span class='kw'>specie</span> <span class='kw'>=</span> <span class='no'>mySpec</span>)
+    <pre class="examples"><div class='input'><span class='kw'>mySpec</span> <span class='op'>&lt;-</span> <span class='kw'>specie</span><span class='op'>$</span><span class='fu'>new</span>(nChr = <span class='fl'>10</span>,
+                     lchr = <span class='fl'>10</span><span class='op'>^</span><span class='fl'>6</span>,
+                     specName = <span class='st'>"Geneticae Exempli"</span>,
+                     ploidy = <span class='fl'>2</span>,
+                     recombRate = <span class='fl'>3</span><span class='op'>/</span><span class='fl'>10</span><span class='op'>^</span><span class='fl'>6</span>)
+</div><div class='output co'>#&gt; A new species has emerged: Geneticae Exempli !
+#&gt; </div><div class='input'><span class='kw'>SNPs</span> <span class='op'>&lt;-</span> <span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span>(SNPcoord = <span class='kw'>exampleData</span><span class='op'>$</span><span class='kw'>snpCoord</span>,
+                    specie = <span class='kw'>mySpec</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>exampleData</span>$<span class='no'>genotypes</span>[<span class='fl'>1</span>:<span class='fl'>5</span>, <span class='fl'>1</span>:<span class='fl'>10</span>])</div><div class='output co'>#&gt;          snp00006 snp00009 snp00011 snp00018 snp00026 snp00031 snp00035
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>exampleData</span><span class='op'>$</span><span class='kw'>genotypes</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>])
+</div><div class='output co'>#&gt;          snp00006 snp00009 snp00011 snp00018 snp00026 snp00031 snp00035
 #&gt; Coll0001        2        2        2        0        2        2        2
 #&gt; Coll0002        0        2        2        2        0        0        0
 #&gt; Coll0003        2        2        2        0        2        2        2
@@ -174,9 +176,10 @@ names. If NULL, <code><a href='https://rdrr.io/r/base/colnames.html'>rownames(ge
 #&gt; Coll0002        2        2        2
 #&gt; Coll0003        0        0        0
 #&gt; Coll0004        2        2        2
-#&gt; Coll0005        0        0        0</div><div class='input'><span class='no'>example_pop</span> <span class='kw'>&lt;-</span> <span class='fu'>createPop</span>(<span class='kw'>geno</span> <span class='kw'>=</span> <span class='no'>exampleData</span>$<span class='no'>genotypes</span>,
-                         <span class='kw'>SNPinfo</span> <span class='kw'>=</span> <span class='no'>SNPs</span>,
-                         <span class='kw'>popName</span> <span class='kw'>=</span> <span class='st'>"Example population"</span>)</div><div class='output co'>#&gt; Create population: Initialisation...
+#&gt; Coll0005        0        0        0</div><div class='input'><span class='kw'>example_pop</span> <span class='op'>&lt;-</span> <span class='fu'>createPop</span>(geno = <span class='kw'>exampleData</span><span class='op'>$</span><span class='kw'>genotypes</span>,
+                         SNPinfo = <span class='kw'>SNPs</span>,
+                         popName = <span class='st'>"Example population"</span>)
+</div><div class='output co'>#&gt; Create population: Initialisation...
 #&gt; Create population: Create individuals...
 #&gt; 1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99%100%
 #&gt; Create population: Create population object...
