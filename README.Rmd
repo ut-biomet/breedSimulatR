@@ -81,7 +81,7 @@ The package contains some example data that we will use for this example. These 
 
 First we must load the package:
 ```{r example_0.1, include=FALSE}
-options("max.print" = 10)
+options("max.print" = 25)
 ```
 
 ```{r example_0.2}
@@ -120,6 +120,7 @@ SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
 print(SNPs)
 ```
 
+
 #### Population initialization
 
 We can now generate an initial population from genotypic data.
@@ -138,6 +139,34 @@ initPop <- createPop(geno = exampleData$genotypes,
                      popName = "Initial population")
 ```
 
+
+#### Traits and phenotyping initialization
+Let's create 2 independent phenotypic traits that can be phenotyped.
+
+```{r example_trait.1}
+nQtn <- 1000
+
+qtn <- sample(names(initPop$maf > 0.1), nQtn)
+weight <- trait$new(name = "Weight",
+                    qtn = qtn,
+                    qtnEff = rnorm(nQtn, 0, 0.35))
+
+qtn <- sample(names(initPop$maf > 0.1), nQtn)
+height <- trait$new(name = "Height",
+                    qtn = qtn,
+                    qtnEff = rnorm(nQtn, 0, 0.25))
+
+phenolab <- phenotyper$new(name = "Pheno lab", 
+                           traits = list(weight, height),
+                           plotCost = 150,
+                           mu = c(100, 75),
+                           he = c(0.4, 0.6),
+                           pop = initPop)
+
+pheno <- phenolab$trial(pop = initPop, rep = 4)
+head(pheno$data)
+print(pheno$cost)
+```
 
 #### Selection Simulation
 

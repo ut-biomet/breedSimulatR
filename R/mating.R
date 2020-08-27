@@ -25,7 +25,7 @@
 #' randomMate(inds, nCross, names)
 randomMate <- function(inds, n, names) {
 
-  if (length(names) == 1) {
+  if (length(names) == 1 && n != 1) {
     names <- .charSeq(paste0(names,"-"), seq(n))
   } else if (length(names) != n) {
     stop('"length(names)" must be equal to "1" or to "n"')

@@ -242,7 +242,7 @@ makeCrosses <- function(crosses, pop){
   newInds <- unlist(newInds)
 
   # offsprings names do not already exist in population
-  if (any(vapply(newInds, function(x){x$name}, "character")%in%names(pop$inds))){
+  if (any(vapply(newInds, function(x){x$name}, "character") %in% names(pop$inds))) {
     nameInPop <-
       unique(crosses$names[which(crosses$names %in% names(pop$inds))])
     nameInPop <- paste(nameInPop, collapse = '" ; "')
