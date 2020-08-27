@@ -8,7 +8,8 @@
 
 # Iwata example -----------------------------------------------------------
 
-# Assume genetic effects of qtns. The effects are assumed to follow an exponential distribution here.
+# Assume genetic effects of qtns. The effects are assumed to follow an
+# exponential distribution here.
 
 # lmbd <- 1.0
 # is.qtn <- substr(colnames(initPop$genoMat), 1, 3) == "qtn"
@@ -63,7 +64,8 @@ trait <- R6::R6Class(
     #' @param class "quantitative" or "qualitative"
     #' @param qtn [character vector] list of the quantitative trait
     #'   nucleotides names implied in the trait
-    #' @param qtnEff [numeric vector] quantitative trait nucleotides effects (see details for more information).
+    #' @param qtnEff [numeric vector] quantitative trait nucleotides effects
+    #' (see details for more information).
     #'
     #' @return A new `trait` object.
     #'
@@ -185,7 +187,7 @@ trait <- R6::R6Class(
 
 
 
-# phenotyper -------------------------------------------------------------------
+# phenotyper -----------------------------------------------------------------
 
 # TODO find better name than "phenotyper"
 
@@ -209,7 +211,8 @@ phenotyper <- R6::R6Class(
     traits = NULL,
     #' @field mu [numeric] vector of the mean for each trait
     mu = 0,
-    #' @field ve [numeric] vector of the environmental variance sigma^2 for each trait
+    #' @field ve [numeric] vector of the environmental variance sigma^2
+    #' for each trait
     ve = 1,
 
     # Public Methods ####
@@ -218,9 +221,12 @@ phenotyper <- R6::R6Class(
     #' @param traits [trait or list] of phenotyped traits
     #' @param plotCost [numeric] cost for phenotyping one plot
     #' @param mu [numeric] vector of the mean for each trait
-    #' @param ve [numeric] (if \code{he} not provided) vector of the environmental variance sigma^2 for each trait
-    #' @param he [numeric] (if \code{ve} not provided) vector of the target heredity for each trait
-    #' @param pop [population] (if \code{ve} not provided) population used for the target heredity calculation (see:\link[breedSimulatR]{population})
+    #' @param ve [numeric] (if \code{he} not provided) vector of the
+    #' environmental variance sigma^2 for each trait
+    #' @param he [numeric] (if \code{ve} not provided) vector of the target
+    #' heredity for each trait
+    #' @param pop [population] (if \code{ve} not provided) population used for
+    #' the target heredity calculation (see:\link[breedSimulatR]{population})
     #' @return A new `phenotyper` object.
     #' @examples
     #' mySpec <- specie$new(nChr = 10,
@@ -275,7 +281,8 @@ phenotyper <- R6::R6Class(
         if (length(traits) < 1) {
           stop("The list of traits should not be empty")
         }
-        if (!all(vapply(traits, function(x) {class(x)[1]}, FUN.VALUE = "trait") == "trait")) {
+        if (!all(vapply(traits, function(x) {class(x)[1]},
+                        FUN.VALUE = "trait") == "trait")) {
           stop("All elements of the trait list should be traits")
         }
       } else {# traits is a trait, insert in a list
@@ -380,7 +387,7 @@ phenotyper <- R6::R6Class(
       } else {
         ve <- vapply(traits, function(trait) {
           g <- trait$gv(pop)
-          ve = var(g) * ((1 / he[trait$name]) - 1)
+          ve <- var(g) * ((1 / he[trait$name]) - 1)
           ve
         }, 1)
         names(ve) <- traitsNames
@@ -403,7 +410,8 @@ phenotyper <- R6::R6Class(
     #' @param pop [population class] population
     #'     (see: \link[breedSimulatR]{population})
     #' @param rep [numeric] number of replication for each individuals
-    #' @param offset [numeric] offset added to the phenotypic calculation results
+    #' @param offset [numeric] offset added to the phenotypic calculation
+    #' results
     #' @details
     #' phenotypic values for individual i repetition j is calculated as follow:
     #' \deqn{y_{ij} = \mu + g_i + e_ij + offset}
@@ -419,7 +427,8 @@ phenotyper <- R6::R6Class(
     #' pheno2$cost
     #' summary(pheno2$data)
     trial = function(pop, rep = 1, offset = 0) {
-      # TODO add "inds" parameter to only phenotype the corresponding individuals of the population
+      # TODO add "inds" parameter to only phenotype the corresponding
+      # individuals of the population
 
       if (class(pop)[1] != "population") {
         stop('pop should be an object of class "population"')
@@ -429,7 +438,8 @@ phenotyper <- R6::R6Class(
         stop('rep should be a numeric vector')
       }
       # if (length(rep) != 1 && length(rep) != pop$nInd) {
-      #   stop('length(rep) should be equal to 1 or to the number of individuals in the population')
+      #   stop('length(rep) should be equal to 1 or to the number of
+      #   individuals in the population')
       # } TODO
       if (length(rep) != 1) {
         stop('length(rep) should be equal to 1')
@@ -482,14 +492,15 @@ phenotyper <- R6::R6Class(
     },
     #' @description Calculate the heritability of a given population
     #' @param pop [population] the population
-    #' @return named numeric vector of the calculated heritability of the population for each trait
+    #' @return named numeric vector of the calculated heritability of the
+    #' population for each trait
     #' @examples
     #' phenoLab1$he(example_pop)
     #' phenoLab2$he(example_pop)
     he = function(pop) {
       sapply(self$traits, function(t){
         g <- t$gv(pop)
-        he = var(g) / (var(g) + self$ve[t$name])
+        he <- var(g) / (var(g) + self$ve[t$name])
         he
       })
     }
@@ -500,6 +511,3 @@ phenotyper <- R6::R6Class(
     traitsNames = NULL
   )
 )
-
-
-
