@@ -59,6 +59,12 @@ pheno2 <- phenoLab2$trial(example_pop, rep = 3, offset = c(-5, 0))
 pheno2$cost
 summary(pheno2$data)
 
+pheno3 <- phenoLab2$trial(example_pop,
+                          rep = round(runif(example_pop$nInd, 1, 3)),
+                          offset = c(-5, 0))
+pheno3$cost
+summary(pheno3$data)
+
 ## ------------------------------------------------
 ## Method `phenotyper$he`
 ## ------------------------------------------------
@@ -77,7 +83,8 @@ phenoLab2$he(example_pop)
 
 \item{\code{mu}}{[numeric] vector of the mean for each trait}
 
-\item{\code{ve}}{[numeric] vector of the environmental variance sigma^2 for each trait}
+\item{\code{ve}}{[numeric] vector of the environmental variance sigma^2
+for each trait}
 }
 \if{html}{\out{</div>}}
 }
@@ -119,11 +126,14 @@ Create a new phenotyper object.
 
 \item{\code{mu}}{[numeric] vector of the mean for each trait}
 
-\item{\code{ve}}{[numeric] (if \code{he} not provided) vector of the environmental variance sigma^2 for each trait}
+\item{\code{ve}}{[numeric] (if \code{he} not provided) vector of the
+environmental variance sigma^2 for each trait}
 
-\item{\code{he}}{[numeric] (if \code{ve} not provided) vector of the target heredity for each trait}
+\item{\code{he}}{[numeric] (if \code{ve} not provided) vector of the target
+heredity for each trait}
 
-\item{\code{pop}}{[population] (if \code{ve} not provided) population used for the target heredity calculation (see:\link[breedSimulatR]{population})}
+\item{\code{pop}}{[population] (if \code{ve} not provided) population used for
+the target heredity calculation (see:\link[breedSimulatR]{population})}
 }
 \if{html}{\out{</div>}}
 }
@@ -198,7 +208,8 @@ Phenotype a given population
 
 \item{\code{rep}}{[numeric] number of replication for each individuals}
 
-\item{\code{offset}}{[numeric] offset added to the phenotypic calculation results}
+\item{\code{offset}}{[numeric] offset added to the phenotypic calculation
+results}
 }
 \if{html}{\out{</div>}}
 }
@@ -219,6 +230,12 @@ summary(pheno1$data)
 pheno2 <- phenoLab2$trial(example_pop, rep = 3, offset = c(-5, 0))
 pheno2$cost
 summary(pheno2$data)
+
+pheno3 <- phenoLab2$trial(example_pop,
+                          rep = round(runif(example_pop$nInd, 1, 3)),
+                          offset = c(-5, 0))
+pheno3$cost
+summary(pheno3$data)
 }
 \if{html}{\out{</div>}}
 
@@ -242,7 +259,8 @@ Calculate the heritability of a given population
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-named numeric vector of the calculated heritability of the population for each trait
+named numeric vector of the calculated heritability of the
+population for each trait
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}

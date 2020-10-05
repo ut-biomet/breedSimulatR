@@ -84,7 +84,8 @@ Create a new trait object.
 \item{\code{qtn}}{[character vector] list of the quantitative trait
 nucleotides names implied in the trait}
 
-\item{\code{qtnEff}}{[numeric vector] quantitative trait nucleotides effects (see details for more information).}
+\item{\code{qtnEff}}{[numeric vector] quantitative trait nucleotides effects
+(see details for more information).}
 }
 \if{html}{\out{</div>}}
 }

@@ -19,7 +19,9 @@ if (interactive()) {
 
 #### TESTS  traits ####
 test_that("quant trait initialisation", {
-  mySpec <- create_spec()
+  nChr <- round(runif(1, 1, 10))
+  mySpec <- create_spec(nChr = nChr,
+                        lchr = round(pmax(rnorm(nChr, 450, 50), 301)))
   SNPs <- create_SNP(mySpec, nMarker = 300)
 
   expect_error({
@@ -135,13 +137,30 @@ test_that("phenotyper initialisation", {
   expect_error({
     pheno <- phenoLab1$trial(myPop, rep = 2, offset = 4)
   }, NA)
-  expect_error({
-    phenoLab2$trial(myPop, rep = 2, offset = c(-3, -4, 5))
-  }, NA)
-  expect_error({
-    phenoLab1$trial(myPop, rep = round(runif(myPop$nInd, 1, 3)), offset = 4)
-  })
+  expect_equal(nrow(pheno$data), myPop$nInd * 2)
+  expect_equal(ncol(pheno$data), 6)
 
+  expect_error({
+    pheno2 <- phenoLab2$trial(myPop, rep = 2, offset = c(-3, -4, 5))
+  }, NA)
+  expect_equal(nrow(pheno2$data), myPop$nInd * 2)
+  expect_equal(ncol(pheno2$data), 6)
+
+  expect_error({
+    rep <- round(runif(myPop$nInd, 1, 3))
+    pheno3 <- phenoLab1$trial(myPop, rep = rep, offset = 4)
+  }, NA)
+  expect_equal(nrow(pheno3$data), sum(rep))
+  expect_equal(ncol(pheno3$data), 6)
+
+  expect_error({
+    rep <- round(runif(myPop$nInd, 1, 3))
+    pheno4 <- phenoLab1$trial(myPop,
+                    rep = rep,
+                    offset = c(-3, -4, 5))
+  }, NA)
+  expect_equal(nrow(pheno4$data), sum(rep))
+  expect_equal(ncol(pheno4$data), 6)
 
   expect_equal(names(pheno$data),
                c("ind", "myTrait1", "myTrait2", "myTrait3", "rep", "phenotyper"))

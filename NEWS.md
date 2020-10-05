@@ -1,4 +1,10 @@
-# breedSimulatR 0.1.1
+# breedSimulatR 0.1.3
+
+## Improvements
+
+- The method `phenotyper$trial` can now manage the parameter `rep` as a vector for each individual.
+
+# breedSimulatR 0.1.2
 
 ## Feature
 

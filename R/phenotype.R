@@ -426,6 +426,12 @@ phenotyper <- R6::R6Class(
     #' pheno2 <- phenoLab2$trial(example_pop, rep = 3, offset = c(-5, 0))
     #' pheno2$cost
     #' summary(pheno2$data)
+    #'
+    #' pheno3 <- phenoLab2$trial(example_pop,
+    #'                           rep = round(runif(example_pop$nInd, 1, 3)),
+    #'                           offset = c(-5, 0))
+    #' pheno3$cost
+    #' summary(pheno3$data)
     trial = function(pop, rep = 1, offset = 0) {
       # TODO add "inds" parameter to only phenotype the corresponding
       # individuals of the population
@@ -437,13 +443,14 @@ phenotyper <- R6::R6Class(
       if (!is.numeric(rep)) {
         stop('rep should be a numeric vector')
       }
-      # if (length(rep) != 1 && length(rep) != pop$nInd) {
-      #   stop('length(rep) should be equal to 1 or to the number of
-      #   individuals in the population')
-      # } TODO
-      if (length(rep) != 1) {
-        stop('length(rep) should be equal to 1')
+      if (length(rep) != 1 && length(rep) != pop$nInd) {
+        stop('length(rep) should be equal to 1 or to the number of
+        individuals in the population')
       }
+      if (length(rep) == 1) {
+        rep <- base::rep(rep, pop$nInd)
+      }
+
       if (any(rep < 0)) {
         stop('all values of rep should be higher or equal than 0')
       }
@@ -452,7 +459,7 @@ phenotyper <- R6::R6Class(
         stop('"offset" should be a numeric value')
       }
       if (length(offset) == 1) {
-        offset <- rep(offset, length(self$traits))
+        offset <- base::rep(offset, length(self$traits))
       }
       else if (length(offset) != length(self$traits)) {
         stop('"length(offset)" should be equal to the number of traits')
@@ -465,21 +472,20 @@ phenotyper <- R6::R6Class(
         offset <- offset[private$traitsNames]
       }
 
-      cost <- self$plotCost * pop$nInd * rep
+      cost <- self$plotCost * sum(rep)
 
       pheno <- sapply(self$traits, function(trait) {
         mu <- self$mu[trait$name]
         sigma <- sqrt(self$ve[trait$name])
 
-        gv <- base::rep(trait$gv(pop), each = rep)
-        e <- rnorm(pop$nInd * rep, sd = sigma)
+        gv <- base::rep(trait$gv(pop), rep)
+        e <- rnorm(sum(rep), sd = sigma)
 
         matrix(mu + gv + e + offset[trait$name], ncol = 1)
       })
-
-      dta <- data.frame(ind = base::rep(row.names(pop$genoMat), each = rep),
+      dta <- data.frame(ind = base::rep(row.names(pop$genoMat), rep),
                         pheno,
-                        rep = base::rep(seq(rep), pop$nInd),
+                        rep = unlist(lapply(rep, seq)),
                         phenotyper = self$name)
 
       list(
