@@ -162,6 +162,17 @@ test_that("phenotyper initialisation", {
   expect_equal(nrow(pheno4$data), sum(rep))
   expect_equal(ncol(pheno4$data), 6)
 
+  expect_error({
+    rep <- c(0, round(runif(myPop$nInd - 1, 0, 3)))
+    pheno5 <- phenoLab1$trial(myPop,
+                              rep = rep,
+                              offset = c(-3, -4, 5))
+  }, NA)
+  expect_equal(nrow(pheno5$data), sum(rep))
+  expect_equal(ncol(pheno5$data), 6)
+
+
+
   expect_equal(names(pheno$data),
                c("ind", "myTrait1", "myTrait2", "myTrait3", "rep", "phenotyper"))
   expect_true(!any(is.na(pheno$data$myTrait1)))

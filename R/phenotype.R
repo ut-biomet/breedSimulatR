@@ -433,8 +433,6 @@ phenotyper <- R6::R6Class(
     #' pheno3$cost
     #' summary(pheno3$data)
     trial = function(pop, rep = 1, offset = 0) {
-      # TODO add "inds" parameter to only phenotype the corresponding
-      # individuals of the population
 
       if (class(pop)[1] != "population") {
         stop('pop should be an object of class "population"')
@@ -485,7 +483,14 @@ phenotyper <- R6::R6Class(
       })
       dta <- data.frame(ind = base::rep(row.names(pop$genoMat), rep),
                         pheno,
-                        rep = unlist(lapply(rep, seq)),
+                        rep = unlist(lapply(rep, function(x){
+                          if (x != 0) {
+                            out <- seq(x)
+                          } else {
+                            out <- c()
+                          }
+                          out
+                        })),
                         phenotyper = self$name)
 
       list(
