@@ -458,8 +458,7 @@ phenotyper <- R6::R6Class(
       }
       if (length(offset) == 1) {
         offset <- base::rep(offset, length(self$traits))
-      }
-      else if (length(offset) != length(self$traits)) {
+      } else if (length(offset) != length(self$traits)) {
         stop('"length(offset)" should be equal to the number of traits')
       }
       if (is.null(names(offset))) {
@@ -471,8 +470,7 @@ phenotyper <- R6::R6Class(
       }
 
       cost <- self$plotCost * sum(rep)
-
-      pheno <- sapply(self$traits, function(trait) {
+      pheno <- matrix(sapply(self$traits, function(trait) {
         mu <- self$mu[trait$name]
         sigma <- sqrt(self$ve[trait$name])
 
@@ -480,7 +478,9 @@ phenotyper <- R6::R6Class(
         e <- rnorm(sum(rep), sd = sigma)
 
         matrix(mu + gv + e + offset[trait$name], ncol = 1)
-      })
+      }),
+      nrow = sum(rep))
+      colnames(pheno) <- names(self$traits)
       dta <- data.frame(ind = base::rep(row.names(pop$genoMat), rep),
                         pheno,
                         rep = unlist(lapply(rep, function(x){
