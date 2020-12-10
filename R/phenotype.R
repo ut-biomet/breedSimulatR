@@ -5,32 +5,7 @@
 # Definition of phenotyper class
 
 
-
-# Iwata example -----------------------------------------------------------
-
-# Assume genetic effects of qtns. The effects are assumed to follow an
-# exponential distribution here.
-
-# lmbd <- 1.0
-# is.qtn <- substr(colnames(initPop$genoMat), 1, 3) == "qtn"
-# qtn.genotypes <- initPop$genoMat[, is.qtn]
-# qtn.eff <- rexp(n.qtn, lmbd) * sample(c(-1, 1), n.qtn, replace = T)
-#
-#
-# # Simulate genotypic values and phenotypic values.
-#
-# he <- 0.5  # heritability intended
-# g <- qtn.genotypes %*% qtn.eff
-# var.e <- var(g) * ((1 - he) / he)
-# e <- rnorm(length(g), sd = sqrt(var.e))
-# y <- g + e
-# (var(g) / var(y))  # heritabilty realized
-#
-# g <- a + d + i
-# y <- g + e
-
-
-# trait -------------------------------------------------------------------
+# trait ----
 
 #' R6 class representing a phenotypic trait
 #'
@@ -44,7 +19,7 @@ trait <- R6::R6Class(
   "trait",
   lock_objects = FALSE,
   public = list(
-    # Public fields ####
+    ## Public fields ####
     #' @field name [string] Name of the trait
     name = NULL,
     #' @field class "qualitative" or "quantitative" trait ("qualitative" not
@@ -58,7 +33,7 @@ trait <- R6::R6Class(
     qtnEff = NULL,
 
 
-    # Public methods ####
+    ## Public methods ####
     #' @description Create a new trait object.
     #' @param name [character] name of the trait
     #' @param class "quantitative" or "qualitative"
@@ -187,7 +162,7 @@ trait <- R6::R6Class(
 
 
 
-# phenotyper -----------------------------------------------------------------
+# phenotyper ----
 
 # TODO find better name than "phenotyper"
 
@@ -202,7 +177,7 @@ phenotyper <- R6::R6Class(
   "phenotyper",
   lock_objects = FALSE,
   public = list(
-    # Public Fields ####
+    ## Public Fields ####
     #' @field name [character] name of the phenotyper
     name = "Pheno lab",
     #' @field plotCost [numeric] cost for phenotyping one plot
@@ -215,7 +190,7 @@ phenotyper <- R6::R6Class(
     #' for each trait
     ve = 1,
 
-    # Public Methods ####
+    ## Public Methods ####
     #' @description Create a new phenotyper object.
     #' @param name [character] name of the phenotyper
     #' @param traits [trait or list] of phenotyped traits
@@ -517,7 +492,7 @@ phenotyper <- R6::R6Class(
     }
   ),
   private = list(
-    # Private Fields ####
+    ## Private Fields ####
     # @field traitsNames [character] names of the traits
     traitsNames = NULL
   )
