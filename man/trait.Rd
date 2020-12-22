@@ -14,9 +14,9 @@ trait object store information about a phenotypic trait
 
 mySpec <- specie$new(nChr = 10,
                      lchr = 10^6,
+                     lchrCm = 100,
                      specName = "Geneticae Exempli",
-                     ploidy = 2,
-                     recombRate = 3/10^6)
+                     ploidy = 2)
 SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
                     specie = mySpec)
 
@@ -101,9 +101,9 @@ A new `trait` object.
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{mySpec <- specie$new(nChr = 10,
                      lchr = 10^6,
+                     lchrCm = 100,
                      specName = "Geneticae Exempli",
-                     ploidy = 2,
-                     recombRate = 3/10^6)
+                     ploidy = 2)
 SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
                     specie = mySpec)
 

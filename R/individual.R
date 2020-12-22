@@ -45,16 +45,17 @@ individual <- R6::R6Class(
     #' # create specie
     #' mySpec <- specie$new(nChr = 3,
     #'                      lchr = c(100, 150, 200),
-    #'                      recombRate = 0.006,
+    #'                      lchrCm = 100,
     #'                      verbose = FALSE)
     #'
     #' # simulate SNP
     #' SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
     #'                                rep("Chr2", 4),
     #'                                rep("Chr3", 5)),
-    #'                        pos = c(sample(100, 3),
+    #'                        physPos = c(sample(100, 3),
     #'                                sample(150, 4),
     #'                                sample(200, 5)),
+    #'                        linkMapPos = NA,
     #'                        SNPid = sprintf(fmt = paste0("SNP%0", 2,"i"),
     #'                                        1:(3 + 4 + 5)))
     #'
@@ -96,35 +97,57 @@ individual <- R6::R6Class(
     #' myInd$generateGametes(2)
     generateGametes = function(n = 1) {
       gametes <- lapply(1:n, function(x) {
-        if (is.na(self$specie$recombRate)) {
-          stop('specie$recombRate must be specify in order to generate gemtes')
+        if (any(is.na(self$specie$lchrCm))) {
+          stop('specie$lchrCm must be specify in order to generate gemtes')
         }
         gamete <- mapply(function(haplo, SNPcoord) {
           chrName <- SNPcoord$chr[1]
           chrLen <- self$specie$lchr[chrName]
+          chrLenCm <- self$specie$lchrCm[chrName]
 
-          # number of recombination events:
-          nRecomb <- rbinom(1, chrLen, self$specie$recombRate)
+          # number of recombination locations:
+          nRecomb <- rpois(1, chrLenCm/100)
 
-          Rpos <- sample.int(chrLen, nRecomb)
+          g <- (runif(1) < 0.5) + 1
+          if (nRecomb == 0) {
+            gamHaplo <- haplo[g, ]
+            return(gamHaplo)
+          }
+
+
+
+          # draw recombination locations
+          if (is.na(SNPcoord$linkMapPos[1])) {
+            # if SNP's linkMap positions is unknown
+            # draw recombination locations uniformly in physical length range:
+            Rpos <- runif(nRecomb, 0, chrLen)
+            # get id of the recombination positions
+            ids <- (c(0,
+                      sort(base::findInterval(Rpos, SNPcoord$physPos)),
+                      nrow(SNPcoord))
+            )
+          } else {
+            # draw recombination locations uniformly in chrLenCm range:
+            RposCm <- runif(nRecomb, 0, chrLenCm)
+            # get id of the recombination positions
+            ids <- (c(0,
+                      sort(base::findInterval(RposCm, SNPcoord$linkMapPos)),
+                      nrow(SNPcoord))
+            )
+          }
 
           gamHaplo <- integer(ncol(haplo))
-          # split SNP beetween two chromosome
-          if (length(Rpos) == 0) {
-            g <- (runif(1) < 0.5) + 1
-            gamHaplo <- haplo[g, ]
-          } else {
-            ids <- unique(c(0,
-                            sort(findInterval(Rpos, SNPcoord$pos)),
-                            length(SNPcoord$pos))
-            )
-            g <- (runif(1) < 0.5) + 1
-            for (i in seq_len(length(ids) - 1)) {
-              gamHaplo[(ids[[i]] + 1):ids[[i + 1]]] <-
-                haplo[g, (ids[[i]] + 1):ids[[i + 1]]]
+          for (i in seq_len(length(ids) - 1)) {
+            if (ids[i] == ids[i + 1]) {
+              # several recombinations between SNPs
               g <- -g + 3
+              next
             }
+            gamHaplo[(ids[i] + 1):ids[i + 1]] <-
+              haplo[g, (ids[i] + 1):ids[i + 1]]
+            g <- -g + 3
           }
+
           names(gamHaplo) <- colnames(haplo)
           gamHaplo
         },

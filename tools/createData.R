@@ -5,7 +5,8 @@
 # R script to generate package's data
 
 library(dplyr)
-library(breedSimulatR)
+# library(breedSimulatR)
+devtools::load_all()
 
 # load genotype data:
 example_genotypes <- read.table("tools/data/genotypes.txt.gz", header = T, sep = "\t")
@@ -32,10 +33,29 @@ if (any(!example_snpCoord$SNPid %in% colnames(example_genotypes))) {
 example_specie <- specie$new(specName = "Statisticae exempli",
                              nChr = 10,
                              lchr = 1e6,
-                             ploidy = 2,
-                             recombRate = 3/1e6)
+                             lchrCm = 100,
+                             ploidy = 2)
 
 # create SNPinfo
+
+# simulate linkage map position
+b1 <- c(6, 13, 10, 7, 13, 10, 13, 9, 6, 9)
+b2 <- c(6, 8, 12, 12, 11, 7, 9, 7, 7, 13)
+names(b1) <- names(b2) <- example_specie$chrNames
+example_snpCoord <- do.call(rbind,
+  lapply(example_specie$chrNames,
+         function(chr){
+           SNPcoord <- example_snpCoord[example_snpCoord$chr == chr,]
+           SNPcoord$linkMapPos <- breedSimulatR:::.simulLinkMapPos(
+             SNPcoord$physPos,
+             example_specie$lchr[chr],
+             example_specie$lchrCm[chr],
+             b1[chr],
+             b2[chr])
+           SNPcoord[c("chr", "physPos", "linkMapPos", "SNPid")]
+         }))
+
+
 example_SNPs <- SNPinfo$new(SNPcoord = example_snpCoord,
                             specie = example_specie)
 

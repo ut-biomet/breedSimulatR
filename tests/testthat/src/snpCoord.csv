@@ -1,4 +1,4 @@
-"chr","pos","SNPid"
+"chr","physPos","SNPid"
 "Chr03",27670,"snp07263"
 "Chr10",195761,"snp32236"
 "Chr07",966320,"snp24461"

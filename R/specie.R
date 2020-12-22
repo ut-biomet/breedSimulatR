@@ -26,48 +26,51 @@ specie <- R6::R6Class(
     nChr = NA,
     #' @field ploidy [numeric] Number of possible alleles at one locus
     ploidy = NA,
-    #' @field lchr [numeric] length of all chromosomes
+    #' @field lchr [numeric] length of all chromosomes in base pairs
     lchr = NA,
+    #' @field lchrCm [numeric] length of all chromosomes in centimorgans
+    lchrCm = NA,
     #' @field mutRate [numeric] Mutation rate at each base
     mutRate = NA,
     #' @field chrNames [str] Names of the chromosomes
     chrNames = NA,
-    #' @field recombRate [numeric] Recombination rate at each base
-    recombRate = NA,
 
     #' @description Create a new specie object.
     #' @param nChr [numeric] Number of chromosomes
-    #' @param lchr [numeric] length of all chromosomes
+    #' @param lchr [numeric] length of all chromosomes in base pairs
+    #' @param lchrCm [numeric] length of all chromosomes in centimorgans
     #' @param specName [str] Specie's name (optional)
     #' @param ploidy [numeric] Number of possible alleles at one locus
     #'   (optional)
     #' @param mutRate [numeric] Mutation rate at each base (optional)
-    #' @param recombRate [numeric] Recombination rate at each base (optional)
     #' @param chrNames [str] Names of the chromosomes (optional)
     #' @param verbose [bool] Display info (optional)
     #' @return A new `specie` object.
     #' @examples
     #' mySpec <- specie$new(nChr = 3,
     #'                      lchr = c(100, 150, 200),
-    #'                      specName = "Geneticae Exempulus",
-    #'                      ploidy = 2,
-    #'                      mutRate = 10^-8,
-    #'                      recombRate = 10^-7)
+    #'                      lchrCm = 100,
+    #'                      specName = "Geneticae Exempulus")
     #' print(mySpec)
     initialize = function(nChr,
                           lchr,
+                          lchrCm,
                           specName = "Undefinded",
                           ploidy = NA,
                           mutRate = NA,
-                          recombRate = NA,
                           chrNames = NA,
                           verbose = TRUE){
       if (!is.numeric(nChr)) stop("nChr must be numeric.")
       if (floor(nChr) - nChr != 0) stop("nChr must be integer.")
       if (!is.numeric(lchr)) stop("lchr must be numeric.")
+      if (!is.numeric(lchrCm)) stop("lchrCm must be numeric.")
       if (any(floor(lchr) - lchr != 0)) stop("lchr must be integers.")
       if (length(lchr) != 1 && length(lchr) != nChr){
         stop(paste("length(lchr) must be equal to 1 (all chr have the same",
+                   "size) or equal to nChr."))
+      }
+      if (length(lchrCm) != 1 && length(lchrCm) != nChr){
+        stop(paste("length(lchrCm) must be equal to 1 (all chr have the same",
                    "size) or equal to nChr."))
       }
       if (is.na(ploidy)){
@@ -80,7 +83,6 @@ specie <- R6::R6Class(
       self$nChr <- nChr
       self$ploidy <- ploidy
       self$mutRate <- mutRate
-      self$recombRate <- recombRate
       if (all(is.na(chrNames))) {
         self$chrNames <- .charSeq("Chr", 1:self$nChr)
       } else {
@@ -94,6 +96,13 @@ specie <- R6::R6Class(
       }
       names(self$lchr) <- self$chrNames
 
+      if (length(lchrCm) == 1) {
+        self$lchrCm <- rep(lchrCm, nChr)
+      } else {
+        self$lchrCm <- lchrCm
+      }
+      names(self$lchrCm) <- self$chrNames
+
       if (verbose) cat(paste("A new species has emerged:", self$specName,
                              "!\n\n"))
     },
@@ -105,12 +114,12 @@ specie <- R6::R6Class(
         "Name: ", self$specName, "\n",
         "Number of Chromosomes: ", self$nChr, "\n",
         "Ploidy: ", self$ploidy, "\n",
-        "Mutation rate : ", self$mutRate, "\n",
-        "Recombination Rate: ", self$recombRate, "\n",
+        # "Mutation rate : ", self$mutRate, "\n",
         "Chromosome length:\n"
       ))
       print(data.frame(chrNames = self$chrNames,
-                       chrLength = self$lchr))
+                       chrLength = self$lchr,
+                       chrLengthCm = self$lchrCm))
     },
 
     #' @description
