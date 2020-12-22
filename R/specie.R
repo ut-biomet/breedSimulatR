@@ -139,7 +139,7 @@ specie <- R6::R6Class(
       stopifnot((is.character(chr) || is.numeric(chr)))
 
       if (is.character(chr)) {
-        id <- as.numeric(regmatches(chr, gregexpr("[0-9]+", chr)))
+        id <- which(chr == self$chrNames)
       } else id <- chr
       self$lchr[id]
 
