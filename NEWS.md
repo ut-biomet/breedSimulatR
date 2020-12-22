@@ -1,8 +1,14 @@
+# breedSimulatR 0.2.0
 
 ## Improvements
 
 - The initialization of the object `specie` now take as input chromosomes length in centimorgans: `lchrCm`. The argument `recombRate` is now deprecated.
 - Crossing over simulations can now take in account the linkage map position of the markers. 
+
+## Bug Fixes
+
+- `specie`'s `getChrLength` method now works fine with input of class "character"
+
 
 # breedSimulatR 0.1.3
 
