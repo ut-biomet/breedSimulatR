@@ -1,4 +1,5 @@
 .Rprofile
+tmp/
 
 # History files
 .Rhistory
