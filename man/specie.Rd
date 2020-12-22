@@ -25,6 +25,14 @@ print(mySpec)
 mySpec$getChrLength()
 mySpec$getChrLength(2)
 mySpec$getChrLength("Chr3")
+
+## ------------------------------------------------
+## Method `specie$getChrLengthCm`
+## ------------------------------------------------
+
+mySpec$getChrLengthCm()
+mySpec$getChrLengthCm(2)
+mySpec$getChrLengthCm("Chr3")
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -51,6 +59,7 @@ mySpec$getChrLength("Chr3")
 \item \href{#method-new}{\code{specie$new()}}
 \item \href{#method-print}{\code{specie$print()}}
 \item \href{#method-getChrLength}{\code{specie$getChrLength()}}
+\item \href{#method-getChrLengthCm}{\code{specie$getChrLengthCm()}}
 \item \href{#method-clone}{\code{specie$clone()}}
 }
 }
@@ -141,6 +150,33 @@ Get the chromosomes length
 \preformatted{mySpec$getChrLength()
 mySpec$getChrLength(2)
 mySpec$getChrLength("Chr3")
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getChrLengthCm"></a>}}
+\if{latex}{\out{\hypertarget{method-getChrLengthCm}{}}}
+\subsection{Method \code{getChrLengthCm()}}{
+Get the chromosomes length in centimorgans
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{specie$getChrLengthCm(chr = NA)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{chr}}{[str or numeric] chromosome ids}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{mySpec$getChrLengthCm()
+mySpec$getChrLengthCm(2)
+mySpec$getChrLengthCm("Chr3")
 }
 \if{html}{\out{</div>}}
 

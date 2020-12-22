@@ -143,6 +143,29 @@ specie <- R6::R6Class(
       } else id <- chr
       self$lchr[id]
 
+    },
+
+    #' @description
+    #' Get the chromosomes length in centimorgans
+    #' @param chr [str or numeric] chromosome ids
+    #' @examples
+    #' mySpec$getChrLengthCm()
+    #' mySpec$getChrLengthCm(2)
+    #' mySpec$getChrLengthCm("Chr3")
+    getChrLengthCm = function(chr = NA) {
+
+      # quick return:
+      if (is.na(chr)) {
+        return(self$lchrCm)
+      }
+
+      stopifnot((is.character(chr) || is.numeric(chr)))
+
+      if (is.character(chr)) {
+        id <- which(chr == self$chrNames)
+      } else id <- chr
+      self$lchrCm[id]
+
     }
   )
 )

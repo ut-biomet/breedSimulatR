@@ -98,6 +98,31 @@ test_that("specie's \"getChrLength\" methods", {
   expect_identical(as.numeric(mySpec$getChrLength("X")), 200)
 
 
+
+  mySpec <- specie$new(nChr = 3,
+                       lchr = c(100, 150, 200),
+                       lchrCm = c(101, 151, 201),
+                       verbose = F)
+
+  expect_is(mySpec$getChrLengthCm(), "numeric")
+  expect_named(mySpec$getChrLengthCm())
+
+  expect_identical(as.numeric(mySpec$getChrLengthCm()), c(101, 151, 201))
+  expect_identical(as.numeric(mySpec$getChrLengthCm(1)), 101)
+  expect_identical(as.numeric(mySpec$getChrLengthCm("Chr2")), 151)
+
+  expect_identical(names(mySpec$getChrLengthCm()), c("Chr1", "Chr2", "Chr3"))
+  expect_identical(names(mySpec$getChrLengthCm(3)), "Chr3")
+  expect_identical(names(mySpec$getChrLengthCm("Chr1")), "Chr1")
+
+  mySpec <- specie$new(nChr = 3,
+                       lchr = c(100, 150, 200),
+                       lchrCm = c(101, 151, 201),
+                       verbose = F,
+                       chrNames = c("chr1","chr2","X"))
+  expect_identical(as.numeric(mySpec$getChrLengthCm("X")), 201)
+
+
   })
 
 
