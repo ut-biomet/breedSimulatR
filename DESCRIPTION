@@ -1,7 +1,7 @@
 Type: Package
 Package: breedSimulatR
 Title: R Breeding Simulator
-Version: 0.1.2
+Version: 0.2.0
 Date: 2020-01-31
 Authors@R: 
     c(person(given = "Julien",
@@ -21,8 +21,9 @@ BugReports: https://github.com/ut-biomet/breedSimulatR/issues
 Depends: 
     R (>= 3.2.0)
 Imports: 
-    plotly,
-    R6
+    base,
+    R6,
+    stats
 Suggests:
     covr,
     devtools,
@@ -30,6 +31,7 @@ Suggests:
     pkgdown,
     rmarkdown,
     roxygen2,
+    plotly,
     spelling,
     testthat
 VignetteBuilder: 

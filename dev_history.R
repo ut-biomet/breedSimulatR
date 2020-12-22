@@ -69,7 +69,7 @@ install()
 # build()
 
 # use_github_release()
-usethis::use_version()
+usethis::use_version(which = "minor")
 # use_news_md()
 
 

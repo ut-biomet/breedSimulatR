@@ -14,10 +14,8 @@ Specie object store specific information of one specie.
 
 mySpec <- specie$new(nChr = 3,
                      lchr = c(100, 150, 200),
-                     specName = "Geneticae Exempulus",
-                     ploidy = 2,
-                     mutRate = 10^-8,
-                     recombRate = 10^-7)
+                     lchrCm = 100,
+                     specName = "Geneticae Exempulus")
 print(mySpec)
 
 ## ------------------------------------------------
@@ -27,6 +25,14 @@ print(mySpec)
 mySpec$getChrLength()
 mySpec$getChrLength(2)
 mySpec$getChrLength("Chr3")
+
+## ------------------------------------------------
+## Method `specie$getChrLengthCm`
+## ------------------------------------------------
+
+mySpec$getChrLengthCm()
+mySpec$getChrLengthCm(2)
+mySpec$getChrLengthCm("Chr3")
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -37,13 +43,13 @@ mySpec$getChrLength("Chr3")
 
 \item{\code{ploidy}}{[numeric] Number of possible alleles at one locus}
 
-\item{\code{lchr}}{[numeric] length of all chromosomes}
+\item{\code{lchr}}{[numeric] length of all chromosomes in base pairs}
+
+\item{\code{lchrCm}}{[numeric] length of all chromosomes in centimorgans}
 
 \item{\code{mutRate}}{[numeric] Mutation rate at each base}
 
 \item{\code{chrNames}}{[str] Names of the chromosomes}
-
-\item{\code{recombRate}}{[numeric] Recombination rate at each base}
 }
 \if{html}{\out{</div>}}
 }
@@ -53,6 +59,7 @@ mySpec$getChrLength("Chr3")
 \item \href{#method-new}{\code{specie$new()}}
 \item \href{#method-print}{\code{specie$print()}}
 \item \href{#method-getChrLength}{\code{specie$getChrLength()}}
+\item \href{#method-getChrLengthCm}{\code{specie$getChrLengthCm()}}
 \item \href{#method-clone}{\code{specie$clone()}}
 }
 }
@@ -65,10 +72,10 @@ Create a new specie object.
 \if{html}{\out{<div class="r">}}\preformatted{specie$new(
   nChr,
   lchr,
+  lchrCm,
   specName = "Undefinded",
   ploidy = NA,
   mutRate = NA,
-  recombRate = NA,
   chrNames = NA,
   verbose = TRUE
 )}\if{html}{\out{</div>}}
@@ -79,7 +86,9 @@ Create a new specie object.
 \describe{
 \item{\code{nChr}}{[numeric] Number of chromosomes}
 
-\item{\code{lchr}}{[numeric] length of all chromosomes}
+\item{\code{lchr}}{[numeric] length of all chromosomes in base pairs}
+
+\item{\code{lchrCm}}{[numeric] length of all chromosomes in centimorgans}
 
 \item{\code{specName}}{[str] Specie's name (optional)}
 
@@ -87,8 +96,6 @@ Create a new specie object.
 (optional)}
 
 \item{\code{mutRate}}{[numeric] Mutation rate at each base (optional)}
-
-\item{\code{recombRate}}{[numeric] Recombination rate at each base (optional)}
 
 \item{\code{chrNames}}{[str] Names of the chromosomes (optional)}
 
@@ -103,10 +110,8 @@ A new `specie` object.
 \if{html}{\out{<div class="r example copy">}}
 \preformatted{mySpec <- specie$new(nChr = 3,
                      lchr = c(100, 150, 200),
-                     specName = "Geneticae Exempulus",
-                     ploidy = 2,
-                     mutRate = 10^-8,
-                     recombRate = 10^-7)
+                     lchrCm = 100,
+                     specName = "Geneticae Exempulus")
 print(mySpec)
 }
 \if{html}{\out{</div>}}
@@ -145,6 +150,33 @@ Get the chromosomes length
 \preformatted{mySpec$getChrLength()
 mySpec$getChrLength(2)
 mySpec$getChrLength("Chr3")
+}
+\if{html}{\out{</div>}}
+
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getChrLengthCm"></a>}}
+\if{latex}{\out{\hypertarget{method-getChrLengthCm}{}}}
+\subsection{Method \code{getChrLengthCm()}}{
+Get the chromosomes length in centimorgans
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{specie$getChrLengthCm(chr = NA)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{chr}}{[str or numeric] chromosome ids}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{mySpec$getChrLengthCm()
+mySpec$getChrLengthCm(2)
+mySpec$getChrLengthCm("Chr3")
 }
 \if{html}{\out{</div>}}
 

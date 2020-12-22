@@ -24,8 +24,8 @@ Selection according to breeding values
 mySpec <- specie$new(specName = "Statisticae exempli",
                      nChr = 10,
                      lchr = 1e6,
-                     ploidy = 2,
-                     recombRate = 3/1e6)
+                     lchrCm = 100,
+                     ploidy = 2)
 SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord, specie = mySpec)
 initPop <- createPop(geno = exampleData$genotypes,
                      SNPinfo = SNPs,

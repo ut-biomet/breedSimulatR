@@ -5,32 +5,7 @@
 # Definition of phenotyper class
 
 
-
-# Iwata example -----------------------------------------------------------
-
-# Assume genetic effects of qtns. The effects are assumed to follow an
-# exponential distribution here.
-
-# lmbd <- 1.0
-# is.qtn <- substr(colnames(initPop$genoMat), 1, 3) == "qtn"
-# qtn.genotypes <- initPop$genoMat[, is.qtn]
-# qtn.eff <- rexp(n.qtn, lmbd) * sample(c(-1, 1), n.qtn, replace = T)
-#
-#
-# # Simulate genotypic values and phenotypic values.
-#
-# he <- 0.5  # heritability intended
-# g <- qtn.genotypes %*% qtn.eff
-# var.e <- var(g) * ((1 - he) / he)
-# e <- rnorm(length(g), sd = sqrt(var.e))
-# y <- g + e
-# (var(g) / var(y))  # heritabilty realized
-#
-# g <- a + d + i
-# y <- g + e
-
-
-# trait -------------------------------------------------------------------
+# trait ----
 
 #' R6 class representing a phenotypic trait
 #'
@@ -44,7 +19,7 @@ trait <- R6::R6Class(
   "trait",
   lock_objects = FALSE,
   public = list(
-    # Public fields ####
+    ## Public fields ####
     #' @field name [string] Name of the trait
     name = NULL,
     #' @field class "qualitative" or "quantitative" trait ("qualitative" not
@@ -58,7 +33,7 @@ trait <- R6::R6Class(
     qtnEff = NULL,
 
 
-    # Public methods ####
+    ## Public methods ####
     #' @description Create a new trait object.
     #' @param name [character] name of the trait
     #' @param class "quantitative" or "qualitative"
@@ -77,9 +52,9 @@ trait <- R6::R6Class(
     #' @examples
     #' mySpec <- specie$new(nChr = 10,
     #'                      lchr = 10^6,
+    #'                      lchrCm = 100,
     #'                      specName = "Geneticae Exempli",
-    #'                      ploidy = 2,
-    #'                      recombRate = 3/10^6)
+    #'                      ploidy = 2)
     #' SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
     #'                     specie = mySpec)
     #'
@@ -187,7 +162,7 @@ trait <- R6::R6Class(
 
 
 
-# phenotyper -----------------------------------------------------------------
+# phenotyper ----
 
 # TODO find better name than "phenotyper"
 
@@ -202,7 +177,7 @@ phenotyper <- R6::R6Class(
   "phenotyper",
   lock_objects = FALSE,
   public = list(
-    # Public Fields ####
+    ## Public Fields ####
     #' @field name [character] name of the phenotyper
     name = "Pheno lab",
     #' @field plotCost [numeric] cost for phenotyping one plot
@@ -215,7 +190,7 @@ phenotyper <- R6::R6Class(
     #' for each trait
     ve = 1,
 
-    # Public Methods ####
+    ## Public Methods ####
     #' @description Create a new phenotyper object.
     #' @param name [character] name of the phenotyper
     #' @param traits [trait or list] of phenotyped traits
@@ -231,9 +206,9 @@ phenotyper <- R6::R6Class(
     #' @examples
     #' mySpec <- specie$new(nChr = 10,
     #'                     lchr = 10^6,
+    #'                     lchrCm = 100,
     #'                     specName = "Geneticae Exempli",
-    #'                     ploidy = 2,
-    #'                     recombRate = 3/10^6)
+    #'                     ploidy = 2)
     #' SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
     #'                    specie = mySpec)
     #' example_pop <- createPop(geno = exampleData$genotypes,
@@ -426,9 +401,13 @@ phenotyper <- R6::R6Class(
     #' pheno2 <- phenoLab2$trial(example_pop, rep = 3, offset = c(-5, 0))
     #' pheno2$cost
     #' summary(pheno2$data)
+    #'
+    #' pheno3 <- phenoLab2$trial(example_pop,
+    #'                           rep = round(runif(example_pop$nInd, 1, 3)),
+    #'                           offset = c(-5, 0))
+    #' pheno3$cost
+    #' summary(pheno3$data)
     trial = function(pop, rep = 1, offset = 0) {
-      # TODO add "inds" parameter to only phenotype the corresponding
-      # individuals of the population
 
       if (class(pop)[1] != "population") {
         stop('pop should be an object of class "population"')
@@ -437,13 +416,14 @@ phenotyper <- R6::R6Class(
       if (!is.numeric(rep)) {
         stop('rep should be a numeric vector')
       }
-      # if (length(rep) != 1 && length(rep) != pop$nInd) {
-      #   stop('length(rep) should be equal to 1 or to the number of
-      #   individuals in the population')
-      # } TODO
-      if (length(rep) != 1) {
-        stop('length(rep) should be equal to 1')
+      if (length(rep) != 1 && length(rep) != pop$nInd) {
+        stop('length(rep) should be equal to 1 or to the number of
+        individuals in the population')
       }
+      if (length(rep) == 1) {
+        rep <- base::rep(rep, pop$nInd)
+      }
+
       if (any(rep < 0)) {
         stop('all values of rep should be higher or equal than 0')
       }
@@ -452,9 +432,8 @@ phenotyper <- R6::R6Class(
         stop('"offset" should be a numeric value')
       }
       if (length(offset) == 1) {
-        offset <- rep(offset, length(self$traits))
-      }
-      else if (length(offset) != length(self$traits)) {
+        offset <- base::rep(offset, length(self$traits))
+      } else if (length(offset) != length(self$traits)) {
         stop('"length(offset)" should be equal to the number of traits')
       }
       if (is.null(names(offset))) {
@@ -465,21 +444,28 @@ phenotyper <- R6::R6Class(
         offset <- offset[private$traitsNames]
       }
 
-      cost <- self$plotCost * pop$nInd * rep
-
-      pheno <- sapply(self$traits, function(trait) {
+      cost <- self$plotCost * sum(rep)
+      pheno <- matrix(sapply(self$traits, function(trait) {
         mu <- self$mu[trait$name]
         sigma <- sqrt(self$ve[trait$name])
 
-        gv <- base::rep(trait$gv(pop), each = rep)
-        e <- rnorm(pop$nInd * rep, sd = sigma)
+        gv <- base::rep(trait$gv(pop), rep)
+        e <- rnorm(sum(rep), sd = sigma)
 
         matrix(mu + gv + e + offset[trait$name], ncol = 1)
-      })
-
-      dta <- data.frame(ind = base::rep(row.names(pop$genoMat), each = rep),
+      }),
+      nrow = sum(rep))
+      colnames(pheno) <- names(self$traits)
+      dta <- data.frame(ind = base::rep(row.names(pop$genoMat), rep),
                         pheno,
-                        rep = base::rep(seq(rep), pop$nInd),
+                        rep = unlist(lapply(rep, function(x){
+                          if (x != 0) {
+                            out <- seq(x)
+                          } else {
+                            out <- c()
+                          }
+                          out
+                        })),
                         phenotyper = self$name)
 
       list(
@@ -506,7 +492,7 @@ phenotyper <- R6::R6Class(
     }
   ),
   private = list(
-    # Private Fields ####
+    ## Private Fields ####
     # @field traitsNames [character] names of the traits
     traitsNames = NULL
   )

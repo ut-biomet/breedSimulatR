@@ -23,16 +23,17 @@ Proceed several crosses
 # create specie:
 mySpec <- specie$new(nChr = 3,
                      lchr = c(100, 150, 200),
-                     recombRate = 0.006,
+                     lchrCm = 100,
                      verbose = FALSE)
 
 # simulate SNP:
 SNPcoord <- data.frame(chr = c(rep("Chr1", 3),
                                rep("Chr2", 4),
                                rep("Chr3", 5)),
-                       pos = c(sample(100, 3),
+                       physPos = c(sample(100, 3),
                                sample(150, 4),
                                sample(200, 5)),
+                       linkMapPos = NA,
                        SNPid = sprintf(fmt = paste0("SNP\%0", 2,"i"),
                                        1:(3 + 4 + 5)))
 

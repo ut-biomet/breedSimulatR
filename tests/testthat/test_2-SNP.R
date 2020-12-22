@@ -17,15 +17,16 @@ if (interactive()) {
 
 
 #### TESTS ####
-test_that("SNPinfo initialization", {
+test_that("SNPinfo initialization without lmap", {
   #### Initialisation:
   mySpec <- create_spec()
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(lapply(seq(mySpec$nChr),
+  physPos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
-                         sample(mySpec$lchr[chr], nMarkers[chr])
+                         sample(mySpec$lchr[chr], nMarkers[chr],
+                                replace = FALSE)
                        }))
 
   # generate arbitrary SNPid
@@ -33,7 +34,7 @@ test_that("SNPinfo initialization", {
 
   # SNP coordinates data.frame
   SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
-                         pos = pos,
+                         physPos = physPos,
                          SNPid = SNPid)
 
   #### Tests:
@@ -51,7 +52,53 @@ test_that("SNPinfo initialization", {
   # check SNPs$SNPcoord is sorted increasingly for all chromosomes (needed for
   # the function "findInterval" in individual's generateGametes method)
   for (chr in mySpec$chrNames) {
-    expect_true(!is.unsorted(SNPs$SNPcoord[SNPs$SNPcoord$chr == chr, "pos"]))
+    expect_true(!is.unsorted(SNPs$SNPcoord[SNPs$SNPcoord$chr == chr, "physPos"]))
+  }
+
+})
+
+test_that("SNPinfo initialization with lmap", {
+  #### Initialisation:
+  mySpec <- create_spec()
+  nMarkers <- round(mySpec$lchr/10)
+
+  # generate positions
+  SNPcoord <- do.call(rbind,lapply(seq(mySpec$nChr),
+                           function(chr){
+                             physPos <- sample(mySpec$lchr[chr], nMarkers[chr],
+                                    replace = FALSE)
+                             linkMapPos <- .simulLinkMapPos(physPos,
+                                                    mySpec$lchr[chr],
+                                                    mySpec$lchrCm[chr],
+                                                    b1 = 10, b2 = 10)
+                             data.frame(physPos,linkMapPos)
+                           }))
+
+  # generate arbitrary SNPid
+  SNPcoord$SNPid <- .charSeq("SNP", sample(sum(nMarkers)*50, sum(nMarkers)))
+
+  # SNP coordinates data.frame
+  SNPcoord$chr <- rep(mySpec$chrNames, times = nMarkers)
+
+  #### Tests:
+  # create SNPinfo object
+  expect_error({SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)},
+               NA)
+
+  expect_identical(SNPs$specie, mySpec)
+  expect_is(SNPs$SNPcoord, "data.frame")
+  expect_is(SNPs$SNPcoordList, "list")
+  expect_equal(length(SNPs$SNPcoordList), mySpec$nChr)
+  expect_identical(names(SNPs$SNPcoordList), mySpec$chrNames)
+  expect_equal(SNPs$nSNP(), sum(nMarkers))
+
+  # check SNPs$SNPcoord is sorted increasingly for all chromosomes (needed for
+  # the function "findInterval" in individual's generateGametes method)
+  for (chr in mySpec$chrNames) {
+    expect_true(!is.unsorted(SNPs$SNPcoord[SNPs$SNPcoord$chr == chr, "physPos"]))
+  }
+  for (chr in mySpec$chrNames) {
+    expect_true(!is.unsorted(SNPs$SNPcoord[SNPs$SNPcoord$chr == chr, "linkMapPos"]))
   }
 
 })
@@ -62,7 +109,7 @@ test_that("SNPinfo errors", {
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(lapply(seq(mySpec$nChr),
+  physPos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))
@@ -72,14 +119,14 @@ test_that("SNPinfo errors", {
   # Test differents chromosome names than those in specie
   chrNames <- c("toto", mySpec$chrNames[-1])
   SNPcoord <- data.frame(chr = rep(chrNames, times = nMarkers),
-                         pos = pos,
+                         physPos = physPos,
                          SNPid = SNPid)
   expect_error({SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)},
                paste('"Chromosomes\'names specified in "SNPcoord"',
                      'do not match those specified in "specie"'))
 
   SNPcoord <- data.frame(chr = rep(chrNames, times = nMarkers),
-                         pos = pos,
+                         physPos = physPos,
                          SNPid = SNPid,
                          stringsAsFactors = FALSE)
   expect_error({SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)},
@@ -97,7 +144,7 @@ test_that("SNPinfo stringAsFactor",{
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(lapply(seq(mySpec$nChr),
+  physPos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))
@@ -107,11 +154,13 @@ test_that("SNPinfo stringAsFactor",{
 
   # SNP coordinates data.frame
   SNPcoord_SAF_T <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
-                         pos = pos,
+                         physPos = physPos,
+                         linkMapPos = NA,
                          SNPid = SNPid,
                          stringsAsFactors = TRUE)
   SNPcoord_SAF_F <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
-                               pos = pos,
+                               physPos = physPos,
+                               linkMapPos = NA,
                                SNPid = SNPid,
                                stringsAsFactors = FALSE)
 
@@ -120,7 +169,8 @@ test_that("SNPinfo stringAsFactor",{
   SNPs_SAF_F <- SNPinfo$new(SNPcoord = SNPcoord_SAF_F, specie = mySpec)
 
   #### Tests:
-  expect_error(expect_identical(SNPs_SAF_T$SNPcoord, SNPcoord_SAF_T))
+  expect_error(expect_identical(SNPs_SAF_T$SNPcoord, SNPcoord_SAF_F))
+  expect_error(expect_identical(SNPs_SAF_F$SNPcoord, SNPcoord_SAF_F))
   expect_equal(summary(SNPs_SAF_T$SNPcoord), summary(SNPcoord_SAF_F))
   expect_equal(SNPs_SAF_T, SNPs_SAF_F)
 })
@@ -131,7 +181,7 @@ test_that("SNPinfo nSNP method", {
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(lapply(seq(mySpec$nChr),
+  physPos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))
@@ -141,7 +191,7 @@ test_that("SNPinfo nSNP method", {
 
   # SNP coordinates data.frame
   SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
-                         pos = pos,
+                         physPos = physPos,
                          SNPid = SNPid)
 
   # create SNPinfo object
@@ -162,7 +212,7 @@ test_that("SNPinfo getInfo method", {
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(lapply(seq(mySpec$nChr),
+  physPos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))
@@ -172,7 +222,7 @@ test_that("SNPinfo getInfo method", {
 
   # SNP coordinates data.frame
   SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
-                         pos = pos,
+                         physPos = physPos,
                          SNPid = SNPid)
 
   # create SNPinfo object
@@ -195,7 +245,7 @@ test_that("SNPinfo plot method", {
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(lapply(seq(mySpec$nChr),
+  physPos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))
@@ -205,7 +255,7 @@ test_that("SNPinfo plot method", {
 
   # SNP coordinates data.frame
   SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
-                         pos = pos,
+                         physPos = physPos,
                          SNPid = SNPid)
 
   # create SNPinfo object
@@ -224,7 +274,7 @@ test_that("SNPinfo's \"print\" methods", {
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
-  pos <- unlist(lapply(seq(mySpec$nChr),
+  physPos <- unlist(lapply(seq(mySpec$nChr),
                        function(chr){
                          sample(mySpec$lchr[chr], nMarkers[chr])
                        }))
@@ -234,7 +284,7 @@ test_that("SNPinfo's \"print\" methods", {
 
   # SNP coordinates data.frame
   SNPcoord <- data.frame(chr = rep(mySpec$chrNames, times = nMarkers),
-                         pos = pos,
+                         physPos = physPos,
                          SNPid = SNPid)
 
   # create SNPinfo object

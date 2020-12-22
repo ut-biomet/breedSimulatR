@@ -19,7 +19,9 @@ if (interactive()) {
 
 #### TESTS  traits ####
 test_that("quant trait initialisation", {
-  mySpec <- create_spec()
+  nChr <- round(runif(1, 1, 10))
+  mySpec <- create_spec(nChr = nChr,
+                        lchr = round(pmax(rnorm(nChr, 450, 50), 301)))
   SNPs <- create_SNP(mySpec, nMarker = 300)
 
   expect_error({
@@ -132,15 +134,63 @@ test_that("phenotyper initialisation", {
     phenoLab2$he(myPop)
   }, NA)
 
+  refColnames <-   c("ind", "myTrait1", "myTrait2",
+                     "myTrait3", "rep", "phenotyper")
   expect_error({
     pheno <- phenoLab1$trial(myPop, rep = 2, offset = 4)
   }, NA)
+  expect_equal(nrow(pheno$data), myPop$nInd * 2)
+  expect_equal(ncol(pheno$data), 6)
+  expect_equal(colnames(pheno$data), refColnames)
+
   expect_error({
-    phenoLab2$trial(myPop, rep = 2, offset = c(-3, -4, 5))
+    pheno2 <- phenoLab2$trial(myPop, rep = 2, offset = c(-3, -4, 5))
   }, NA)
+  expect_equal(nrow(pheno2$data), myPop$nInd * 2)
+  expect_equal(ncol(pheno2$data), 6)
+  expect_equal(colnames(pheno2$data), refColnames)
+
+
   expect_error({
-    phenoLab1$trial(myPop, rep = round(runif(myPop$nInd, 1, 3)), offset = 4)
-  })
+    rep <- round(runif(myPop$nInd, 1, 3))
+    pheno3 <- phenoLab1$trial(myPop, rep = rep, offset = 4)
+  }, NA)
+  expect_equal(nrow(pheno3$data), sum(rep))
+  expect_equal(ncol(pheno3$data), 6)
+  expect_equal(colnames(pheno3$data), refColnames)
+
+
+  expect_error({
+    rep <- round(runif(myPop$nInd, 1, 3))
+    pheno4 <- phenoLab1$trial(myPop,
+                    rep = rep,
+                    offset = c(-3, -4, 5))
+  }, NA)
+  expect_equal(nrow(pheno4$data), sum(rep))
+  expect_equal(ncol(pheno4$data), 6)
+  expect_equal(colnames(pheno4$data), refColnames)
+
+
+  expect_error({
+    rep <- c(0, round(runif(myPop$nInd - 1, 0, 3)))
+    pheno5 <- phenoLab1$trial(myPop,
+                              rep = rep,
+                              offset = c(-3, -4, 5))
+  }, NA)
+  expect_equal(nrow(pheno5$data), sum(rep))
+  expect_equal(ncol(pheno5$data), 6)
+  expect_equal(colnames(pheno5$data), refColnames)
+
+  # one individual
+  expect_error({
+    rep <- c(1, rep(0, myPop$nInd - 1))
+    pheno6 <- phenoLab1$trial(myPop,
+                              rep = rep,
+                              offset = c(-3, -4, 5))
+  }, NA)
+  expect_equal(nrow(pheno6$data), sum(rep))
+  expect_equal(ncol(pheno6$data), 6)
+  expect_equal(colnames(pheno6$data), refColnames)
 
 
   expect_equal(names(pheno$data),
