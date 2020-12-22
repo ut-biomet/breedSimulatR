@@ -22,7 +22,6 @@ Depends:
     R (>= 3.2.0)
 Imports: 
     base,
-    plotly,
     R6,
     stats
 Suggests:
@@ -32,6 +31,7 @@ Suggests:
     pkgdown,
     rmarkdown,
     roxygen2,
+    plotly,
     spelling,
     testthat
 VignetteBuilder: 

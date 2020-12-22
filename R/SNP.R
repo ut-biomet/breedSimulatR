@@ -202,32 +202,35 @@ SNPinfo <- R6::R6Class(
     #' plot chromosome map using the \pkg{plotly} package
     #' @param alpha transparency see \link[plotly]{plot_ly}
     #'
-    #' @import plotly
-    #'
     #' @examples
     #' SNPs$plot(alpha = 1)
     plot = function(alpha = 0.01) {
-      ends <- self$specie$lchr
+      if (requireNamespace("plotly", quietly=TRUE)) {
+        ends <- self$specie$lchr
 
-      plotly::plot_ly(data = self$SNPcoord,
-                      x = ~chr,
-                      y = ~physPos,
-                      type = "scatter",
-                      mode = "markers",
-                      alpha = alpha,
-                      name = "SNPs",
-                      hoverinfo = 'text',
-                      text = apply(self$SNPcoord, 1, function(l) {
-                        paste(names(l), ":", l, collapse = "\n")
-                      })) %>%
-        plotly::add_markers(x = rep(names(ends), 2),
-                            y = c(ends, rep(0,length(ends))),
-                            alpha = 1,
-                            name = "Chromosome's edges",
-                            hoverinfo = 'text',
-                            text = paste(rep(names(ends), 2),
-                                         ": length =",
-                                         rep(ends, 2)))
+        p <- plotly::plot_ly(data = self$SNPcoord,
+                             x = ~chr,
+                             y = ~physPos,
+                             type = "scatter",
+                             mode = "markers",
+                             alpha = alpha,
+                             name = "SNPs",
+                             hoverinfo = 'text',
+                             text = apply(self$SNPcoord, 1, function(l) {
+                               paste(names(l), ":", l, collapse = "\n")
+                             }))
+        p <- plotly::add_markers(p,
+                                 x = rep(names(ends), 2),
+                                 y = c(ends, rep(0,length(ends))),
+                                 alpha = 1,
+                                 name = "Chromosome's edges",
+                                 hoverinfo = 'text',
+                                 text = paste(rep(names(ends), 2),
+                                              ": length =",
+                                              rep(ends, 2)))
+      } else {
+        stop("The package 'plotly' is needed to use the method 'plot'.")
+      }
     }
   )
 )
