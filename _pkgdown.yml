@@ -37,14 +37,18 @@ reference:
   - title: Utils functions
     contents:
       - "`createPop`"
-  - title: Crossing functions
+  - title: Phenotyping functions
     contents:
-      - "`makeSingleCross`"
-      - "`makeCrosses`"
+      - "`trait`"
+      - "`phenotyper`"
   - title: Selection functions
     contents:
       - '`selectBV`'
       - '`selectWBV`'
+  - title: Crossing functions
+    contents:
+      - "`makeSingleCross`"
+      - "`makeCrosses`"
   - title: Mating functions
     contents:
       - '`randomMate`'

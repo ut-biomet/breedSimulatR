@@ -105,7 +105,7 @@ individual <- R6::R6Class(
           chrLen <- self$specie$lchr[chrName]
           chrLenCm <- self$specie$lchrCm[chrName]
 
-          # number of recombination locations:
+          # number of crossing-overs locations:
           nRecomb <- rpois(1, chrLenCm/100)
 
           g <- (runif(1) < 0.5) + 1
@@ -116,20 +116,20 @@ individual <- R6::R6Class(
 
 
 
-          # draw recombination locations
+          # draw crossing-overs locations
           if (is.na(SNPcoord$linkMapPos[1])) {
             # if SNP's linkMap positions is unknown
-            # draw recombination locations uniformly in physical length range:
+            # draw crossing-overs locations uniformly in physical length range:
             Rpos <- runif(nRecomb, 0, chrLen)
-            # get id of the recombination positions
+            # get id of the crossing-overs positions
             ids <- (c(0,
                       sort(base::findInterval(Rpos, SNPcoord$physPos)),
                       nrow(SNPcoord))
             )
           } else {
-            # draw recombination locations uniformly in chrLenCm range:
+            # draw crossing-overs locations uniformly in chrLenCm range:
             RposCm <- runif(nRecomb, 0, chrLenCm)
-            # get id of the recombination positions
+            # get id of the crossing-overs positions
             ids <- (c(0,
                       sort(base::findInterval(RposCm, SNPcoord$linkMapPos)),
                       nrow(SNPcoord))
@@ -139,7 +139,7 @@ individual <- R6::R6Class(
           gamHaplo <- integer(ncol(haplo))
           for (i in seq_len(length(ids) - 1)) {
             if (ids[i] == ids[i + 1]) {
-              # several recombinations between SNPs
+              # several crossing-overs between SNPs
               g <- -g + 3
               next
             }

@@ -26,8 +26,6 @@ knitr::opts_chunk$set(
 
 # breedSimulatR 
 
-
-
 <!-- badges: start -->
 [![pipeline status](https://gitlab.com/juliendiot42/breedSimulatR/badges/master/pipeline.svg)](https://gitlab.com/juliendiot42/breedSimulatR/commits/master)
 [![codecov](https://codecov.io/gh/ut-biomet/breedSimulatR/branch/master/graph/badge.svg?token=4Uxp1ySLIn)](https://codecov.io/gh/ut-biomet/breedSimulatR)
@@ -39,6 +37,8 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 R package providing classes and functions to simulate breeding schemes.
+
+The associated web-site for this package can be found at: https://ut-biomet.github.io/breedSimulatR/
 
 ## Installation
 

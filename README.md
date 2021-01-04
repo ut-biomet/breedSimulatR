@@ -21,6 +21,9 @@ status](https://github.com/ut-biomet/breedSimulatR/workflows/R-CMD-check/badge.s
 
 R package providing classes and functions to simulate breeding schemes.
 
+The associated web-site for this package can be found at:
+<https://ut-biomet.github.io/breedSimulatR/>
+
 ## Installation
 
 :octocat: You can install `breedSimulatR` from
@@ -158,11 +161,11 @@ phenolab <- phenotyper$new(name = "Pheno lab", traits = list(weight, height), pl
 pheno <- phenolab$trial(pop = initPop, rep = 4)
 head(pheno$data)
 #>        ind    Weight   Height rep phenotyper
-#> 1 Coll0001  92.95343 74.58895   1  Pheno lab
-#> 2 Coll0001  95.25723 77.01605   2  Pheno lab
-#> 3 Coll0001 106.49726 76.35178   3  Pheno lab
-#> 4 Coll0001  89.47586 75.33123   4  Pheno lab
-#> 5 Coll0002 105.92757 82.12443   1  Pheno lab
+#> 1 Coll0001  74.04406 80.86103   1  Pheno lab
+#> 2 Coll0001 101.04694 70.97162   2  Pheno lab
+#> 3 Coll0001  95.92415 83.44197   3  Pheno lab
+#> 4 Coll0001 107.65019 83.37849   4  Pheno lab
+#> 5 Coll0002  83.41513 48.97785   1  Pheno lab
 #>  [ reached 'max' / getOption("max.print") -- omitted 1 rows ]
 print(pheno$cost)
 #> [1] 60000
@@ -198,12 +201,12 @@ exampleData$snpEffects
 
 (crossTable <- randomMate(inds = selectedInds, n = 120, names = "generation_1"))
 #>       ind1     ind2 n            names
-#> 1 Coll0079 Coll0008 1 generation_1-001
-#> 2 Coll0008 Coll0045 1 generation_1-002
-#> 3 Coll0074 Coll0097 1 generation_1-003
-#> 4 Coll0045 Coll0097 1 generation_1-004
-#> 5 Coll0068 Coll0068 1 generation_1-005
-#> 6 Coll0045 Coll0046 1 generation_1-006
+#> 1 Coll0002 Coll0008 1 generation_1-001
+#> 2 Coll0045 Coll0020 1 generation_1-002
+#> 3 Coll0046 Coll0068 1 generation_1-003
+#> 4 Coll0016 Coll0097 1 generation_1-004
+#> 5 Coll0008 Coll0008 1 generation_1-005
+#> 6 Coll0016 Coll0016 1 generation_1-006
 #>  [ reached 'max' / getOption("max.print") -- omitted 114 rows ]
 ```
 
@@ -282,12 +285,12 @@ packages:
 
 <ul>
 <li>
-<b> plotly </b>
+<b> base </b>
 <ul>
 <li>
-Sievert C (2020).<em>Interactive Web-Based Data Visualization with R,
-plotly, and shiny</em>.Chapman and Hall/CRC.ISBN 9781138331457,
-<a href="https://plotly-r.com">https://plotly-r.com</a>.
+R Core Team (2020).<em>R: A Language and Environment for Statistical
+Computing</em>.R Foundation for Statistical Computing, Vienna,
+Austria.<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </li>
 </ul>
 </li>
@@ -298,6 +301,16 @@ plotly, and shiny</em>.Chapman and Hall/CRC.ISBN 9781138331457,
 Chang W (2020).<em>R6: Encapsulated Classes with Reference
 Semantics</em>.R package version 2.5.0,
 <a href="https://CRAN.R-project.org/package=R6">https://CRAN.R-project.org/package=R6</a>.
+</li>
+</ul>
+</li>
+<li>
+<b> stats </b>
+<ul>
+<li>
+R Core Team (2020).<em>R: A Language and Environment for Statistical
+Computing</em>.R Foundation for Statistical Computing, Vienna,
+Austria.<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </li>
 </ul>
 </li>
@@ -316,7 +329,7 @@ version 3.5.1,
 <ul>
 <li>
 Wickham H, Hester J, Chang W (2020).<em>devtools: Tools to Make
-Developing R Packages Easier</em>.R package version 2.3.1,
+Developing R Packages Easier</em>.R package version 2.3.2,
 <a href="https://CRAN.R-project.org/package=devtools">https://CRAN.R-project.org/package=devtools</a>.
 </li>
 </ul>
@@ -381,6 +394,16 @@ Cookbook</em>.Chapman and Hall/CRC, Boca Raton, Florida.ISBN
 Wickham H, Danenberg P, Csárdi G, Eugster M (2020).<em>roxygen2: In-Line
 Documentation for R</em>.R package version 7.1.1,
 <a href="https://CRAN.R-project.org/package=roxygen2">https://CRAN.R-project.org/package=roxygen2</a>.
+</li>
+</ul>
+</li>
+<li>
+<b> plotly </b>
+<ul>
+<li>
+Sievert C (2020).<em>Interactive Web-Based Data Visualization with R,
+plotly, and shiny</em>.Chapman and Hall/CRC.ISBN 9781138331457,
+<a href="https://plotly-r.com">https://plotly-r.com</a>.
 </li>
 </ul>
 </li>
