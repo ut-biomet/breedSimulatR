@@ -76,6 +76,7 @@
 <!-- badges: start -->
 
 <p>R package providing classes and functions to simulate breeding schemes.</p>
+<p>The associated web-site for this package can be found at: <a href="https://ut-biomet.github.io/breedSimulatR/" class="uri">https://ut-biomet.github.io/breedSimulatR/</a></p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -189,11 +190,11 @@
 <span class="va">pheno</span> <span class="op">&lt;-</span> <span class="va">phenolab</span><span class="op">$</span><span class="fu">trial</span><span class="op">(</span>pop <span class="op">=</span> <span class="va">initPop</span>, rep <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">pheno</span><span class="op">$</span><span class="va">data</span><span class="op">)</span>
 <span class="co">#&gt;        ind    Weight   Height rep phenotyper</span>
-<span class="co">#&gt; 1 Coll0001  92.95343 74.58895   1  Pheno lab</span>
-<span class="co">#&gt; 2 Coll0001  95.25723 77.01605   2  Pheno lab</span>
-<span class="co">#&gt; 3 Coll0001 106.49726 76.35178   3  Pheno lab</span>
-<span class="co">#&gt; 4 Coll0001  89.47586 75.33123   4  Pheno lab</span>
-<span class="co">#&gt; 5 Coll0002 105.92757 82.12443   1  Pheno lab</span>
+<span class="co">#&gt; 1 Coll0001  74.04406 80.86103   1  Pheno lab</span>
+<span class="co">#&gt; 2 Coll0001 101.04694 70.97162   2  Pheno lab</span>
+<span class="co">#&gt; 3 Coll0001  95.92415 83.44197   3  Pheno lab</span>
+<span class="co">#&gt; 4 Coll0001 107.65019 83.37849   4  Pheno lab</span>
+<span class="co">#&gt; 5 Coll0002  83.41513 48.97785   1  Pheno lab</span>
 <span class="co">#&gt;  [ reached 'max' / getOption("max.print") -- omitted 1 rows ]</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">pheno</span><span class="op">$</span><span class="va">cost</span><span class="op">)</span>
 <span class="co">#&gt; [1] 60000</span></code></pre></div>
@@ -223,12 +224,12 @@
 
 <span class="op">(</span><span class="va">crossTable</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/randomMate.html">randomMate</a></span><span class="op">(</span>inds <span class="op">=</span> <span class="va">selectedInds</span>, n <span class="op">=</span> <span class="fl">120</span>, names <span class="op">=</span> <span class="st">"generation_1"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;       ind1     ind2 n            names</span>
-<span class="co">#&gt; 1 Coll0079 Coll0008 1 generation_1-001</span>
-<span class="co">#&gt; 2 Coll0008 Coll0045 1 generation_1-002</span>
-<span class="co">#&gt; 3 Coll0074 Coll0097 1 generation_1-003</span>
-<span class="co">#&gt; 4 Coll0045 Coll0097 1 generation_1-004</span>
-<span class="co">#&gt; 5 Coll0068 Coll0068 1 generation_1-005</span>
-<span class="co">#&gt; 6 Coll0045 Coll0046 1 generation_1-006</span>
+<span class="co">#&gt; 1 Coll0002 Coll0008 1 generation_1-001</span>
+<span class="co">#&gt; 2 Coll0045 Coll0020 1 generation_1-002</span>
+<span class="co">#&gt; 3 Coll0046 Coll0068 1 generation_1-003</span>
+<span class="co">#&gt; 4 Coll0016 Coll0097 1 generation_1-004</span>
+<span class="co">#&gt; 5 Coll0008 Coll0008 1 generation_1-005</span>
+<span class="co">#&gt; 6 Coll0016 Coll0016 1 generation_1-006</span>
 <span class="co">#&gt;  [ reached 'max' / getOption("max.print") -- omitted 114 rows ]</span></code></pre></div>
 <p>We can now generate the offspring:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -288,10 +289,10 @@ R Core Team (2020).<em>R: A Language and Environment for Statistical Computing</
 <p><code>breedSimulatR</code> package or its development required the following R packages:</p>
 <ul>
 <li>
-<b> plotly </b>
+<b> base </b>
 <ul>
 <li>
-Sievert C (2020).<em>Interactive Web-Based Data Visualization with R, plotly, and shiny</em>.Chapman and Hall/CRC.ISBN 9781138331457, <a href="https://plotly-r.com">https://plotly-r.com</a>.
+R Core Team (2020).<em>R: A Language and Environment for Statistical Computing</em>.R Foundation for Statistical Computing, Vienna, Austria.<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </li>
 </ul>
 </li>
@@ -300,6 +301,14 @@ Sievert C (2020).<em>Interactive Web-Based Data Visualization with R, plotly, an
 <ul>
 <li>
 Chang W (2020).<em>R6: Encapsulated Classes with Reference Semantics</em>.R package version 2.5.0, <a href="https://CRAN.R-project.org/package=R6">https://CRAN.R-project.org/package=R6</a>.
+</li>
+</ul>
+</li>
+<li>
+<b> stats </b>
+<ul>
+<li>
+R Core Team (2020).<em>R: A Language and Environment for Statistical Computing</em>.R Foundation for Statistical Computing, Vienna, Austria.<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </li>
 </ul>
 </li>
@@ -315,7 +324,7 @@ Hester J (2020).<em>covr: Test Coverage for Packages</em>.R package version 3.5.
 <b> devtools </b>
 <ul>
 <li>
-Wickham H, Hester J, Chang W (2020).<em>devtools: Tools to Make Developing R Packages Easier</em>.R package version 2.3.1, <a href="https://CRAN.R-project.org/package=devtools">https://CRAN.R-project.org/package=devtools</a>.
+Wickham H, Hester J, Chang W (2020).<em>devtools: Tools to Make Developing R Packages Easier</em>.R package version 2.3.2, <a href="https://CRAN.R-project.org/package=devtools">https://CRAN.R-project.org/package=devtools</a>.
 </li>
 </ul>
 </li>
@@ -364,6 +373,14 @@ Wickham H, Danenberg P, Csárdi G, Eugster M (2020).<em>roxygen2: In-Line Docume
 </ul>
 </li>
 <li>
+<b> plotly </b>
+<ul>
+<li>
+Sievert C (2020).<em>Interactive Web-Based Data Visualization with R, plotly, and shiny</em>.Chapman and Hall/CRC.ISBN 9781138331457, <a href="https://plotly-r.com">https://plotly-r.com</a>.
+</li>
+</ul>
+</li>
+<li>
 <b> spelling </b>
 <ul>
 <li>
@@ -392,9 +409,9 @@ Flutre T, Diot J, and David J (2019). <em>PlantBreedGame</em>: A Serious Game th
 </li>
 </ul>
 </div>
-<div id="license-and-copyright-copyright" class="section level2">
+<div id="license-and-copyright-️" class="section level2">
 <h2 class="hasAnchor">
-<a href="#license-and-copyright-copyright" class="anchor"></a>License and copyright <span class="emoji" data-emoji="copyright">©️</span>
+<a href="#license-and-copyright-%EF%B8%8F" class="anchor"></a>License and copyright <span class="emoji" data-emoji="copyright">©️</span>
 </h2>
 <p>The <code>breedSimulatR</code> package as a whole is licensed under the MIT. See the <a href="LICENSE">LICENSE</a> file for more details.</p>
 <p><span class="emoji" data-emoji="copyright">©️</span> The copyright holder is <a href="https://www.u-tokyo.ac.jp/en/">The University of Tokyo</a>, Laboratory of Biometry and Bioinformatics.</p>
@@ -449,7 +466,7 @@ Flutre T, Diot J, and David J (2019). <em>PlantBreedGame</em>: A Serious Game th
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

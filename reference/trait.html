@@ -240,13 +240,14 @@ nucleotides names implied in the trait</p></dd>
                      lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
                      specName <span class='op'>=</span> <span class='st'>"Geneticae Exempli"</span>,
                      ploidy <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in .subset2(public_bind_env, "initialize")(...): unused argument (lchrCm = 100)</span></div><div class='input'><span class='va'>SNPs</span> <span class='op'>&lt;-</span> <span class='va'><a href='SNPinfo.html'>SNPinfo</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>SNPcoord <span class='op'>=</span> <span class='va'>exampleData</span><span class='op'>$</span><span class='va'>snpCoord</span>,
+</div><div class='output co'>#&gt; A new species has emerged: Geneticae Exempli !
+#&gt; </div><div class='input'><span class='va'>SNPs</span> <span class='op'>&lt;-</span> <span class='va'><a href='SNPinfo.html'>SNPinfo</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>SNPcoord <span class='op'>=</span> <span class='va'>exampleData</span><span class='op'>$</span><span class='va'>snpCoord</span>,
                     specie <span class='op'>=</span> <span class='va'>mySpec</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in .subset2(public_bind_env, "initialize")(...): object 'mySpec' not found</span></div><div class='input'>
+
 <span class='va'>myTrait</span> <span class='op'>&lt;-</span> <span class='va'>trait</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"myTrait"</span>,
                      qtn <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>SNPs</span><span class='op'>$</span><span class='va'>SNPcoord</span><span class='op'>$</span><span class='va'>SNPid</span>, <span class='fl'>100</span><span class='op'>)</span>,
                      qtnEff <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span>, sd <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in sample(SNPs$SNPcoord$SNPid, 100): object 'SNPs' not found</span></div><div class='input'>
+
 <span class='co'>## ------------------------------------------------</span>
 <span class='co'>## Method `trait$gv`</span>
 <span class='co'>## ------------------------------------------------</span>
@@ -255,8 +256,114 @@ nucleotides names implied in the trait</p></dd>
 <span class='va'>example_pop</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createPop.html'>createPop</a></span><span class='op'>(</span>geno <span class='op'>=</span> <span class='va'>exampleData</span><span class='op'>$</span><span class='va'>genotypes</span>,
                          SNPinfo <span class='op'>=</span> <span class='va'>SNPs</span>,
                          popName <span class='op'>=</span> <span class='st'>"Example population"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Create population: Initialisation...</div><div class='output co'>#&gt; <span class='error'>Error in colnames(geno) %in% SNPinfo$SNPcoord$SNPid: object 'SNPs' not found</span></div><div class='input'><span class='va'>myTrait</span><span class='op'>$</span><span class='fu'>gv</span><span class='op'>(</span><span class='va'>example_pop</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'myTrait' not found</span></div></pre>
+</div><div class='output co'>#&gt; Create population: Initialisation...
+#&gt; Create population: Create individuals...
+#&gt; 1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99%100%
+#&gt; Create population: Create population object...
+#&gt; Create population: Add individuals...
+#&gt; 1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99%100%
+#&gt; A new population created: Example population !</div><div class='input'><span class='va'>myTrait</span><span class='op'>$</span><span class='fu'>gv</span><span class='op'>(</span><span class='va'>example_pop</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;                [,1]
+#&gt; Coll0001 -4.2158834
+#&gt; Coll0002  8.3548092
+#&gt; Coll0003  3.7723037
+#&gt; Coll0004  3.8181822
+#&gt; Coll0005 12.3965430
+#&gt; Coll0006 -4.4802869
+#&gt; Coll0007  2.3991851
+#&gt; Coll0008 12.0305083
+#&gt; Coll0009  1.0671912
+#&gt; Coll0010 -2.8938691
+#&gt; Coll0011 -0.2320498
+#&gt; Coll0012  1.4804435
+#&gt; Coll0013 -3.9327907
+#&gt; Coll0014 -1.1846558
+#&gt; Coll0015 16.2560498
+#&gt; Coll0016  3.1415145
+#&gt; Coll0017 -0.1058846
+#&gt; Coll0018  3.4286479
+#&gt; Coll0019  4.3406178
+#&gt; Coll0020  6.7881144
+#&gt; Coll0021  6.5257012
+#&gt; Coll0022  7.8131965
+#&gt; Coll0023  6.3831769
+#&gt; Coll0024  4.0374779
+#&gt; Coll0025  8.3855127
+#&gt; Coll0026  5.2369238
+#&gt; Coll0027 -6.3388320
+#&gt; Coll0028 -2.9164099
+#&gt; Coll0029  2.1408798
+#&gt; Coll0030 -2.2292685
+#&gt; Coll0031  5.8138775
+#&gt; Coll0032  4.9860527
+#&gt; Coll0033 -1.9387855
+#&gt; Coll0034  1.4150423
+#&gt; Coll0035  2.0259025
+#&gt; Coll0036  4.0077140
+#&gt; Coll0037  8.0265737
+#&gt; Coll0038 -0.3183030
+#&gt; Coll0039 12.7400834
+#&gt; Coll0040  8.3389574
+#&gt; Coll0041 17.8613660
+#&gt; Coll0042  0.7842534
+#&gt; Coll0043 12.7257600
+#&gt; Coll0044 10.5740236
+#&gt; Coll0045  8.4581743
+#&gt; Coll0046  9.4841849
+#&gt; Coll0047  0.6052785
+#&gt; Coll0048 10.7164510
+#&gt; Coll0049  4.4981076
+#&gt; Coll0050  8.9119367
+#&gt; Coll0051  1.3075987
+#&gt; Coll0052 -1.8619359
+#&gt; Coll0053  4.3766028
+#&gt; Coll0054  2.7569067
+#&gt; Coll0055  2.8419351
+#&gt; Coll0056 -7.4289293
+#&gt; Coll0057 10.2420323
+#&gt; Coll0058  3.0596717
+#&gt; Coll0059  3.0606273
+#&gt; Coll0060  8.5380842
+#&gt; Coll0061 -6.1442407
+#&gt; Coll0062 -6.4541820
+#&gt; Coll0063  1.8867622
+#&gt; Coll0064  3.5846764
+#&gt; Coll0065 -3.1316436
+#&gt; Coll0066  1.4609023
+#&gt; Coll0067  2.0365347
+#&gt; Coll0068  9.1110817
+#&gt; Coll0069  3.6662765
+#&gt; Coll0070  8.5527853
+#&gt; Coll0071 -2.3053222
+#&gt; Coll0072  5.9575512
+#&gt; Coll0073  1.0461343
+#&gt; Coll0074  7.8330840
+#&gt; Coll0075  1.8686989
+#&gt; Coll0076  2.7073347
+#&gt; Coll0077  7.5065292
+#&gt; Coll0078  6.8937198
+#&gt; Coll0079  4.8387148
+#&gt; Coll0080  7.3985669
+#&gt; Coll0081  8.1122827
+#&gt; Coll0082  0.3961473
+#&gt; Coll0083 15.3687560
+#&gt; Coll0084  1.0182599
+#&gt; Coll0085  9.3036826
+#&gt; Coll0086  0.9711091
+#&gt; Coll0087 10.5160808
+#&gt; Coll0088  7.9832562
+#&gt; Coll0089  8.5707037
+#&gt; Coll0090 -2.0025086
+#&gt; Coll0091  9.4172620
+#&gt; Coll0092  3.5657786
+#&gt; Coll0093  6.3781416
+#&gt; Coll0094 -6.6802091
+#&gt; Coll0095  9.2803725
+#&gt; Coll0096  3.8545229
+#&gt; Coll0097  5.8371670
+#&gt; Coll0098  7.7040458
+#&gt; Coll0099  7.3843881
+#&gt; Coll0100  6.3786784</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -272,7 +379,7 @@ nucleotides names implied in the trait</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
