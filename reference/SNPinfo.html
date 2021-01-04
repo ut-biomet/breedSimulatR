@@ -73,7 +73,7 @@ markers" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedSimulatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -81,7 +81,7 @@ markers" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -95,7 +95,7 @@ markers" />
 </li>
 <li>
   <a href="https://github.com/ut-biomet/breedSimulatR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -134,7 +134,8 @@ markers</p>
 <dt><code>SNPcoord</code></dt><dd><p>[data.frame] Coordinate of all SNPs.3 columns:
 <ul>
 <li><p><code>chr</code>: Chromosome holding the SNP</p></li>
-<li><p><code>pos</code>: SNP position on the chromosome</p></li>
+<li><p><code>physPos</code>: SNP physical position on the chromosome</p></li>
+<li><p><code>linkMapPos</code>: SNP linkage map position on the chromosome</p></li>
 <li><p><code>SNPid</code>: SNP's IDs</p></li>
 </ul></p></dd>
 
@@ -163,13 +164,14 @@ of all SNPs. for each chromosomes</p></dd>
 <p><hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
 <p>Create a new SNPinfo object.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span>(<span class='kw'>SNPcoord</span>, <span class='kw'>specie</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>SNPcoord</span>, <span class='va'>specie</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>SNPcoord</code></dt><dd><p>[data.frame] Coordinate of all SNPs.  3 columns: <ul>
 <li><p><code>chr</code>: Chromosome holding the SNP</p></li>
-<li><p><code>pos</code>: SNP position on the chromosome</p></li>
+<li><p><code>physPos</code>: SNP physical position on the chromosome</p></li>
+<li><p><code>linkMapPos</code>: SNP linkage map position on the chromosome</p></li>
 <li><p><code>SNPid</code>: SNP's IDs</p></li>
 </ul></p></dd>
 
@@ -181,28 +183,30 @@ of all SNPs. for each chromosomes</p></dd>
 <p>A new `SNPinfo` object.</p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='co'># create specie</span>
-<span class='kw'>mySpec</span> <span class='op'>&lt;-</span> <span class='kw'>specie</span><span class='op'>$</span><span class='fu'>new</span>(nChr = <span class='fl'>3</span>,
-                     lchr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span>),
-                     verbose = <span class='fl'>FALSE</span>)
+<span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'><a href='specie.html'>specie</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>3</span>,
+                     lchr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span><span class='op'>)</span>,
+                     lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
+                     verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='co'># simulate SNP</span>
-<span class='kw'>SNPcoord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(chr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Chr1"</span>, <span class='fl'>3</span>),
-                               <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Chr2"</span>, <span class='fl'>4</span>),
-                               <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Chr3"</span>, <span class='fl'>5</span>)),
-                       pos = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>100</span>, <span class='fl'>3</span>),
-                               <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>150</span>, <span class='fl'>4</span>),
-                               <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>200</span>, <span class='fl'>5</span>)),
-                       SNPid = <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(fmt = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"SNP%0"</span>, <span class='fl'>2</span>,<span class='st'>"i"</span>),
-                                       <span class='fl'>1</span><span class='op'>:</span>(<span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>4</span> <span class='op'>+</span> <span class='fl'>5</span>)))
+<span class='va'>SNPcoord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>chr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Chr1"</span>, <span class='fl'>3</span><span class='op'>)</span>,
+                               <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Chr2"</span>, <span class='fl'>4</span><span class='op'>)</span>,
+                               <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Chr3"</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>,
+                       physPos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>3</span><span class='op'>)</span>,
+                               <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>150</span>, <span class='fl'>4</span><span class='op'>)</span>,
+                               <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>200</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>,
+                       linkMapPos <span class='op'>=</span> <span class='cn'>NA</span>,
+                       SNPid <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span><span class='op'>(</span>fmt <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"SNP%0"</span>, <span class='fl'>2</span>,<span class='st'>"i"</span><span class='op'>)</span>,
+                                       <span class='fl'>1</span><span class='op'>:</span><span class='op'>(</span><span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>4</span> <span class='op'>+</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># create SNPinfo object</span>
-<span class='kw'>SNPs</span> <span class='op'>&lt;-</span> <span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span>(SNPcoord = <span class='kw'>SNPcoord</span>, specie = <span class='kw'>mySpec</span>)
+<span class='va'>SNPs</span> <span class='op'>&lt;-</span> <span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>SNPcoord <span class='op'>=</span> <span class='va'>SNPcoord</span>, specie <span class='op'>=</span> <span class='va'>mySpec</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
 <a id="method-nSNP"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>nSNP()</code></h3>
 <p>Get the number of SNPs per chromosomes</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'>nSNP</span>(chr = <span class='fl'>NA</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>nSNP</span><span class='op'>(</span>chr <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -210,14 +214,14 @@ of all SNPs. for each chromosomes</p></dd>
 
 </dl><p></div></p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
-<p><div class="r example copy"></p><pre><span class='kw'>SNPs</span><span class='op'>$</span><span class='fu'>nSNP</span>()
-<span class='kw'>SNPs</span><span class='op'>$</span><span class='fu'>nSNP</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Chr2"</span>,<span class='st'>"Chr3"</span>))
+<p><div class="r example copy"></p><pre><span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>nSNP</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>nSNP</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Chr2"</span>,<span class='st'>"Chr3"</span><span class='op'>)</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
 <a id="method-getInfo"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>getInfo()</code></h3>
 <p>Get information about specific SNPs</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'>getInfo</span>(<span class='kw'>SNPid</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>getInfo</span><span class='op'>(</span><span class='va'>SNPid</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -225,20 +229,20 @@ of all SNPs. for each chromosomes</p></dd>
 
 </dl><p></div></p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
-<p><div class="r example copy"></p><pre><span class='kw'>SNPs</span><span class='op'>$</span><span class='fu'>getInfo</span>(<span class='st'>"SNP01"</span>)
-<span class='kw'>SNPs</span><span class='op'>$</span><span class='fu'>getInfo</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"SNP01"</span>, <span class='st'>"SNP03"</span>))
+<p><div class="r example copy"></p><pre><span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>getInfo</span><span class='op'>(</span><span class='st'>"SNP01"</span><span class='op'>)</span>
+<span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>getInfo</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"SNP01"</span>, <span class='st'>"SNP03"</span><span class='op'>)</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
 <a id="method-print"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
 <p>Display summary information about the object: specie, number
 of SNP, SNP coordinates.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>()</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
 <a id="method-plot"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code></h3>
 <p>plot chromosome map using the <span class="pkg">plotly</span> package</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(alpha = <span class='fl'>0.01</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>plot</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>0.01</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -246,13 +250,13 @@ of SNP, SNP coordinates.</p><h4 class='hasAnchor' id='arguments'><a class='ancho
 
 </dl><p></div></p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
-<p><div class="r example copy"></p><pre><span class='kw'>SNPs</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(alpha = <span class='fl'>1</span>)
+<p><div class="r example copy"></p><pre><span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>plot</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'>clone</span>(deep = <span class='fl'>FALSE</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -269,51 +273,45 @@ of SNP, SNP coordinates.</p><h4 class='hasAnchor' id='arguments'><a class='ancho
 <span class='co'>## ------------------------------------------------</span>
 
 <span class='co'># create specie</span>
-<span class='kw'>mySpec</span> <span class='op'>&lt;-</span> <span class='kw'>specie</span><span class='op'>$</span><span class='fu'>new</span>(nChr = <span class='fl'>3</span>,
-                     lchr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span>),
-                     verbose = <span class='fl'>FALSE</span>)
-</div><div class='output co'>#&gt; <span class='message'>"ploidy" was not specify. The ploidy had been set to "2"</span></div><div class='input'>
+<span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'><a href='specie.html'>specie</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>3</span>,
+                     lchr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span><span class='op'>)</span>,
+                     lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
+                     verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in .subset2(public_bind_env, "initialize")(...): unused argument (lchrCm = 100)</span></div><div class='input'>
 <span class='co'># simulate SNP</span>
-<span class='kw'>SNPcoord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(chr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Chr1"</span>, <span class='fl'>3</span>),
-                               <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Chr2"</span>, <span class='fl'>4</span>),
-                               <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Chr3"</span>, <span class='fl'>5</span>)),
-                       pos = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>100</span>, <span class='fl'>3</span>),
-                               <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>150</span>, <span class='fl'>4</span>),
-                               <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>200</span>, <span class='fl'>5</span>)),
-                       SNPid = <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(fmt = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"SNP%0"</span>, <span class='fl'>2</span>,<span class='st'>"i"</span>),
-                                       <span class='fl'>1</span><span class='op'>:</span>(<span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>4</span> <span class='op'>+</span> <span class='fl'>5</span>)))
+<span class='va'>SNPcoord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>chr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Chr1"</span>, <span class='fl'>3</span><span class='op'>)</span>,
+                               <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Chr2"</span>, <span class='fl'>4</span><span class='op'>)</span>,
+                               <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Chr3"</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>,
+                       physPos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>3</span><span class='op'>)</span>,
+                               <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>150</span>, <span class='fl'>4</span><span class='op'>)</span>,
+                               <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>200</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>,
+                       linkMapPos <span class='op'>=</span> <span class='cn'>NA</span>,
+                       SNPid <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span><span class='op'>(</span>fmt <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"SNP%0"</span>, <span class='fl'>2</span>,<span class='st'>"i"</span><span class='op'>)</span>,
+                                       <span class='fl'>1</span><span class='op'>:</span><span class='op'>(</span><span class='fl'>3</span> <span class='op'>+</span> <span class='fl'>4</span> <span class='op'>+</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># create SNPinfo object</span>
-<span class='kw'>SNPs</span> <span class='op'>&lt;-</span> <span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span>(SNPcoord = <span class='kw'>SNPcoord</span>, specie = <span class='kw'>mySpec</span>)
-
+<span class='va'>SNPs</span> <span class='op'>&lt;-</span> <span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>SNPcoord <span class='op'>=</span> <span class='va'>SNPcoord</span>, specie <span class='op'>=</span> <span class='va'>mySpec</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in .subset2(public_bind_env, "initialize")(...): object 'mySpec' not found</span></div><div class='input'>
 <span class='co'>## ------------------------------------------------</span>
 <span class='co'>## Method `SNPinfo$nSNP`</span>
 <span class='co'>## ------------------------------------------------</span>
 
-<span class='kw'>SNPs</span><span class='op'>$</span><span class='fu'>nSNP</span>()
-</div><div class='output co'>#&gt; [1] 12</div><div class='input'><span class='kw'>SNPs</span><span class='op'>$</span><span class='fu'>nSNP</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Chr2"</span>,<span class='st'>"Chr3"</span>))
-</div><div class='output co'>#&gt; Chr2 Chr3 
-#&gt;    4    5 </div><div class='input'>
+<span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>nSNP</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'SNPs' not found</span></div><div class='input'><span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>nSNP</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Chr2"</span>,<span class='st'>"Chr3"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'SNPs' not found</span></div><div class='input'>
 <span class='co'>## ------------------------------------------------</span>
 <span class='co'>## Method `SNPinfo$getInfo`</span>
 <span class='co'>## ------------------------------------------------</span>
 
-<span class='kw'>SNPs</span><span class='op'>$</span><span class='fu'>getInfo</span>(<span class='st'>"SNP01"</span>)
-</div><div class='output co'>#&gt;    chr pos SNPid
-#&gt; 1 Chr1  45 SNP01</div><div class='input'><span class='kw'>SNPs</span><span class='op'>$</span><span class='fu'>getInfo</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"SNP01"</span>, <span class='st'>"SNP03"</span>))
-</div><div class='output co'>#&gt;    chr pos SNPid
-#&gt; 1 Chr1  45 SNP01
-#&gt; 3 Chr1  76 SNP03</div><div class='input'>
+<span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>getInfo</span><span class='op'>(</span><span class='st'>"SNP01"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'SNPs' not found</span></div><div class='input'><span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>getInfo</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"SNP01"</span>, <span class='st'>"SNP03"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'SNPs' not found</span></div><div class='input'>
 <span class='co'>## ------------------------------------------------</span>
 <span class='co'>## Method `SNPinfo$plot`</span>
 <span class='co'>## ------------------------------------------------</span>
 
-<span class='kw'>SNPs</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(alpha = <span class='fl'>1</span>)
-</div><div class='output co'>#&gt; <span class='warning'>Warning: `arrange_()` is deprecated as of dplyr 0.7.0.</span>
-#&gt; <span class='warning'>Please use `arrange()` instead.</span>
-#&gt; <span class='warning'>See vignette('programming') for more help</span>
-#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div></span></pre>
+<span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>plot</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'SNPs' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -329,7 +327,7 @@ of SNP, SNP coordinates.</p><h4 class='hasAnchor' id='arguments'><a class='ancho
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedSimulatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -94,7 +94,7 @@
 </li>
 <li>
   <a href="https://github.com/ut-biomet/breedSimulatR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -150,14 +150,14 @@ nucleotides (<code>length(qtn) == length(qtnEff)</code> must be <code>true</code
 <p><hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
 <p>Create a new trait object.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>trait</span><span class='op'>$</span><span class='fu'>new</span>(
-  name = <span class='kw'>NULL</span>,
-  class = <span class='st'>"quantitative"</span>,
-  qtn = <span class='kw'>NULL</span>,
-  qtnEff = <span class='kw'>NULL</span>,
-  vg = <span class='kw'>NULL</span>,
-  afs = <span class='kw'>NULL</span>
-)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>trait</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
+  name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  class <span class='op'>=</span> <span class='st'>"quantitative"</span>,
+  qtn <span class='op'>=</span> <span class='cn'>NULL</span>,
+  qtnEff <span class='op'>=</span> <span class='cn'>NULL</span>,
+  vg <span class='op'>=</span> <span class='cn'>NULL</span>,
+  afs <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -168,7 +168,8 @@ nucleotides (<code>length(qtn) == length(qtnEff)</code> must be <code>true</code
 <dt><code>qtn</code></dt><dd><p>[character vector] list of the quantitative trait
 nucleotides names implied in the trait</p></dd>
 
-<dt><code>qtnEff</code></dt><dd><p>[numeric vector] quantitative trait nucleotides effects (see details for more information).</p></dd>
+<dt><code>qtnEff</code></dt><dd><p>[numeric vector] quantitative trait nucleotides effects
+(see details for more information).</p></dd>
 
 </dl><p></div></p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Details</h4>
@@ -178,23 +179,23 @@ nucleotides names implied in the trait</p></dd>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
 <p>A new `trait` object.</p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
-<p><div class="r example copy"></p><pre><span class='kw'>mySpec</span> <span class='op'>&lt;-</span> <span class='kw'>specie</span><span class='op'>$</span><span class='fu'>new</span>(nChr = <span class='fl'>10</span>,
-                     lchr = <span class='fl'>10</span><span class='op'>^</span><span class='fl'>6</span>,
-                     specName = <span class='st'>"Geneticae Exempli"</span>,
-                     ploidy = <span class='fl'>2</span>,
-                     recombRate = <span class='fl'>3</span><span class='op'>/</span><span class='fl'>10</span><span class='op'>^</span><span class='fl'>6</span>)
-<span class='kw'>SNPs</span> <span class='op'>&lt;-</span> <span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span>(SNPcoord = <span class='kw'>exampleData</span><span class='op'>$</span><span class='kw'>snpCoord</span>,
-                    specie = <span class='kw'>mySpec</span>)
+<p><div class="r example copy"></p><pre><span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'><a href='specie.html'>specie</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>10</span>,
+                     lchr <span class='op'>=</span> <span class='fl'>10</span><span class='op'>^</span><span class='fl'>6</span>,
+                     lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
+                     specName <span class='op'>=</span> <span class='st'>"Geneticae Exempli"</span>,
+                     ploidy <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>SNPs</span> <span class='op'>&lt;-</span> <span class='va'><a href='SNPinfo.html'>SNPinfo</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>SNPcoord <span class='op'>=</span> <span class='va'>exampleData</span><span class='op'>$</span><span class='va'>snpCoord</span>,
+                    specie <span class='op'>=</span> <span class='va'>mySpec</span><span class='op'>)</span>
 
-<span class='kw'>myTrait</span> <span class='op'>&lt;-</span> <span class='kw'>trait</span><span class='op'>$</span><span class='fu'>new</span>(name = <span class='st'>"myTrait"</span>,
-                     qtn = <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='kw'>SNPs</span><span class='op'>$</span><span class='kw'>SNPcoord</span><span class='op'>$</span><span class='kw'>SNPid</span>, <span class='fl'>100</span>),
-                     qtnEff = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>, sd = <span class='fl'>0.5</span>))
+<span class='va'>myTrait</span> <span class='op'>&lt;-</span> <span class='va'>trait</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"myTrait"</span>,
+                     qtn <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>SNPs</span><span class='op'>$</span><span class='va'>SNPcoord</span><span class='op'>$</span><span class='va'>SNPid</span>, <span class='fl'>100</span><span class='op'>)</span>,
+                     qtnEff <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span>, sd <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
 <a id="method-gv"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>gv()</code></h3>
 <p>Calculate the genetic values of a population</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>trait</span><span class='op'>$</span><span class='fu'>gv</span>(<span class='kw'>pop</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>trait</span><span class='op'>$</span><span class='fu'>gv</span><span class='op'>(</span><span class='va'>pop</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -204,21 +205,21 @@ nucleotides names implied in the trait</p></dd>
 </dl><p></div></p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='co'># create population</span>
-<span class='kw'>example_pop</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createPop.html'>createPop</a></span>(geno = <span class='kw'>exampleData</span><span class='op'>$</span><span class='kw'>genotypes</span>,
-                         SNPinfo = <span class='kw'>SNPs</span>,
-                         popName = <span class='st'>"Example population"</span>)
-<span class='kw'>myTrait</span><span class='op'>$</span><span class='fu'>gv</span>(<span class='kw'>example_pop</span>)
+<span class='va'>example_pop</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createPop.html'>createPop</a></span><span class='op'>(</span>geno <span class='op'>=</span> <span class='va'>exampleData</span><span class='op'>$</span><span class='va'>genotypes</span>,
+                         SNPinfo <span class='op'>=</span> <span class='va'>SNPs</span>,
+                         popName <span class='op'>=</span> <span class='st'>"Example population"</span><span class='op'>)</span>
+<span class='va'>myTrait</span><span class='op'>$</span><span class='fu'>gv</span><span class='op'>(</span><span class='va'>example_pop</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
 <a id="method-print"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
 <p>Display information about the object</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>trait</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>()</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>trait</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>trait</span><span class='op'>$</span><span class='fu'>clone</span>(deep = <span class='fl'>FALSE</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>trait</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -234,135 +235,28 @@ nucleotides names implied in the trait</p></dd>
 <span class='co'>## Method `trait$new`</span>
 <span class='co'>## ------------------------------------------------</span>
 
-<span class='kw'>mySpec</span> <span class='op'>&lt;-</span> <span class='kw'>specie</span><span class='op'>$</span><span class='fu'>new</span>(nChr = <span class='fl'>10</span>,
-                     lchr = <span class='fl'>10</span><span class='op'>^</span><span class='fl'>6</span>,
-                     specName = <span class='st'>"Geneticae Exempli"</span>,
-                     ploidy = <span class='fl'>2</span>,
-                     recombRate = <span class='fl'>3</span><span class='op'>/</span><span class='fl'>10</span><span class='op'>^</span><span class='fl'>6</span>)
-</div><div class='output co'>#&gt; A new species has emerged: Geneticae Exempli !
-#&gt; </div><div class='input'><span class='kw'>SNPs</span> <span class='op'>&lt;-</span> <span class='kw'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span>(SNPcoord = <span class='kw'>exampleData</span><span class='op'>$</span><span class='kw'>snpCoord</span>,
-                    specie = <span class='kw'>mySpec</span>)
-
-<span class='kw'>myTrait</span> <span class='op'>&lt;-</span> <span class='kw'>trait</span><span class='op'>$</span><span class='fu'>new</span>(name = <span class='st'>"myTrait"</span>,
-                     qtn = <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='kw'>SNPs</span><span class='op'>$</span><span class='kw'>SNPcoord</span><span class='op'>$</span><span class='kw'>SNPid</span>, <span class='fl'>100</span>),
-                     qtnEff = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>, sd = <span class='fl'>0.5</span>))
-
+<span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'><a href='specie.html'>specie</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>10</span>,
+                     lchr <span class='op'>=</span> <span class='fl'>10</span><span class='op'>^</span><span class='fl'>6</span>,
+                     lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
+                     specName <span class='op'>=</span> <span class='st'>"Geneticae Exempli"</span>,
+                     ploidy <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in .subset2(public_bind_env, "initialize")(...): unused argument (lchrCm = 100)</span></div><div class='input'><span class='va'>SNPs</span> <span class='op'>&lt;-</span> <span class='va'><a href='SNPinfo.html'>SNPinfo</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>SNPcoord <span class='op'>=</span> <span class='va'>exampleData</span><span class='op'>$</span><span class='va'>snpCoord</span>,
+                    specie <span class='op'>=</span> <span class='va'>mySpec</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in .subset2(public_bind_env, "initialize")(...): object 'mySpec' not found</span></div><div class='input'>
+<span class='va'>myTrait</span> <span class='op'>&lt;-</span> <span class='va'>trait</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"myTrait"</span>,
+                     qtn <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>SNPs</span><span class='op'>$</span><span class='va'>SNPcoord</span><span class='op'>$</span><span class='va'>SNPid</span>, <span class='fl'>100</span><span class='op'>)</span>,
+                     qtnEff <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span>, sd <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in sample(SNPs$SNPcoord$SNPid, 100): object 'SNPs' not found</span></div><div class='input'>
 <span class='co'>## ------------------------------------------------</span>
 <span class='co'>## Method `trait$gv`</span>
 <span class='co'>## ------------------------------------------------</span>
 
 <span class='co'># create population</span>
-<span class='kw'>example_pop</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createPop.html'>createPop</a></span>(geno = <span class='kw'>exampleData</span><span class='op'>$</span><span class='kw'>genotypes</span>,
-                         SNPinfo = <span class='kw'>SNPs</span>,
-                         popName = <span class='st'>"Example population"</span>)
-</div><div class='output co'>#&gt; Create population: Initialisation...
-#&gt; Create population: Create individuals...
-#&gt; 1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99%100%
-#&gt; Create population: Create population object...
-#&gt; Create population: Add individuals...
-#&gt; 1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99%100%
-#&gt; A new population created: Example population !</div><div class='input'><span class='kw'>myTrait</span><span class='op'>$</span><span class='fu'>gv</span>(<span class='kw'>example_pop</span>)
-</div><div class='output co'>#&gt;                 [,1]
-#&gt; Coll0001   2.7178022
-#&gt; Coll0002  -7.3329499
-#&gt; Coll0003  -4.1501852
-#&gt; Coll0004  -8.3372600
-#&gt; Coll0005  -1.8441642
-#&gt; Coll0006  -4.0918945
-#&gt; Coll0007  -3.6628397
-#&gt; Coll0008  -4.4268337
-#&gt; Coll0009  -5.5224824
-#&gt; Coll0010 -11.7017875
-#&gt; Coll0011  -8.8740015
-#&gt; Coll0012  -3.6034233
-#&gt; Coll0013   1.6110625
-#&gt; Coll0014  -3.3700490
-#&gt; Coll0015 -14.5840378
-#&gt; Coll0016  -5.3113940
-#&gt; Coll0017   1.6212251
-#&gt; Coll0018  -4.9999024
-#&gt; Coll0019   0.8756595
-#&gt; Coll0020   0.7398596
-#&gt; Coll0021   3.3453433
-#&gt; Coll0022  -4.7799026
-#&gt; Coll0023 -10.3881525
-#&gt; Coll0024   0.4525894
-#&gt; Coll0025  -5.5052386
-#&gt; Coll0026  -2.1048737
-#&gt; Coll0027   3.6202163
-#&gt; Coll0028  -5.2853341
-#&gt; Coll0029   1.9311643
-#&gt; Coll0030  -1.4158721
-#&gt; Coll0031  -1.2596829
-#&gt; Coll0032   3.6101593
-#&gt; Coll0033   1.3874153
-#&gt; Coll0034  -3.8616874
-#&gt; Coll0035  -3.2654685
-#&gt; Coll0036 -12.2465223
-#&gt; Coll0037  -6.1403798
-#&gt; Coll0038  -0.1519302
-#&gt; Coll0039  -6.3444200
-#&gt; Coll0040  -1.8021201
-#&gt; Coll0041 -17.3238240
-#&gt; Coll0042  -5.3367852
-#&gt; Coll0043  -2.5954757
-#&gt; Coll0044  -4.5675512
-#&gt; Coll0045  -9.9258339
-#&gt; Coll0046 -12.0442862
-#&gt; Coll0047   1.1812372
-#&gt; Coll0048   6.5132270
-#&gt; Coll0049  -4.7611605
-#&gt; Coll0050  -7.1648308
-#&gt; Coll0051  -7.9979857
-#&gt; Coll0052  -4.9671098
-#&gt; Coll0053  -0.4858822
-#&gt; Coll0054   0.4836165
-#&gt; Coll0055  -4.4505183
-#&gt; Coll0056  -9.6203308
-#&gt; Coll0057  -3.8084546
-#&gt; Coll0058 -11.4741095
-#&gt; Coll0059  -9.8558876
-#&gt; Coll0060  -2.9118392
-#&gt; Coll0061   2.7959231
-#&gt; Coll0062  -0.2015518
-#&gt; Coll0063  -5.3976787
-#&gt; Coll0064  -7.2025390
-#&gt; Coll0065   0.4722737
-#&gt; Coll0066   1.6360332
-#&gt; Coll0067   6.7475464
-#&gt; Coll0068   1.9196162
-#&gt; Coll0069 -10.7337546
-#&gt; Coll0070  -5.2331585
-#&gt; Coll0071  -5.4624479
-#&gt; Coll0072   5.4495686
-#&gt; Coll0073  -1.8725235
-#&gt; Coll0074  -3.1665783
-#&gt; Coll0075  -7.0840061
-#&gt; Coll0076  -1.2823682
-#&gt; Coll0077  -5.4422462
-#&gt; Coll0078  -5.8541814
-#&gt; Coll0079  -9.1301785
-#&gt; Coll0080 -11.8489319
-#&gt; Coll0081  -0.9426233
-#&gt; Coll0082  -4.7687268
-#&gt; Coll0083   2.6007378
-#&gt; Coll0084  -6.4760691
-#&gt; Coll0085  -1.2346903
-#&gt; Coll0086  -8.0501361
-#&gt; Coll0087  -2.5263611
-#&gt; Coll0088  -2.8387750
-#&gt; Coll0089  -3.1069742
-#&gt; Coll0090  -2.5833045
-#&gt; Coll0091   2.4134636
-#&gt; Coll0092  -4.3248956
-#&gt; Coll0093  -0.4692350
-#&gt; Coll0094  -3.0899308
-#&gt; Coll0095  -8.0044591
-#&gt; Coll0096  -9.4520829
-#&gt; Coll0097  -0.1481705
-#&gt; Coll0098  -5.8151304
-#&gt; Coll0099  -9.2678015
-#&gt; Coll0100  -9.8788327</div></pre>
+<span class='va'>example_pop</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createPop.html'>createPop</a></span><span class='op'>(</span>geno <span class='op'>=</span> <span class='va'>exampleData</span><span class='op'>$</span><span class='va'>genotypes</span>,
+                         SNPinfo <span class='op'>=</span> <span class='va'>SNPs</span>,
+                         popName <span class='op'>=</span> <span class='st'>"Example population"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Create population: Initialisation...</div><div class='output co'>#&gt; <span class='error'>Error in colnames(geno) %in% SNPinfo$SNPcoord$SNPid: object 'SNPs' not found</span></div><div class='input'><span class='va'>myTrait</span><span class='op'>$</span><span class='fu'>gv</span><span class='op'>(</span><span class='va'>example_pop</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'myTrait' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -378,7 +272,7 @@ nucleotides names implied in the trait</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

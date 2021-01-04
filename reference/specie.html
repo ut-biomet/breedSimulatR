@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedSimulatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -94,7 +94,7 @@
 </li>
 <li>
   <a href="https://github.com/ut-biomet/breedSimulatR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -131,13 +131,13 @@
 
 <dt><code>ploidy</code></dt><dd><p>[numeric] Number of possible alleles at one locus</p></dd>
 
-<dt><code>lchr</code></dt><dd><p>[numeric] length of all chromosomes</p></dd>
+<dt><code>lchr</code></dt><dd><p>[numeric] length of all chromosomes in base pairs</p></dd>
+
+<dt><code>lchrCm</code></dt><dd><p>[numeric] length of all chromosomes in centimorgans</p></dd>
 
 <dt><code>mutRate</code></dt><dd><p>[numeric] Mutation rate at each base</p></dd>
 
 <dt><code>chrNames</code></dt><dd><p>[str] Names of the chromosomes</p></dd>
-
-<dt><code>recombRate</code></dt><dd><p>[numeric] Recombination rate at each base</p></dd>
 
 </dl><p></div></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
@@ -149,27 +149,30 @@
 <li><p><a href='#method-new'><code>specie$new()</code></a></p></li>
 <li><p><a href='#method-print'><code>specie$print()</code></a></p></li>
 <li><p><a href='#method-getChrLength'><code>specie$getChrLength()</code></a></p></li>
+<li><p><a href='#method-getChrLengthCm'><code>specie$getChrLengthCm()</code></a></p></li>
 <li><p><a href='#method-clone'><code>specie$clone()</code></a></p></li>
 </ul>
 <p><hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
 <p>Create a new specie object.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>specie</span><span class='op'>$</span><span class='fu'>new</span>(
-  <span class='kw'>nChr</span>,
-  <span class='kw'>lchr</span>,
-  specName = <span class='st'>"Undefinded"</span>,
-  ploidy = <span class='fl'>NA</span>,
-  mutRate = <span class='fl'>NA</span>,
-  recombRate = <span class='fl'>NA</span>,
-  chrNames = <span class='fl'>NA</span>,
-  verbose = <span class='fl'>TRUE</span>
-)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
+  <span class='va'>nChr</span>,
+  <span class='va'>lchr</span>,
+  <span class='va'>lchrCm</span>,
+  specName <span class='op'>=</span> <span class='st'>"Undefinded"</span>,
+  ploidy <span class='op'>=</span> <span class='cn'>NA</span>,
+  mutRate <span class='op'>=</span> <span class='cn'>NA</span>,
+  chrNames <span class='op'>=</span> <span class='cn'>NA</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>nChr</code></dt><dd><p>[numeric] Number of chromosomes</p></dd>
 
-<dt><code>lchr</code></dt><dd><p>[numeric] length of all chromosomes</p></dd>
+<dt><code>lchr</code></dt><dd><p>[numeric] length of all chromosomes in base pairs</p></dd>
+
+<dt><code>lchrCm</code></dt><dd><p>[numeric] length of all chromosomes in centimorgans</p></dd>
 
 <dt><code>specName</code></dt><dd><p>[str] Specie's name (optional)</p></dd>
 
@@ -177,8 +180,6 @@
 (optional)</p></dd>
 
 <dt><code>mutRate</code></dt><dd><p>[numeric] Mutation rate at each base (optional)</p></dd>
-
-<dt><code>recombRate</code></dt><dd><p>[numeric] Recombination rate at each base (optional)</p></dd>
 
 <dt><code>chrNames</code></dt><dd><p>[str] Names of the chromosomes (optional)</p></dd>
 
@@ -188,24 +189,22 @@
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
 <p>A new `specie` object.</p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
-<p><div class="r example copy"></p><pre><span class='kw'>mySpec</span> <span class='op'>&lt;-</span> <span class='kw'>specie</span><span class='op'>$</span><span class='fu'>new</span>(nChr = <span class='fl'>3</span>,
-                     lchr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span>),
-                     specName = <span class='st'>"Geneticae Exempulus"</span>,
-                     ploidy = <span class='fl'>2</span>,
-                     mutRate = <span class='fl'>10</span><span class='op'>^</span><span class='op'>-</span><span class='fl'>8</span>,
-                     recombRate = <span class='fl'>10</span><span class='op'>^</span><span class='op'>-</span><span class='fl'>7</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>mySpec</span>)
+<p><div class="r example copy"></p><pre><span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'>specie</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>3</span>,
+                     lchr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span><span class='op'>)</span>,
+                     lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
+                     specName <span class='op'>=</span> <span class='st'>"Geneticae Exempulus"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>mySpec</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
 <a id="method-print"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
 <p>Display information about the object</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>specie</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>()</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
 <a id="method-getChrLength"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>getChrLength()</code></h3>
 <p>Get the chromosomes length</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>specie</span><span class='op'>$</span><span class='fu'>getChrLength</span>(chr = <span class='fl'>NA</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span>chr <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -213,15 +212,31 @@
 
 </dl><p></div></p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
-<p><div class="r example copy"></p><pre><span class='kw'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span>()
-<span class='kw'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span>(<span class='fl'>2</span>)
-<span class='kw'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span>(<span class='st'>"Chr3"</span>)
+<p><div class="r example copy"></p><pre><span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span><span class='st'>"Chr3"</span><span class='op'>)</span>
+</pre><p></div></p>
+
+<p><hr>
+<a id="method-getChrLengthCm"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>getChrLengthCm()</code></h3>
+<p>Get the chromosomes length in centimorgans</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span>chr <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>chr</code></dt><dd><p>[str or numeric] chromosome ids</p></dd>
+
+</dl><p></div></p>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
+<p><div class="r example copy"></p><pre><span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span><span class='st'>"Chr3"</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='kw'>specie</span><span class='op'>$</span><span class='fu'>clone</span>(deep = <span class='fl'>FALSE</span>)</pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -237,35 +252,28 @@
 <span class='co'>## Method `specie$new`</span>
 <span class='co'>## ------------------------------------------------</span>
 
-<span class='kw'>mySpec</span> <span class='op'>&lt;-</span> <span class='kw'>specie</span><span class='op'>$</span><span class='fu'>new</span>(nChr = <span class='fl'>3</span>,
-                     lchr = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span>),
-                     specName = <span class='st'>"Geneticae Exempulus"</span>,
-                     ploidy = <span class='fl'>2</span>,
-                     mutRate = <span class='fl'>10</span><span class='op'>^</span><span class='op'>-</span><span class='fl'>8</span>,
-                     recombRate = <span class='fl'>10</span><span class='op'>^</span><span class='op'>-</span><span class='fl'>7</span>)
-</div><div class='output co'>#&gt; A new species has emerged: Geneticae Exempulus !
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>mySpec</span>)
-</div><div class='output co'>#&gt; Name: Geneticae Exempulus
-#&gt; Number of Chromosomes: 3
-#&gt; Ploidy: 2
-#&gt; Mutation rate : 1e-08
-#&gt; Recombination Rate: 1e-07
-#&gt; Chromosome length:
-#&gt;      chrNames chrLength
-#&gt; Chr1     Chr1       100
-#&gt; Chr2     Chr2       150
-#&gt; Chr3     Chr3       200</div><div class='input'>
+<span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'>specie</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>3</span>,
+                     lchr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span><span class='op'>)</span>,
+                     lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
+                     specName <span class='op'>=</span> <span class='st'>"Geneticae Exempulus"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in .subset2(public_bind_env, "initialize")(...): unused argument (lchrCm = 100)</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>mySpec</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in print(mySpec): object 'mySpec' not found</span></div><div class='input'>
 <span class='co'>## ------------------------------------------------</span>
 <span class='co'>## Method `specie$getChrLength`</span>
 <span class='co'>## ------------------------------------------------</span>
 
-<span class='kw'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span>()
-</div><div class='output co'>#&gt; Chr1 Chr2 Chr3 
-#&gt;  100  150  200 </div><div class='input'><span class='kw'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span>(<span class='fl'>2</span>)
-</div><div class='output co'>#&gt; Chr2 
-#&gt;  150 </div><div class='input'><span class='kw'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span>(<span class='st'>"Chr3"</span>)
-</div><div class='output co'>#&gt; Chr3 
-#&gt;  200 </div></pre>
+<span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'mySpec' not found</span></div><div class='input'><span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'mySpec' not found</span></div><div class='input'><span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span><span class='st'>"Chr3"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'mySpec' not found</span></div><div class='input'>
+<span class='co'>## ------------------------------------------------</span>
+<span class='co'>## Method `specie$getChrLengthCm`</span>
+<span class='co'>## ------------------------------------------------</span>
+
+<span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'mySpec' not found</span></div><div class='input'><span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'mySpec' not found</span></div><div class='input'><span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span><span class='st'>"Chr3"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'mySpec' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -281,7 +289,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
