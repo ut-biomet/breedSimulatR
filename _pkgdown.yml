@@ -26,7 +26,7 @@ navbar:
       href: https://github.com/ut-biomet/breedSimulatR/
 
 reference:
-  - title: All class
+  - title: Main class
     # desc:  Build a complete site or its individual section components.
     contents:
       - "`specie`"
@@ -37,21 +37,21 @@ reference:
   - title: Utils functions
     contents:
       - "`createPop`"
-  - title: Phenotyping functions
+  - title: Phenotyping class
     contents:
       - "`trait`"
       - "`phenotyper`"
   - title: Selection functions
     contents:
-      - '`selectBV`'
-      - '`selectWBV`'
+      - "`selectBV`"
+      - "`selectWBV`"
   - title: Crossing functions
     contents:
       - "`makeSingleCross`"
       - "`makeCrosses`"
   - title: Mating functions
     contents:
-      - '`randomMate`'
+      - "`randomMate`"
   - title: Data
     contents:
-      - '`exampleData`'
+      - "`exampleData`"
