@@ -29,7 +29,6 @@ trait <- R6::R6Class(
     #' nucleotides (\code{length(qtn) == length(qtnEff)} must be \code{true})
     qtn = NULL,
     #' @field qtnEff [numeric vector] quantitative trait nucleotides effects
-    # TODO include Dominance effects: qtnEff list(A=addEff, D=domEff)
     qtnEff = NULL,
 
 

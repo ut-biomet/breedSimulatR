@@ -11,7 +11,7 @@
 #' @param pop (population object) Population of individuals to select
 #'   (see:\link[breedSimulatR]{population})
 #' @param n (integer) number of individuals to select
-#' @param SNPeffects (numeric vector) effect of the genetic markers
+#' @param QTNeffects (named numeric vector) effect of the genetic markers
 #'
 #' @return character vector of the selected individuals' names
 #' @export
@@ -26,16 +26,24 @@
 #' initPop <- createPop(geno = exampleData$genotypes,
 #'                      SNPinfo = SNPs,
 #'                      popName = "Initial population")
+#' myTrait <- trait$new(name = "myTrait",
+#'                      qtn = names(exampleData$snpEffects),
+#'                      qtnEff = exampleData$snpEffects)
 #' selectBV(pop = initPop,
-#'          SNPeffects = exampleData$snpEffects,
+#'          QTNeffects = myTrait$qtnEff,
 #'          n = 10)
-selectBV <- function(pop, n, SNPeffects){
-  # TODO integrate "trait" object
-  if (!all(colnames(SNPeffects) == colnames(pop$genoMat))) {
-    SNPeffects <- SNPeffects[colnames(pop$genoMat)]
+selectBV <- function(pop, n, QTNeffects){
+
+  if (is.null(names(QTNeffects))) {
+    stop("QTNeffects should be named according to qtns")
   }
 
-  BV <- as.numeric(pop$genoMat %*% SNPeffects)
+  if (!all(names(QTNeffects) %in% colnames(pop$genoMat))) {
+    stop("qtn not found in the population. please check that:\n",
+         "`all(names(QTNeffects) %in% colnames(pop$genoMat))` is true")
+  }
+
+  BV <- as.numeric(pop$genoMat[,names(QTNeffects)] %*% QTNeffects)
   names(pop$inds)[order(BV, decreasing = TRUE)][1:n]
 }
 
@@ -45,7 +53,7 @@ selectBV <- function(pop, n, SNPeffects){
 #' @param pop (population object) Population of individuals to select
 #'   (see:\link[breedSimulatR]{population})
 #' @param n (integer) number of individuals to select
-#' @param SNPeffects (numeric vector) effect of the genetic markers
+#' @param QTNeffects (numeric vector) effect of the genetic markers
 #'
 #' @return character vector of the selected individuals' names
 #' @references Jannink, Jean-Luc. “Dynamics of Long-Term Genomic Selection.”
@@ -63,23 +71,30 @@ selectBV <- function(pop, n, SNPeffects){
 #' initPop <- createPop(geno = exampleData$genotypes,
 #'                      SNPinfo = SNPs,
 #'                      popName = "Initial population")
+#' myTrait <- trait$new(name = "myTrait",
+#'                      qtn = names(exampleData$snpEffects),
+#'                      qtnEff = exampleData$snpEffects)
 #' selectWBV(pop = initPop,
-#'          SNPeffects = exampleData$snpEffects,
-#'          n = 10)
-selectWBV <- function(pop, n, SNPeffects){
-  # TODO integrate "trait" object
-  if (!all(colnames(SNPeffects) == colnames(pop$genoMat))) {
-    SNPeffects <- SNPeffects[colnames(pop$genoMat)]
+#'           QTNeffects = myTrait$qtnEff,
+#'           n = 10)
+selectWBV <- function(pop, n, QTNeffects){
+  if (is.null(names(QTNeffects))) {
+    stop("QTNeffects should be named according to qtns")
   }
 
-  favAllel <- as.numeric(SNPeffects > 0)
+  if (!all(names(QTNeffects) %in% colnames(pop$genoMat))) {
+    stop("qtn not found in the population. please check that:\n",
+         "`all(names(QTNeffects) %in% colnames(pop$genoMat))` is true")
+  }
 
-  w <- pop$af
+  favAllel <- as.numeric(QTNeffects > 0)
+
+  w <- pop$af[names(QTNeffects)]
   w[favAllel == 0] <- 1 - w[favAllel == 0]
   w[w == 0] <- 1 # give weight 1 for fixed alleles
   w <- w ^ (-0.5)
 
-  W_SNPeffects <- SNPeffects * w
-  WBV <- as.numeric(pop$genoMat %*% W_SNPeffects)
+  W_QTNeffects <- QTNeffects * w
+  WBV <- as.numeric(pop$genoMat[, names(QTNeffects)] %*% W_QTNeffects)
   names(pop$inds)[order(WBV, decreasing = TRUE)][1:n]
 }

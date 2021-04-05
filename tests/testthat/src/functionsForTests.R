@@ -103,5 +103,27 @@ create_inds <- function(haploList){
   inds
 }
 
+
+create_trait <- function(SNPs,
+                         name = "trait",
+                         n = 100,
+                         qtn = NULL,
+                         qtnEff = NULL) {
+  if (is.null(qtn)) {
+    qtn <-  sample(SNPs$SNPcoord$SNPid, n)
+  }
+
+  if (is.null(qtnEff)) {
+    qtnEff <-  rnorm(length(qtn), sd = 0.5)
+  }
+
+  myTrait <- trait$new(
+    name = name,
+    qtn = qtn,
+    qtnEff = qtnEff
+  )
+  myTrait
+}
+
 .charSeq <- breedSimulatR:::.charSeq
 .simulLinkMapPos <- breedSimulatR:::.simulLinkMapPos

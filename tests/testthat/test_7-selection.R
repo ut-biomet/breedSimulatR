@@ -30,26 +30,26 @@ test_that("selectBV", {
                           inds = indList,
                           verbose = FALSE)
 
-  snpEffects <- rnorm(SNPs$nSNP(),mean = 0, sd = 42/sqrt(SNPs$nSNP()))
-  names(snpEffects) <- colnames(myPop$genoMat)
+
+  myTrait <- create_trait(SNPs)
 
   nSel <- 10
 
   #### Tests:
-  expect_error({selectedInds <- selectBV(myPop, nSel, snpEffects)},
+  expect_error({selectedInds <- selectBV(myPop, nSel, myTrait$qtnEff)},
                NA)
   expect_is(selectedInds, "character")
   expect_equal(length(selectedInds), nSel)
   expect_equal(unique(selectedInds), selectedInds)
 
-  bv <- myPop$genoMat %*% snpEffects
+  bv <- myPop$genoMat[,myTrait$qtn] %*% matrix(myTrait$qtnEff, ncol = 1)
   bv <- as.numeric(bv)
   names(bv) <- rownames(myPop$genoMat)
-
   expect_equivalent(bv[selectedInds[1]], max(bv))
-
   bv <- sort(bv, decreasing = T)
   expect_equal(selectedInds, names(bv)[1:nSel])
+
+  expect_error({selectedInds <- selectBV(myPop, nSel, c(1,2,3,4))})
 
 })
 
@@ -70,16 +70,16 @@ test_that("selectWBV", {
 
   snpEffects <- rnorm(SNPs$nSNP(),mean = 0, sd = 42/sqrt(SNPs$nSNP()))
   names(snpEffects) <- colnames(myPop$genoMat)
-
+  myTrait <- create_trait(SNPs)
   nSel <- 10
 
   #### Tests:
-  expect_error({selectedInds <- selectWBV(myPop, nSel, snpEffects)},
+  expect_error({selectedInds <- selectWBV(myPop, nSel, myTrait$qtnEff)},
                NA)
   expect_is(selectedInds, "character")
   expect_equal(length(selectedInds), nSel)
   expect_equal(unique(selectedInds), selectedInds)
 
-  warning("calculation's results not checked !")
+  expect_error({selectedInds <- selectWBV(myPop, nSel, c(1,2,3,4))})
 
 })
