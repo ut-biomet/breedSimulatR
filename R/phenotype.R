@@ -63,9 +63,7 @@ trait <- R6::R6Class(
     initialize = function(name = NULL,
                           class = "quantitative",
                           qtn = NULL,
-                          qtnEff = NULL,
-                          vg = NULL,
-                          afs = NULL){
+                          qtnEff = NULL){
       # checks ----
       if (is.null(name)) {
         name <- "Unspecified"

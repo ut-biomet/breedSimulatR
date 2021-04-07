@@ -64,14 +64,7 @@ nucleotides (\code{length(qtn) == length(qtnEff)} must be \code{true})}
 \subsection{Method \code{new()}}{
 Create a new trait object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{trait$new(
-  name = NULL,
-  class = "quantitative",
-  qtn = NULL,
-  qtnEff = NULL,
-  vg = NULL,
-  afs = NULL
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{trait$new(name = NULL, class = "quantitative", qtn = NULL, qtnEff = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
