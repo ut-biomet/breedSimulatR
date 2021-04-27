@@ -150,7 +150,7 @@ trait <- R6::R6Class(
     print = function() {
       cat(paste0("trait: ", self$name, "\n",
                  self$class, " trait\n",
-                 "number of QTN effects: ", length(self$qtnEff), "\n"))
+                 "number of QTN: ", length(self$qtnEff), "\n"))
     }
   )
 )
