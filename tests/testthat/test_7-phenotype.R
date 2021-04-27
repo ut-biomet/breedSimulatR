@@ -198,8 +198,11 @@ test_that("phenotyper initialisation", {
   expect_equal(colnames(pheno6$data), refColnames)
 
 
-  expect_equal(names(pheno$data),
-               c("ind", "myTrait1", "myTrait2", "myTrait3", "rep", "phenotyper"))
+  expect_equal(
+    names(pheno$data),
+    c("ind", "myTrait1", "myTrait2", "myTrait3", "rep", "phenotyper")
+  )
+
   expect_true(!any(is.na(pheno$data$myTrait1)))
 
 

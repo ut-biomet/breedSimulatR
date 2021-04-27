@@ -37,22 +37,24 @@ create_SNP <- function(spec = create_spec(), nMarker = NULL,
 
 
 
-  SNPcoord <- do.call(rbind,lapply(seq(spec$nChr),
-                                   function(chr){
-                                     physPos <- sample(spec$lchr[chr], nMarker[chr],
-                                                       replace = FALSE)
-                                     if (lmap) {
-                                       linkMapPos <- .simulLinkMapPos(physPos,
-                                                                      spec$lchr[chr],
-                                                                      spec$lchrCm[chr],
-                                                                      b1 = b1,
-                                                                      b2 = b2)
-                                     } else {
-                                       linkMapPos <- NA
-                                     }
+  SNPcoord <- do.call(
+    rbind,
+    lapply(seq(spec$nChr),
+           function(chr){
+             physPos <- sample(spec$lchr[chr], nMarker[chr],
+                               replace = FALSE)
+             if (lmap) {
+               linkMapPos <- .simulLinkMapPos(physPos,
+                                              spec$lchr[chr],
+                                              spec$lchrCm[chr],
+                                              b1 = b1,
+                                              b2 = b2)
+             } else {
+               linkMapPos <- NA
+             }
 
-                                     data.frame(physPos,linkMapPos)
-                                   }))
+             data.frame(physPos,linkMapPos)
+           }))
   SNPcoord$chr <- rep(spec$chrNames, times = nMarker)
   # generate arbitrary SNPid
   SNPcoord$SNPid <- .charSeq("SNP", sample(sum(nMarker)*50, sum(nMarker)))

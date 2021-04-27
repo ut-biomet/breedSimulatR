@@ -27,8 +27,8 @@
 #'
 #'   Flutre, T., Diot, J., and David, J. (2019). PlantBreedGame: A Serious Game
 #'   that Puts Students in the Breeder’s Seat. Crop Science.
-#'   \href{https://dl.sciencesocieties.org/publications/cs/abstracts/59/4/1374}{DOI
-#'    10.2135/cropsci2019.03.0183le}
+#'   \href{https://dl.sciencesocieties.org/publications/cs/abstracts/59/4/1374}
+#'   {DOI 10.2135/cropsci2019.03.0183le}
 #'
 #' @aliases genotypes snpCoord snpEffects
 #'
