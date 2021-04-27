@@ -29,7 +29,6 @@ trait <- R6::R6Class(
     #' nucleotides (\code{length(qtn) == length(qtnEff)} must be \code{true})
     qtn = NULL,
     #' @field qtnEff [numeric vector] quantitative trait nucleotides effects
-    # TODO include Dominance effects: qtnEff list(A=addEff, D=domEff)
     qtnEff = NULL,
 
 
@@ -53,8 +52,7 @@ trait <- R6::R6Class(
     #' mySpec <- specie$new(nChr = 10,
     #'                      lchr = 10^6,
     #'                      lchrCm = 100,
-    #'                      specName = "Geneticae Exempli",
-    #'                      ploidy = 2)
+    #'                      specName = "Geneticae Exempli")
     #' SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
     #'                     specie = mySpec)
     #'
@@ -64,9 +62,7 @@ trait <- R6::R6Class(
     initialize = function(name = NULL,
                           class = "quantitative",
                           qtn = NULL,
-                          qtnEff = NULL,
-                          vg = NULL,
-                          afs = NULL){
+                          qtnEff = NULL){
       # checks ----
       if (is.null(name)) {
         name <- "Unspecified"
@@ -154,7 +150,7 @@ trait <- R6::R6Class(
     print = function() {
       cat(paste0("trait: ", self$name, "\n",
                  self$class, " trait\n",
-                 "number of QTN effects: ", length(self$qtnEff), "\n"))
+                 "number of QTN: ", length(self$qtnEff), "\n"))
     }
   )
 )
@@ -207,8 +203,7 @@ phenotyper <- R6::R6Class(
     #' mySpec <- specie$new(nChr = 10,
     #'                     lchr = 10^6,
     #'                     lchrCm = 100,
-    #'                     specName = "Geneticae Exempli",
-    #'                     ploidy = 2)
+    #'                     specName = "Geneticae Exempli")
     #' SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
     #'                    specie = mySpec)
     #' example_pop <- createPop(geno = exampleData$genotypes,

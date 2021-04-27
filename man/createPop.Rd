@@ -30,8 +30,7 @@ Create population object from genotype data.frame
 mySpec <- specie$new(nChr = 10,
                      lchr = 10^6,
                      lchrCm = 100,
-                     specName = "Geneticae Exempli",
-                     ploidy = 2)
+                     specName = "Geneticae Exempli")
 SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
                     specie = mySpec)
 

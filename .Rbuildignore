@@ -11,3 +11,6 @@
 ^docs$
 ^pkgdown$
 ^tmp$
+^doc$
+^Meta$
+.vscode

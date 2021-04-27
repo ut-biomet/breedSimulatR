@@ -30,8 +30,8 @@ specie <- R6::R6Class(
     lchr = NA,
     #' @field lchrCm [numeric] length of all chromosomes in centimorgans
     lchrCm = NA,
-    #' @field mutRate [numeric] Mutation rate at each base
-    mutRate = NA,
+    # @field mutRate [numeric] Mutation rate at each base
+    # mutRate = NA,
     #' @field chrNames [str] Names of the chromosomes
     chrNames = NA,
 
@@ -40,9 +40,9 @@ specie <- R6::R6Class(
     #' @param lchr [numeric] length of all chromosomes in base pairs
     #' @param lchrCm [numeric] length of all chromosomes in centimorgans
     #' @param specName [str] Specie's name (optional)
-    #' @param ploidy [numeric] Number of possible alleles at one locus
+    # @param ploidy [numeric] Number of possible alleles at one locus
     #'   (optional)
-    #' @param mutRate [numeric] Mutation rate at each base (optional)
+    # @param mutRate [numeric] Mutation rate at each base (optional)
     #' @param chrNames [str] Names of the chromosomes (optional)
     #' @param verbose [bool] Display info (optional)
     #' @return A new `specie` object.
@@ -56,8 +56,8 @@ specie <- R6::R6Class(
                           lchr,
                           lchrCm,
                           specName = "Undefinded",
-                          ploidy = NA,
-                          mutRate = NA,
+                          # ploidy = NA,
+                          # mutRate = NA,
                           chrNames = NA,
                           verbose = TRUE){
       if (!is.numeric(nChr)) stop("nChr must be numeric.")
@@ -73,6 +73,7 @@ specie <- R6::R6Class(
         stop(paste("length(lchrCm) must be equal to 1 (all chr have the same",
                    "size) or equal to nChr."))
       }
+      ploidy <- 2
       if (is.na(ploidy)){
         message('"ploidy" was not specify. The ploidy had been set to "2"')
         ploidy <- 2
@@ -82,7 +83,7 @@ specie <- R6::R6Class(
       self$specName <- specName
       self$nChr <- nChr
       self$ploidy <- ploidy
-      self$mutRate <- mutRate
+      # self$mutRate <- mutRate
       if (all(is.na(chrNames))) {
         self$chrNames <- .charSeq("Chr", 1:self$nChr)
       } else {

@@ -9,7 +9,8 @@
 #' R6 class representing a population
 #'
 #' @description
-#' population object store specific information about group of several individuals
+#' population object store specific information about group of several
+#' individuals
 #'
 #'
 #' @export
@@ -274,8 +275,7 @@ population <- R6::R6Class(
 #' mySpec <- specie$new(nChr = 10,
 #'                      lchr = 10^6,
 #'                      lchrCm = 100,
-#'                      specName = "Geneticae Exempli",
-#'                      ploidy = 2)
+#'                      specName = "Geneticae Exempli")
 #' SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
 #'                     specie = mySpec)
 #'

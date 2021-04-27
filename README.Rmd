@@ -64,6 +64,7 @@ help(package = breedSimulatR)
 
 ```{r example_0, include=FALSE}
 dta <- breedSimulatR::exampleData
+set.seed(1804)
 ```
 
 This is a basic example which shows how to use the package. 
@@ -97,8 +98,7 @@ Let's specify the specie:
 specie_statEx <- specie$new(specName = "Statisticae exempli",
                         nChr = 10,
                         lchr = 1e6,
-                        lchrCm = 100,
-                        ploidy = 2)
+                        lchrCm = 100)
 ```
 
 #### SNP specification
@@ -141,6 +141,7 @@ initPop <- createPop(geno = exampleData$genotypes,
 
 
 #### Traits and phenotyping initialization
+
 Let's create 2 independent phenotypic traits that can be phenotyped.
 
 ```{r example_trait.1}
@@ -179,7 +180,7 @@ Then, the function `randomMate` will generate the crossing table.
 ```{r example_4.1}
 exampleData$snpEffects
 (selectedInds <- selectBV(pop = initPop,
-                          SNPeffects = exampleData$snpEffects,
+                          QTNeffects = exampleData$snpEffects,
                           n = 10))
 
 (crossTable <- randomMate(inds = selectedInds,
@@ -302,7 +303,7 @@ Flutre T, Diot J, and David J (2019). <em>PlantBreedGame</em>: A Serious Game th
 ## License and copyright  :copyright:
 
 The `breedSimulatR` package as a whole is licensed under the MIT.
-See the [LICENSE](LICENSE) file for more details.
+See the [LICENSE.md](LICENSE.md) file for more details.
 
 :copyright: The copyright holder is [The University of Tokyo](https://www.u-tokyo.ac.jp/en/), 
 Laboratory of Biometry and Bioinformatics.

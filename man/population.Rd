@@ -4,7 +4,8 @@
 \alias{population}
 \title{R6 class representing a population}
 \description{
-population object store specific information about group of several individuals
+population object store specific information about group of several
+individuals
 }
 \examples{
 

@@ -15,8 +15,7 @@ trait object store information about a phenotypic trait
 mySpec <- specie$new(nChr = 10,
                      lchr = 10^6,
                      lchrCm = 100,
-                     specName = "Geneticae Exempli",
-                     ploidy = 2)
+                     specName = "Geneticae Exempli")
 SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
                     specie = mySpec)
 
@@ -64,14 +63,7 @@ nucleotides (\code{length(qtn) == length(qtnEff)} must be \code{true})}
 \subsection{Method \code{new()}}{
 Create a new trait object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{trait$new(
-  name = NULL,
-  class = "quantitative",
-  qtn = NULL,
-  qtnEff = NULL,
-  vg = NULL,
-  afs = NULL
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{trait$new(name = NULL, class = "quantitative", qtn = NULL, qtnEff = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -102,8 +94,7 @@ A new `trait` object.
 \preformatted{mySpec <- specie$new(nChr = 10,
                      lchr = 10^6,
                      lchrCm = 100,
-                     specName = "Geneticae Exempli",
-                     ploidy = 2)
+                     specName = "Geneticae Exempli")
 SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
                     specie = mySpec)
 

@@ -44,6 +44,12 @@ test_that("quant trait initialisation", {
   expect_equal(names(myTrait$qtnEff), myTrait$qtn)
   expect_equal(names(myTrait2$qtnEff), myTrait2$qtn)
 
+
+  expect_is(myTrait$name, "character")
+  expect_equal(myTrait$class, "quantitative")
+  expect_is(myTrait$qtn, "character")
+  expect_is(myTrait$qtnEff, "numeric")
+
 })
 
 
@@ -68,7 +74,6 @@ test_that("quant trait gv calculation", {
   expect_is(gv, "matrix")
   expect_equal(nrow(gv), nInds)
   expect_equal(row.names(gv), names(myPop$inds))
-
 })
 
 
@@ -193,8 +198,11 @@ test_that("phenotyper initialisation", {
   expect_equal(colnames(pheno6$data), refColnames)
 
 
-  expect_equal(names(pheno$data),
-               c("ind", "myTrait1", "myTrait2", "myTrait3", "rep", "phenotyper"))
+  expect_equal(
+    names(pheno$data),
+    c("ind", "myTrait1", "myTrait2", "myTrait3", "rep", "phenotyper")
+  )
+
   expect_true(!any(is.na(pheno$data$myTrait1)))
 
 

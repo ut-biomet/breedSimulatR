@@ -10,13 +10,11 @@
 create_spec <- function(nChr = round(runif(1, 1, 10)),
                         lchr = round(pmax(rnorm(nChr, 450, 50), 200)),# > 200
                         lchrCm = 100,
-                        ploidy = 2,
                         name = "Undefinded") {
 
   specie$new(nChr = nChr,
              lchr = lchr,
              lchrCm = lchrCm,
-             ploidy = ploidy,
              specName = name,
              verbose = F)
 }
@@ -39,22 +37,24 @@ create_SNP <- function(spec = create_spec(), nMarker = NULL,
 
 
 
-  SNPcoord <- do.call(rbind,lapply(seq(spec$nChr),
-                                   function(chr){
-                                     physPos <- sample(spec$lchr[chr], nMarker[chr],
-                                                       replace = FALSE)
-                                     if (lmap) {
-                                       linkMapPos <- .simulLinkMapPos(physPos,
-                                                                      spec$lchr[chr],
-                                                                      spec$lchrCm[chr],
-                                                                      b1 = b1,
-                                                                      b2 = b2)
-                                     } else {
-                                       linkMapPos <- NA
-                                     }
+  SNPcoord <- do.call(
+    rbind,
+    lapply(seq(spec$nChr),
+           function(chr){
+             physPos <- sample(spec$lchr[chr], nMarker[chr],
+                               replace = FALSE)
+             if (lmap) {
+               linkMapPos <- .simulLinkMapPos(physPos,
+                                              spec$lchr[chr],
+                                              spec$lchrCm[chr],
+                                              b1 = b1,
+                                              b2 = b2)
+             } else {
+               linkMapPos <- NA
+             }
 
-                                     data.frame(physPos,linkMapPos)
-                                   }))
+             data.frame(physPos,linkMapPos)
+           }))
   SNPcoord$chr <- rep(spec$chrNames, times = nMarker)
   # generate arbitrary SNPid
   SNPcoord$SNPid <- .charSeq("SNP", sample(sum(nMarker)*50, sum(nMarker)))
@@ -101,6 +101,28 @@ create_inds <- function(haploList){
     return(inds[[1]])
   }
   inds
+}
+
+
+create_trait <- function(SNPs,
+                         name = "trait",
+                         n = 100,
+                         qtn = NULL,
+                         qtnEff = NULL) {
+  if (is.null(qtn)) {
+    qtn <-  sample(SNPs$SNPcoord$SNPid, n)
+  }
+
+  if (is.null(qtnEff)) {
+    qtnEff <-  rnorm(length(qtn), sd = 0.5)
+  }
+
+  myTrait <- trait$new(
+    name = name,
+    qtn = qtn,
+    qtnEff = qtnEff
+  )
+  myTrait
 }
 
 .charSeq <- breedSimulatR:::.charSeq

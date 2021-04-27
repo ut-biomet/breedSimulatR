@@ -15,8 +15,7 @@ phenotyper object is used to phenotype populations
 mySpec <- specie$new(nChr = 10,
                     lchr = 10^6,
                     lchrCm = 100,
-                    specName = "Geneticae Exempli",
-                    ploidy = 2)
+                    specName = "Geneticae Exempli")
 SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
                    specie = mySpec)
 example_pop <- createPop(geno = exampleData$genotypes,
@@ -145,8 +144,7 @@ A new `phenotyper` object.
 \preformatted{mySpec <- specie$new(nChr = 10,
                     lchr = 10^6,
                     lchrCm = 100,
-                    specName = "Geneticae Exempli",
-                    ploidy = 2)
+                    specName = "Geneticae Exempli")
 SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
                    specie = mySpec)
 example_pop <- createPop(geno = exampleData$genotypes,

@@ -4,7 +4,7 @@
 \alias{selectBV}
 \title{Selection according to breeding values}
 \usage{
-selectBV(pop, n, SNPeffects)
+selectBV(pop, n, QTNeffects)
 }
 \arguments{
 \item{pop}{(population object) Population of individuals to select
@@ -12,7 +12,7 @@ selectBV(pop, n, SNPeffects)
 
 \item{n}{(integer) number of individuals to select}
 
-\item{SNPeffects}{(numeric vector) effect of the genetic markers}
+\item{QTNeffects}{(named numeric vector) effect of the genetic markers}
 }
 \value{
 character vector of the selected individuals' names
@@ -24,13 +24,15 @@ Selection according to breeding values
 mySpec <- specie$new(specName = "Statisticae exempli",
                      nChr = 10,
                      lchr = 1e6,
-                     lchrCm = 100,
-                     ploidy = 2)
+                     lchrCm = 100)
 SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord, specie = mySpec)
 initPop <- createPop(geno = exampleData$genotypes,
                      SNPinfo = SNPs,
                      popName = "Initial population")
+myTrait <- trait$new(name = "myTrait",
+                     qtn = names(exampleData$snpEffects),
+                     qtnEff = exampleData$snpEffects)
 selectBV(pop = initPop,
-         SNPeffects = exampleData$snpEffects,
+         QTNeffects = myTrait$qtnEff,
          n = 10)
 }

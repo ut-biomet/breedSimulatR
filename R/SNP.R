@@ -22,7 +22,7 @@ SNPinfo <- R6::R6Class(
   public = list(
     #' @field SNPcoord [data.frame] Coordinate of all SNPs.
     #'
-    #' 3 columns:
+    #' 4 columns:
     #' \itemize{
     #'  \item{\code{chr}:} {Chromosome holding the SNP}
     #'  \item{\code{physPos}:} {SNP physical position on the chromosome}
