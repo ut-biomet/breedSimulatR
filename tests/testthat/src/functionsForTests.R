@@ -10,13 +10,11 @@
 create_spec <- function(nChr = round(runif(1, 1, 10)),
                         lchr = round(pmax(rnorm(nChr, 450, 50), 200)),# > 200
                         lchrCm = 100,
-                        ploidy = 2,
                         name = "Undefinded") {
 
   specie$new(nChr = nChr,
              lchr = lchr,
              lchrCm = lchrCm,
-             ploidy = ploidy,
              specName = name,
              verbose = F)
 }

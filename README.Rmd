@@ -97,8 +97,7 @@ Let's specify the specie:
 specie_statEx <- specie$new(specName = "Statisticae exempli",
                         nChr = 10,
                         lchr = 1e6,
-                        lchrCm = 100,
-                        ploidy = 2)
+                        lchrCm = 100)
 ```
 
 #### SNP specification

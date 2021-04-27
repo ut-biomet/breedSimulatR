@@ -47,8 +47,6 @@ mySpec$getChrLengthCm("Chr3")
 
 \item{\code{lchrCm}}{[numeric] length of all chromosomes in centimorgans}
 
-\item{\code{mutRate}}{[numeric] Mutation rate at each base}
-
 \item{\code{chrNames}}{[str] Names of the chromosomes}
 }
 \if{html}{\out{</div>}}
@@ -74,8 +72,6 @@ Create a new specie object.
   lchr,
   lchrCm,
   specName = "Undefinded",
-  ploidy = NA,
-  mutRate = NA,
   chrNames = NA,
   verbose = TRUE
 )}\if{html}{\out{</div>}}
@@ -90,12 +86,8 @@ Create a new specie object.
 
 \item{\code{lchrCm}}{[numeric] length of all chromosomes in centimorgans}
 
-\item{\code{specName}}{[str] Specie's name (optional)}
-
-\item{\code{ploidy}}{[numeric] Number of possible alleles at one locus
+\item{\code{specName}}{[str] Specie's name (optional)
 (optional)}
-
-\item{\code{mutRate}}{[numeric] Mutation rate at each base (optional)}
 
 \item{\code{chrNames}}{[str] Names of the chromosomes (optional)}
 

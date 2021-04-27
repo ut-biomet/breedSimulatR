@@ -33,8 +33,7 @@ if (any(!example_snpCoord$SNPid %in% colnames(example_genotypes))) {
 example_specie <- specie$new(specName = "Statisticae exempli",
                              nChr = 10,
                              lchr = 1e6,
-                             lchrCm = 100,
-                             ploidy = 2)
+                             lchrCm = 100)
 
 # create SNPinfo
 

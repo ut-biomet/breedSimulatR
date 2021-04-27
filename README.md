@@ -77,8 +77,10 @@ Let’s specify the specie:
 
 ``` r
 # create specie object
-specie_statEx <- specie$new(specName = "Statisticae exempli", nChr = 10, lchr = 1000000, 
-    lchrCm = 100, ploidy = 2)
+specie_statEx <- specie$new(specName = "Statisticae exempli",
+                        nChr = 10,
+                        lchr = 1e6,
+                        lchrCm = 100)
 #> A new species has emerged: Statisticae exempli !
 ```
 

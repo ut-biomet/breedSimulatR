@@ -24,8 +24,7 @@ Selection according to weighted breeding values
 mySpec <- specie$new(specName = "Statisticae exempli",
                      nChr = 10,
                      lchr = 1e6,
-                     lchrCm = 100,
-                     ploidy = 2)
+                     lchrCm = 100)
 SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord, specie = mySpec)
 initPop <- createPop(geno = exampleData$genotypes,
                      SNPinfo = SNPs,

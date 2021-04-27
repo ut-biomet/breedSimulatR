@@ -15,8 +15,6 @@ test_that("specie initialization", {
                                      lchr = c(100, 150, 200),
                                      lchrCm = c(101, 151, 201),
                                      specName = "Geneticae Exempulus",
-                                     ploidy = 2,
-                                     mutRate = 10^-8,
                                      chrNames = c("C1", "C2", "C3"),
                                      verbose = F)},
                NA)
@@ -29,7 +27,6 @@ test_that("specie initialization", {
   expect_identical(names(mySpec$lchr), c("C1", "C2", "C3"))
   expect_identical(as.numeric(mySpec$lchrCm), c(101, 151, 201))
   expect_identical(names(mySpec$lchrCm), c("C1", "C2", "C3"))
-  expect_identical(mySpec$mutRate, 10^-8)
   expect_identical(mySpec$chrNames, c("C1", "C2", "C3"))
   expect_output(specie$new(1, 10, 100, verbose = T), paste("A new species has",
                                                       "emerged: Undefinded !"))
@@ -68,7 +65,6 @@ test_that("specie initialization without optional values", {
   expect_identical(names(mySpec$lchr), c("Chr1", "Chr2", "Chr3"))
   expect_identical(as.numeric(mySpec$lchrCm), c(101, 151, 201))
   expect_identical(names(mySpec$lchrCm), c("Chr1", "Chr2", "Chr3"))
-  expect_identical(mySpec$mutRate, NA)
   expect_identical(mySpec$chrNames, c("Chr1", "Chr2", "Chr3"))
 })
 
