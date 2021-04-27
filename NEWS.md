@@ -1,3 +1,14 @@
+# breedSimulatR 0.3.0
+
+## Breaking changes
+
+- For the initialization of the class `specie`, parameters `ploidy` and `mutRate` had been removed.
+- For functions `selectBV` and `selectWBV`, parameter `SNPeffect` have been renamed to `QTNeffect`.
+
+## Improved Documentation
+
+- Create an [**example** vignette](https://ut-biomet.github.io/breedSimulatR/docs/articles/example.html) presenting a use case example for the package.
+
 # breedSimulatR 0.2.0
 
 ## Improvements
