@@ -7,7 +7,7 @@
 
 ## Improved Documentation
 
-- Create an [**example** vignette](https://ut-biomet.github.io/breedSimulatR/docs/articles/example.html) presenting a use case example for the package.
+- Create an [**example** vignette](https://ut-biomet.github.io/breedSimulatR/articles/example.html) presenting a use case example for the package.
 
 # breedSimulatR 0.2.0
 
