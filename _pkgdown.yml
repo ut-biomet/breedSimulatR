@@ -6,7 +6,7 @@ navbar:
       - home
       # - intro
       - reference
-      # - articles
+      - articles
       # - tutorials
     right:
       - news
