@@ -2,7 +2,6 @@ Type: Package
 Package: breedSimulatR
 Title: R Breeding Simulator
 Version: 0.2.0
-Date: 2020-01-31
 Authors@R: 
     c(person(given = "Julien",
              family = "Diot",

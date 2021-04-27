@@ -466,7 +466,7 @@ Game that Puts Students in the Breeder’s Seat. <em>Crop Science.</em>
 ## License and copyright :copyright:
 
 The `breedSimulatR` package as a whole is licensed under the MIT. See
-the [LICENSE](LICENSE) file for more details.
+the [LICENSE.md](LICENSE.md) file for more details.
 
 :copyright: The copyright holder is [The University of
 Tokyo](https://www.u-tokyo.ac.jp/en/), Laboratory of Biometry and
