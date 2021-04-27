@@ -64,6 +64,7 @@ help(package = breedSimulatR)
 
 ```{r example_0, include=FALSE}
 dta <- breedSimulatR::exampleData
+set.seed(1804)
 ```
 
 This is a basic example which shows how to use the package. 

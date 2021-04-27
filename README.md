@@ -31,7 +31,7 @@ The associated web-site for this package can be found at:
 
 ``` r
 if (!require("devtools")) {
-    install.packages("devtools")
+  install.packages("devtools")
 }
 devtools::install_github("ut-biomet/breedSimulatR")
 ```
@@ -106,7 +106,8 @@ head(exampleData$snpCoord)
 
 ``` r
 # create SNPinfo object
-SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord, specie = specie_statEx)
+SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
+                    specie = specie_statEx)
 print(SNPs)
 #> specie: Statisticae exempli
 #> 3333 Markers on 10 chromosomes :
@@ -132,7 +133,7 @@ and create the `population` object:
 
 ``` r
 # data preview
-exampleData$genotypes[1:3, 1:5]
+exampleData$genotypes[1:3,1:5]
 #>          snp00006 snp00009 snp00011 snp00018 snp00026
 #> Coll0001        2        2        2        0        2
 #> Coll0002        0        2        2        2        0
@@ -141,7 +142,9 @@ exampleData$genotypes[1:3, 1:5]
 
 ``` r
 # create population object
-initPop <- createPop(geno = exampleData$genotypes, SNPinfo = SNPs, popName = "Initial population")
+initPop <- createPop(geno = exampleData$genotypes,
+                     SNPinfo = SNPs,
+                     popName = "Initial population")
 ```
 
 #### Traits and phenotyping initialization
@@ -152,22 +155,30 @@ Let’s create 2 independent phenotypic traits that can be phenotyped.
 nQtn <- 1000
 
 qtn <- sample(names(initPop$maf > 0.1), nQtn)
-weight <- trait$new(name = "Weight", qtn = qtn, qtnEff = rnorm(nQtn, 0, 0.35))
+weight <- trait$new(name = "Weight",
+                    qtn = qtn,
+                    qtnEff = rnorm(nQtn, 0, 0.35))
 
 qtn <- sample(names(initPop$maf > 0.1), nQtn)
-height <- trait$new(name = "Height", qtn = qtn, qtnEff = rnorm(nQtn, 0, 0.25))
+height <- trait$new(name = "Height",
+                    qtn = qtn,
+                    qtnEff = rnorm(nQtn, 0, 0.25))
 
-phenolab <- phenotyper$new(name = "Pheno lab", traits = list(weight, height), plotCost = 150, 
-    mu = c(100, 75), he = c(0.4, 0.6), pop = initPop)
+phenolab <- phenotyper$new(name = "Pheno lab", 
+                           traits = list(weight, height),
+                           plotCost = 150,
+                           mu = c(100, 75),
+                           he = c(0.4, 0.6),
+                           pop = initPop)
 
 pheno <- phenolab$trial(pop = initPop, rep = 4)
 head(pheno$data)
 #>        ind    Weight   Height rep phenotyper
-#> 1 Coll0001  74.04406 80.86103   1  Pheno lab
-#> 2 Coll0001 101.04694 70.97162   2  Pheno lab
-#> 3 Coll0001  95.92415 83.44197   3  Pheno lab
-#> 4 Coll0001 107.65019 83.37849   4  Pheno lab
-#> 5 Coll0002  83.41513 48.97785   1  Pheno lab
+#> 1 Coll0001 125.51295 83.75159   1  Pheno lab
+#> 2 Coll0001 113.00704 67.41127   2  Pheno lab
+#> 3 Coll0001  92.74805 68.17246   3  Pheno lab
+#> 4 Coll0001  99.54966 70.02556   4  Pheno lab
+#> 5 Coll0002 118.49684 65.84139   1  Pheno lab
 #>  [ reached 'max' / getOption("max.print") -- omitted 1 rows ]
 print(pheno$cost)
 #> [1] 60000
@@ -203,22 +214,24 @@ exampleData$snpEffects
 #>  [1] "Coll0068" "Coll0008" "Coll0074" "Coll0016" "Coll0020" "Coll0045"
 #>  [7] "Coll0079" "Coll0002" "Coll0046" "Coll0097"
 
-(crossTable <- randomMate(inds = selectedInds, n = 120, names = "generation_1"))
+(crossTable <- randomMate(inds = selectedInds,
+                          n = 120,
+                          names = "generation_1"))
 #>       ind1     ind2 n            names
-#> 1 Coll0002 Coll0008 1 generation_1-001
-#> 2 Coll0045 Coll0020 1 generation_1-002
-#> 3 Coll0046 Coll0068 1 generation_1-003
-#> 4 Coll0016 Coll0097 1 generation_1-004
-#> 5 Coll0008 Coll0008 1 generation_1-005
-#> 6 Coll0016 Coll0016 1 generation_1-006
+#> 1 Coll0046 Coll0097 1 generation_1-001
+#> 2 Coll0068 Coll0097 1 generation_1-002
+#> 3 Coll0074 Coll0020 1 generation_1-003
+#> 4 Coll0008 Coll0008 1 generation_1-004
+#> 5 Coll0097 Coll0097 1 generation_1-005
+#> 6 Coll0097 Coll0074 1 generation_1-006
 #>  [ reached 'max' / getOption("max.print") -- omitted 114 rows ]
 ```
 
 We can now generate the offspring:
 
 ``` r
-newPop <- population$new(name = "1st offspring", inds = makeCrosses(crosses = crossTable, 
-    pop = initPop))
+newPop <- population$new(name = "1st offspring",
+                         inds = makeCrosses(crosses = crossTable, pop = initPop))
 ```
 
 ``` r
@@ -278,7 +291,7 @@ feedbacks.
 
 <ul>
 <li>
-R Core Team (2020).<em>R: A Language and Environment for Statistical
+R Core Team (2021).<em>R: A Language and Environment for Statistical
 Computing</em>.R Foundation for Statistical Computing, Vienna,
 Austria.<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </li>
@@ -292,7 +305,7 @@ packages:
 <b> base </b>
 <ul>
 <li>
-R Core Team (2020).<em>R: A Language and Environment for Statistical
+R Core Team (2021).<em>R: A Language and Environment for Statistical
 Computing</em>.R Foundation for Statistical Computing, Vienna,
 Austria.<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </li>
@@ -312,7 +325,7 @@ Semantics</em>.R package version 2.5.0,
 <b> stats </b>
 <ul>
 <li>
-R Core Team (2020).<em>R: A Language and Environment for Statistical
+R Core Team (2021).<em>R: A Language and Environment for Statistical
 Computing</em>.R Foundation for Statistical Computing, Vienna,
 Austria.<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </li>
@@ -342,8 +355,8 @@ Developing R Packages Easier</em>.R package version 2.3.2,
 <b> knitr </b>
 <ul>
 <li>
-Xie Y (2020).<em>knitr: A General-Purpose Package for Dynamic Report
-Generation in R</em>.R package version 1.30,
+Xie Y (2021).<em>knitr: A General-Purpose Package for Dynamic Report
+Generation in R</em>.R package version 1.31,
 <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
 </li>
 <li>
@@ -374,8 +387,8 @@ Documentation for a Package</em>.R package version 1.6.1,
 <ul>
 <li>
 Allaire J, Xie Y, McPherson J, Luraschi J, Ushey K, Atkins A, Wickham H,
-Cheng J, Chang W, Iannone R (2020).<em>rmarkdown: Dynamic Documents for
-R</em>.R package version 2.6,
+Cheng J, Chang W, Iannone R (2021).<em>rmarkdown: Dynamic Documents for
+R</em>.R package version 2.7,
 <a href="https://github.com/rstudio/rmarkdown">https://github.com/rstudio/rmarkdown</a>.
 </li>
 <li>
