@@ -1,0 +1,340 @@
+---
+title: "`breedSimulatR` Example"
+output:
+  rmarkdown::html_vignette:
+    toc: true 
+vignette: >
+  %\VignetteIndexEntry{`breedSimulatR` Example}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+references:
+- id: PlantBreedGame
+  title: PlantBreedGame, A Serious Game that Puts Students in the Breeder's Seat
+  author:
+  - family: Flutre
+    given: Timothée
+  - family: Diot
+    given: Julien
+  - family: David
+    given: Jacques
+  container-title: Crop Science
+  volume: 59
+  number: 4
+  page: 1374-1375
+  URL: https://acsess.onlinelibrary.wiley.com/doi/abs/10.2135/cropsci2019.03.0183le
+  DOI: 10.2135/cropsci2019.03.0183le
+  publisher: Nature Publishing Group
+  type: article-journal
+  issued:
+    year: 2019
+    month: 10
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+#  R options
+options(max.print = 25)
+```
+
+```{r setup, include=FALSE}
+library(breedSimulatR)
+```
+
+# Introduction
+
+`breedSimulatR` is R package providing classes and functions to simulate breeding schemes. It have been design to be intuitive and easy to use.
+
+The Object-Oriented Programming (OOP) system used in this package is [R6](https://CRAN.R-project.org/package=R6). Information about R6 OOP system can be found at [chapter 14 of Hadley Wickham's book *Advanced R*](https://adv-r.hadley.nz/r6.html).
+
+This vignette shows how to use the `breedSimulatR` package thought basic examples.
+
+## `breedSimulatR`'s classes
+
+First let's have a look on the main classes provided by `breedSimulatR`:
+
+- [`Specie`](https://ut-biomet.github.io/breedSimulatR/reference/specie.html): which store specific information about the studied specie like number of chromosomes, length of chromosomes in base pairs and centimorgans, their names
+- [`SNPinfo`](https://ut-biomet.github.io/breedSimulatR/reference/SNPinfo.html): which store specific information about a set of SNP markers like physical positions, linkage map position, IDs
+- [`individuals`](https://ut-biomet.github.io/breedSimulatR/reference/individual.html): which store specific information about an individual like its parents, its haplotype. This class have also a method to generate gametes.
+- [`population`](https://ut-biomet.github.io/breedSimulatR/reference/population.html): which store specific information several individuals like their genotypes, allele frequency
+- [`trait`](https://ut-biomet.github.io/breedSimulatR/reference/trait.html): which store specific information about a trait like the QTN involved, the QTN's effects
+- [`phenotyper`](https://ut-biomet.github.io/breedSimulatR/reference/phenotyper.html): This object is used to simulate phenotyping experiments and store store some specific information like the variance of the environmental effect and have method to phenotype individuals. Several phenotyper can be created to represents several environments.
+
+A exhaustive list can be fond on the package's [web site](https://ut-biomet.github.io/breedSimulatR/reference/index.html).
+
+## Example data
+
+The package contains some example data that we will use for these examples. These data are stored in the variable `exampleData` of the package.
+
+```{r eval = FALSE, include = TRUE}
+library(breedSimulatR)
+exampleData
+```
+
+```{r include=FALSE}
+dta <- exampleData
+```
+
+```{r include=FALSE}
+.nInd = nrow(dta$genotypes)
+.nSNP = ncol(dta$genotypes)
+.ColNamesSNP = paste("\`", colnames(dta$snpCoord), "\`")
+.nChr = length(unique(dta$snpCoord$chr))
+.lchr = format(signif(max(dta$snpCoord$physPos), digits = 3), scientific = TRUE)
+.lchrCm = signif(max(dta$snpCoord$linkMapPos), digits = 2)
+```
+
+`exampleData` is a list containing 3 elements:
+
+- `exampleData$genotypes`: contains some genotypic.
+- `exampleData$snpCoord`: contains the coordinates of the SNP markers.
+- `exampleData$snpEffects`: contains the "true" effects of the SNP markers for a quantitative trait based on an additive architecture.
+
+It represents information about `.nInd` individuals and `.nSNP` markers on `.nChr`.
+
+These data are fictitious and come from the serious game ["PlantBreedGame"](https://github.com/timflutre/PlantBreedGame) [@PlantBreedGame].
+
+# Simulation Initialization
+
+In order to run some simulation, we must first initialize some objects: a `specie`, SNP information (`SNPinfo`), a `population`, some `traits` and a `phenotyper`.
+
+## Specie specification
+
+The example's specie, let's name it *Statisticae exempli*, have **`r .nChr` chromosomes** with the same length of around **`r .lchr`** base pairs for **`r .lchrCm`** centimorgans.
+
+The function `specie$new` will create a new `specie` object `specie_statEx`.
+
+```{r setup_1}
+# create specie object
+specie_statEx <- specie$new(specName = "Statisticae exempli",
+                            nChr = 10,
+                            lchr = 1e6,
+                            lchrCm = 100)
+```
+
+```{r setup_1.1}
+print(specie_statEx)
+```
+
+## SNP specification
+
+In order to simulate the crossing between individuals, we need information about the positions of the genotypic markers used in the simulation. We will create for that the object `SNPinfo` using the function `SNPinfo$new`.
+
+- `SNPcoord`: a `data.frame` with one line per marker and 4 columns:
+  - `chr`: Chromosome holding the SNP
+  - `physPos`: SNP physical position on the chromosome
+  - `linkMapPos`: SNP linkage map position on the chromosome
+  - `SNPid`: SNP's IDs
+- `specie`: an object of class specie.
+
+We can create the `SNPinfo` object using `exampleData$snpCoord` which is a `data.frame` matching the requirement of `SNPinfo$new`:
+
+```{r setup_2.1}
+# data preview
+head(exampleData$snpCoord)
+```
+
+```{r setup_2.2}
+# create SNPinfo object
+SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
+                    specie = specie_statEx)
+```
+
+```{r setup_2.2.1}
+print(SNPs)
+```
+
+## Population initialization
+
+We can now generate an initial population from genotypic data. We will use the function `createPop`. This function will create a `population` object from at least two arguments:
+
+- `geno`: a `data.frame` of the genotypic data of homozygotes individuals
+- `SNPinfo`: a `SNPinfo` object containing the information related to the markers of the genotypic data
+
+We can create the initial `population` object using `exampleData$genotypes` which is a `data.frame` matching the requirement of `geno`:
+
+```{r setup_3.1}
+# data preview
+exampleData$genotypes[1:3,1:5]
+```
+
+```{r setup_3.2, results='hide'}
+# create population object
+initPop <- createPop(geno = exampleData$genotypes,
+                     SNPinfo = SNPs,
+                     popName = "Initial population")
+```
+
+```{r setup_3.3}
+print(initPop)
+```
+
+## Traits and phenotyping initialization
+
+In order to do some phenotyping simulation, we need to create a trait.
+
+We will use for that the example data `exampleData$snpEffects` containing the "true" effects of each QTN.
+
+```{r setup_trait.1}
+exampleData$snpEffects[1:5]
+```
+
+```{r setup_trait.1.2}
+weight <- trait$new(name = "Weight",
+                    qtn = names(exampleData$snpEffects),
+                    qtnEff = exampleData$snpEffects)
+```
+
+```{r}
+print(weight)
+```
+
+This trait object contain the genetic effects but in order to simulate phenotyping experiments, we should also include some environmental effects.
+
+The environmental effect will be stored in the `phenotyper` object. Here we create a phenotyper for which the mean of the phenotypic value is equal to 100 and the initial population have an heritability of 0.6, and the cost for phenotyping one plot is 150.
+
+```{r setup_trait.2}
+phenolab <- phenotyper$new(name = "Pheno lab",
+                           traits = weight,
+                           plotCost = 150,
+                           mu = 100,
+                           he = 0.6,
+                           pop = initPop)
+```
+
+```{r setup_trait.2.1}
+print(phenolab)
+```
+
+# Breeding simulation
+
+Now the simulation is setup, we can write the simulation code using the objects defined previously. For this example we will simulate a simple breeding scheme consisting in phenotyping individuals and selecting those with the highest phenotypic values and cross them together.
+
+## phenotyping individuals
+
+First, let's phenotype the initial population
+
+```{r}
+set.seed(1809) # set seed 
+
+pheno <- phenolab$trial(pop = initPop, rep = 3)
+pheno$data
+pheno$cost
+```
+
+The `trial` method of the `phenotyper` class return a list:
+
+- `data`: containing a `data.frame` of the phenotypic data
+- `cost`: a numeric value representing the cost of the trial.
+
+## Selecting individuals
+
+Here we will just select the individuals with the highest phenotypic values.
+
+```{r}
+# aggregate result by individual
+aggPheno <- aggregate(Weight ~ ind, data = pheno$data, mean) 
+
+# sort result by "Weight" in ascending order
+aggPheno <- aggPheno[order(aggPheno$Weight, decreasing = T),]
+
+# set selection intensity
+i = 0.1
+
+# calculated number of selected individuals
+nSelected = floor(initPop$nInd * i)
+  
+# get names of selected individuals
+selectedInds = aggPheno$ind[1:nSelected]
+selectedInds
+```
+
+## Crossing individuals
+
+In order to cross the individuals we need to create a crossing table specifying:
+
+- the first parent: `ind1`
+- the second parent: `ind2`
+- number of progenies for these two parents: `n`
+- name of the progenies: `name`
+
+In this example we will randomly cross the individuals together to create 100 new individuals. The function `randomMate` can generate such table.
+
+```{r}
+crossTable <- randomMate(selectedInds, 100, paste0("gen-2_", seq(1:100)))
+crossTable
+```
+
+Now we have specified the crosses to do, the function `makeCrosses` will create new individuals and return them as a list:
+
+```{r}
+newIndsList <- makeCrosses(crossTable, initPop)
+```
+
+We can integrate these new individuals in a new population:
+
+```{r}
+newPop <- population$new(name = "generation 2",
+                         inds = newIndsList,
+                         verbose = FALSE)
+```
+
+## Automatisation
+
+We have created one new generation, let's create 3 more generations other generation automatically integrating the code above in one loop.
+
+```{r}
+# create a list with all our populations
+popList <- vector(mode = "list", length = 5)
+popList[[1]] <- initPop
+popList[[2]] <- newPop
+
+
+for (gen in 3:5) {
+  # phenotyping
+  pheno <- phenolab$trial(pop = popList[[gen-1]], rep = 3)
+  
+  # select individuals
+  aggPheno <- aggregate(Weight ~ ind, data = pheno$data, mean) 
+  aggPheno <- aggPheno[order(aggPheno$Weight, decreasing = T),]
+  nSelected = floor(initPop$nInd * i)
+  selectedInds = aggPheno$ind[1:nSelected]
+  
+  # cross individuals
+  crossTable <- randomMate(inds = selectedInds,
+                           n = 100,
+                           names = paste0("gen-", gen,"_", seq(1:100)))
+  newIndsList <- makeCrosses(crossTable, popList[[gen-1]])
+  
+  # create new population
+  popList[[gen]] <- population$new(name = paste("generation", gen),
+                                   inds = newIndsList,
+                                   verbose = FALSE)
+  
+}
+popList
+```
+
+Let's look at the true genetic values of each population:
+
+```{r, fig.width=8, fig.height=6}
+# create data.table with all genetic values
+GVs <- do.call(rbind, lapply(popList, function(pop){
+  data.frame(gvWeight = weight$gv(pop), pop = pop$name)
+}))
+
+# set pop variable as factor
+GVs$pop <- factor(GVs$pop, levels = unique(GVs$pop))
+
+# create boxplot
+boxplot(gvWeight~pop,data=GVs)
+```
+
+# Conclusion
+
+We have build an algorithm for simulating a simple breeding camping. In order to create more advance simulation, users can create their own functions for selecting, mating individuals using the classes provided by `breedSimulatR`. An exhaustive list of the fields and methods available for each class can be found in the documentation of the package and on [the package's web site](https://ut-biomet.github.io/breedSimulatR/reference/index.html).
+
+## References
