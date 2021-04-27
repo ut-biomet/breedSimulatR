@@ -62,7 +62,7 @@ SNPs$plot(alpha = 1)
 \describe{
 \item{\code{SNPcoord}}{[data.frame] Coordinate of all SNPs.
 
-3 columns:
+4 columns:
 \itemize{
  \item{\code{chr}:} {Chromosome holding the SNP}
  \item{\code{physPos}:} {SNP physical position on the chromosome}
