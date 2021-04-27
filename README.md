@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![pipeline
-status](https://gitlab.com/juliendiot42/breedSimulatR/badges/master/pipeline.svg)](https://gitlab.com/juliendiot42/breedSimulatR/commits/master)
 [![codecov](https://codecov.io/gh/ut-biomet/breedSimulatR/branch/master/graph/badge.svg?token=4Uxp1ySLIn)](https://codecov.io/gh/ut-biomet/breedSimulatR)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
