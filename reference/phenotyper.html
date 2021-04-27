@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedSimulatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -151,7 +151,7 @@ for each trait</p></dd>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
-<h3 class='hasAnchor' id='public-methods'><a class='anchor' href='#public-methods'></a>Public methods</h3>
+<h3 class='hasAnchor' id='public-methods'><a class='anchor' aria-hidden='true' href='#public-methods'></a>Public methods</h3>
 
 <ul>
 <li><p><a href='#method-new'><code>phenotyper$new()</code></a></p></li>
@@ -161,8 +161,8 @@ for each trait</p></dd>
 <li><p><a href='#method-clone'><code>phenotyper$clone()</code></a></p></li>
 </ul>
 <p><hr>
-<a id="method-new"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' href='#method-'></a>Method <code>new()</code></h3>
-<p>Create a new phenotyper object.</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<a id="method-new"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>new()</code></h3>
+<p>Create a new phenotyper object.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>phenotyper</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   <span class='va'>name</span>,
   <span class='va'>traits</span>,
@@ -173,7 +173,7 @@ for each trait</p></dd>
   pop <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>name</code></dt><dd><p>[character] name of the phenotyper</p></dd>
 
@@ -193,14 +193,13 @@ heredity for each trait</p></dd>
 the target heredity calculation (see:<a href='population.html'>population</a>)</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='returns'><a class='anchor' href='#returns'></a>Returns</h4>
+<h4 class='hasAnchor' id='returns'><a class='anchor' aria-hidden='true' href='#returns'></a>Returns</h4>
 <p>A new `phenotyper` object.</p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'><a href='specie.html'>specie</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>10</span>,
                     lchr <span class='op'>=</span> <span class='fl'>10</span><span class='op'>^</span><span class='fl'>6</span>,
                     lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
-                    specName <span class='op'>=</span> <span class='st'>"Geneticae Exempli"</span>,
-                    ploidy <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+                    specName <span class='op'>=</span> <span class='st'>"Geneticae Exempli"</span><span class='op'>)</span>
 <span class='va'>SNPs</span> <span class='op'>&lt;-</span> <span class='va'><a href='SNPinfo.html'>SNPinfo</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>SNPcoord <span class='op'>=</span> <span class='va'>exampleData</span><span class='op'>$</span><span class='va'>snpCoord</span>,
                    specie <span class='op'>=</span> <span class='va'>mySpec</span><span class='op'>)</span>
 <span class='va'>example_pop</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createPop.html'>createPop</a></span><span class='op'>(</span>geno <span class='op'>=</span> <span class='va'>exampleData</span><span class='op'>$</span><span class='va'>genotypes</span>,
@@ -231,8 +230,8 @@ the target heredity calculation (see:<a href='population.html'>population</a>)</
 
 </pre><p></div></p>
 
-<h3 class='hasAnchor' id='list-new-'><a class='anchor' href='#list-new-'></a>Method <code>new()</code></h3>
-<p>Create a new phenotyper object.</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<h3 class='hasAnchor' id='list-new-'><a class='anchor' aria-hidden='true' href='#list-new-'></a>Method <code>new()</code></h3>
+<p>Create a new phenotyper object.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>phenotyper</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   <span class='va'>name</span>,
   <span class='va'>traits</span>,
@@ -243,7 +242,7 @@ the target heredity calculation (see:<a href='population.html'>population</a>)</
   pop <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>name</code></dt><dd><p>[character] name of the phenotyper</p></dd>
 
@@ -263,14 +262,13 @@ heredity for each trait</p></dd>
 the target heredity calculation (see:<a href='population.html'>population</a>)</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='returns'><a class='anchor' href='#returns'></a>Returns</h4>
+<h4 class='hasAnchor' id='returns'><a class='anchor' aria-hidden='true' href='#returns'></a>Returns</h4>
 <p>A new `phenotyper` object.</p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'><a href='specie.html'>specie</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>10</span>,
                     lchr <span class='op'>=</span> <span class='fl'>10</span><span class='op'>^</span><span class='fl'>6</span>,
                     lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
-                    specName <span class='op'>=</span> <span class='st'>"Geneticae Exempli"</span>,
-                    ploidy <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+                    specName <span class='op'>=</span> <span class='st'>"Geneticae Exempli"</span><span class='op'>)</span>
 <span class='va'>SNPs</span> <span class='op'>&lt;-</span> <span class='va'><a href='SNPinfo.html'>SNPinfo</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>SNPcoord <span class='op'>=</span> <span class='va'>exampleData</span><span class='op'>$</span><span class='va'>snpCoord</span>,
                    specie <span class='op'>=</span> <span class='va'>mySpec</span><span class='op'>)</span>
 <span class='va'>example_pop</span> <span class='op'>&lt;-</span> <span class='fu'><a href='createPop.html'>createPop</a></span><span class='op'>(</span>geno <span class='op'>=</span> <span class='va'>exampleData</span><span class='op'>$</span><span class='va'>genotypes</span>,
@@ -302,20 +300,20 @@ the target heredity calculation (see:<a href='population.html'>population</a>)</
 </pre><p></div></p>
 
 <p><hr>
-<a id="method-print"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' href='#method-'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
-<p>Display informations about the object</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<a id="method-print"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
+<p>Display informations about the object</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>phenotyper</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
-<h3 class='hasAnchor' id='list-print-'><a class='anchor' href='#list-print-'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
-<p>Display informations about the object</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<h3 class='hasAnchor' id='list-print-'><a class='anchor' aria-hidden='true' href='#list-print-'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
+<p>Display informations about the object</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>phenotyper</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
-<a id="method-trial"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' href='#method-'></a>Method <code>trial()</code></h3>
-<p>Phenotype a given population</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<a id="method-trial"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>trial()</code></h3>
+<p>Phenotype a given population</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>phenotyper</span><span class='op'>$</span><span class='fu'>trial</span><span class='op'>(</span><span class='va'>pop</span>, rep <span class='op'>=</span> <span class='fl'>1</span>, offset <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>pop</code></dt><dd><p>[population class] population
 (see: <a href='population.html'>population</a>)</p></dd>
@@ -326,13 +324,13 @@ the target heredity calculation (see:<a href='population.html'>population</a>)</
 results</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='details'><a class='anchor' href='#details'></a>Details</h4>
+<h4 class='hasAnchor' id='details'><a class='anchor' aria-hidden='true' href='#details'></a>Details</h4>
 <p>phenotypic values for individual i repetition j is calculated as follow:
 $$y_{ij} = \mu + g_i + e_ij + offset$$
 $$e_ij \sim N(0, \sigma_e^2)$$
 where g_i is the genetic value of the individual i</p>
 
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre>
 <span class='va'>pheno1</span> <span class='op'>&lt;-</span> <span class='va'>phenoLab1</span><span class='op'>$</span><span class='fu'>trial</span><span class='op'>(</span><span class='va'>example_pop</span>, rep <span class='op'>=</span> <span class='fl'>4</span>, offset <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>pheno1</span><span class='op'>$</span><span class='va'>cost</span>
@@ -349,11 +347,11 @@ where g_i is the genetic value of the individual i</p>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>pheno3</span><span class='op'>$</span><span class='va'>data</span><span class='op'>)</span>
 </pre><p></div></p>
 
-<h3 class='hasAnchor' id='list-trial-'><a class='anchor' href='#list-trial-'></a>Method <code>trial()</code></h3>
-<p>Phenotype a given population</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<h3 class='hasAnchor' id='list-trial-'><a class='anchor' aria-hidden='true' href='#list-trial-'></a>Method <code>trial()</code></h3>
+<p>Phenotype a given population</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>phenotyper</span><span class='op'>$</span><span class='fu'>trial</span><span class='op'>(</span><span class='va'>pop</span>, rep <span class='op'>=</span> <span class='fl'>1</span>, offset <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>pop</code></dt><dd><p>[population class] population
 (see: <a href='population.html'>population</a>)</p></dd>
@@ -364,13 +362,13 @@ where g_i is the genetic value of the individual i</p>
 results</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='details'><a class='anchor' href='#details'></a>Details</h4>
+<h4 class='hasAnchor' id='details'><a class='anchor' aria-hidden='true' href='#details'></a>Details</h4>
 <p>phenotypic values for individual i repetition j is calculated as follow:
 $$y_{ij} = \mu + g_i + e_ij + offset$$
 $$e_ij \sim N(0, \sigma_e^2)$$
 where g_i is the genetic value of the individual i</p>
 
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre>
 <span class='va'>pheno1</span> <span class='op'>&lt;-</span> <span class='va'>phenoLab1</span><span class='op'>$</span><span class='fu'>trial</span><span class='op'>(</span><span class='va'>example_pop</span>, rep <span class='op'>=</span> <span class='fl'>4</span>, offset <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>pheno1</span><span class='op'>$</span><span class='va'>cost</span>
@@ -388,55 +386,55 @@ where g_i is the genetic value of the individual i</p>
 </pre><p></div></p>
 
 <p><hr>
-<a id="method-he"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' href='#method-'></a>Method <code>he()</code></h3>
-<p>Calculate the heritability of a given population</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<a id="method-he"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>he()</code></h3>
+<p>Calculate the heritability of a given population</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>phenotyper</span><span class='op'>$</span><span class='fu'>he</span><span class='op'>(</span><span class='va'>pop</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>pop</code></dt><dd><p>[population] the population</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='returns'><a class='anchor' href='#returns'></a>Returns</h4>
+<h4 class='hasAnchor' id='returns'><a class='anchor' aria-hidden='true' href='#returns'></a>Returns</h4>
 <p>named numeric vector of the calculated heritability of the
 population for each trait</p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>phenoLab1</span><span class='op'>$</span><span class='fu'>he</span><span class='op'>(</span><span class='va'>example_pop</span><span class='op'>)</span>
 <span class='va'>phenoLab2</span><span class='op'>$</span><span class='fu'>he</span><span class='op'>(</span><span class='va'>example_pop</span><span class='op'>)</span>
 </pre><p></div></p>
 
-<h3 class='hasAnchor' id='list-he-'><a class='anchor' href='#list-he-'></a>Method <code>he()</code></h3>
-<p>Calculate the heritability of a given population</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<h3 class='hasAnchor' id='list-he-'><a class='anchor' aria-hidden='true' href='#list-he-'></a>Method <code>he()</code></h3>
+<p>Calculate the heritability of a given population</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>phenotyper</span><span class='op'>$</span><span class='fu'>he</span><span class='op'>(</span><span class='va'>pop</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>pop</code></dt><dd><p>[population] the population</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='returns'><a class='anchor' href='#returns'></a>Returns</h4>
+<h4 class='hasAnchor' id='returns'><a class='anchor' aria-hidden='true' href='#returns'></a>Returns</h4>
 <p>named numeric vector of the calculated heritability of the
 population for each trait</p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>phenoLab1</span><span class='op'>$</span><span class='fu'>he</span><span class='op'>(</span><span class='va'>example_pop</span><span class='op'>)</span>
 <span class='va'>phenoLab2</span><span class='op'>$</span><span class='fu'>he</span><span class='op'>(</span><span class='va'>example_pop</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
-<a id="method-clone"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' href='#method-'></a>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<a id="method-clone"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>phenotyper</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
 </dl><p></div></p>
-<h3 class='hasAnchor' id='list-clone-'><a class='anchor' href='#list-clone-'></a>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<h3 class='hasAnchor' id='list-clone-'><a class='anchor' aria-hidden='true' href='#list-clone-'></a>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>phenotyper</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
@@ -453,8 +451,7 @@ population for each trait</p>
 <span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'><a href='specie.html'>specie</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>10</span>,
                     lchr <span class='op'>=</span> <span class='fl'>10</span><span class='op'>^</span><span class='fl'>6</span>,
                     lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
-                    specName <span class='op'>=</span> <span class='st'>"Geneticae Exempli"</span>,
-                    ploidy <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+                    specName <span class='op'>=</span> <span class='st'>"Geneticae Exempli"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; A new species has emerged: Geneticae Exempli !
 #&gt; </div><div class='input'><span class='va'>SNPs</span> <span class='op'>&lt;-</span> <span class='va'><a href='SNPinfo.html'>SNPinfo</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>SNPcoord <span class='op'>=</span> <span class='va'>exampleData</span><span class='op'>$</span><span class='va'>snpCoord</span>,
                    specie <span class='op'>=</span> <span class='va'>mySpec</span><span class='op'>)</span>

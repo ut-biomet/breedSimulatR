@@ -84,7 +84,7 @@ markers" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedSimulatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -142,7 +142,7 @@ markers</p>
     <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
 
     <p><div class="r6-fields"></p><dl>
-<dt><code>SNPcoord</code></dt><dd><p>[data.frame] Coordinate of all SNPs.3 columns:
+<dt><code>SNPcoord</code></dt><dd><p>[data.frame] Coordinate of all SNPs.4 columns:
 <ul>
 <li><p><code>chr</code>: Chromosome holding the SNP</p></li>
 <li><p><code>physPos</code>: SNP physical position on the chromosome</p></li>
@@ -162,7 +162,7 @@ of all SNPs. for each chromosomes</p></dd>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
-<h3 class='hasAnchor' id='public-methods'><a class='anchor' href='#public-methods'></a>Public methods</h3>
+<h3 class='hasAnchor' id='public-methods'><a class='anchor' aria-hidden='true' href='#public-methods'></a>Public methods</h3>
 
 <ul>
 <li><p><a href='#method-new'><code>SNPinfo$new()</code></a></p></li>
@@ -173,11 +173,11 @@ of all SNPs. for each chromosomes</p></dd>
 <li><p><a href='#method-clone'><code>SNPinfo$clone()</code></a></p></li>
 </ul>
 <p><hr>
-<a id="method-new"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' href='#method-'></a>Method <code>new()</code></h3>
-<p>Create a new SNPinfo object.</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<a id="method-new"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>new()</code></h3>
+<p>Create a new SNPinfo object.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>SNPcoord</span>, <span class='va'>specie</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>SNPcoord</code></dt><dd><p>[data.frame] Coordinate of all SNPs.  3 columns: <ul>
 <li><p><code>chr</code>: Chromosome holding the SNP</p></li>
@@ -190,9 +190,9 @@ of all SNPs. for each chromosomes</p></dd>
 (see:<a href='specie.html'>specie</a>)</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='returns'><a class='anchor' href='#returns'></a>Returns</h4>
+<h4 class='hasAnchor' id='returns'><a class='anchor' aria-hidden='true' href='#returns'></a>Returns</h4>
 <p>A new `SNPinfo` object.</p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='co'># create specie</span>
 <span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'><a href='specie.html'>specie</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>3</span>,
                      lchr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span><span class='op'>)</span>,
@@ -214,11 +214,11 @@ of all SNPs. for each chromosomes</p></dd>
 <span class='va'>SNPs</span> <span class='op'>&lt;-</span> <span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>SNPcoord <span class='op'>=</span> <span class='va'>SNPcoord</span>, specie <span class='op'>=</span> <span class='va'>mySpec</span><span class='op'>)</span>
 </pre><p></div></p>
 
-<h3 class='hasAnchor' id='list-new-'><a class='anchor' href='#list-new-'></a>Method <code>new()</code></h3>
-<p>Create a new SNPinfo object.</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<h3 class='hasAnchor' id='list-new-'><a class='anchor' aria-hidden='true' href='#list-new-'></a>Method <code>new()</code></h3>
+<p>Create a new SNPinfo object.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>SNPcoord</span>, <span class='va'>specie</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>SNPcoord</code></dt><dd><p>[data.frame] Coordinate of all SNPs.  3 columns: <ul>
 <li><p><code>chr</code>: Chromosome holding the SNP</p></li>
@@ -231,9 +231,9 @@ of all SNPs. for each chromosomes</p></dd>
 (see:<a href='specie.html'>specie</a>)</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='returns'><a class='anchor' href='#returns'></a>Returns</h4>
+<h4 class='hasAnchor' id='returns'><a class='anchor' aria-hidden='true' href='#returns'></a>Returns</h4>
 <p>A new `SNPinfo` object.</p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='co'># create specie</span>
 <span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'><a href='specie.html'>specie</a></span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>3</span>,
                      lchr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span><span class='op'>)</span>,
@@ -256,116 +256,116 @@ of all SNPs. for each chromosomes</p></dd>
 </pre><p></div></p>
 
 <p><hr>
-<a id="method-nSNP"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' href='#method-'></a>Method <code>nSNP()</code></h3>
-<p>Get the number of SNPs per chromosomes</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<a id="method-nSNP"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>nSNP()</code></h3>
+<p>Get the number of SNPs per chromosomes</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>nSNP</span><span class='op'>(</span>chr <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>chr</code></dt><dd><p>[str or numeric] chromosome id</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>nSNP</span><span class='op'>(</span><span class='op'>)</span>
 <span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>nSNP</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Chr2"</span>,<span class='st'>"Chr3"</span><span class='op'>)</span><span class='op'>)</span>
 </pre><p></div></p>
 
-<h3 class='hasAnchor' id='list-nsnp-'><a class='anchor' href='#list-nsnp-'></a>Method <code>nSNP()</code></h3>
-<p>Get the number of SNPs per chromosomes</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<h3 class='hasAnchor' id='list-nsnp-'><a class='anchor' aria-hidden='true' href='#list-nsnp-'></a>Method <code>nSNP()</code></h3>
+<p>Get the number of SNPs per chromosomes</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>nSNP</span><span class='op'>(</span>chr <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>chr</code></dt><dd><p>[str or numeric] chromosome id</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>nSNP</span><span class='op'>(</span><span class='op'>)</span>
 <span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>nSNP</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Chr2"</span>,<span class='st'>"Chr3"</span><span class='op'>)</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
-<a id="method-getInfo"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' href='#method-'></a>Method <code>getInfo()</code></h3>
-<p>Get information about specific SNPs</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<a id="method-getInfo"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>getInfo()</code></h3>
+<p>Get information about specific SNPs</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>getInfo</span><span class='op'>(</span><span class='va'>SNPid</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>SNPid</code></dt><dd><p>[str] SNP ids</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>getInfo</span><span class='op'>(</span><span class='st'>"SNP01"</span><span class='op'>)</span>
 <span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>getInfo</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"SNP01"</span>, <span class='st'>"SNP03"</span><span class='op'>)</span><span class='op'>)</span>
 </pre><p></div></p>
 
-<h3 class='hasAnchor' id='list-getinfo-'><a class='anchor' href='#list-getinfo-'></a>Method <code>getInfo()</code></h3>
-<p>Get information about specific SNPs</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<h3 class='hasAnchor' id='list-getinfo-'><a class='anchor' aria-hidden='true' href='#list-getinfo-'></a>Method <code>getInfo()</code></h3>
+<p>Get information about specific SNPs</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>getInfo</span><span class='op'>(</span><span class='va'>SNPid</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>SNPid</code></dt><dd><p>[str] SNP ids</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>getInfo</span><span class='op'>(</span><span class='st'>"SNP01"</span><span class='op'>)</span>
 <span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>getInfo</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"SNP01"</span>, <span class='st'>"SNP03"</span><span class='op'>)</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
-<a id="method-print"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' href='#method-'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
+<a id="method-print"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
 <p>Display summary information about the object: specie, number
-of SNP, SNP coordinates.</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+of SNP, SNP coordinates.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
-<h3 class='hasAnchor' id='list-print-'><a class='anchor' href='#list-print-'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
+<h3 class='hasAnchor' id='list-print-'><a class='anchor' aria-hidden='true' href='#list-print-'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
 <p>Display summary information about the object: specie, number
-of SNP, SNP coordinates.</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+of SNP, SNP coordinates.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
-<a id="method-plot"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' href='#method-'></a>Method <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code></h3>
-<p>plot chromosome map using the <span class="pkg">plotly</span> package</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<a id="method-plot"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code></h3>
+<p>plot chromosome map using the <span class="pkg">plotly</span> package</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>plot</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>0.01</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>alpha</code></dt><dd><p>transparency see <a href='https://docs.ropensci.org/plotly/reference/plot_ly.html'>plot_ly</a></p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>plot</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 </pre><p></div></p>
 
-<h3 class='hasAnchor' id='list-plot-'><a class='anchor' href='#list-plot-'></a>Method <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code></h3>
-<p>plot chromosome map using the <span class="pkg">plotly</span> package</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<h3 class='hasAnchor' id='list-plot-'><a class='anchor' aria-hidden='true' href='#list-plot-'></a>Method <code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot()</a></code></h3>
+<p>plot chromosome map using the <span class="pkg">plotly</span> package</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>plot</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>0.01</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>alpha</code></dt><dd><p>transparency see <a href='https://docs.ropensci.org/plotly/reference/plot_ly.html'>plot_ly</a></p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>SNPs</span><span class='op'>$</span><span class='fu'>plot</span><span class='op'>(</span>alpha <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
-<a id="method-clone"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' href='#method-'></a>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<a id="method-clone"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
 </dl><p></div></p>
-<h3 class='hasAnchor' id='list-clone-'><a class='anchor' href='#list-clone-'></a>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' href='#usage'></a>Usage</h4>
+<h3 class='hasAnchor' id='list-clone-'><a class='anchor' aria-hidden='true' href='#list-clone-'></a>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>SNPinfo</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
@@ -384,7 +384,7 @@ of SNP, SNP coordinates.</p><h4 class='hasAnchor' id='usage'><a class='anchor' h
                      lchr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span><span class='op'>)</span>,
                      lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
                      verbose <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>"ploidy" was not specify. The ploidy had been set to "2"</span></div><div class='input'>
+
 <span class='co'># simulate SNP</span>
 <span class='va'>SNPcoord</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>chr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Chr1"</span>, <span class='fl'>3</span><span class='op'>)</span>,
                                <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Chr2"</span>, <span class='fl'>4</span><span class='op'>)</span>,
