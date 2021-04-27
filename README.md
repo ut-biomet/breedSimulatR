@@ -197,7 +197,9 @@ exampleData$snpEffects
 #>     snp00145 
 #>  0.072675256 
 #>  [ reached getOption("max.print") -- omitted 3308 entries ]
-(selectedInds <- selectBV(pop = initPop, SNPeffects = exampleData$snpEffects, n = 10))
+(selectedInds <- selectBV(pop = initPop,
+                          QTNeffects = exampleData$snpEffects,
+                          n = 10))
 #>  [1] "Coll0068" "Coll0008" "Coll0074" "Coll0016" "Coll0020" "Coll0045"
 #>  [7] "Coll0079" "Coll0002" "Coll0046" "Coll0097"
 

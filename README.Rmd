@@ -140,6 +140,7 @@ initPop <- createPop(geno = exampleData$genotypes,
 
 
 #### Traits and phenotyping initialization
+
 Let's create 2 independent phenotypic traits that can be phenotyped.
 
 ```{r example_trait.1}
@@ -178,7 +179,7 @@ Then, the function `randomMate` will generate the crossing table.
 ```{r example_4.1}
 exampleData$snpEffects
 (selectedInds <- selectBV(pop = initPop,
-                          SNPeffects = exampleData$snpEffects,
+                          QTNeffects = exampleData$snpEffects,
                           n = 10))
 
 (crossTable <- randomMate(inds = selectedInds,
