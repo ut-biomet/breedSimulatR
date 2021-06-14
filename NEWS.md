@@ -1,3 +1,10 @@
+# breedSimulatR 0.3.1
+
+## Performence optimization
+
+- `population$addInd` methods will now only check that the specie's names match between the population and the individual instead of checking if the specie objects are exactly the same. This can introduce a bug if two differents species with the same name are use in a simulation however, this cases will be very unlikely and the performance gain is quite high.
+
+
 # breedSimulatR 0.3.0
 
 ## Breaking changes

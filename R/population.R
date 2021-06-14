@@ -236,7 +236,7 @@ population <- R6::R6Class(
       # check species
       if (is.null(self$specie)) {
         self$specie <- ind$specie
-      } else if (!isTRUE(all.equal(self$specie, ind$specie))) {
+      } else if (self$specie$specName != ind$specie$specName) {
         stop(paste("Individual of a different species than the population's",
                    "one.\nPlease add", self$specie$name, "individuals."))
       }
