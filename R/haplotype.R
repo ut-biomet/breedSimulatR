@@ -27,8 +27,8 @@ haplotype <- R6::R6Class(
     #' @description Create a new Haplotype object.
     #' @param SNPinfo [SNPinfo class] information about the haplotype's SNPs
     #'   (see:\link[breedSimulatR]{SNPinfo})
-    #' @param haplo [matrix] named matrix of the genotype for all markers
-    #' @return A new `SNPinfo` object.
+    #' @param haplo [matrix] named matrix of the haplotypes for all markers. This matrix should have `SNPinfo$specie$ploidy` line and `SNPinfo$nSNP()` columns.
+    #' @return A new `haplotype` object.
     #' @examples
     #' # create specie
     #' mySpec <- specie$new(nChr = 3,
@@ -105,7 +105,7 @@ haplotype <- R6::R6Class(
     }),
 
   active = list(
-    #' @field allelDose [numeric] vector of haplotypes encoded in allele dose
+    #' @field allelDose [numeric] vector of genotypes encoded in allele dose
     allelDose = function(){
       colSums(do.call(cbind, self$values))
     }
