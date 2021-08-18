@@ -7,7 +7,7 @@
 
 # set.seed(9552) # for reproductible RNG
 
-if (interactive()) {
+if (basename(getwd()) == "breedSimulatR") {
   devtools::load_all()
 }
 

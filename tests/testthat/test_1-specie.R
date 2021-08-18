@@ -4,7 +4,7 @@
 # Description:
 # Test file for the Specie class
 
-if (interactive()) {
+if (basename(getwd()) == "breedSimulatR") {
   devtools::load_all()
 }
 

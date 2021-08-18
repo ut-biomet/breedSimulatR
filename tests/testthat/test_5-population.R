@@ -9,7 +9,7 @@
 
 
 ##### Initialisation functions ####
-if (interactive()) {
+if (basename(getwd()) == "breedSimulatR") {
   devtools::load_all()
   source("tests/testthat/src/functionsForTests.R")
 } else source("src/functionsForTests.R")
@@ -175,14 +175,12 @@ test_that("population remove individuals", {
 
 test_that("population creation", {
   #### Initialisation
-  mySpec <- create_spec(nChr = 10, lchr = 10^6)
 
-  if (interactive()) {
+  if (basename(getwd()) == "breedSimulatR") {
     snpCoord <- read.csv(file = "tests/testthat/src/snpCoord.csv", header = T)
   } else snpCoord <- read.csv(file = "src/snpCoord.csv", header = T)
-  SNPs <- SNPinfo$new(SNPcoord = snpCoord, specie = mySpec)
 
-  if (interactive()) {
+  if (basename(getwd()) == "breedSimulatR") {
     geno <- read.csv(file = "tests/testthat/src/genotype.csv",
                      header = T,
                      row.names = 1)
