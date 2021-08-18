@@ -52,7 +52,7 @@ SNPs (see:\link[breedSimulatR]{SNPinfo})}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{allelDose}}{[numeric] vector of haplotypes encoded in allele dose}
+\item{\code{allelDose}}{[numeric] vector of genotypes encoded in allele dose}
 }
 \if{html}{\out{</div>}}
 }
@@ -78,12 +78,12 @@ Create a new Haplotype object.
 \item{\code{SNPinfo}}{[SNPinfo class] information about the haplotype's SNPs
 (see:\link[breedSimulatR]{SNPinfo})}
 
-\item{\code{haplo}}{[matrix] named matrix of the genotype for all markers}
+\item{\code{haplo}}{[matrix] named matrix of the haplotypes for all markers. This matrix should have `SNPinfo$specie$ploidy` line and `SNPinfo$nSNP()` columns.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new `SNPinfo` object.
+A new `haplotype` object.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}

@@ -213,8 +213,8 @@ results}
 }
 \subsection{Details}{
 phenotypic values for individual i repetition j is calculated as follow:
-\deqn{y_{ij} = \mu + g_i + e_ij + offset}
-\deqn{e_ij \sim N(0, \sigma_e^2)}
+\deqn{y_{ij} = \mu + g_i + e_{ij} + offset}
+\deqn{e_{ij} \sim N(0, \sigma_e^2)}
 where g_i is the genetic value of the individual i
 }
 

@@ -6,8 +6,8 @@
 \alias{breedSimulatR-package}
 \title{breedSimulatR: R Breeding Simulator}
 \description{
-R package providing classes and functions to
-    simulate breeding schemes.
+R package providing classes and functions to simulate
+    breeding schemes.
 }
 \seealso{
 Useful links:

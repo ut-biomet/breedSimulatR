@@ -14,3 +14,6 @@
 ^doc$
 ^Meta$
 .vscode
+tags
+.vim
+

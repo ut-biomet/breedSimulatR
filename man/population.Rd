@@ -130,6 +130,7 @@ encoded in allele doses. (individuals in row and markers in column)}
 \item \href{#method-new}{\code{population$new()}}
 \item \href{#method-addInds}{\code{population$addInds()}}
 \item \href{#method-remInds}{\code{population$remInds()}}
+\item \href{#method-writeVcf}{\code{population$writeVcf()}}
 \item \href{#method-print}{\code{population$print()}}
 \item \href{#method-clone}{\code{population$clone()}}
 }
@@ -288,6 +289,23 @@ print(myPop)
 
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-writeVcf"></a>}}
+\if{latex}{\out{\hypertarget{method-writeVcf}{}}}
+\subsection{Method \code{writeVcf()}}{
+Write a gzip compressed VCF file with population's individuals information
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{population$writeVcf(file)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{file}}{[character] path of the output file.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}

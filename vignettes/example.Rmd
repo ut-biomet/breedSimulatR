@@ -288,12 +288,14 @@ We have created one new generation, let's create 3 more generations other genera
 
 ```{r}
 # create a list with all our populations
-popList <- vector(mode = "list", length = 5)
+nGen <- 5 # total number of generation
+popList <- vector(mode = "list", length = nGen)
 popList[[1]] <- initPop
 popList[[2]] <- newPop
 
-
-for (gen in 3:5) {
+nNew <- 100 # number of new individual for each generation
+for (gen in 3:nGen) {
+  print(gen)
   # phenotyping
   pheno <- phenolab$trial(pop = popList[[gen-1]], rep = 3)
   
@@ -305,8 +307,8 @@ for (gen in 3:5) {
   
   # cross individuals
   crossTable <- randomMate(inds = selectedInds,
-                           n = 100,
-                           names = paste0("gen-", gen,"_", seq(1:100)))
+                           n = nNew,
+                           names = paste0("gen-", gen,"_", seq(1:nNew)))
   newIndsList <- makeCrosses(crossTable, popList[[gen-1]])
   
   # create new population

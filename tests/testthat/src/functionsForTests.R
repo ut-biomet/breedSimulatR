@@ -7,15 +7,17 @@
 
 
 ##### Initialisation functions ####
-create_spec <- function(nChr = round(runif(1, 1, 10)),
+create_spec <- function(nChr = round(runif(1, 1, 15)),
                         lchr = round(pmax(rnorm(nChr, 450, 50), 200)),# > 200
                         lchrCm = 100,
-                        name = "Undefinded") {
+                        name = "Undefinded",
+                        chrNames = NA) {
 
   specie$new(nChr = nChr,
              lchr = lchr,
              lchrCm = lchrCm,
              specName = name,
+             chrNames = chrNames,
              verbose = F)
 }
 
@@ -26,7 +28,11 @@ create_SNP <- function(spec = create_spec(), nMarker = NULL,
     nMarker <- round(spec$lchr/10)
   } else {
     stopifnot(all(nMarker < spec$lchr))
+    if (length(nMarker) == 1) {
     nMarker <- rep(nMarker, spec$nChr)
+    } else if (length(nMarker) != spec$nChr){
+      stop("length(nMarker) != spec$nChr or 1")
+    }
   }
 
   # generate arbitrary marker position

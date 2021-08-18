@@ -9,7 +9,7 @@
 
 
 ##### Initialisation functions ####
-if (interactive()) {
+if (basename(getwd()) == "breedSimulatR") {
   devtools::load_all()
   source("tests/testthat/src/functionsForTests.R")
 } else source("src/functionsForTests.R")

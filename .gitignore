@@ -46,3 +46,8 @@ inst/doc
 dev_history.R
 doc
 Meta
+
+# vim
+*.vim
+tags
+

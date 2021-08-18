@@ -89,7 +89,7 @@ Create a new specie object.
 \item{\code{specName}}{[str] Specie's name (optional)
 (optional)}
 
-\item{\code{chrNames}}{[str] Names of the chromosomes (optional)}
+\item{\code{chrNames}}{[str] Names of the chromosomes (optional). By default the chromosomes names will be set to "Chr01", "Chr02", "Chr03" ...}
 
 \item{\code{verbose}}{[bool] Display info (optional)}
 }
