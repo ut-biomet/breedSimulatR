@@ -189,9 +189,11 @@ test_that("population creation", {
                      header = T,
                      row.names = 1)
   }
-  expect_true(all(dim(geno) > 2))
-  expect_equal(ncol(geno), SNPs$nSNP())
 
+  mySpec <- create_spec(nChr = 10,
+                        lchr = 10^6,
+                        chrNames = sort(unique(snpCoord$chr)))
+  SNPs <- SNPinfo$new(SNPcoord = snpCoord, specie = mySpec)
 
   # TEST:
   expect_error({myPop <- createPop(geno = geno,
@@ -275,4 +277,55 @@ test_that("population allele freq", {
 
   expect_equal(names(myPop$af), colnames(myPop$genoMat))
   expect_equal(names(myPop$maf), colnames(myPop$genoMat))
+})
+
+
+
+
+
+
+test_that("population write VCF", {
+  #### Initialisation
+  mySpec <- create_spec(nChr = round(runif(1, 2, 15)))
+  SNPs <- create_SNP(mySpec)
+  nInds <- 20
+  haploList <- lapply(seq(nInds), function(x){
+    create_haplo(SNPs)
+  })
+
+  indList <-  create_inds(haploList)
+
+  myPop <- population$new(name = "My Population 1",
+                          inds = indList,
+                          verbose = FALSE)
+
+  newfile <- tempfile(fileext = ".vcf.gz")
+  expect_error(myPop$writeVcf(newfile), NA)
+
+  # check read with vcfR
+  expect_error({x <- vcfR::read.vcfR(newfile, verbose = FALSE)}, NA)
+  expect_equal(nrow(x@fix), nrow(SNPs$SNPcoord))
+  expect_equal(ncol(x@gt) -1, nInds)
+
+  # check read with gaston
+  expect_error({
+    x <- gaston::read.vcf(newfile,
+                          verbose = FALSE,
+                          convert.chr = FALSE)
+  }, NA)
+  expect_equal(sort(x@snps$id), sort(SNPs$SNPcoord$SNPid)) 
+  expect_equal(sort(x@ped$id), sort(names(myPop$inds))) 
+  # expect_equal(nrow(x@snps), nrow(SNPs$SNPcoord))
+  # expect_equal(nrow(x@ped), nInds)
+  # browser()
+  l <- names(myPop$inds)
+  c <- SNPs$SNPcoord$SNPid
+  expect_equal(gaston::as.matrix(x)[l, c], myPop$genoMat[l, c])
+
+  # check read with breedSimulatR
+  expect_error({x <- readVCF(newfile, specie = mySpec, verbose = F)}, NA)
+  expect_equal(x$snps$nSNP(), SNPs$nSNP())
+  expect_equal(x$snps$SNPcoord[,-4], SNPs$SNPcoord[,-4])
+  expect_equal(x$pop$nInd, nInds)
+  expect_equal(x$pop$genoMat, myPop$genoMat)
 })

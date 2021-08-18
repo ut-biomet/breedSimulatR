@@ -155,7 +155,6 @@ population <- R6::R6Class(
     #' myPop$remInds("Ind 2")
     #' print(myPop)
     remInds = function(indsNames){
-
       # check
       if (class(indsNames) != "character") {
         stop("Please provide individuals' names as a character vector.")
@@ -170,13 +169,80 @@ population <- R6::R6Class(
       self$inds[indsNames] <- NULL
       invisible(NULL)
     },
+
+
+
+    #' @description Write a gzip compressed VCF file with population's individuals information
+    #' @param file [character] path of the output file.
+    #' @importFrom data.table fwrite
+    writeVcf = function(file){
+      if (file.exists(file)) {
+        stop("`file` should not already exists.")
+      }
+      ext1 <- tools::file_ext(file)
+      ext2 <- tools::file_ext(tools::file_path_sans_ext(file))
+      if (ext1 != "gz" || ext2 != "vcf") {
+        message('your file extention is not ".vcf.gz"')
+      }
+
+      # Fixed region
+      data <- self$inds[[1]]$haplo$SNPinfo$SNPcoord[,c("chr", "physPos", "SNPid")]
+      colnames(data) <- c("#CHROM", "POS", "ID")
+      data <- data[order(data$POS),]
+      data <- data[order(data$`#CHROM`),]
+
+      data$REF <- "."
+      data$ALT <- "."
+      data$QUAL <- "."
+      data$FILTER <- "PASS"
+      data$INFO <- "."
+
+
+
+      # Genotype region
+      data$FORMAT <- "GT"
+      gt <- vapply(self$inds, function(ind){
+        hap <- do.call(cbind, ind$haplo$values)
+        x <- paste(hap[1,], hap[2,], sep = "|")
+        names(x) <- colnames(hap)
+        x
+      }, vector(mode = "character",
+                length = length(self$inds[[1]]$haplo$allelDose)))
+      gt <- as.data.frame(gt[data$ID,])
+      data <- cbind(data, gt)
+
+
+      # Meta region
+      meta <- paste("##fileformat=VCFv4.3",
+                    "##source=\"breedSimulatR\", data in this file are simulated.",
+                    "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">",
+                    sep = "\n")
+
+      # write file
+      f <- gzfile(file, "w")
+      writeLines(text = meta, con = f)
+      close(f)
+      data.table::fwrite(x = data,
+                         file = file,
+                         append = TRUE,
+                         sep = "\t",
+                         quote = FALSE,
+                         row.names = FALSE,
+                         col.names = TRUE)
+    },
+
+
+
+
+
+
     #' @description
     #' Display informations about the object
     print = function() {
       cat(paste0(
         "Population: ", self$name, "\n",
         "Species: ", self$specie$specName, "\n",
-        "Number of individuals: ", self$nInd
+        "Number of individuals: ", self$nInd, "\n"
       ))
     }
 
