@@ -1,6 +1,10 @@
 # breedSimulatR 0.3.1
 
 
+## New Features
+
+- add  a `readVCF` function for importing a population from a VCF file.
+
 ## fix
 
 - fix wrong documentation in `phenotype` and `haplotype` classes.

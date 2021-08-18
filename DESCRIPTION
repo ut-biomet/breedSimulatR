@@ -12,8 +12,8 @@ Authors@R:
              family = "Iwata",
              role = "ths",
              email = "aiwata@mail.ecc.u-tokyo.ac.jp"))
-Description: R package providing classes and functions to
-    simulate breeding schemes.
+Description: R package providing classes and functions to simulate
+    breeding schemes.
 License: MIT + file LICENSE
 URL: https://github.com/ut-biomet/breedSimulatR
 BugReports: https://github.com/ut-biomet/breedSimulatR/issues
@@ -21,11 +21,14 @@ Depends:
     R (>= 3.2.0)
 Imports: 
     base,
+    data.table,
     R6,
-    stats
+    stats,
+    vcfR
 Suggests:
     covr,
     devtools,
+    gaston,
     knitr,
     pkgdown,
     rmarkdown,
