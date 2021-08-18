@@ -16,7 +16,7 @@
 # Details: Specie object store specific information of one specie.
 #'
 #' @export
-#' @import R6
+#' @importFrom R6 R6Class
 specie <- R6::R6Class(
   "Specie",
   public = list(

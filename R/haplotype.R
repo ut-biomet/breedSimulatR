@@ -14,7 +14,7 @@
 #'
 #'
 #' @export
-#' @import R6
+#' @importFrom R6 R6Class
 haplotype <- R6::R6Class(
   "Haplotype",
   public = list(

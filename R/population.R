@@ -14,7 +14,7 @@
 #'
 #'
 #' @export
-#' @import R6
+#' @importFrom R6 R6Class
 population <- R6::R6Class(
   "population",
   lock_objects = FALSE,

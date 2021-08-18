@@ -14,7 +14,7 @@
 #'
 #'
 #' @export
-#' @import R6
+#' @importFrom R6 R6Class
 individual <- R6::R6Class(
   "individual",
   public = list(

@@ -16,7 +16,7 @@
 #' \code{\link[breedSimulatR]{haplotype}})
 #'
 #' @export
-#' @import R6
+#' @importFrom R6 R6Class
 SNPinfo <- R6::R6Class(
   "SNPinfo",
   public = list(

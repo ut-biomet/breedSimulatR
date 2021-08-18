@@ -14,7 +14,7 @@
 #'
 #'
 #' @export
-#' @import R6
+#' @importFrom R6 R6Class
 trait <- R6::R6Class(
   "trait",
   lock_objects = FALSE,
@@ -168,7 +168,7 @@ trait <- R6::R6Class(
 #' phenotyper object is used to phenotype populations
 #'
 #' @export
-#' @import R6
+#' @importFrom R6 R6Class
 phenotyper <- R6::R6Class(
   "phenotyper",
   lock_objects = FALSE,
