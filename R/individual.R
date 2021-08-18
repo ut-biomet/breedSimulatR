@@ -80,6 +80,11 @@ individual <- R6::R6Class(
                           parent2 = NA,
                           haplo = NA,
                           verbose = TRUE){
+      # checks
+      if (class(haplo)[1] != "Haplotype") {
+        stop('"class(haplo)" must be "Haplotype"')
+      }
+
       self$name <- name
       self$specie <- specie
       self$parent1 <- parent1
@@ -101,6 +106,7 @@ individual <- R6::R6Class(
           stop('specie$lchrCm must be specify in order to generate gemtes')
         }
         gamete <- mapply(function(haplo, SNPcoord) {
+          # for each chromosome
           chrName <- SNPcoord$chr[1]
           chrLen <- self$specie$lchr[chrName]
           chrLenCm <- self$specie$lchrCm[chrName]
@@ -151,8 +157,8 @@ individual <- R6::R6Class(
           names(gamHaplo) <- colnames(haplo)
           gamHaplo
         },
-        self$haplo$values,
-        self$haplo$SNPinfo$SNPcoordList,
+        self$haplo$values[self$specie$chrNames],
+        self$haplo$SNPinfo$SNPcoordList[self$specie$chrNames],
         SIMPLIFY = FALSE)
 
         gamete <- unlist(gamete, use.names = FALSE)

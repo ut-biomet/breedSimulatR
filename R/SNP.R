@@ -104,6 +104,7 @@ SNPinfo <- R6::R6Class(
         }
       }
 
+      # chr names match those in specie
       if (!all(unique(SNPcoord$chr) %in% specie$chrNames)) {
         stop(paste0('"Chromosomes\'names specified in "SNPcoord" do ',
                     'not match those specified in "specie"\n',
@@ -112,8 +113,15 @@ SNPinfo <- R6::R6Class(
                     'specie$chrNames = ',
                     paste0(specie$chrNames, collapse = " ")))
       }
+
+      # markers are unique
       if (length(SNPcoord$SNPid) != length(unique(SNPcoord$SNPid))) {
         stop('Some markers appear several times in "SNPcoord"')
+      }
+
+      # physical position are integers
+      if (!all.equal(SNPcoord$physPos, as.integer(SNPcoord$physPos))) {
+        stop('markers\'s physical position should all be integers.')
       }
 
       # remove factors
@@ -125,13 +133,18 @@ SNPinfo <- R6::R6Class(
 
       # sort position in increasing order (needed for the function
       # "findInterval" in individual's generateGametes method)
+      SNPcoord <- SNPcoord[order(SNPcoord$SNPid),] # first order on unique values to be sure to always have the same order.
       SNPcoord <- SNPcoord[order(SNPcoord$physPos),]
 
+      # reorder columns
+      SNPcoord <- SNPcoord[,c("chr", "SNPid", "physPos", "linkMapPos")]
+      rownames(SNPcoord) <- SNPcoord$SNPid
 
       self$SNPcoord <- SNPcoord
       self$specie <- specie
       self$SNPcoordList <- split(SNPcoord,
                                  SNPcoord$chr)
+      self$SNPcoordList  <- self$SNPcoordList[specie$chrNames]
 
       # check SNP unicity and linkage map position order
       lapply(self$SNPcoordList, function(subSNPcoord){

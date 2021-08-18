@@ -3,7 +3,8 @@
 
 ## New Features
 
-- add  a `readVCF` function for importing a population from a VCF file.
+- add the `writeVCF` method to the `population` class to write genetic information in a vcf file.
+- add a `readVCF` function for importing a population from a phased VCF file.
 
 ## fix
 

@@ -17,9 +17,10 @@ if (basename(getwd()) == "breedSimulatR") {
 
 
 #### TESTS ####
-test_that("SNPinfo initialization without lmap", {
+test_that("SNPinfo initialization without link map pos", {
   #### Initialisation:
   mySpec <- create_spec()
+  ( mySpec <- create_spec() )
   nMarkers <- round(mySpec$lchr/10)
 
   # generate positions
@@ -57,7 +58,7 @@ test_that("SNPinfo initialization without lmap", {
 
 })
 
-test_that("SNPinfo initialization with lmap", {
+test_that("SNPinfo initialization with link map pos", {
   #### Initialisation:
   mySpec <- create_spec()
   nMarkers <- round(mySpec$lchr/10)
@@ -101,6 +102,25 @@ test_that("SNPinfo initialization with lmap", {
     expect_true(!is.unsorted(SNPs$SNPcoord[SNPs$SNPcoord$chr == chr, "linkMapPos"]))
   }
 
+
+  # two snpcoord data.frame with same information but in different order should
+  # lead to the same SNPinfo object
+  isDiff <- FALSE
+  while (!isDiff) {
+    cols <- sample(colnames(SNPcoord))
+    rows <- sample(nrow(SNPcoord))
+    if (!all(rows == seq_len(nrow(SNPcoord))) && !all(cols == colnames(SNPcoord))) {
+      SNPcoord_2 <- SNPcoord[sample(nrow(SNPcoord)), sample(colnames(SNPcoord))]
+      isDiff <- TRUE
+    }
+  }
+  expect_error({SNPs2 <- SNPinfo$new(SNPcoord_2, mySpec)}, NA)
+  # browser()
+  expect_equal(SNPs2,SNPs)
+  expect_identical(SNPs2$SNPcoord, SNPs$SNPcoord)
+  expect_identical(SNPs2$ids, SNPs$ids)
+  expect_identical(SNPs2$SNPcoordList, SNPs$SNPcoordList)
+  expect_identical(capture.output(print(SNPs2)),capture.output(print(SNPs)))
 })
 
 test_that("SNPinfo errors", {
@@ -171,7 +191,9 @@ test_that("SNPinfo stringAsFactor",{
   #### Tests:
   expect_error(expect_identical(SNPs_SAF_T$SNPcoord, SNPcoord_SAF_F))
   expect_error(expect_identical(SNPs_SAF_F$SNPcoord, SNPcoord_SAF_F))
-  expect_equal(summary(SNPs_SAF_T$SNPcoord), summary(SNPcoord_SAF_F))
+  for (col in colnames(SNPcoord_SAF_F)) {
+    expect_equal(summary(SNPs_SAF_T$SNPcoord[,col]), summary(SNPcoord_SAF_F[,col]))
+  }
   expect_equal(SNPs_SAF_T, SNPs_SAF_F)
 })
 

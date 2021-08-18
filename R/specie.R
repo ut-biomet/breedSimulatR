@@ -43,7 +43,7 @@ specie <- R6::R6Class(
     # @param ploidy [numeric] Number of possible alleles at one locus
     #'   (optional)
     # @param mutRate [numeric] Mutation rate at each base (optional)
-    #' @param chrNames [str] Names of the chromosomes (optional)
+    #' @param chrNames [str] Names of the chromosomes (optional). By default the chromosomes names will be set to "Chr01", "Chr02", "Chr03" ... 
     #' @param verbose [bool] Display info (optional)
     #' @return A new `specie` object.
     #' @examples

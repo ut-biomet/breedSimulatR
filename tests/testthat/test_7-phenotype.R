@@ -54,7 +54,9 @@ test_that("quant trait initialisation", {
 
 
 test_that("quant trait gv calculation", {
-  mySpec <- create_spec()
+  nChr <- round(runif(1, 1, 15))
+  lchr <- round(pmax(rnorm(nChr, 450, 50), 301))
+  mySpec <- create_spec(nChr = nChr, lchr = lchr )
   SNPs <- create_SNP(mySpec, nMarker = 300)
   nInds <- 100
   haploList <- lapply(seq(nInds), function(x){
@@ -82,7 +84,9 @@ test_that("quant trait gv calculation", {
 
 #### TESTS  phenotyper ####
 test_that("phenotyper initialisation", {
-  mySpec <- create_spec()
+  nChr <- round(runif(1, 1, 15))
+  lchr <- round(pmax(rnorm(nChr, 450, 50), 301))
+  mySpec <- create_spec(nChr = nChr, lchr = lchr )
   SNPs <- create_SNP(mySpec, nMarker = 300)
   nInds <- 100
   haploList <- lapply(seq(nInds), function(x){
@@ -204,6 +208,4 @@ test_that("phenotyper initialisation", {
   )
 
   expect_true(!any(is.na(pheno$data$myTrait1)))
-
-
 })
