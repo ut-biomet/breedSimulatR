@@ -53,7 +53,7 @@ readVCF <- function(file, specie = NULL, verbose = TRUE) {
   }
   # browser()
   vcf <- vcfR::read.vcfR(file = file, verbose = verbose)
-  fixVcf <- as.data.frame(vcfR::getFIX(vcf))
+  fixVcf <- as.data.frame(vcfR::getFIX(vcf), stringsAsFactors = FALSE)
   fixVcf[,"POS"] <- as.numeric(fixVcf[,"POS"])
 
   # create specie
@@ -71,10 +71,10 @@ readVCF <- function(file, specie = NULL, verbose = TRUE) {
     lchr <- lchr[chrNames]
 
     specie <- breedSimulatR::specie$new(nChr = nChr,
-                         chrNames = chrNames,
-                         lchr = lchr,
-                         lchrCm = lchr/10^6, # 1 cMper Mb.
-                         verbose = verbose)
+                                        chrNames = chrNames,
+                                        lchr = lchr,
+                                        lchrCm = lchr/10^6, # 1 cMper Mb.
+                                        verbose = verbose)
   }
 
 

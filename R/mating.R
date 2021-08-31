@@ -35,6 +35,7 @@ randomMate <- function(inds, n, names) {
     ind1 = sample(inds, n, replace = TRUE),
     ind2 = sample(inds, n, replace = TRUE),
     n = 1,
-    names = names
+    names = names,
+    stringsAsFactors = FALSE
   )
 }

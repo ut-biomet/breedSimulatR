@@ -461,7 +461,8 @@ phenotyper <- R6::R6Class(
                           }
                           out
                         })),
-                        phenotyper = self$name)
+                        phenotyper = self$name,
+                        stringsAsFactors = FALSE)
 
       list(
         data = dta,
