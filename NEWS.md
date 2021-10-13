@@ -1,3 +1,7 @@
+# breedSimulatR 0.3.2
+
+- Creating a new `phenotyper` object with `he = 0` now raise an error.
+
 # breedSimulatR 0.3.1
 
 
