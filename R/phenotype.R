@@ -316,8 +316,8 @@ phenotyper <- R6::R6Class(
           stop('If you do not provide "ve" please specify both "he" and "pop"')
         }
 
-        if (any(he > 1) || any(he < 0)) {
-          stop('"he" should be between 0 and 1')
+        if (any(he > 1) || any(he <= 0)) {
+          stop('"he" should be between 0 and 1 (0 excluded)')
         }
 
         if (length(he) == 1) {
