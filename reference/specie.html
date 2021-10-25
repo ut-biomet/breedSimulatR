@@ -45,8 +45,6 @@
 
 
 
-
-
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -58,18 +56,9 @@
 
 
 
-<!-- dependencies from examples -->
-
-
-  
-
-  
-
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -83,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedSimulatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -164,7 +153,7 @@
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
-<h3 class='hasAnchor' id='public-methods'><a class='anchor' aria-hidden='true' href='#public-methods'></a>Public methods</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Public methods</h3>
 
 <ul>
 <li><p><a href='#method-new'><code>specie$new()</code></a></p></li>
@@ -174,8 +163,8 @@
 <li><p><a href='#method-clone'><code>specie$clone()</code></a></p></li>
 </ul>
 <p><hr>
-<a id="method-new"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>new()</code></h3>
-<p>Create a new specie object.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
+<p>Create a new specie object.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   <span class='va'>nChr</span>,
   <span class='va'>lchr</span>,
@@ -185,7 +174,7 @@
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>nChr</code></dt><dd><p>[numeric] Number of chromosomes</p></dd>
 
@@ -196,51 +185,14 @@
 <dt><code>specName</code></dt><dd><p>[str] Specie's name (optional)
 (optional)</p></dd>
 
-<dt><code>chrNames</code></dt><dd><p>[str] Names of the chromosomes (optional)</p></dd>
+<dt><code>chrNames</code></dt><dd><p>[str] Names of the chromosomes (optional). By default the chromosomes names will be set to "Chr01", "Chr02", "Chr03" ...</p></dd>
 
 <dt><code>verbose</code></dt><dd><p>[bool] Display info (optional)</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='returns'><a class='anchor' aria-hidden='true' href='#returns'></a>Returns</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
 <p>A new `specie` object.</p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
-<p><div class="r example copy"></p><pre><span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'>specie</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>3</span>,
-                     lchr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span><span class='op'>)</span>,
-                     lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
-                     specName <span class='op'>=</span> <span class='st'>"Geneticae Exempulus"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>mySpec</span><span class='op'>)</span>
-</pre><p></div></p>
-
-<h3 class='hasAnchor' id='list-new-'><a class='anchor' aria-hidden='true' href='#list-new-'></a>Method <code>new()</code></h3>
-<p>Create a new specie object.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
-  <span class='va'>nChr</span>,
-  <span class='va'>lchr</span>,
-  <span class='va'>lchrCm</span>,
-  specName <span class='op'>=</span> <span class='st'>"Undefinded"</span>,
-  chrNames <span class='op'>=</span> <span class='cn'>NA</span>,
-  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre><p></div></p>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
-<p><div class="arguments"></p><dl>
-<dt><code>nChr</code></dt><dd><p>[numeric] Number of chromosomes</p></dd>
-
-<dt><code>lchr</code></dt><dd><p>[numeric] length of all chromosomes in base pairs</p></dd>
-
-<dt><code>lchrCm</code></dt><dd><p>[numeric] length of all chromosomes in centimorgans</p></dd>
-
-<dt><code>specName</code></dt><dd><p>[str] Specie's name (optional)
-(optional)</p></dd>
-
-<dt><code>chrNames</code></dt><dd><p>[str] Names of the chromosomes (optional)</p></dd>
-
-<dt><code>verbose</code></dt><dd><p>[bool] Display info (optional)</p></dd>
-
-</dl><p></div></p>
-<h4 class='hasAnchor' id='returns'><a class='anchor' aria-hidden='true' href='#returns'></a>Returns</h4>
-<p>A new `specie` object.</p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>mySpec</span> <span class='op'>&lt;-</span> <span class='va'>specie</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>nChr <span class='op'>=</span> <span class='fl'>3</span>,
                      lchr <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>150</span>, <span class='fl'>200</span><span class='op'>)</span>,
                      lchrCm <span class='op'>=</span> <span class='fl'>100</span>,
@@ -249,91 +201,48 @@
 </pre><p></div></p>
 
 <p><hr>
-<a id="method-print"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
-<p>Display information about the object</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<h3 class='hasAnchor' id='list-print-'><a class='anchor' aria-hidden='true' href='#list-print-'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
-<p>Display information about the object</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<a id="method-print"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
+<p>Display information about the object</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
-<a id="method-getChrLength"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>getChrLength()</code></h3>
-<p>Get the chromosomes length</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<a id="method-getChrLength"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>getChrLength()</code></h3>
+<p>Get the chromosomes length</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span>chr <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>chr</code></dt><dd><p>[str or numeric] chromosome ids</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
-<p><div class="r example copy"></p><pre><span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
-<span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span><span class='st'>"Chr3"</span><span class='op'>)</span>
-</pre><p></div></p>
-
-<h3 class='hasAnchor' id='list-getchrlength-'><a class='anchor' aria-hidden='true' href='#list-getchrlength-'></a>Method <code>getChrLength()</code></h3>
-<p>Get the chromosomes length</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span>chr <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre><p></div></p>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
-<p><div class="arguments"></p><dl>
-<dt><code>chr</code></dt><dd><p>[str or numeric] chromosome ids</p></dd>
-
-</dl><p></div></p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span><span class='op'>)</span>
 <span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
 <span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLength</span><span class='op'>(</span><span class='st'>"Chr3"</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
-<a id="method-getChrLengthCm"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>getChrLengthCm()</code></h3>
-<p>Get the chromosomes length in centimorgans</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<a id="method-getChrLengthCm"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>getChrLengthCm()</code></h3>
+<p>Get the chromosomes length in centimorgans</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span>chr <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>chr</code></dt><dd><p>[str or numeric] chromosome ids</p></dd>
 
 </dl><p></div></p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
-<p><div class="r example copy"></p><pre><span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
-<span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span><span class='st'>"Chr3"</span><span class='op'>)</span>
-</pre><p></div></p>
-
-<h3 class='hasAnchor' id='list-getchrlengthcm-'><a class='anchor' aria-hidden='true' href='#list-getchrlengthcm-'></a>Method <code>getChrLengthCm()</code></h3>
-<p>Get the chromosomes length in centimorgans</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span>chr <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre><p></div></p>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
-<p><div class="arguments"></p><dl>
-<dt><code>chr</code></dt><dd><p>[str or numeric] chromosome ids</p></dd>
-
-</dl><p></div></p>
-<h4 class='hasAnchor' id='examples'><a class='anchor' aria-hidden='true' href='#examples'></a>Examples</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Examples</h4>
 <p><div class="r example copy"></p><pre><span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span><span class='op'>)</span>
 <span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
 <span class='va'>mySpec</span><span class='op'>$</span><span class='fu'>getChrLengthCm</span><span class='op'>(</span><span class='st'>"Chr3"</span><span class='op'>)</span>
 </pre><p></div></p>
 
 <p><hr>
-<a id="method-clone"></a></p><h3 class='hasAnchor' id='method-'><a class='anchor' aria-hidden='true' href='#method-'></a>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
+<a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>clone()</code></h3>
+<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
-<p><div class="arguments"></p><dl>
-<dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
-
-</dl><p></div></p>
-<h3 class='hasAnchor' id='list-clone-'><a class='anchor' aria-hidden='true' href='#list-clone-'></a>Method <code>clone()</code></h3>
-<p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='usage'><a class='anchor' aria-hidden='true' href='#usage'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>specie</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' aria-hidden='true' href='#arguments'></a>Arguments</h4>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>deep</code></dt><dd><p>Whether to make a deep clone.</p></dd>
 
@@ -394,11 +303,11 @@
 
       <footer>
       <div class="copyright">
-  <p><p>Developed by Julien Diot.</p></p>
+  <p>Developed by Julien Diot.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -406,8 +315,6 @@
 
   
 
-
-  
 
   </body>
 </html>

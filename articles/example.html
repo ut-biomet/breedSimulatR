@@ -19,8 +19,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">breedSimulatR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -66,7 +64,7 @@
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="https://github.com/ut-biomet/breedSimulatR/" class="external-link">
+  <a href="https://github.com/ut-biomet/breedSimulatR/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -88,7 +86,7 @@
 <code>breedSimulatR</code> Example</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ut-biomet/breedSimulatR/blob/master/vignettes/example.Rmd" class="external-link"><code>vignettes/example.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ut-biomet/breedSimulatR/blob/master/vignettes/example.Rmd"><code>vignettes/example.Rmd</code></a></small>
       <div class="hidden name"><code>example.Rmd</code></div>
 
     </div>
@@ -97,13 +95,13 @@
     
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
-<a href="#introduction" class="anchor" aria-hidden="true"></a>Introduction</h1>
+<a href="#introduction" class="anchor"></a>Introduction</h1>
 <p><code>breedSimulatR</code> is R package providing classes and functions to simulate breeding schemes. It have been design to be intuitive and easy to use.</p>
-<p>The Object-Oriented Programming (OOP) system used in this package is <a href="https://CRAN.R-project.org/package=R6" class="external-link">R6</a>. Information about R6 OOP system can be found at <a href="https://adv-r.hadley.nz/r6.html" class="external-link">chapter 14 of Hadley Wickham’s book <em>Advanced R</em></a>.</p>
+<p>The Object-Oriented Programming (OOP) system used in this package is <a href="https://CRAN.R-project.org/package=R6">R6</a>. Information about R6 OOP system can be found at <a href="https://adv-r.hadley.nz/r6.html">chapter 14 of Hadley Wickham’s book <em>Advanced R</em></a>.</p>
 <p>This vignette shows how to use the <code>breedSimulatR</code> package thought basic examples.</p>
 <div id="breedsimulatrs-classes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breedsimulatrs-classes" class="anchor" aria-hidden="true"></a><code>breedSimulatR</code>’s classes</h2>
+<a href="#breedsimulatrs-classes" class="anchor"></a><code>breedSimulatR</code>’s classes</h2>
 <p>First let’s have a look on the main classes provided by <code>breedSimulatR</code>:</p>
 <ul>
 <li>
@@ -123,10 +121,10 @@
 </div>
 <div id="example-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-data" class="anchor" aria-hidden="true"></a>Example data</h2>
+<a href="#example-data" class="anchor"></a>Example data</h2>
 <p>The package contains some example data that we will use for these examples. These data are stored in the variable <code>exampleData</code> of the package.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ut-biomet/breedSimulatR" class="external-link">breedSimulatR</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ut-biomet/breedSimulatR">breedSimulatR</a></span><span class="op">)</span>
 <span class="va">exampleData</span></code></pre></div>
 <p><code>exampleData</code> is a list containing 3 elements:</p>
 <ul>
@@ -138,16 +136,16 @@
 <code>exampleData$snpEffects</code>: contains the “true” effects of the SNP markers for a quantitative trait based on an additive architecture.</li>
 </ul>
 <p>It represents information about <code>.nInd</code> individuals and <code>.nSNP</code> markers on <code>.nChr</code>.</p>
-<p>These data are fictitious and come from the serious game <a href="https://github.com/timflutre/PlantBreedGame" class="external-link">“PlantBreedGame”</a> <span class="citation">(Flutre, Diot, and David 2019)</span>.</p>
+<p>These data are fictitious and come from the serious game <a href="https://github.com/timflutre/PlantBreedGame">“PlantBreedGame”</a> <span class="citation">(Flutre, Diot, and David 2019)</span>.</p>
 </div>
 </div>
 <div id="simulation-initialization" class="section level1">
 <h1 class="hasAnchor">
-<a href="#simulation-initialization" class="anchor" aria-hidden="true"></a>Simulation Initialization</h1>
+<a href="#simulation-initialization" class="anchor"></a>Simulation Initialization</h1>
 <p>In order to run some simulation, we must first initialize some objects: a <code>specie</code>, SNP information (<code>SNPinfo</code>), a <code>population</code>, some <code>traits</code> and a <code>phenotyper</code>.</p>
 <div id="specie-specification" class="section level2">
 <h2 class="hasAnchor">
-<a href="#specie-specification" class="anchor" aria-hidden="true"></a>Specie specification</h2>
+<a href="#specie-specification" class="anchor"></a>Specie specification</h2>
 <p>The example’s specie, let’s name it <em>Statisticae exempli</em>, have <strong>10 chromosomes</strong> with the same length of around <strong>1e+06</strong> base pairs for <strong>100</strong> centimorgans.</p>
 <p>The function <code>specie$new</code> will create a new <code>specie</code> object <code>specie_statEx</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -158,7 +156,7 @@
                             lchrCm <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>
 <span class="co">#&gt; A new species has emerged: Statisticae exempli !</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">specie_statEx</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">specie_statEx</span><span class="op">)</span>
 <span class="co">#&gt; Name: Statisticae exempli</span>
 <span class="co">#&gt; Number of Chromosomes: 10</span>
 <span class="co">#&gt; Ploidy: 2</span>
@@ -176,7 +174,7 @@
 </div>
 <div id="snp-specification" class="section level2">
 <h2 class="hasAnchor">
-<a href="#snp-specification" class="anchor" aria-hidden="true"></a>SNP specification</h2>
+<a href="#snp-specification" class="anchor"></a>SNP specification</h2>
 <p>In order to simulate the crossing between individuals, we need information about the positions of the genotypic markers used in the simulation. We will create for that the object <code>SNPinfo</code> using the function <code>SNPinfo$new</code>.</p>
 <ul>
 <li>
@@ -198,7 +196,7 @@
 <p>We can create the <code>SNPinfo</code> object using <code>exampleData$snpCoord</code> which is a <code>data.frame</code> matching the requirement of <code>SNPinfo$new</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># data preview</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">exampleData</span><span class="op">$</span><span class="va">snpCoord</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">exampleData</span><span class="op">$</span><span class="va">snpCoord</span><span class="op">)</span>
 <span class="co">#&gt;      chr physPos linkMapPos    SNPid</span>
 <span class="co">#&gt; 2  Chr01  937638   86.81546 snp03760</span>
 <span class="co">#&gt; 6  Chr01  654763   56.51842 snp02674</span>
@@ -211,24 +209,24 @@
 <span class="va">SNPs</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/SNPinfo.html">SNPinfo</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>SNPcoord <span class="op">=</span> <span class="va">exampleData</span><span class="op">$</span><span class="va">snpCoord</span>,
                     specie <span class="op">=</span> <span class="va">specie_statEx</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">SNPs</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">SNPs</span><span class="op">)</span>
 <span class="co">#&gt; specie: Statisticae exempli</span>
 <span class="co">#&gt; 3333 Markers on 10 chromosomes :</span>
 <span class="co">#&gt; Chr01 Chr02 Chr03 Chr04 Chr05 Chr06 Chr07 Chr08 Chr09 Chr10 </span>
 <span class="co">#&gt;   415   247   425   322   381   269   238   355   342   339 </span>
 <span class="co">#&gt; SNPcoord:</span>
-<span class="co">#&gt;        chr physPos linkMapPos    SNPid</span>
-<span class="co">#&gt; 338  Chr01    2068  0.4911687 snp00006</span>
-<span class="co">#&gt; 1450 Chr01    2708  0.6423784 snp00009</span>
-<span class="co">#&gt; 1391 Chr01    2782  0.6598378 snp00011</span>
-<span class="co">#&gt; 2475 Chr01    4159  0.9838113 snp00018</span>
-<span class="co">#&gt; 1553 Chr01    6917  1.6275084 snp00026</span>
-<span class="co">#&gt; 2365 Chr01    7814  1.8353769 snp00031</span>
+<span class="co">#&gt;            chr    SNPid physPos linkMapPos</span>
+<span class="co">#&gt; snp00006 Chr01 snp00006    2068  0.4911687</span>
+<span class="co">#&gt; snp00009 Chr01 snp00009    2708  0.6423784</span>
+<span class="co">#&gt; snp00011 Chr01 snp00011    2782  0.6598378</span>
+<span class="co">#&gt; snp00018 Chr01 snp00018    4159  0.9838113</span>
+<span class="co">#&gt; snp00026 Chr01 snp00026    6917  1.6275084</span>
+<span class="co">#&gt; snp00031 Chr01 snp00031    7814  1.8353769</span>
 <span class="co">#&gt;  [ reached 'max' / getOption("max.print") -- omitted 3327 rows ]</span></code></pre></div>
 </div>
 <div id="population-initialization" class="section level2">
 <h2 class="hasAnchor">
-<a href="#population-initialization" class="anchor" aria-hidden="true"></a>Population initialization</h2>
+<a href="#population-initialization" class="anchor"></a>Population initialization</h2>
 <p>We can now generate an initial population from genotypic data. We will use the function <code>createPop</code>. This function will create a <code>population</code> object from at least two arguments:</p>
 <ul>
 <li>
@@ -250,14 +248,14 @@
                      SNPinfo <span class="op">=</span> <span class="va">SNPs</span>,
                      popName <span class="op">=</span> <span class="st">"Initial population"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">initPop</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">initPop</span><span class="op">)</span>
 <span class="co">#&gt; Population: Initial population</span>
 <span class="co">#&gt; Species: Statisticae exempli</span>
 <span class="co">#&gt; Number of individuals: 100</span></code></pre></div>
 </div>
 <div id="traits-and-phenotyping-initialization" class="section level2">
 <h2 class="hasAnchor">
-<a href="#traits-and-phenotyping-initialization" class="anchor" aria-hidden="true"></a>Traits and phenotyping initialization</h2>
+<a href="#traits-and-phenotyping-initialization" class="anchor"></a>Traits and phenotyping initialization</h2>
 <p>In order to do some phenotyping simulation, we need to create a trait.</p>
 <p>We will use for that the example data <code>exampleData$snpEffects</code> containing the “true” effects of each QTN.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -266,10 +264,10 @@
 <span class="co">#&gt; 0.05110930 0.08099233 0.18353259 0.02819434 0.14413695</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">weight</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/trait.html">trait</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Weight"</span>,
-                    qtn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">exampleData</span><span class="op">$</span><span class="va">snpEffects</span><span class="op">)</span>,
+                    qtn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">exampleData</span><span class="op">$</span><span class="va">snpEffects</span><span class="op">)</span>,
                     qtnEff <span class="op">=</span> <span class="va">exampleData</span><span class="op">$</span><span class="va">snpEffects</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>
 <span class="co">#&gt; trait: Weight</span>
 <span class="co">#&gt; quantitative trait</span>
 <span class="co">#&gt; number of QTN: 3333</span></code></pre></div>
@@ -283,7 +281,7 @@
                            he <span class="op">=</span> <span class="fl">0.6</span>,
                            pop <span class="op">=</span> <span class="va">initPop</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">phenolab</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">phenolab</span><span class="op">)</span>
 <span class="co">#&gt; Phenotyper: Pheno lab</span>
 <span class="co">#&gt; Traits: Weight</span>
 <span class="co">#&gt; μ: 100</span>
@@ -294,14 +292,14 @@
 </div>
 <div id="breeding-simulation" class="section level1">
 <h1 class="hasAnchor">
-<a href="#breeding-simulation" class="anchor" aria-hidden="true"></a>Breeding simulation</h1>
+<a href="#breeding-simulation" class="anchor"></a>Breeding simulation</h1>
 <p>Now the simulation is setup, we can write the simulation code using the objects defined previously. For this example we will simulate a simple breeding scheme consisting in phenotyping individuals and selecting those with the highest phenotypic values and cross them together.</p>
 <div id="phenotyping-individuals" class="section level2">
 <h2 class="hasAnchor">
-<a href="#phenotyping-individuals" class="anchor" aria-hidden="true"></a>phenotyping individuals</h2>
+<a href="#phenotyping-individuals" class="anchor"></a>phenotyping individuals</h2>
 <p>First, let’s phenotype the initial population</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1809</span><span class="op">)</span> <span class="co"># set seed </span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1809</span><span class="op">)</span> <span class="co"># set seed </span>
 
 <span class="va">pheno</span> <span class="op">&lt;-</span> <span class="va">phenolab</span><span class="op">$</span><span class="fu">trial</span><span class="op">(</span>pop <span class="op">=</span> <span class="va">initPop</span>, rep <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="va">pheno</span><span class="op">$</span><span class="va">data</span>
@@ -325,20 +323,20 @@
 </div>
 <div id="selecting-individuals" class="section level2">
 <h2 class="hasAnchor">
-<a href="#selecting-individuals" class="anchor" aria-hidden="true"></a>Selecting individuals</h2>
+<a href="#selecting-individuals" class="anchor"></a>Selecting individuals</h2>
 <p>Here we will just select the individuals with the highest phenotypic values.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># aggregate result by individual</span>
-<span class="va">aggPheno</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">ind</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">$</span><span class="va">data</span>, <span class="va">mean</span><span class="op">)</span> 
+<span class="va">aggPheno</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">ind</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">$</span><span class="va">data</span>, <span class="va">mean</span><span class="op">)</span> 
 
 <span class="co"># sort result by "Weight" in ascending order</span>
-<span class="va">aggPheno</span> <span class="op">&lt;-</span> <span class="va">aggPheno</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">aggPheno</span><span class="op">$</span><span class="va">Weight</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,<span class="op">]</span>
+<span class="va">aggPheno</span> <span class="op">&lt;-</span> <span class="va">aggPheno</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">aggPheno</span><span class="op">$</span><span class="va">Weight</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,<span class="op">]</span>
 
 <span class="co"># set selection intensity</span>
 <span class="va">i</span> <span class="op">=</span> <span class="fl">0.1</span>
 
 <span class="co"># calculated number of selected individuals</span>
-<span class="va">nSelected</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">floor</a></span><span class="op">(</span><span class="va">initPop</span><span class="op">$</span><span class="va">nInd</span> <span class="op">*</span> <span class="va">i</span><span class="op">)</span>
+<span class="va">nSelected</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="va">initPop</span><span class="op">$</span><span class="va">nInd</span> <span class="op">*</span> <span class="va">i</span><span class="op">)</span>
   
 <span class="co"># get names of selected individuals</span>
 <span class="va">selectedInds</span> <span class="op">=</span> <span class="va">aggPheno</span><span class="op">$</span><span class="va">ind</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">nSelected</span><span class="op">]</span>
@@ -348,7 +346,7 @@
 </div>
 <div id="crossing-individuals" class="section level2">
 <h2 class="hasAnchor">
-<a href="#crossing-individuals" class="anchor" aria-hidden="true"></a>Crossing individuals</h2>
+<a href="#crossing-individuals" class="anchor"></a>Crossing individuals</h2>
 <p>In order to cross the individuals we need to create a crossing table specifying:</p>
 <ul>
 <li>the first parent: <code>ind1</code>
@@ -362,7 +360,7 @@
 </ul>
 <p>In this example we will randomly cross the individuals together to create 100 new individuals. The function <code>randomMate</code> can generate such table.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">crossTable</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/randomMate.html">randomMate</a></span><span class="op">(</span><span class="va">selectedInds</span>, <span class="fl">100</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"gen-2_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">crossTable</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/randomMate.html">randomMate</a></span><span class="op">(</span><span class="va">selectedInds</span>, <span class="fl">100</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"gen-2_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="va">crossTable</span>
 <span class="co">#&gt;       ind1     ind2 n   names</span>
 <span class="co">#&gt; 1 Coll0079 Coll0046 1 gen-2_1</span>
@@ -383,54 +381,63 @@
 </div>
 <div id="automatisation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#automatisation" class="anchor" aria-hidden="true"></a>Automatisation</h2>
+<a href="#automatisation" class="anchor"></a>Automatisation</h2>
 <p>We have created one new generation, let’s create 3 more generations other generation automatically integrating the code above in one loop.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a list with all our populations</span>
-<span class="va">popList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">vector</a></span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"list"</span>, length <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
+<span class="va">nGen</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="co"># total number of generation</span>
+<span class="va">popList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"list"</span>, length <span class="op">=</span> <span class="va">nGen</span><span class="op">)</span>
 <span class="va">popList</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">initPop</span>
 <span class="va">popList</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">newPop</span>
 
-
-<span class="kw">for</span> <span class="op">(</span><span class="va">gen</span> <span class="kw">in</span> <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span>
+<span class="va">nNew</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="co"># number of new individual for each generation</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">gen</span> <span class="kw">in</span> <span class="fl">3</span><span class="op">:</span><span class="va">nGen</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">gen</span><span class="op">)</span>
   <span class="co"># phenotyping</span>
   <span class="va">pheno</span> <span class="op">&lt;-</span> <span class="va">phenolab</span><span class="op">$</span><span class="fu">trial</span><span class="op">(</span>pop <span class="op">=</span> <span class="va">popList</span><span class="op">[[</span><span class="va">gen</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, rep <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
   
   <span class="co"># select individuals</span>
-  <span class="va">aggPheno</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">ind</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">$</span><span class="va">data</span>, <span class="va">mean</span><span class="op">)</span> 
-  <span class="va">aggPheno</span> <span class="op">&lt;-</span> <span class="va">aggPheno</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">aggPheno</span><span class="op">$</span><span class="va">Weight</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,<span class="op">]</span>
-  <span class="va">nSelected</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">floor</a></span><span class="op">(</span><span class="va">initPop</span><span class="op">$</span><span class="va">nInd</span> <span class="op">*</span> <span class="va">i</span><span class="op">)</span>
+  <span class="va">aggPheno</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">ind</span>, data <span class="op">=</span> <span class="va">pheno</span><span class="op">$</span><span class="va">data</span>, <span class="va">mean</span><span class="op">)</span> 
+  <span class="va">aggPheno</span> <span class="op">&lt;-</span> <span class="va">aggPheno</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">aggPheno</span><span class="op">$</span><span class="va">Weight</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,<span class="op">]</span>
+  <span class="va">nSelected</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="va">initPop</span><span class="op">$</span><span class="va">nInd</span> <span class="op">*</span> <span class="va">i</span><span class="op">)</span>
   <span class="va">selectedInds</span> <span class="op">=</span> <span class="va">aggPheno</span><span class="op">$</span><span class="va">ind</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">nSelected</span><span class="op">]</span>
   
   <span class="co"># cross individuals</span>
   <span class="va">crossTable</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/randomMate.html">randomMate</a></span><span class="op">(</span>inds <span class="op">=</span> <span class="va">selectedInds</span>,
-                           n <span class="op">=</span> <span class="fl">100</span>,
-                           names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"gen-"</span>, <span class="va">gen</span>,<span class="st">"_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+                           n <span class="op">=</span> <span class="va">nNew</span>,
+                           names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"gen-"</span>, <span class="va">gen</span>,<span class="st">"_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">nNew</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
   <span class="va">newIndsList</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/makeCrosses.html">makeCrosses</a></span><span class="op">(</span><span class="va">crossTable</span>, <span class="va">popList</span><span class="op">[[</span><span class="va">gen</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
   
   <span class="co"># create new population</span>
-  <span class="va">popList</span><span class="op">[[</span><span class="va">gen</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/population.html">population</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"generation"</span>, <span class="va">gen</span><span class="op">)</span>,
+  <span class="va">popList</span><span class="op">[[</span><span class="va">gen</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/population.html">population</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"generation"</span>, <span class="va">gen</span><span class="op">)</span>,
                                    inds <span class="op">=</span> <span class="va">newIndsList</span>,
                                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
   
 <span class="op">}</span>
+<span class="co">#&gt; [1] 3</span>
+<span class="co">#&gt; [1] 4</span>
+<span class="co">#&gt; [1] 5</span>
 <span class="va">popList</span>
 <span class="co">#&gt; [[1]]</span>
 <span class="co">#&gt; Population: Initial population</span>
 <span class="co">#&gt; Species: Statisticae exempli</span>
 <span class="co">#&gt; Number of individuals: 100</span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]</span>
 <span class="co">#&gt; Population: generation 2</span>
 <span class="co">#&gt; Species: Statisticae exempli</span>
 <span class="co">#&gt; Number of individuals: 100</span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; [[3]]</span>
 <span class="co">#&gt; Population: generation 3</span>
 <span class="co">#&gt; Species: Statisticae exempli</span>
 <span class="co">#&gt; Number of individuals: 100</span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; [[4]]</span>
 <span class="co">#&gt; Population: generation 4</span>
 <span class="co">#&gt; Species: Statisticae exempli</span>
 <span class="co">#&gt; Number of individuals: 100</span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; [[5]]</span>
 <span class="co">#&gt; Population: generation 5</span>
 <span class="co">#&gt; Species: Statisticae exempli</span>
@@ -438,28 +445,28 @@
 <p>Let’s look at the true genetic values of each population:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create data.table with all genetic values</span>
-<span class="va">GVs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">popList</span>, <span class="kw">function</span><span class="op">(</span><span class="va">pop</span><span class="op">)</span><span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>gvWeight <span class="op">=</span> <span class="va">weight</span><span class="op">$</span><span class="fu">gv</span><span class="op">(</span><span class="va">pop</span><span class="op">)</span>, pop <span class="op">=</span> <span class="va">pop</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>
+<span class="va">GVs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">popList</span>, <span class="kw">function</span><span class="op">(</span><span class="va">pop</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>gvWeight <span class="op">=</span> <span class="va">weight</span><span class="op">$</span><span class="fu">gv</span><span class="op">(</span><span class="va">pop</span><span class="op">)</span>, pop <span class="op">=</span> <span class="va">pop</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># set pop variable as factor</span>
-<span class="va">GVs</span><span class="op">$</span><span class="va">pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">GVs</span><span class="op">$</span><span class="va">pop</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">GVs</span><span class="op">$</span><span class="va">pop</span><span class="op">)</span><span class="op">)</span>
+<span class="va">GVs</span><span class="op">$</span><span class="va">pop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">GVs</span><span class="op">$</span><span class="va">pop</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">GVs</span><span class="op">$</span><span class="va">pop</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># create boxplot</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html" class="external-link">boxplot</a></span><span class="op">(</span><span class="va">gvWeight</span><span class="op">~</span><span class="va">pop</span>,data<span class="op">=</span><span class="va">GVs</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">gvWeight</span><span class="op">~</span><span class="va">pop</span>,data<span class="op">=</span><span class="va">GVs</span><span class="op">)</span></code></pre></div>
 <p><img src="example_files/figure-html/unnamed-chunk-12-1.png" width="768"></p>
 </div>
 </div>
 <div id="conclusion" class="section level1">
 <h1 class="hasAnchor">
-<a href="#conclusion" class="anchor" aria-hidden="true"></a>Conclusion</h1>
+<a href="#conclusion" class="anchor"></a>Conclusion</h1>
 <p>We have build an algorithm for simulating a simple breeding camping. In order to create more advance simulation, users can create their own functions for selecting, mating individuals using the classes provided by <code>breedSimulatR</code>. An exhaustive list of the fields and methods available for each class can be found in the documentation of the package and on <a href="https://ut-biomet.github.io/breedSimulatR/reference/index.html">the package’s web site</a>.</p>
 <div id="references" class="section level2 unnumbered">
 <h2 class="hasAnchor">
-<a href="#references" class="anchor" aria-hidden="true"></a>References</h2>
+<a href="#references" class="anchor"></a>References</h2>
 <div id="refs" class="references">
 <div id="ref-PlantBreedGame">
-<p>Flutre, Timothée, Julien Diot, and Jacques David. 2019. “PlantBreedGame, A Serious Game That Puts Students in the Breeder’s Seat.” <em>Crop Science</em> 59 (October): 1374–5. <a href="https://doi.org/10.2135/cropsci2019.03.0183le" class="external-link">https://doi.org/10.2135/cropsci2019.03.0183le</a>.</p>
+<p>Flutre, Timothée, Julien Diot, and Jacques David. 2019. “PlantBreedGame, A Serious Game That Puts Students in the Breeder’s Seat.” <em>Crop Science</em> 59 (October): 1374–5. <a href="https://doi.org/10.2135/cropsci2019.03.0183le">https://doi.org/10.2135/cropsci2019.03.0183le</a>.</p>
 </div>
 </div>
 </div>
@@ -477,13 +484,11 @@
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by Julien Diot.</p>
+  <p>Developed by Julien Diot.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -491,8 +496,6 @@
 
   
 
-
-  
 
   </body>
 </html>
