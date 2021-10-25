@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   example: example.html
-last_built: 2021-10-25T09:05Z
+last_built: 2021-10-25T09:06Z
 urls:
   reference: https://ut-biomet.github.io/breedSimulatR//reference
   article: https://ut-biomet.github.io/breedSimulatR//articles
