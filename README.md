@@ -13,7 +13,9 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 status](https://www.r-pkg.org/badges/version/breedSimulatR)](https://CRAN.R-project.org/package=breedSimulatR)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![R-CMD-check](https://github.com/ut-biomet/breedSimulatR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ut-biomet/breedSimulatR/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check-Linux](https://github.com/ut-biomet/breedSimulatR/actions/workflows/R-CMD-check-Linux.yaml/badge.svg)](https://github.com/ut-biomet/breedSimulatR/actions/workflows/R-CMD-check-Linux.yaml)
+[![R-CMD-check-Windows](https://github.com/ut-biomet/breedSimulatR/actions/workflows/R-CMD-check-Windows.yaml/badge.svg)](https://github.com/ut-biomet/breedSimulatR/actions/workflows/R-CMD-check-Windows.yaml)
+[![R-CMD-check](https://github.com/ut-biomet/breedSimulatR/actions/workflows/R-CMD-check-MacOS.yaml/badge.svg)](https://github.com/ut-biomet/breedSimulatR/actions/workflows/R-CMD-check-MacOS.yaml)
 <!-- badges: end -->
 
 R package providing classes and functions to simulate breeding schemes.

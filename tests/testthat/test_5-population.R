@@ -313,11 +313,8 @@ test_that("population write VCF", {
                           verbose = FALSE,
                           convert.chr = FALSE)
   }, NA)
-  expect_equal(sort(x@snps$id), sort(SNPs$SNPcoord$SNPid)) 
-  expect_equal(sort(x@ped$id), sort(names(myPop$inds))) 
-  # expect_equal(nrow(x@snps), nrow(SNPs$SNPcoord))
-  # expect_equal(nrow(x@ped), nInds)
-  # browser()
+  expect_equal(sort(x@snps$id), sort(SNPs$SNPcoord$SNPid))
+  expect_equal(sort(x@ped$id), sort(names(myPop$inds)))
   l <- names(myPop$inds)
   c <- SNPs$SNPcoord$SNPid
   expect_equal(gaston::as.matrix(x)[l, c], myPop$genoMat[l, c])
