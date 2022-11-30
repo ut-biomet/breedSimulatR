@@ -15,6 +15,7 @@ status](https://www.r-pkg.org/badges/version/breedSimulatR)](https://CRAN.R-proj
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R build
 status](https://github.com/ut-biomet/breedSimulatR/workflows/R-CMD-check/badge.svg)](https://github.com/ut-biomet/breedSimulatR/actions)
+[![R-CMD-check](https://github.com/ut-biomet/breedSimulatR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ut-biomet/breedSimulatR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 R package providing classes and functions to simulate breeding schemes.
@@ -379,8 +380,8 @@ version 3.6.1,
 <b> devtools </b>
 <ul>
 <li>
-Wickham H, Hester J, Chang W (2021).<em>devtools: Tools to Make
-Developing R Packages Easier</em>.R package version 2.4.2,
+Wickham H, Hester J, Chang W, Bryan J (2022).<em>devtools: Tools to Make
+Developing R Packages Easier</em>.R package version 2.4.5,
 <a href="https://CRAN.R-project.org/package=devtools">https://CRAN.R-project.org/package=devtools</a>.
 </li>
 </ul>
@@ -399,8 +400,8 @@ Perdry H, Dandine-Roulland C (2020).<em>gaston: Genetic Data Handling
 <b> knitr </b>
 <ul>
 <li>
-Xie Y (2021).<em>knitr: A General-Purpose Package for Dynamic Report
-Generation in R</em>.R package version 1.34,
+Xie Y (2022).<em>knitr: A General-Purpose Package for Dynamic Report
+Generation in R</em>.R package version 1.41,
 <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
 </li>
 <li>
@@ -441,8 +442,8 @@ plotly, and shiny</em>.Chapman and Hall/CRC.ISBN 9781138331457,
 <ul>
 <li>
 Allaire J, Xie Y, McPherson J, Luraschi J, Ushey K, Atkins A, Wickham H,
-Cheng J, Chang W, Iannone R (2021).<em>rmarkdown: Dynamic Documents for
-R</em>.R package version 2.11,
+Cheng J, Chang W, Iannone R (2022).<em>rmarkdown: Dynamic Documents for
+R</em>.R package version 2.18,
 <a href="https://github.com/rstudio/rmarkdown">https://github.com/rstudio/rmarkdown</a>.
 </li>
 <li>
@@ -462,8 +463,8 @@ Cookbook</em>.Chapman and Hall/CRC, Boca Raton, Florida.ISBN
 <b> roxygen2 </b>
 <ul>
 <li>
-Wickham H, Danenberg P, Csárdi G, Eugster M (2021).<em>roxygen2: In-Line
-Documentation for R</em>.R package version 7.1.2,
+Wickham H, Danenberg P, Csárdi G, Eugster M (2022).<em>roxygen2: In-Line
+Documentation for R</em>.R package version 7.2.2,
 <a href="https://CRAN.R-project.org/package=roxygen2">https://CRAN.R-project.org/package=roxygen2</a>.
 </li>
 </ul>
