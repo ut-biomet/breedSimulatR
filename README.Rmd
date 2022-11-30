@@ -10,21 +10,21 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   # out.width = "100%",
-  
+
   results = 'markup', # "hold", # display chunk output in one block
   tidy = TRUE, # better code organisation
   tidy.opts = list(width.cutoff = 80),
   strip.white = FALSE, # remove the white lines in the beginning or end of a source chunk
 
-  
+
   fig.align = "center",
   fig.width = 9,
   fig.height = 5
-  
+
 )
 ```
 
-# breedSimulatR 
+# breedSimulatR
 
 <!-- badges: start -->
 [![codecov](https://codecov.io/gh/ut-biomet/breedSimulatR/branch/master/graph/badge.svg?token=4Uxp1ySLIn)](https://codecov.io/gh/ut-biomet/breedSimulatR)
@@ -66,7 +66,7 @@ dta <- breedSimulatR::exampleData
 set.seed(1804)
 ```
 
-This is a basic example which shows how to use the package. 
+This is a basic example which shows how to use the package.
 
 The package contains some example data that we will use for this example. These data are stored in the variable `exampleData`.
 
@@ -156,7 +156,7 @@ height <- trait$new(name = "Height",
                     qtn = qtn,
                     qtnEff = rnorm(nQtn, 0, 0.25))
 
-phenolab <- phenotyper$new(name = "Pheno lab", 
+phenolab <- phenotyper$new(name = "Pheno lab",
                            traits = list(weight, height),
                            plotCost = 150,
                            mu = c(100, 75),
@@ -304,7 +304,7 @@ Flutre T, Diot J, and David J (2019). <em>PlantBreedGame</em>: A Serious Game th
 The `breedSimulatR` package as a whole is licensed under the MIT.
 See the [LICENSE.md](LICENSE.md) file for more details.
 
-:copyright: The copyright holder is [The University of Tokyo](https://www.u-tokyo.ac.jp/en/), 
-Laboratory of Biometry and Bioinformatics.
+:copyright: The copyright holder is [The University of Tokyo, Laboratory of Biometry and Bioinformatics](https://sites.google.com/ut-biomet.org/lbm).
 
-<img src="man/figures/UTlogo-sm.jpg" style="display: block; margin: auto;"/>
+
+<img src="man/figures/biometLogo.png" style="display: block; margin: auto;max-height: 100px"/>

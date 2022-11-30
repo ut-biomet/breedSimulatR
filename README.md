@@ -50,16 +50,16 @@ example. These data are stored in the variable `exampleData`.
 
 `exampleData` is a list containing 3 elements:
 
--   `exampleData$genotypes`: `data.frame` containing the genotypic data
-    encoded in allele doses of 100 fictitious individuals with 3333 SNP
-    markers. These individuals have 10 chromosomes of length 10^6 bases
-    pairs.
--   `exampleData$snpCoord`: `data.frame` containing the coordinates of
-    the 3333 individuals’ markers. This data.frame contains 3 columns:
-    `chr`, `pos` and `SNPid`.
--   `exampleData$snpEffects`: `numeric` vector containing the “true”
-    effects of the 3333 individuals’ markers about a fictitious
-    quantitative trait based on an additive architecture.
+- `exampleData$genotypes`: `data.frame` containing the genotypic data
+  encoded in allele doses of 100 fictitious individuals with 3333 SNP
+  markers. These individuals have 10 chromosomes of length 10^6 bases
+  pairs.
+- `exampleData$snpCoord`: `data.frame` containing the coordinates of the
+  3333 individuals’ markers. This data.frame contains 3 columns: `chr`,
+  `pos` and `SNPid`.
+- `exampleData$snpEffects`: `numeric` vector containing the “true”
+  effects of the 3333 individuals’ markers about a fictitious
+  quantitative trait based on an additive architecture.
 
 #### initialization
 
@@ -112,13 +112,13 @@ print(SNPs)
 #> Chr01 Chr02 Chr03 Chr04 Chr05 Chr06 Chr07 Chr08 Chr09 Chr10 
 #>   415   247   425   322   381   269   238   355   342   339 
 #> SNPcoord:
-#>        chr physPos linkMapPos    SNPid
-#> 338  Chr01    2068  0.4911687 snp00006
-#> 1450 Chr01    2708  0.6423784 snp00009
-#> 1391 Chr01    2782  0.6598378 snp00011
-#> 2475 Chr01    4159  0.9838113 snp00018
-#> 1553 Chr01    6917  1.6275084 snp00026
-#> 2365 Chr01    7814  1.8353769 snp00031
+#>            chr    SNPid physPos linkMapPos
+#> snp00006 Chr01 snp00006    2068  0.4911687
+#> snp00009 Chr01 snp00009    2708  0.6423784
+#> snp00011 Chr01 snp00011    2782  0.6598378
+#> snp00018 Chr01 snp00018    4159  0.9838113
+#> snp00026 Chr01 snp00026    6917  1.6275084
+#> snp00031 Chr01 snp00031    7814  1.8353769
 #>  [ reached 'max' / getOption("max.print") -- omitted 3327 rows ]
 ```
 
@@ -162,7 +162,7 @@ height <- trait$new(name = "Height",
                     qtn = qtn,
                     qtnEff = rnorm(nQtn, 0, 0.25))
 
-phenolab <- phenotyper$new(name = "Pheno lab", 
+phenolab <- phenotyper$new(name = "Pheno lab",
                            traits = list(weight, height),
                            plotCost = 150,
                            mu = c(100, 75),
@@ -254,10 +254,10 @@ I will do my best to help you as soon as possible.
 
 You can contribute in various ways:
 
--   report an [issue](https://github.com/ut-biomet/breedSimulatR/issues)
-    (online, see the above section)
--   suggest improvements (in the same way as issues)
--   propose a pull request (after creating a new branch)
+- report an [issue](https://github.com/ut-biomet/breedSimulatR/issues)
+  (online, see the above section)
+- suggest improvements (in the same way as issues)
+- propose a pull request (after creating a new branch)
 
 When editing the content of this package, please run the following
 commands before asking a pull request:
@@ -310,11 +310,21 @@ Austria.<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </ul>
 </li>
 <li>
+<b> data.table </b>
+<ul>
+<li>
+Dowle M, Srinivasan A (2021).<em>data.table: Extension of
+‘data.frame’</em>.R package version 1.14.2,
+<a href="https://CRAN.R-project.org/package=data.table">https://CRAN.R-project.org/package=data.table</a>.
+</li>
+</ul>
+</li>
+<li>
 <b> R6 </b>
 <ul>
 <li>
-Chang W (2020).<em>R6: Encapsulated Classes with Reference
-Semantics</em>.R package version 2.5.0,
+Chang W (2021).<em>R6: Encapsulated Classes with Reference
+Semantics</em>.R package version 2.5.1,
 <a href="https://CRAN.R-project.org/package=R6">https://CRAN.R-project.org/package=R6</a>.
 </li>
 </ul>
@@ -330,11 +340,37 @@ Austria.<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </ul>
 </li>
 <li>
+<b> tools </b>
+<ul>
+<li>
+R Core Team (2021).<em>R: A Language and Environment for Statistical
+Computing</em>.R Foundation for Statistical Computing, Vienna,
+Austria.<a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</li>
+</ul>
+</li>
+<li>
+<b> vcfR </b>
+<ul>
+<li>
+Knaus BJ, Grünwald NJ (2017).“VCFR: a package to manipulate and
+visualize variant call format data in R.”<em>Molecular Ecology
+Resources</em>, <b>17</b>(1), 44–53.ISSN 757,
+<a href="http://dx.doi.org/10.1111/1755-0998.12549">http://dx.doi.org/10.1111/1755-0998.12549</a>.
+</li>
+<li>
+Knaus BJ, Grünwald NJ (2016).“VcfR: an R package to manipulate and
+visualize VCF format
+data.”<em>BioRxiv</em>.<a href="http://dx.doi.org/10.1101/041277">http://dx.doi.org/10.1101/041277</a>.
+</li>
+</ul>
+</li>
+<li>
 <b> covr </b>
 <ul>
 <li>
-Hester J (2020).<em>covr: Test Coverage for Packages</em>.R package
-version 3.5.1,
+Hester J (2022).<em>covr: Test Coverage for Packages</em>.R package
+version 3.6.1,
 <a href="https://CRAN.R-project.org/package=covr">https://CRAN.R-project.org/package=covr</a>.
 </li>
 </ul>
@@ -343,9 +379,19 @@ version 3.5.1,
 <b> devtools </b>
 <ul>
 <li>
-Wickham H, Hester J, Chang W (2020).<em>devtools: Tools to Make
-Developing R Packages Easier</em>.R package version 2.3.2,
+Wickham H, Hester J, Chang W (2021).<em>devtools: Tools to Make
+Developing R Packages Easier</em>.R package version 2.4.2,
 <a href="https://CRAN.R-project.org/package=devtools">https://CRAN.R-project.org/package=devtools</a>.
+</li>
+</ul>
+</li>
+<li>
+<b> gaston </b>
+<ul>
+<li>
+Perdry H, Dandine-Roulland C (2020).<em>gaston: Genetic Data Handling
+(QC, GRM, LD, PCA) & Linear Mixed Models</em>.R package version 1.5.7,
+<a href="https://CRAN.R-project.org/package=gaston">https://CRAN.R-project.org/package=gaston</a>.
 </li>
 </ul>
 </li>
@@ -354,7 +400,7 @@ Developing R Packages Easier</em>.R package version 2.3.2,
 <ul>
 <li>
 Xie Y (2021).<em>knitr: A General-Purpose Package for Dynamic Report
-Generation in R</em>.R package version 1.31,
+Generation in R</em>.R package version 1.34,
 <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
 </li>
 <li>
@@ -374,9 +420,19 @@ Computational Research</em>.Chapman and Hall/CRC.ISBN 978-1466561595,
 <b> pkgdown </b>
 <ul>
 <li>
-Wickham H, Hesselberth J (2020).<em>pkgdown: Make Static HTML
-Documentation for a Package</em>.R package version 1.6.1,
+Wickham H, Hesselberth J, Salmon M (2022).<em>pkgdown: Make Static HTML
+Documentation for a Package</em>.R package version 2.0.6,
 <a href="https://CRAN.R-project.org/package=pkgdown">https://CRAN.R-project.org/package=pkgdown</a>.
+</li>
+</ul>
+</li>
+<li>
+<b> plotly </b>
+<ul>
+<li>
+Sievert C (2020).<em>Interactive Web-Based Data Visualization with R,
+plotly, and shiny</em>.Chapman and Hall/CRC.ISBN 9781138331457,
+<a href="https://plotly-r.com">https://plotly-r.com</a>.
 </li>
 </ul>
 </li>
@@ -386,7 +442,7 @@ Documentation for a Package</em>.R package version 1.6.1,
 <li>
 Allaire J, Xie Y, McPherson J, Luraschi J, Ushey K, Atkins A, Wickham H,
 Cheng J, Chang W, Iannone R (2021).<em>rmarkdown: Dynamic Documents for
-R</em>.R package version 2.7,
+R</em>.R package version 2.11,
 <a href="https://github.com/rstudio/rmarkdown">https://github.com/rstudio/rmarkdown</a>.
 </li>
 <li>
@@ -406,19 +462,9 @@ Cookbook</em>.Chapman and Hall/CRC, Boca Raton, Florida.ISBN
 <b> roxygen2 </b>
 <ul>
 <li>
-Wickham H, Danenberg P, Csárdi G, Eugster M (2020).<em>roxygen2: In-Line
-Documentation for R</em>.R package version 7.1.1,
+Wickham H, Danenberg P, Csárdi G, Eugster M (2021).<em>roxygen2: In-Line
+Documentation for R</em>.R package version 7.1.2,
 <a href="https://CRAN.R-project.org/package=roxygen2">https://CRAN.R-project.org/package=roxygen2</a>.
-</li>
-</ul>
-</li>
-<li>
-<b> plotly </b>
-<ul>
-<li>
-Sievert C (2020).<em>Interactive Web-Based Data Visualization with R,
-plotly, and shiny</em>.Chapman and Hall/CRC.ISBN 9781138331457,
-<a href="https://plotly-r.com">https://plotly-r.com</a>.
 </li>
 </ul>
 </li>
@@ -438,7 +484,7 @@ R</em>.R package version 2.2,
 <li>
 Wickham H (2011).“testthat: Get Started with Testing.”<em>The R
 Journal</em>, <b>3</b>,
-5–10.<a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf">https://journal.r-project.org/archive/2011-1/RJournal\_2011-1\_Wickham.pdf</a>.
+5–10.<a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf">https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf</a>.
 </li>
 </ul>
 </li>
@@ -466,8 +512,8 @@ Game that Puts Students in the Breeder’s Seat. <em>Crop Science.</em>
 The `breedSimulatR` package as a whole is licensed under the MIT. See
 the [LICENSE.md](LICENSE.md) file for more details.
 
-:copyright: The copyright holder is [The University of
-Tokyo](https://www.u-tokyo.ac.jp/en/), Laboratory of Biometry and
-Bioinformatics.
+:copyright: The copyright holder is [The University of Tokyo, Laboratory
+of Biometry and
+Bioinformatics](https://sites.google.com/ut-biomet.org/lbm).
 
-<img src="man/figures/UTlogo-sm.jpg" style="display: block; margin: auto;"/>
+<img src="man/figures/biometLogo.png" style="display: block; margin: auto;max-height: 100px"/>
