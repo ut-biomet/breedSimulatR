@@ -355,12 +355,12 @@ population for each trait</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 400</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">pheno1</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      ind                Trait1           Trait2           rep      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Length:400         Min.   : 92.87   Min.   :44.82   Min.   :1.00  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Class :character   1st Qu.: 99.73   1st Qu.:56.60   1st Qu.:1.75  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mode  :character   Median :102.86   Median :60.17   Median :2.50  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     Mean   :103.04   Mean   :60.56   Mean   :2.50  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     3rd Qu.:106.22   3rd Qu.:64.35   3rd Qu.:3.25  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     Max.   :114.85   Max.   :79.34   Max.   :4.00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Length:400         Min.   : 93.48   Min.   :35.48   Min.   :1.00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Class :character   1st Qu.:103.30   1st Qu.:50.78   1st Qu.:1.75  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mode  :character   Median :106.44   Median :55.29   Median :2.50  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     Mean   :106.69   Mean   :54.96   Mean   :2.50  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     3rd Qu.:109.95   3rd Qu.:59.15   3rd Qu.:3.25  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     Max.   :119.92   Max.   :70.29   Max.   :4.00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   phenotyper       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Length:400        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Class :character  </span>
@@ -374,12 +374,12 @@ population for each trait</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 600</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">pheno2</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      ind                Trait1           Trait2           rep   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Length:300         Min.   : 86.40   Min.   :41.17   Min.   :1  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Class :character   1st Qu.: 92.54   1st Qu.:51.98   1st Qu.:1  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mode  :character   Median : 95.47   Median :55.22   Median :2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     Mean   : 95.50   Mean   :55.47   Mean   :2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     3rd Qu.: 98.03   3rd Qu.:58.84   3rd Qu.:3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     Max.   :108.22   Max.   :73.67   Max.   :3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Length:300         Min.   : 85.36   Min.   :34.97   Min.   :1  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Class :character   1st Qu.: 95.09   1st Qu.:47.07   1st Qu.:1  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mode  :character   Median : 98.04   Median :49.97   Median :2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     Mean   : 98.17   Mean   :50.17   Mean   :2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     3rd Qu.:101.01   3rd Qu.:53.76   3rd Qu.:3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     Max.   :113.25   Max.   :64.87   Max.   :3  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   phenotyper       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Length:300        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Class :character  </span>
@@ -392,17 +392,17 @@ population for each trait</p>
 <span class="r-in"><span>                          rep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">example_pop</span><span class="op">$</span><span class="va">nInd</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                          offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">pheno3</span><span class="op">$</span><span class="va">cost</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 386</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 400</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">pheno3</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      ind                Trait1           Trait2           rep       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Length:193         Min.   : 83.49   Min.   :40.50   Min.   :1.000  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Class :character   1st Qu.: 92.52   1st Qu.:51.89   1st Qu.:1.000  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Mode  :character   Median : 95.14   Median :54.90   Median :1.000  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     Mean   : 95.35   Mean   :55.48   Mean   :1.606  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     3rd Qu.: 98.15   3rd Qu.:58.83   3rd Qu.:2.000  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     Max.   :107.94   Max.   :70.62   Max.   :3.000  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Length:200         Min.   : 87.66   Min.   :35.21   Min.   :1.000  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Class :character   1st Qu.: 95.74   1st Qu.:45.52   1st Qu.:1.000  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mode  :character   Median : 98.51   Median :49.68   Median :1.500  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     Mean   : 98.39   Mean   :49.31   Mean   :1.625  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     3rd Qu.:101.46   3rd Qu.:52.96   3rd Qu.:2.000  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     Max.   :109.81   Max.   :61.72   Max.   :3.000  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   phenotyper       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Length:193        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Length:200        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Class :character  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Mode  :character  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    </span>
@@ -418,7 +418,7 @@ population for each trait</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0.40   0.55 </span>
 <span class="r-in"><span><span class="va">phenoLab2</span><span class="op">$</span><span class="fu">he</span><span class="op">(</span><span class="va">example_pop</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Trait1    Trait2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.4797736 0.7170049 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.5060165 0.7313603 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
