@@ -1,10 +1,10 @@
-pandoc: 2.7.3
-pkgdown: 1.6.1
+pandoc: 2.19.2
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   example: example.html
-last_built: 2021-10-25T09:31Z
+last_built: 2022-11-30T02:20Z
 urls:
-  reference: https://ut-biomet.github.io/breedSimulatR//reference
-  article: https://ut-biomet.github.io/breedSimulatR//articles
+  reference: https://ut-biomet.github.io/breedSimulatR/reference
+  article: https://ut-biomet.github.io/breedSimulatR/articles
 

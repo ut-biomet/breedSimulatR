@@ -1,57 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//index.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/404.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/SNPinfo.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/breedSimulatR-package.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/createPop.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/articles/example.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/exampleData.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/haplotype.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/authors.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/individual.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/index.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/makeCrosses.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/news/index.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/makeSingleCross.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/SNPinfo.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/phenotyper.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/breedSimulatR-package.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/population.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/createPop.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/randomMate.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/exampleData.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/readVCF.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/haplotype.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/selectBV.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/selectWBV.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/individual.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/specie.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/makeCrosses.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//reference/trait.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/makeSingleCross.html</loc>
   </url>
   <url>
-    <loc>https://ut-biomet.github.io/breedSimulatR//articles/example.html</loc>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/phenotyper.html</loc>
+  </url>
+  <url>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/population.html</loc>
+  </url>
+  <url>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/randomMate.html</loc>
+  </url>
+  <url>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/readVCF.html</loc>
+  </url>
+  <url>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/selectBV.html</loc>
+  </url>
+  <url>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/selectWBV.html</loc>
+  </url>
+  <url>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/specie.html</loc>
+  </url>
+  <url>
+    <loc>https://ut-biomet.github.io/breedSimulatR/reference/trait.html</loc>
   </url>
 </urlset>
