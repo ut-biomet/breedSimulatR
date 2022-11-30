@@ -13,8 +13,6 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 status](https://www.r-pkg.org/badges/version/breedSimulatR)](https://CRAN.R-project.org/package=breedSimulatR)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![R build
-status](https://github.com/ut-biomet/breedSimulatR/workflows/R-CMD-check/badge.svg)](https://github.com/ut-biomet/breedSimulatR/actions)
 [![R-CMD-check](https://github.com/ut-biomet/breedSimulatR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ut-biomet/breedSimulatR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
