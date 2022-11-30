@@ -87,17 +87,21 @@ population <- R6::R6Class(
     #'                         verbose = FALSE)
     initialize = function(name = NULL,
                           inds = list(),
-                          verbose = TRUE){
+                          verbose = TRUE) {
       # checks
       if (is.null(name)) {
         name <- "Unspecified"
-      } else name <- as.character(name)
+      } else {
+        name <- as.character(name)
+      }
 
       if (class(inds)[1] == "individual") {
         inds <- list(inds)
       } else if (class(inds) != "list") {
-        stop(paste("inds must be an individual object or a list of",
-                   "individuals objects"))
+        stop(paste(
+          "inds must be an individual object or a list of",
+          "individuals objects"
+        ))
       }
 
       if (verbose) {
@@ -108,7 +112,7 @@ population <- R6::R6Class(
       self$name <- name
       for (ind in inds) {
         if (verbose) {
-          cat(paste0("\r", round(i/tot*100), "%"))
+          cat(paste0("\r", round(i / tot * 100), "%"))
           i <- i + 1
         }
         private$addInd(ind)
@@ -138,7 +142,7 @@ population <- R6::R6Class(
     #' print(myPop)
     #' myPop$addInds(myInd3)
     #' print(myPop)
-    addInds = function(inds){
+    addInds = function(inds) {
       # checks
       if (class(inds)[1] == "individual") {
         inds <- list(inds)
@@ -146,7 +150,6 @@ population <- R6::R6Class(
       lapply(inds, private$addInd)
 
       invisible(NULL)
-
     },
     #' @description Remove individuals from the population
     #' @param indsNames [character] character vetcor of the individuals' names
@@ -154,16 +157,18 @@ population <- R6::R6Class(
     #' print(myPop)
     #' myPop$remInds("Ind 2")
     #' print(myPop)
-    remInds = function(indsNames){
+    remInds = function(indsNames) {
       # check
       if (class(indsNames) != "character") {
         stop("Please provide individuals' names as a character vector.")
       }
 
-      if (any(! indsNames %in% names(self$inds))) {
-        id <- which(! indsNames %in% names(self$inds))
-        warning(paste("Some individuals to remove are not in the population:",
-                      paste(indsNames[id], collapse = " ; ")))
+      if (any(!indsNames %in% names(self$inds))) {
+        id <- which(!indsNames %in% names(self$inds))
+        warning(paste(
+          "Some individuals to remove are not in the population:",
+          paste(indsNames[id], collapse = " ; ")
+        ))
       }
 
       self$inds[indsNames] <- NULL
@@ -175,7 +180,7 @@ population <- R6::R6Class(
     #' @description Write a gzip compressed VCF file with population's individuals information
     #' @param file [character] path of the output file.
     #' @importFrom data.table fwrite
-    writeVcf = function(file){
+    writeVcf = function(file) {
       if (file.exists(file)) {
         stop("`file` should not already exists.")
       }
@@ -186,10 +191,10 @@ population <- R6::R6Class(
       }
 
       # Fixed region
-      data <- self$inds[[1]]$haplo$SNPinfo$SNPcoord[,c("chr", "physPos", "SNPid")]
+      data <- self$inds[[1]]$haplo$SNPinfo$SNPcoord[, c("chr", "physPos", "SNPid")]
       colnames(data) <- c("#CHROM", "POS", "ID")
-      data <- data[order(data$POS),]
-      data <- data[order(data$`#CHROM`),]
+      data <- data[order(data$POS), ]
+      data <- data[order(data$`#CHROM`), ]
 
       data$REF <- "."
       data$ALT <- "."
@@ -201,34 +206,39 @@ population <- R6::R6Class(
 
       # Genotype region
       data$FORMAT <- "GT"
-      gt <- vapply(self$inds, function(ind){
+      gt <- vapply(self$inds, function(ind) {
         hap <- do.call(cbind, ind$haplo$values)
-        x <- paste(hap[1,], hap[2,], sep = "|")
+        x <- paste(hap[1, ], hap[2, ], sep = "|")
         names(x) <- colnames(hap)
         x
-      }, vector(mode = "character",
-                length = length(self$inds[[1]]$haplo$allelDose)))
-      gt <- as.data.frame(gt[data$ID,])
+      }, vector(
+        mode = "character",
+        length = length(self$inds[[1]]$haplo$allelDose)
+      ))
+      gt <- as.data.frame(gt[data$ID, ])
       data <- cbind(data, gt)
 
 
       # Meta region
       meta <- paste("##fileformat=VCFv4.3",
-                    "##source=\"breedSimulatR\", data in this file are simulated.",
-                    "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">",
-                    sep = "\n")
+        "##source=\"breedSimulatR\", data in this file are simulated.",
+        "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">",
+        sep = "\n"
+      )
 
       # write file
       f <- gzfile(file, "w")
       writeLines(text = meta, con = f)
       close(f)
-      data.table::fwrite(x = data,
-                         file = file,
-                         append = TRUE,
-                         sep = "\t",
-                         quote = FALSE,
-                         row.names = FALSE,
-                         col.names = TRUE)
+      data.table::fwrite(
+        x = data,
+        file = file,
+        append = TRUE,
+        sep = "\t",
+        quote = FALSE,
+        row.names = FALSE,
+        col.names = TRUE
+      )
     },
 
 
@@ -245,33 +255,31 @@ population <- R6::R6Class(
         "Number of individuals: ", self$nInd, "\n"
       ))
     }
-
-
   ),
   active = list(
     #' @field nInd [numeric] number of individual in the population
-    nInd = function(){
+    nInd = function() {
       length(self$inds)
     },
     #' @field genoMat [matrix] matrix of all the genotypes of the population
     #'   encoded in allele doses. (individuals in row and markers in column)
-    genoMat = function(){
+    genoMat = function() {
       if (length(self$inds) > 0) {
-        t(vapply(self$inds, function(ind){
+        t(vapply(self$inds, function(ind) {
           ind$haplo$allelDose
-        }, vector(mode = "numeric",
-                  length = length(self$inds[[1]]$haplo$allelDose)))
-        )
+        }, vector(
+          mode = "numeric",
+          length = length(self$inds[[1]]$haplo$allelDose)
+        )))
       } else {
         NULL
       }
-
     },
 
     #' @field af [named vector] allele frequency
-    af = function(){
+    af = function() {
       ploidy <- self$specie$ploidy
-      stopifnot(ploidy %in% c(1,2))
+      stopifnot(ploidy %in% c(1, 2))
 
       geno <- self$genoMat
       freq <- colSums(geno) / (self$nInd * ploidy)
@@ -279,13 +287,12 @@ population <- R6::R6Class(
     },
 
     #' @field maf [named vector] minor allele frequency
-    maf = function(){
+    maf = function() {
       ploidy <- self$specie$ploidy
-      stopifnot(ploidy %in% c(1,2))
+      stopifnot(ploidy %in% c(1, 2))
       freq <- 0.5 - abs(self$af - 0.5)
       freq
     }
-
   ),
   private = list(
     # @description Add new individual to the population
@@ -303,14 +310,18 @@ population <- R6::R6Class(
       if (is.null(self$specie)) {
         self$specie <- ind$specie
       } else if (self$specie$specName != ind$specie$specName) {
-        stop(paste("Individual of a different species than the population's",
-                   "one.\nPlease add", self$specie$name, "individuals."))
+        stop(paste(
+          "Individual of a different species than the population's",
+          "one.\nPlease add", self$specie$name, "individuals."
+        ))
       }
 
       # check name
       if (ind$name %in% names(self$inds)) {
-        stop(paste("Individual with the same name already exists",
-                   "in the population:", ind$name))
+        stop(paste(
+          "Individual with the same name already exists",
+          "in the population:", ind$name
+        ))
       }
 
       # add new individual
@@ -338,17 +349,23 @@ population <- R6::R6Class(
 #' @export
 #'
 #' @examples
-#' mySpec <- specie$new(nChr = 10,
-#'                      lchr = 10^6,
-#'                      lchrCm = 100,
-#'                      specName = "Geneticae Exempli")
-#' SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
-#'                     specie = mySpec)
+#' mySpec <- specie$new(
+#'   nChr = 10,
+#'   lchr = 10^6,
+#'   lchrCm = 100,
+#'   specName = "Geneticae Exempli"
+#' )
+#' SNPs <- SNPinfo$new(
+#'   SNPcoord = exampleData$snpCoord,
+#'   specie = mySpec
+#' )
 #'
 #' print(exampleData$genotypes[1:5, 1:10])
-#' example_pop <- createPop(geno = exampleData$genotypes,
-#'                          SNPinfo = SNPs,
-#'                          popName = "Example population")
+#' example_pop <- createPop(
+#'   geno = exampleData$genotypes,
+#'   SNPinfo = SNPs,
+#'   popName = "Example population"
+#' )
 createPop <- function(geno,
                       SNPinfo,
                       indNames = NULL,
@@ -369,25 +386,34 @@ createPop <- function(geno,
   if (is.null(indNames)) {
     if (is.null(rownames(geno))) {
       stop('"rownames(geno)" is NULL, please specify "indNames"')
-    } else indNames <- rownames(geno)
+    } else {
+      indNames <- rownames(geno)
+    }
   } else if (length(indNames) == 1) {
     indNames <- sprintf(
-      fmt = paste0(indNames,
-                   "%0", floor(log10(nrow(geno))) + 1, "i"),
-      seq(nrow(geno)))
+      fmt = paste0(
+        indNames,
+        "%0", floor(log10(nrow(geno))) + 1, "i"
+      ),
+      seq(nrow(geno))
+    )
   } else if (length(indNames) != nrow(geno)) {
-    stop(paste0("length(indNames) = ", length(indNames),
-                '\n"length(indNames)" must be equal to "1" or "nrow(geno)"'))
+    stop(paste0(
+      "length(indNames) = ", length(indNames),
+      '\n"length(indNames)" must be equal to "1" or "nrow(geno)"'
+    ))
   }
 
   if (!all.equal(unique(indNames), indNames)) {
     stop('All values of "indNames" must be different')
   }
 
-  if (!all(unique(unlist(geno)) %in% c(0,2))) {
-    stop(paste0('Some values of "geno" are different from 0 or 2.\n',
-                'All individulas must be homozygotes and genotypes must be ',
-                'encoded as allele doses'))
+  if (!all(unique(unlist(geno)) %in% c(0, 2))) {
+    stop(paste0(
+      'Some values of "geno" are different from 0 or 2.\n',
+      "All individulas must be homozygotes and genotypes must be ",
+      "encoded as allele doses"
+    ))
   }
 
   listInds <- list()
@@ -401,11 +427,11 @@ createPop <- function(geno,
 
   for (i in seq(nrow(geno))) {
     if (verbose) {
-      prog <- i/nInd
-      cat(paste0("\r", round(prog*100), "%"))
+      prog <- i / nInd
+      cat(paste0("\r", round(prog * 100), "%"))
     }
 
-    haplo <- geno[i,]
+    haplo <- geno[i, ]
     listInds[[i]] <- individual$new(
       name = indNames[i],
       specie = SNPinfo$specie,
@@ -421,5 +447,4 @@ createPop <- function(geno,
     prog <- 0
   }
   population$new(name = popName, inds = listInds, verbose = verbose)
-
 }
