@@ -32,7 +32,7 @@ The associated web-site for this package can be found at:
 if (!require("devtools")) {
   install.packages("devtools")
 }
-devtools::install_github("ut-biomet/breedSimulatR")
+devtools::install_github("ut-biomet/breedSimulatR", build_vignettes = TRUE)
 ```
 
 You can check the installation with these lines:
