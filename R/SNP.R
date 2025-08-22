@@ -157,7 +157,7 @@ SNPinfo <- R6::R6Class(
         }
         # check the linkMapPos are also sorted like the physical position
         if (is.unsorted(subSNPcoord$linkMapPos, na.rm = TRUE, strictly = TRUE)) {
-          stop("SNP's position order should be similar when sorted by physical position and by linkage map position.")
+          warning("SNP's position order is not the same when sorted by physical position and by linkage map position.")
         }
         subSNPcoord
       })
