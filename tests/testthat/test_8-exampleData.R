@@ -1,4 +1,3 @@
-
 # Author: Julien Diot juliendiot@ut-biomet.org
 # 2021 The University of Tokyo
 #
@@ -22,9 +21,8 @@ capture_output({
     expect_equal(sort(colnames(exampleData$genotypes)), sort(exampleData$snpCoord$SNPid))
 
     # chr id match new specie's default value
-    nChr  <- length(unique(exampleData$snpCoord$chr))
+    nChr <- length(unique(exampleData$snpCoord$chr))
     newSpec <- specie$new(lchr = 1e6, lchrCm = 100, nChr = nChr)
     expect_equal(sort(unique(exampleData$snpCoord$chr)), sort(newSpec$chrNames))
   })
 })
-

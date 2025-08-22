@@ -19,3 +19,6 @@ check: build
 
 clean:
 	@rm -rf $(PKGNAME)_$(PKGVERS).tar.gz $(PKGNAME).Rcheck
+readme:
+	Rscript -e "rmarkdown::render('./README.Rmd', output_file = './README.md', encoding = 'UTF-8')"
+	rm -rf ./README.html

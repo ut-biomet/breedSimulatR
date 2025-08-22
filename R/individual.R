@@ -79,7 +79,7 @@ individual <- R6::R6Class(
                           parent1 = NA,
                           parent2 = NA,
                           haplo = NA,
-                          verbose = TRUE){
+                          verbose = TRUE) {
       # checks
       if (class(haplo)[1] != "Haplotype") {
         stop('"class(haplo)" must be "Haplotype"')
@@ -103,68 +103,73 @@ individual <- R6::R6Class(
     generateGametes = function(n = 1) {
       gametes <- lapply(1:n, function(x) {
         if (any(is.na(self$specie$lchrCm))) {
-          stop('specie$lchrCm must be specify in order to generate gemtes')
+          stop("specie$lchrCm must be specify in order to generate gemtes")
         }
-        gamete <- mapply(function(haplo, SNPcoord) {
-          # for each chromosome
-          chrName <- SNPcoord$chr[1]
-          chrLen <- self$specie$lchr[chrName]
-          chrLenCm <- self$specie$lchrCm[chrName]
+        gamete <- mapply(
+          function(haplo, SNPcoord) {
+            # for each chromosome
+            chrName <- SNPcoord$chr[1]
+            chrLen <- self$specie$lchr[chrName]
+            chrLenCm <- self$specie$lchrCm[chrName]
 
-          # number of crossing-overs locations:
-          nRecomb <- rpois(1, chrLenCm/100)
+            # number of crossing-overs locations:
+            nRecomb <- rpois(1, chrLenCm / 100)
 
-          g <- (runif(1) < 0.5) + 1
-          if (nRecomb == 0) {
-            gamHaplo <- haplo[g, ]
-            return(gamHaplo)
-          }
-
-
-
-          # draw crossing-overs locations
-          if (is.na(SNPcoord$linkMapPos[1])) {
-            # if SNP's linkMap positions is unknown
-            # draw crossing-overs locations uniformly in physical length range:
-            Rpos <- runif(nRecomb, 0, chrLen)
-            # get id of the crossing-overs positions
-            ids <- (c(0,
-                      sort(base::findInterval(Rpos, SNPcoord$physPos)),
-                      nrow(SNPcoord))
-            )
-          } else {
-            # draw crossing-overs locations uniformly in chrLenCm range:
-            RposCm <- runif(nRecomb, 0, chrLenCm)
-            # get id of the crossing-overs positions
-            ids <- (c(0,
-                      sort(base::findInterval(RposCm, SNPcoord$linkMapPos)),
-                      nrow(SNPcoord))
-            )
-          }
-
-          gamHaplo <- integer(ncol(haplo))
-          for (i in seq_len(length(ids) - 1)) {
-            if (ids[i] == ids[i + 1]) {
-              # several crossing-overs between SNPs
-              g <- -g + 3
-              next
+            g <- (runif(1) < 0.5) + 1
+            if (nRecomb == 0) {
+              gamHaplo <- haplo[g, ]
+              return(gamHaplo)
             }
-            gamHaplo[(ids[i] + 1):ids[i + 1]] <-
-              haplo[g, (ids[i] + 1):ids[i + 1]]
-            g <- -g + 3
-          }
 
-          names(gamHaplo) <- colnames(haplo)
-          gamHaplo
-        },
-        self$haplo$values[self$specie$chrNames],
-        self$haplo$SNPinfo$SNPcoordList[self$specie$chrNames],
-        SIMPLIFY = FALSE)
+
+
+            # draw crossing-overs locations
+            if (is.na(SNPcoord$linkMapPos[1])) {
+              # if SNP's linkMap positions is unknown
+              # draw crossing-overs locations uniformly in physical length range:
+              Rpos <- runif(nRecomb, 0, chrLen)
+              # get id of the crossing-overs positions
+              ids <- (c(
+                0,
+                sort(base::findInterval(Rpos, SNPcoord$physPos)),
+                nrow(SNPcoord)
+              )
+              )
+            } else {
+              # draw crossing-overs locations uniformly in chrLenCm range:
+              RposCm <- runif(nRecomb, 0, chrLenCm)
+              # get id of the crossing-overs positions
+              ids <- (c(
+                0,
+                sort(base::findInterval(RposCm, SNPcoord$linkMapPos)),
+                nrow(SNPcoord)
+              )
+              )
+            }
+
+            gamHaplo <- integer(ncol(haplo))
+            for (i in seq_len(length(ids) - 1)) {
+              if (ids[i] == ids[i + 1]) {
+                # several crossing-overs between SNPs
+                g <- -g + 3
+                next
+              }
+              gamHaplo[(ids[i] + 1):ids[i + 1]] <-
+                haplo[g, (ids[i] + 1):ids[i + 1]]
+              g <- -g + 3
+            }
+
+            names(gamHaplo) <- colnames(haplo)
+            gamHaplo
+          },
+          self$haplo$values[self$specie$chrNames],
+          self$haplo$SNPinfo$SNPcoordList[self$specie$chrNames],
+          SIMPLIFY = FALSE
+        )
 
         gamete <- unlist(gamete, use.names = FALSE)
         names(gamete) <- names(self$haplo$allelDose)
         gamete
-
       })
 
       gametes
@@ -175,12 +180,14 @@ individual <- R6::R6Class(
     # Check the number of chromosomes between `haplo` and `specie` is the
     # same
     # @return boolean
-    checkHaplo = function(){
+    checkHaplo = function() {
       if (length(self$haplo$values) != self$specie$nChr) {
-        stop(paste0("Number of chromosomes in haplo is; ",
-                    length(self$haplo$values), " but must be equal to: ",
-                    self$specie$nChr, " (number of chr of ",
-                    self$specie$name, ")"))
+        stop(paste0(
+          "Number of chromosomes in haplo is; ",
+          length(self$haplo$values), " but must be equal to: ",
+          self$specie$nChr, " (number of chr of ",
+          self$specie$name, ")"
+        ))
       }
     }
   )

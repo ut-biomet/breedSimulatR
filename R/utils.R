@@ -11,10 +11,14 @@
 .charSeq <- function(prefix = "",
                      seq,
                      suffix = "") {
-  sprintf(fmt = paste0(prefix,
-                       "%0", floor(log10(max(seq))) + 1, "i",
-                       suffix),
-          seq)
+  sprintf(
+    fmt = paste0(
+      prefix,
+      "%0", floor(log10(max(seq))) + 1, "i",
+      suffix
+    ),
+    seq
+  )
 }
 
 
@@ -46,16 +50,15 @@
 #   y = ~ y1,
 #   name = "y1"
 # )
-.simulLinkMapPos <- function(pos, len, lenCM = 100, b1 = 10, b2 = 10){
-
+.simulLinkMapPos <- function(pos, len, lenCM = 100, b1 = 10, b2 = 10) {
   stopifnot(b1 >= 2)
   stopifnot(b2 >= 2)
   stopifnot(length(len) == 1)
   stopifnot(length(lenCM) == 1)
 
-  posCM <- suppressWarnings((pos/len + b1
-                             - stats::dbeta((pos/len), 1, b1)
-                             + stats::dbeta((pos/len), b2, 1))
-                            * lenCM/(1 + b1 + b2))
+  posCM <- suppressWarnings((pos / len + b1
+    - stats::dbeta((pos / len), 1, b1)
+    + stats::dbeta((pos / len), b2, 1))
+  * lenCM / (1 + b1 + b2))
   return(posCM)
 }

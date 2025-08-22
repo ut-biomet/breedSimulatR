@@ -62,11 +62,13 @@ trait <- R6::R6Class(
     initialize = function(name = NULL,
                           class = "quantitative",
                           qtn = NULL,
-                          qtnEff = NULL){
+                          qtnEff = NULL) {
       # checks ----
       if (is.null(name)) {
         name <- "Unspecified"
-      } else name <- as.character(name)
+      } else {
+        name <- as.character(name)
+      }
 
 
       if (identical(class, "quantitative")) {
@@ -81,7 +83,7 @@ trait <- R6::R6Class(
         if (length(qtn) == 0) {
           stop('"length(qtn)" must be greater than 0')
         }
-        if (length(qtn) != length(qtnEff) ) {
+        if (length(qtn) != length(qtnEff)) {
           stop('"length(qtn)" must be equal to "length(qtnEff)"')
         }
         if (!is.null(names(qtnEff))) {
@@ -98,7 +100,7 @@ trait <- R6::R6Class(
 
         # checks for "quantitative" traits
       } else if (identical(self$class, "qualitative")) {
-        stop('not implemented yet, please try with quantitative trait')
+        stop("not implemented yet, please try with quantitative trait")
       } else {
         stop('"class" must be "quantitative" or "qualitative"')
       }
@@ -108,7 +110,6 @@ trait <- R6::R6Class(
       self$class <- class
       self$qtn <- qtn
       self$qtnEff <- qtnEff
-
     },
     #' @description Calculate the genetic values of a population
     #' @param pop [population class] population
@@ -119,15 +120,17 @@ trait <- R6::R6Class(
     #'                          SNPinfo = SNPs,
     #'                          popName = "Example population")
     #' myTrait$gv(example_pop)
-    gv = function(pop){
+    gv = function(pop) {
       # check ----
       if (!identical(class(pop), c("population", "R6"))) {
         stop('"class(pop)" must be a "population"')
       }
       genoMat <- pop$genoMat
       if (!all(self$qtn %in% colnames(genoMat))) {
-        stop(paste('qtn are not recognized.',
-                   'Please check the QTN are defined in the SNP informations'))
+        stop(paste(
+          "qtn are not recognized.",
+          "Please check the QTN are defined in the SNP informations"
+        ))
       }
 
       # gv calculation ----
@@ -138,19 +141,20 @@ trait <- R6::R6Class(
 
         # checks for "quantitative" traits
       } else if (identical(self$class, "qualitative")) {
-        stop('not implemented yet, please try with quantitative trait')
+        stop("not implemented yet, please try with quantitative trait")
       }
 
       # out ----
       gv
-
     },
     #' @description
     #' Display information about the object
     print = function() {
-      cat(paste0("trait: ", self$name, "\n",
-                 self$class, " trait\n",
-                 "number of QTN: ", length(self$qtnEff), "\n"))
+      cat(paste0(
+        "trait: ", self$name, "\n",
+        self$class, " trait\n",
+        "number of QTN: ", length(self$qtnEff), "\n"
+      ))
     }
   )
 )
@@ -239,8 +243,7 @@ phenotyper <- R6::R6Class(
                           mu = 0,
                           ve = NULL,
                           he = NULL,
-                          pop = NULL){
-
+                          pop = NULL) {
       if (!is.character(name)) {
         stop("name should be a character string.")
       }
@@ -251,15 +254,20 @@ phenotyper <- R6::R6Class(
         if (length(traits) < 1) {
           stop("The list of traits should not be empty")
         }
-        if (!all(vapply(traits, function(x) {class(x)[1]},
-                        FUN.VALUE = "trait") == "trait")) {
+        if (!all(vapply(traits, function(x) {
+          class(x)[1]
+        },
+        FUN.VALUE = "trait"
+        ) == "trait")) {
           stop("All elements of the trait list should be traits")
         }
-      } else {# traits is a trait, insert in a list
+      } else { # traits is a trait, insert in a list
         traits <- list(traits)
       }
 
-      traitsNames <- vapply(traits, function(t){t$name}, "name")
+      traitsNames <- vapply(traits, function(t) {
+        t$name
+      }, "name")
       if (!identical(traitsNames, unique(traitsNames))) {
         stop('All traits names should be differents. Please check the the "name" field of your traits')
       }
@@ -281,7 +289,7 @@ phenotyper <- R6::R6Class(
       if (is.null(names(mu))) {
         names(mu) <- traitsNames
       } else if (!identical(sort(names(mu)), sort(traitsNames))) {
-        stop('names(mu) should be compatible with the traits names')
+        stop("names(mu) should be compatible with the traits names")
       } else {
         mu <- mu[traitsNames]
       }
@@ -292,25 +300,23 @@ phenotyper <- R6::R6Class(
       }
 
       if (is.numeric(ve)) {
-
-        if (!is.null(he) || !is.null(pop) ) {
+        if (!is.null(he) || !is.null(pop)) {
           stop('If "ve" is specified, "he" and "pop" should not be specify.')
         }
 
         if (length(ve) == 1) {
           ve <- rep(ve, length(traits))
         } else if (length(ve) != length(traits)) {
-          stop('length(ve) should be equal to 1 or to the number of traits.')
+          stop("length(ve) should be equal to 1 or to the number of traits.")
         }
 
         if (is.null(names(ve))) {
           names(ve) <- traitsNames
         } else if (!identical(sort(names(ve)), sort(traitsNames))) {
-          stop('names(ve) should be compatible with the traits names')
+          stop("names(ve) should be compatible with the traits names")
         } else {
           ve <- ve[traitsNames]
         }
-
       } else if (is.null(ve)) {
         if (is.null(he) || is.null(pop)) {
           stop('If you do not provide "ve" please specify both "he" and "pop"')
@@ -323,13 +329,13 @@ phenotyper <- R6::R6Class(
         if (length(he) == 1) {
           he <- rep(he, length(traits))
         } else if (length(he) != length(traits)) {
-          stop('length(he) should be equal to 1 or to the number of traits.')
+          stop("length(he) should be equal to 1 or to the number of traits.")
         }
 
         if (is.null(names(he))) {
           names(he) <- traitsNames
         } else if (!identical(sort(names(he)), sort(traitsNames))) {
-          stop('names(he) should be compatible with the traits names')
+          stop("names(he) should be compatible with the traits names")
         } else {
           he <- he[traitsNames]
         }
@@ -363,18 +369,18 @@ phenotyper <- R6::R6Class(
         names(ve) <- traitsNames
         self$ve <- ve
       }
-
-
     },
     #' @description
     #' Display informations about the object
     print = function() {
-      cat(paste0("Phenotyper: ", self$name, "\n",
-                 "Traits: ", paste(private$traitsNames, collapse = ", "), "\n",
-                 "\u03bc: ", paste(self$mu, collapse = ", "), "\n",
-                 "\u03c32: ", paste(self$ve, collapse = ", "), "\n",
-                 "Phenotyping cost (per plot): ", self$plotCost, "\n",
-                 "timeEffect: ", self$timeEffect))
+      cat(paste0(
+        "Phenotyper: ", self$name, "\n",
+        "Traits: ", paste(private$traitsNames, collapse = ", "), "\n",
+        "\u03bc: ", paste(self$mu, collapse = ", "), "\n",
+        "\u03c32: ", paste(self$ve, collapse = ", "), "\n",
+        "Phenotyping cost (per plot): ", self$plotCost, "\n",
+        "timeEffect: ", self$timeEffect
+      ))
     },
     #' @description Phenotype a given population
     #' @param pop [population class] population
@@ -403,24 +409,23 @@ phenotyper <- R6::R6Class(
     #' pheno3$cost
     #' summary(pheno3$data)
     trial = function(pop, rep = 1, offset = 0) {
-
       if (class(pop)[1] != "population") {
         stop('pop should be an object of class "population"')
       }
 
       if (!is.numeric(rep)) {
-        stop('rep should be a numeric vector')
+        stop("rep should be a numeric vector")
       }
       if (length(rep) != 1 && length(rep) != pop$nInd) {
-        stop('length(rep) should be equal to 1 or to the number of
-        individuals in the population')
+        stop("length(rep) should be equal to 1 or to the number of
+        individuals in the population")
       }
       if (length(rep) == 1) {
         rep <- base::rep(rep, pop$nInd)
       }
 
       if (any(rep < 0)) {
-        stop('all values of rep should be higher or equal than 0')
+        stop("all values of rep should be higher or equal than 0")
       }
 
       if (!is.numeric(offset)) {
@@ -434,43 +439,44 @@ phenotyper <- R6::R6Class(
       if (is.null(names(offset))) {
         names(offset) <- private$traitsNames
       } else if (!identical(sort(names(offset)), sort(private$traitsNames))) {
-        stop('names(offset) should be compatible with the traits names')
+        stop("names(offset) should be compatible with the traits names")
       } else {
         offset <- offset[private$traitsNames]
       }
 
       cost <- self$plotCost * sum(rep)
-      pheno <- matrix(sapply(self$traits, function(trait) {
-        mu <- self$mu[trait$name]
-        sigma <- sqrt(self$ve[trait$name])
+      pheno <- matrix(
+        sapply(self$traits, function(trait) {
+          mu <- self$mu[trait$name]
+          sigma <- sqrt(self$ve[trait$name])
 
-        gv <- base::rep(trait$gv(pop), rep)
-        e <- rnorm(sum(rep), sd = sigma)
+          gv <- base::rep(trait$gv(pop), rep)
+          e <- rnorm(sum(rep), sd = sigma)
 
-        matrix(mu + gv + e + offset[trait$name], ncol = 1)
-      }),
-      nrow = sum(rep))
+          matrix(mu + gv + e + offset[trait$name], ncol = 1)
+        }),
+        nrow = sum(rep)
+      )
       colnames(pheno) <- names(self$traits)
-      dta <- data.frame(ind = base::rep(row.names(pop$genoMat), rep),
-                        pheno,
-                        rep = unlist(lapply(rep, function(x){
-                          if (x != 0) {
-                            out <- seq(x)
-                          } else {
-                            out <- c()
-                          }
-                          out
-                        })),
-                        phenotyper = self$name,
-                        stringsAsFactors = FALSE)
+      dta <- data.frame(
+        ind = base::rep(row.names(pop$genoMat), rep),
+        pheno,
+        rep = unlist(lapply(rep, function(x) {
+          if (x != 0) {
+            out <- seq(x)
+          } else {
+            out <- c()
+          }
+          out
+        })),
+        phenotyper = self$name,
+        stringsAsFactors = FALSE
+      )
 
       list(
         data = dta,
         cost = cost
-)
-
-
-
+      )
     },
     #' @description Calculate the heritability of a given population
     #' @param pop [population] the population
@@ -480,7 +486,7 @@ phenotyper <- R6::R6Class(
     #' phenoLab1$he(example_pop)
     #' phenoLab2$he(example_pop)
     he = function(pop) {
-      sapply(self$traits, function(t){
+      sapply(self$traits, function(t) {
         g <- t$gv(pop)
         he <- var(g) / (var(g) + self$ve[t$name])
         he

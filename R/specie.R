@@ -43,7 +43,7 @@ specie <- R6::R6Class(
     # @param ploidy [numeric] Number of possible alleles at one locus
     #'   (optional)
     # @param mutRate [numeric] Mutation rate at each base (optional)
-    #' @param chrNames [str] Names of the chromosomes (optional). By default the chromosomes names will be set to "Chr01", "Chr02", "Chr03" ... 
+    #' @param chrNames [str] Names of the chromosomes (optional). By default the chromosomes names will be set to "Chr01", "Chr02", "Chr03" ...
     #' @param verbose [bool] Display info (optional)
     #' @return A new `specie` object.
     #' @examples
@@ -59,22 +59,26 @@ specie <- R6::R6Class(
                           # ploidy = NA,
                           # mutRate = NA,
                           chrNames = NA,
-                          verbose = TRUE){
+                          verbose = TRUE) {
       if (!is.numeric(nChr)) stop("nChr must be numeric.")
       if (floor(nChr) - nChr != 0) stop("nChr must be integer.")
       if (!is.numeric(lchr)) stop("lchr must be numeric.")
       if (!is.numeric(lchrCm)) stop("lchrCm must be numeric.")
       if (any(floor(lchr) - lchr != 0)) stop("lchr must be integers.")
-      if (length(lchr) != 1 && length(lchr) != nChr){
-        stop(paste("length(lchr) must be equal to 1 (all chr have the same",
-                   "size) or equal to nChr."))
+      if (length(lchr) != 1 && length(lchr) != nChr) {
+        stop(paste(
+          "length(lchr) must be equal to 1 (all chr have the same",
+          "size) or equal to nChr."
+        ))
       }
-      if (length(lchrCm) != 1 && length(lchrCm) != nChr){
-        stop(paste("length(lchrCm) must be equal to 1 (all chr have the same",
-                   "size) or equal to nChr."))
+      if (length(lchrCm) != 1 && length(lchrCm) != nChr) {
+        stop(paste(
+          "length(lchrCm) must be equal to 1 (all chr have the same",
+          "size) or equal to nChr."
+        ))
       }
       ploidy <- 2
-      if (is.na(ploidy)){
+      if (is.na(ploidy)) {
         message('"ploidy" was not specify. The ploidy had been set to "2"')
         ploidy <- 2
       }
@@ -104,8 +108,12 @@ specie <- R6::R6Class(
       }
       names(self$lchrCm) <- self$chrNames
 
-      if (verbose) cat(paste("A new species has emerged:", self$specName,
-                             "!\n\n"))
+      if (verbose) {
+        cat(paste(
+          "A new species has emerged:", self$specName,
+          "!\n\n"
+        ))
+      }
     },
 
     #' @description
@@ -118,9 +126,11 @@ specie <- R6::R6Class(
         # "Mutation rate : ", self$mutRate, "\n",
         "Chromosome length:\n"
       ))
-      print(data.frame(chrNames = self$chrNames,
-                       chrLength = self$lchr,
-                       chrLengthCm = self$lchrCm))
+      print(data.frame(
+        chrNames = self$chrNames,
+        chrLength = self$lchr,
+        chrLengthCm = self$lchrCm
+      ))
     },
 
     #' @description
@@ -131,7 +141,6 @@ specie <- R6::R6Class(
     #' mySpec$getChrLength(2)
     #' mySpec$getChrLength("Chr3")
     getChrLength = function(chr = NA) {
-
       # quick return:
       if (is.na(chr)) {
         return(self$lchr)
@@ -141,9 +150,10 @@ specie <- R6::R6Class(
 
       if (is.character(chr)) {
         id <- which(chr == self$chrNames)
-      } else id <- chr
+      } else {
+        id <- chr
+      }
       self$lchr[id]
-
     },
 
     #' @description
@@ -154,7 +164,6 @@ specie <- R6::R6Class(
     #' mySpec$getChrLengthCm(2)
     #' mySpec$getChrLengthCm("Chr3")
     getChrLengthCm = function(chr = NA) {
-
       # quick return:
       if (is.na(chr)) {
         return(self$lchrCm)
@@ -164,9 +173,10 @@ specie <- R6::R6Class(
 
       if (is.character(chr)) {
         id <- which(chr == self$chrNames)
-      } else id <- chr
+      } else {
+        id <- chr
+      }
       self$lchrCm[id]
-
     }
   )
 )

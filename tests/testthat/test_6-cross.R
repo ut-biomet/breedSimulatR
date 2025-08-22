@@ -12,7 +12,9 @@
 if (basename(getwd()) == "breedSimulatR") {
   devtools::load_all()
   source("tests/testthat/src/functionsForTests.R")
-} else source("src/functionsForTests.R")
+} else {
+  source("src/functionsForTests.R")
+}
 
 
 #### TESTS ####
@@ -60,12 +62,11 @@ test_that("makeSingleCross", {
   expect_true(all(newInd$haplo$allelDose[mustEq0] == 0))
   expect_true(all(newInd$haplo$allelDose[mustEq1.a] == 1))
   expect_true(all(newInd$haplo$allelDose[mustEq1.b] == 1))
-  expect_true(all(newInd$haplo$allelDose[mustEq12.a] %in% c(1,2)))
-  expect_true(all(newInd$haplo$allelDose[mustEq12.b] %in% c(1,2)))
-  expect_true(all(newInd$haplo$allelDose[mustEq01.a] %in% c(1,0)))
-  expect_true(all(newInd$haplo$allelDose[mustEq01.b] %in% c(1,0)))
-  expect_true(all(newInd$haplo$allelDose[mustEq012] %in% c(0,1,2)))
-
+  expect_true(all(newInd$haplo$allelDose[mustEq12.a] %in% c(1, 2)))
+  expect_true(all(newInd$haplo$allelDose[mustEq12.b] %in% c(1, 2)))
+  expect_true(all(newInd$haplo$allelDose[mustEq01.a] %in% c(1, 0)))
+  expect_true(all(newInd$haplo$allelDose[mustEq01.b] %in% c(1, 0)))
+  expect_true(all(newInd$haplo$allelDose[mustEq012] %in% c(0, 1, 2)))
 })
 
 
@@ -76,35 +77,45 @@ test_that("makeCrosses", {
   mySpec <- create_spec()
   SNPs <- create_SNP(mySpec)
   nInds <- 10
-  haploList <- lapply(seq(nInds), function(x){
+  haploList <- lapply(seq(nInds), function(x) {
     create_haplo(SNPs)
   })
   indList <- create_inds(haploList)
-  myPop <- population$new(name = "My Population 1",
-                          inds = indList,
-                          verbose = FALSE)
+  myPop <- population$new(
+    name = "My Population 1",
+    inds = indList,
+    verbose = FALSE
+  )
 
   nCross <- 5
-  crossToDo <- data.frame(ind1 = sample(names(myPop$inds), nCross, replace = T),
-                          ind2 = sample(names(myPop$inds), nCross, replace = T),
-                          n = rep_len(c(1,2,3), length.out = nCross),
-                          names = paste("newInd", 1:nCross))
+  crossToDo <- data.frame(
+    ind1 = sample(names(myPop$inds), nCross, replace = T),
+    ind2 = sample(names(myPop$inds), nCross, replace = T),
+    n = rep_len(c(1, 2, 3), length.out = nCross),
+    names = paste("newInd", 1:nCross)
+  )
 
 
   #### Tests:
-  expect_error({newInds <- makeCrosses(crossToDo, myPop)}, NA)
+  expect_error(
+    {
+      newInds <- makeCrosses(crossToDo, myPop)
+    },
+    NA
+  )
   expect_is(newInds, "list")
   expect_equal(length(newInds), sum(crossToDo$n))
-  lapply(newInds, function(x){
+  lapply(newInds, function(x) {
     expect_is(x, "individual")
   })
 
 
   # check offspring names are unique
-  offNames <- as.character(vapply(newInds, function(x){x$name}, "character"))
+  offNames <- as.character(vapply(newInds, function(x) {
+    x$name
+  }, "character"))
   expect_is(offNames, "character")
   expect_true(length(offNames) == length(unique(offNames)))
-
 })
 
 test_that("makeCrosses particular cases", {
@@ -112,39 +123,51 @@ test_that("makeCrosses particular cases", {
   mySpec <- create_spec()
   SNPs <- create_SNP(mySpec)
   nInds <- 10
-  haploList <- lapply(seq(nInds), function(x){
+  haploList <- lapply(seq(nInds), function(x) {
     create_haplo(SNPs)
   })
   indList <- create_inds(haploList)
-  myPop <- population$new(name = "My Population 1",
-                          inds = indList,
-                          verbose = FALSE)
+  myPop <- population$new(
+    name = "My Population 1",
+    inds = indList,
+    verbose = FALSE
+  )
 
 
   #### Tests:
   # 1 offspring per cross
   nCross <- 3
-  crossToDo <- data.frame(ind1 = sample(names(myPop$inds), nCross),
-                          ind2 = sample(names(myPop$inds), nCross),
-                          n = 1,
-                          names = NA)
+  crossToDo <- data.frame(
+    ind1 = sample(names(myPop$inds), nCross),
+    ind2 = sample(names(myPop$inds), nCross),
+    n = 1,
+    names = NA
+  )
 
-  expect_error({listOff <- makeCrosses(crossToDo, myPop)}, NA)
+  expect_error(
+    {
+      listOff <- makeCrosses(crossToDo, myPop)
+    },
+    NA
+  )
   expect_is(listOff, "list")
-  lapply(listOff, function(x){
+  lapply(listOff, function(x) {
     expect_is(x, "individual")
   })
 
   # all offsprings with differents names when they all have the same parents
   nCross <- 3
-  crossToDo <- data.frame(ind1 = rep(sample(names(myPop$inds), 1), nCross),
-                          ind2 = rep(sample(names(myPop$inds), 1), nCross),
-                          n = c(1,1,5),
-                          names = NA)
+  crossToDo <- data.frame(
+    ind1 = rep(sample(names(myPop$inds), 1), nCross),
+    ind2 = rep(sample(names(myPop$inds), 1), nCross),
+    n = c(1, 1, 5),
+    names = NA
+  )
   listOff <- makeCrosses(crossToDo, myPop)
-  offNames <- as.character(vapply(listOff, function(x){x$name}, "character"))
+  offNames <- as.character(vapply(listOff, function(x) {
+    x$name
+  }, "character"))
   expect_true(length(offNames) == length(unique(offNames)))
-
 })
 
 test_that("makeCrosses errors, messages", {
@@ -152,56 +175,70 @@ test_that("makeCrosses errors, messages", {
   mySpec <- create_spec()
   SNPs <- create_SNP(mySpec)
   nInds <- 10
-  haploList <- lapply(seq(nInds), function(x){
+  haploList <- lapply(seq(nInds), function(x) {
     create_haplo(SNPs)
   })
   indList <- create_inds(haploList)
-  myPop <- population$new(name = "My Population 1",
-                          inds = indList,
-                          verbose = FALSE)
+  myPop <- population$new(
+    name = "My Population 1",
+    inds = indList,
+    verbose = FALSE
+  )
   nCross <- 5
-  crossToDo <- data.frame(ind1 = sample(names(myPop$inds), nCross, replace = T),
-                          ind2 = sample(names(myPop$inds), nCross, replace = T),
-                          n = rep_len(c(1,2,3), length.out = nCross),
-                          names = paste("newInd", 1:nCross),
-                          stringsAsFactors = FALSE)
+  crossToDo <- data.frame(
+    ind1 = sample(names(myPop$inds), nCross, replace = T),
+    ind2 = sample(names(myPop$inds), nCross, replace = T),
+    n = rep_len(c(1, 2, 3), length.out = nCross),
+    names = paste("newInd", 1:nCross),
+    stringsAsFactors = FALSE
+  )
   crossToDoInit <- crossToDo
 
 
   #### Tests
   # test NA in crossToDo$ind1
   crossToDo[sample(nCross, 1), "ind1"] <- NA
-  expect_error(makeCrosses(crossToDo, myPop),
-               'Columns "ind1" and "ind2" should not contain any "NA"')
+  expect_error(
+    makeCrosses(crossToDo, myPop),
+    'Columns "ind1" and "ind2" should not contain any "NA"'
+  )
   crossToDo <- crossToDoInit
   # test NA in crossToDo$ind2
   crossToDo[sample(nCross, 1), "ind2"] <- NA
-  expect_error(makeCrosses(crossToDo, myPop),
-               'Columns "ind1" and "ind2" should not contain any "NA"')
+  expect_error(
+    makeCrosses(crossToDo, myPop),
+    'Columns "ind1" and "ind2" should not contain any "NA"'
+  )
   # test NA in crossToDo$names
   crossToDo[sample(nCross, 1), "names"] <- NA
-  expect_error(makeCrosses(crossToDo, myPop),
-               'Columns "ind1" and "ind2" should not contain any "NA"')
+  expect_error(
+    makeCrosses(crossToDo, myPop),
+    'Columns "ind1" and "ind2" should not contain any "NA"'
+  )
   crossToDo <- crossToDoInit
 
 
 
   # test parents ind1 not in population
   crossToDo[sample(nCross, 1), "ind1"] <- "toto"
-  expect_error(makeCrosses(crossToDo, myPop),
-               'Parents not found in the population')
+  expect_error(
+    makeCrosses(crossToDo, myPop),
+    "Parents not found in the population"
+  )
   crossToDo <- crossToDoInit
   # test parents ind2 not in population
   crossToDo[sample(nCross, 1), "ind2"] <- "tata"
-  expect_error(makeCrosses(crossToDo, myPop),
-               'Parents not found in the population')
+  expect_error(
+    makeCrosses(crossToDo, myPop),
+    "Parents not found in the population"
+  )
   crossToDo <- crossToDoInit
 
 
   # offsprings 'names in population
   crossToDo$names <- crossToDo$ind1
-  expect_message(makeCrosses(crossToDo, myPop),
-               'Offspring names already exist in the population')
-
-
+  expect_message(
+    makeCrosses(crossToDo, myPop),
+    "Offspring names already exist in the population"
+  )
 })

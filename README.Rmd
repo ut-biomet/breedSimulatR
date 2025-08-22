@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   # out.width = "100%",
 
-  results = 'markup', # "hold", # display chunk output in one block
+  results = "markup", # "hold", # display chunk output in one block
   tidy = TRUE, # better code organisation
   tidy.opts = list(width.cutoff = 80),
   strip.white = FALSE, # remove the white lines in the beginning or end of a source chunk
@@ -20,7 +20,6 @@ knitr::opts_chunk$set(
   fig.align = "center",
   fig.width = 9,
   fig.height = 5
-
 )
 ```
 
@@ -96,10 +95,12 @@ Let's specify the specie:
 
 ```{r example_1}
 # create specie object
-specie_statEx <- specie$new(specName = "Statisticae exempli",
-                        nChr = 10,
-                        lchr = 1e6,
-                        lchrCm = 100)
+specie_statEx <- specie$new(
+  specName = "Statisticae exempli",
+  nChr = 10,
+  lchr = 1e6,
+  lchrCm = 100
+)
 ```
 
 #### SNP specification
@@ -116,8 +117,10 @@ head(exampleData$snpCoord)
 
 ```{r example_2.2}
 # create SNPinfo object
-SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
-                    specie = specie_statEx)
+SNPs <- SNPinfo$new(
+  SNPcoord = exampleData$snpCoord,
+  specie = specie_statEx
+)
 print(SNPs)
 ```
 
@@ -130,14 +133,16 @@ Let's load the genotypic information  (stored in `exampleData$genotypes`) and cr
 
 ```{r example_3.1}
 # data preview
-exampleData$genotypes[1:3,1:5]
+exampleData$genotypes[1:3, 1:5]
 ```
 
 ```{r example_3.2, results='hide'}
 # create population object
-initPop <- createPop(geno = exampleData$genotypes,
-                     SNPinfo = SNPs,
-                     popName = "Initial population")
+initPop <- createPop(
+  geno = exampleData$genotypes,
+  SNPinfo = SNPs,
+  popName = "Initial population"
+)
 ```
 
 
@@ -149,21 +154,27 @@ Let's create 2 independent phenotypic traits that can be phenotyped.
 nQtn <- 1000
 
 qtn <- sample(names(initPop$maf > 0.1), nQtn)
-weight <- trait$new(name = "Weight",
-                    qtn = qtn,
-                    qtnEff = rnorm(nQtn, 0, 0.35))
+weight <- trait$new(
+  name = "Weight",
+  qtn = qtn,
+  qtnEff = rnorm(nQtn, 0, 0.35)
+)
 
 qtn <- sample(names(initPop$maf > 0.1), nQtn)
-height <- trait$new(name = "Height",
-                    qtn = qtn,
-                    qtnEff = rnorm(nQtn, 0, 0.25))
+height <- trait$new(
+  name = "Height",
+  qtn = qtn,
+  qtnEff = rnorm(nQtn, 0, 0.25)
+)
 
-phenolab <- phenotyper$new(name = "Pheno lab",
-                           traits = list(weight, height),
-                           plotCost = 150,
-                           mu = c(100, 75),
-                           he = c(0.4, 0.6),
-                           pop = initPop)
+phenolab <- phenotyper$new(
+  name = "Pheno lab",
+  traits = list(weight, height),
+  plotCost = 150,
+  mu = c(100, 75),
+  he = c(0.4, 0.6),
+  pop = initPop
+)
 
 pheno <- phenolab$trial(pop = initPop, rep = 4)
 head(pheno$data)
@@ -180,20 +191,26 @@ Then, the function `randomMate` will generate the crossing table.
 
 ```{r example_4.1}
 exampleData$snpEffects
-(selectedInds <- selectBV(pop = initPop,
-                          QTNeffects = exampleData$snpEffects,
-                          n = 10))
+(selectedInds <- selectBV(
+  pop = initPop,
+  QTNeffects = exampleData$snpEffects,
+  n = 10
+))
 
-(crossTable <- randomMate(inds = selectedInds,
-                          n = 120,
-                          names = "generation_1"))
+(crossTable <- randomMate(
+  inds = selectedInds,
+  n = 120,
+  names = "generation_1"
+))
 ```
 
 We can now generate the offspring:
 
 ```{r example_4.2, results='hide'}
-newPop <- population$new(name = "1st offspring",
-                         inds = makeCrosses(crosses = crossTable, pop = initPop))
+newPop <- population$new(
+  name = "1st offspring",
+  inds = makeCrosses(crosses = crossTable, pop = initPop)
+)
 ```
 ```{r example_4.3}
 newPop
@@ -262,14 +279,16 @@ cat("</ul>")
 
 ```{r References_1, echo=FALSE, results = 'asis'}
 desc <- read.dcf(file.path(getwd(), "DESCRIPTION"))
-pkgs <- unlist(strsplit(desc[,c("Depends", "Imports", "Suggests")], ",[\n]?"))
+pkgs <- unlist(strsplit(desc[, c("Depends", "Imports", "Suggests")], ",[\n]?"))
 pkgs <- gsub(pattern = " (?=.*).*", "", pkgs, perl = TRUE)
 
 cat("<ul>")
 for (pkg in pkgs) {
   if (pkg == "R") {
     next
-  } else cite <- citation(package = pkg)
+  } else {
+    cite <- citation(package = pkg)
+  }
   cat("<li>")
   cat("<b>", pkg, "</b> ")
   ref <- capture.output(print(cite, style = "html", .bibstyle = NULL, Encoding = "UTF-8"))

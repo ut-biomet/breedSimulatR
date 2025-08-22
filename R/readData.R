@@ -21,26 +21,31 @@
 #' @examples
 #' \dontrun{
 #' # create vcf.gz file
-#' mySpec <- specie$new(nChr = 10,
-#'                      lchr = 10^6,
-#'                      lchrCm = 100,
-#'                      specName = "Geneticae Exempli")
-#' SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
-#'                     specie = mySpec)
-#' example_pop <- createPop(geno = exampleData$genotypes,
-#'                          SNPinfo = SNPs,
-#'                          popName = "Example population")
-#' vcfFile <- tempfile(fileext = "vcf.gz") 
+#' mySpec <- specie$new(
+#'   nChr = 10,
+#'   lchr = 10^6,
+#'   lchrCm = 100,
+#'   specName = "Geneticae Exempli"
+#' )
+#' SNPs <- SNPinfo$new(
+#'   SNPcoord = exampleData$snpCoord,
+#'   specie = mySpec
+#' )
+#' example_pop <- createPop(
+#'   geno = exampleData$genotypes,
+#'   SNPinfo = SNPs,
+#'   popName = "Example population"
+#' )
+#' vcfFile <- tempfile(fileext = "vcf.gz")
 #' example_pop$writeVcf(vcfFile)
 #'
 #' # read vcf file
-#' x <- readVCF(file = vcfFile , verbose = TRUE)
+#' x <- readVCF(file = vcfFile, verbose = TRUE)
 #' print(x$pop)
 #' print(x$snps)
 #' print(x$specie)
 #' }
 readVCF <- function(file, specie = NULL, verbose = TRUE) {
-
   # checks
   if (!is.null(specie) && class(specie)[1] != "Specie") {
     stop('"class(specie)" must be "Specie"')
@@ -54,36 +59,38 @@ readVCF <- function(file, specie = NULL, verbose = TRUE) {
   # browser()
   vcf <- vcfR::read.vcfR(file = file, verbose = verbose)
   fixVcf <- as.data.frame(vcfR::getFIX(vcf), stringsAsFactors = FALSE)
-  fixVcf[,"POS"] <- as.numeric(fixVcf[,"POS"])
+  fixVcf[, "POS"] <- as.numeric(fixVcf[, "POS"])
 
   # create specie
   if (is.null(specie)) {
     if (verbose) {
       cat("`specie` is not provided, creation of a new specie based on the information in the vcf file\n")
     }
-    chrNames <- unique(fixVcf[,"CHROM"])
+    chrNames <- unique(fixVcf[, "CHROM"])
     nChr <- length(chrNames)
 
     # get chromosome length
     tabLchr <- stats::aggregate(POS ~ CHROM, data = fixVcf, max)
     lchr <- c()
-    lchr[tabLchr[,"CHROM"]] <- tabLchr[,"POS"]
+    lchr[tabLchr[, "CHROM"]] <- tabLchr[, "POS"]
     lchr <- lchr[chrNames]
 
-    specie <- breedSimulatR::specie$new(nChr = nChr,
-                                        chrNames = chrNames,
-                                        lchr = lchr,
-                                        lchrCm = lchr/10^6, # 1 cMper Mb.
-                                        verbose = verbose)
+    specie <- breedSimulatR::specie$new(
+      nChr = nChr,
+      chrNames = chrNames,
+      lchr = lchr,
+      lchrCm = lchr / 10^6, # 1 cMper Mb.
+      verbose = verbose
+    )
   }
 
 
 
   # extract SNP informations
-  SNPcoord <- fixVcf[,c("CHROM", "POS", "ID")]
+  SNPcoord <- fixVcf[, c("CHROM", "POS", "ID")]
   colnames(SNPcoord) <- c("chr", "physPos", "SNPid")
   SNPcoord$linkMapPos <- NA
-  SNPcoord <- SNPcoord[,c("chr", "physPos", "linkMapPos", "SNPid")]
+  SNPcoord <- SNPcoord[, c("chr", "physPos", "linkMapPos", "SNPid")]
 
   snps <- SNPinfo$new(SNPcoord = SNPcoord, specie = specie)
 
@@ -94,13 +101,13 @@ readVCF <- function(file, specie = NULL, verbose = TRUE) {
   if (verbose) {
     cat("Exctract genetic information...\n")
   }
-  if (all(vcf@gt[,"FORMAT"] == "GT")) {
+  if (all(vcf@gt[, "FORMAT"] == "GT")) {
     # quick return if FORMAT == GT
     gt <- vcf@gt
     gt <- gt[, colnames(gt) != "FORMAT"]
-    row.names(gt) <- vcf@fix[,"ID"]
+    row.names(gt) <- vcf@fix[, "ID"]
   } else {
-    gt <- vcfR::extract.gt(vcf, element = 'GT')
+    gt <- vcfR::extract.gt(vcf, element = "GT")
   }
 
   # stop if not phased
@@ -122,12 +129,14 @@ readVCF <- function(file, specie = NULL, verbose = TRUE) {
   # values of gt are mixed so we need to reorder:
   gt <- c(gt[seq(1, length(gt), 2)], gt[seq(2, length(gt), 2)])
   gt <- matrix(gt,
-               nrow = length(markersNames),
-               byrow = FALSE)
+    nrow = length(markersNames),
+    byrow = FALSE
+  )
   rownames(gt) <- markersNames
   colnames(gt) <- paste(rep(indNames, 2),
-                         rep(1:2, each=length(indNames)),
-                         sep = "_")
+    rep(1:2, each = length(indNames)),
+    sep = "_"
+  )
 
   # create list of individuals
   if (verbose) {
@@ -138,28 +147,36 @@ readVCF <- function(file, specie = NULL, verbose = TRUE) {
   i <- 1
   for (indName in indNames) {
     if (verbose) {
-      prog <- i/length(indNames)
-      cat(paste0("\r", round(prog*100), "%"))
-      i <- i+1
+      prog <- i / length(indNames)
+      cat(paste0("\r", round(prog * 100), "%"))
+      i <- i + 1
     }
     # browser()
-    haplo <- t(gt[, paste(indName, c(1,2), sep = "_")])
-    haplo <- haplotype$new(SNPinfo = snps,
-                           haplo = haplo)
-    listInds[[indName]] <- individual$new(name = indName,
-                                          specie = specie,
-                                          haplo = haplo,
-                                          verbose = FALSE)
+    haplo <- t(gt[, paste(indName, c(1, 2), sep = "_")])
+    haplo <- haplotype$new(
+      SNPinfo = snps,
+      haplo = haplo
+    )
+    listInds[[indName]] <- individual$new(
+      name = indName,
+      specie = specie,
+      haplo = haplo,
+      verbose = FALSE
+    )
   }
-  if (verbose) {cat("\n")}
+  if (verbose) {
+    cat("\n")
+  }
 
   # create population
   pop <- population$new(name = "", inds = listInds, verbose = verbose)
 
 
   # return results
-  out <- list(pop = pop,
-              snps = snps,
-              specie = specie)
+  out <- list(
+    pop = pop,
+    snps = snps,
+    specie = specie
+  )
   return(out)
 }

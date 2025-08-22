@@ -20,16 +20,19 @@ phasedVcfFile <- paste0(pathPref, "data/riceDiv_44kSNP_100colls_beagleOut.vcf.gz
 #### TESTS readVCF ####
 capture_output({
   test_that("readVCF", {
-    expect_error({
-      dta <- readVCF(file = phasedVcfFile, verbose = F)
-    }, NA)
+    expect_error(
+      {
+        dta <- readVCF(file = phasedVcfFile, verbose = F)
+      },
+      NA
+    )
     expect_is(dta, "list")
     expect_identical(names(dta), c("pop", "snps", "specie"))
 
     # use gaston as reference
     x <- gaston::read.vcf(phasedVcfFile, verbose = FALSE)
-    expect_equal(sort(dta$snps$SNPcoord$SNPid), sort(x@snps$id)) 
-    expect_equal(sort(names(dta$pop$inds)), sort(x@ped$id)) 
+    expect_equal(sort(dta$snps$SNPcoord$SNPid), sort(x@snps$id))
+    expect_equal(sort(names(dta$pop$inds)), sort(x@ped$id))
     expect_equal(dta$pop$genoMat, gaston::as.matrix(x))
   })
 })

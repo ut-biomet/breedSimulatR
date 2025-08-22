@@ -8,29 +8,29 @@
 
 ##### Initialisation functions ####
 create_spec <- function(nChr = round(runif(1, 1, 15)),
-                        lchr = round(pmax(rnorm(nChr, 450, 50), 200)),# > 200
+                        lchr = round(pmax(rnorm(nChr, 450, 50), 200)), # > 200
                         lchrCm = 100,
                         name = "Undefinded",
                         chrNames = NA) {
-
-  specie$new(nChr = nChr,
-             lchr = lchr,
-             lchrCm = lchrCm,
-             specName = name,
-             chrNames = chrNames,
-             verbose = F)
+  specie$new(
+    nChr = nChr,
+    lchr = lchr,
+    lchrCm = lchrCm,
+    specName = name,
+    chrNames = chrNames,
+    verbose = F
+  )
 }
 
 create_SNP <- function(spec = create_spec(), nMarker = NULL,
-                       lmap = TRUE, b1 = runif(1,5,15), b2 = runif(1,5,15)){
-
+                       lmap = TRUE, b1 = runif(1, 5, 15), b2 = runif(1, 5, 15)) {
   if (is.null(nMarker)) {
-    nMarker <- round(spec$lchr/10)
+    nMarker <- round(spec$lchr / 10)
   } else {
     stopifnot(all(nMarker < spec$lchr))
     if (length(nMarker) == 1) {
-    nMarker <- rep(nMarker, spec$nChr)
-    } else if (length(nMarker) != spec$nChr){
+      nMarker <- rep(nMarker, spec$nChr)
+    } else if (length(nMarker) != spec$nChr) {
       stop("length(nMarker) != spec$nChr or 1")
     }
   }
@@ -45,63 +45,77 @@ create_SNP <- function(spec = create_spec(), nMarker = NULL,
 
   SNPcoord <- do.call(
     rbind,
-    lapply(seq(spec$nChr),
-           function(chr){
-             physPos <- sample(spec$lchr[chr], nMarker[chr],
-                               replace = FALSE)
-             if (lmap) {
-               linkMapPos <- .simulLinkMapPos(physPos,
-                                              spec$lchr[chr],
-                                              spec$lchrCm[chr],
-                                              b1 = b1,
-                                              b2 = b2)
-             } else {
-               linkMapPos <- NA
-             }
+    lapply(
+      seq(spec$nChr),
+      function(chr) {
+        physPos <- sample(spec$lchr[chr], nMarker[chr],
+          replace = FALSE
+        )
+        if (lmap) {
+          linkMapPos <- .simulLinkMapPos(physPos,
+            spec$lchr[chr],
+            spec$lchrCm[chr],
+            b1 = b1,
+            b2 = b2
+          )
+        } else {
+          linkMapPos <- NA
+        }
 
-             data.frame(physPos,linkMapPos)
-           }))
+        data.frame(physPos, linkMapPos)
+      }
+    )
+  )
   SNPcoord$chr <- rep(spec$chrNames, times = nMarker)
   # generate arbitrary SNPid
-  SNPcoord$SNPid <- .charSeq("SNP", sample(sum(nMarker)*50, sum(nMarker)))
+  SNPcoord$SNPid <- .charSeq("SNP", sample(sum(nMarker) * 50, sum(nMarker)))
 
   # create SNPinfo object
   SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = spec)
   SNPs
 }
 
-create_haplo <- function(SNPs, af = NULL){
-
+create_haplo <- function(SNPs, af = NULL) {
   if (is.null(af)) {
     af <- 0.5
   } else {
     stopifnot(length(af) == SNPs$nSNP())
   }
 
-  rawHaplo <- matrix(rbinom(SNPs$nSNP() * SNPs$specie$ploidy, 1,
-                            af),
-                     nrow = SNPs$specie$ploidy)
+  rawHaplo <- matrix(
+    rbinom(
+      SNPs$nSNP() * SNPs$specie$ploidy, 1,
+      af
+    ),
+    nrow = SNPs$specie$ploidy
+  )
   colnames(rawHaplo) <- SNPs$SNPcoord$SNPid
-  haplo <- haplotype$new(SNPinfo = SNPs,
-                         haplo = rawHaplo)
+  haplo <- haplotype$new(
+    SNPinfo = SNPs,
+    haplo = rawHaplo
+  )
 }
 
 
-create_inds <- function(haploList){
-  if (class(haploList)[1]  == "Haplotype") {
+create_inds <- function(haploList) {
+  if (class(haploList)[1] == "Haplotype") {
     haploList <- list(haploList)
   }
 
   spec <- haploList[[1]]$SNPinfo$specie
-  inds <- mapply(function(haplo, id){
-    myInd <- individual$new(name = paste("Ind", id),
-                            specie = spec,
-                            parent1 = paste("OkaaSan", id),
-                            parent2 = paste("OtouSan", id),
-                            haplo = haplo,
-                            verbose = F)
-  },
-  haploList, c(seq_along(haploList)))
+  inds <- mapply(
+    function(haplo, id) {
+      myInd <- individual$new(
+        name = paste("Ind", id),
+        specie = spec,
+        parent1 = paste("OkaaSan", id),
+        parent2 = paste("OtouSan", id),
+        haplo = haplo,
+        verbose = F
+      )
+    },
+    haploList, c(seq_along(haploList))
+  )
 
   if (length(inds) == 1) {
     return(inds[[1]])
@@ -116,11 +130,11 @@ create_trait <- function(SNPs,
                          qtn = NULL,
                          qtnEff = NULL) {
   if (is.null(qtn)) {
-    qtn <-  sample(SNPs$SNPcoord$SNPid, n)
+    qtn <- sample(SNPs$SNPcoord$SNPid, n)
   }
 
   if (is.null(qtnEff)) {
-    qtnEff <-  rnorm(length(qtn), sd = 0.5)
+    qtnEff <- rnorm(length(qtn), sd = 0.5)
   }
 
   myTrait <- trait$new(

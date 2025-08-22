@@ -79,12 +79,12 @@ dta <- exampleData
 ```
 
 ```{r include=FALSE}
-.nInd = nrow(dta$genotypes)
-.nSNP = ncol(dta$genotypes)
-.ColNamesSNP = paste("\`", colnames(dta$snpCoord), "\`")
-.nChr = length(unique(dta$snpCoord$chr))
-.lchr = format(signif(max(dta$snpCoord$physPos), digits = 3), scientific = TRUE)
-.lchrCm = signif(max(dta$snpCoord$linkMapPos), digits = 2)
+.nInd <- nrow(dta$genotypes)
+.nSNP <- ncol(dta$genotypes)
+.ColNamesSNP <- paste("\`", colnames(dta$snpCoord), "\`")
+.nChr <- length(unique(dta$snpCoord$chr))
+.lchr <- format(signif(max(dta$snpCoord$physPos), digits = 3), scientific = TRUE)
+.lchrCm <- signif(max(dta$snpCoord$linkMapPos), digits = 2)
 ```
 
 `exampleData` is a list containing 3 elements:
@@ -109,10 +109,12 @@ The function `specie$new` will create a new `specie` object `specie_statEx`.
 
 ```{r setup_1}
 # create specie object
-specie_statEx <- specie$new(specName = "Statisticae exempli",
-                            nChr = 10,
-                            lchr = 1e6,
-                            lchrCm = 100)
+specie_statEx <- specie$new(
+  specName = "Statisticae exempli",
+  nChr = 10,
+  lchr = 1e6,
+  lchrCm = 100
+)
 ```
 
 ```{r setup_1.1}
@@ -139,8 +141,10 @@ head(exampleData$snpCoord)
 
 ```{r setup_2.2}
 # create SNPinfo object
-SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
-                    specie = specie_statEx)
+SNPs <- SNPinfo$new(
+  SNPcoord = exampleData$snpCoord,
+  specie = specie_statEx
+)
 ```
 
 ```{r setup_2.2.1}
@@ -158,14 +162,16 @@ We can create the initial `population` object using `exampleData$genotypes` whic
 
 ```{r setup_3.1}
 # data preview
-exampleData$genotypes[1:3,1:5]
+exampleData$genotypes[1:3, 1:5]
 ```
 
 ```{r setup_3.2, results='hide'}
 # create population object
-initPop <- createPop(geno = exampleData$genotypes,
-                     SNPinfo = SNPs,
-                     popName = "Initial population")
+initPop <- createPop(
+  geno = exampleData$genotypes,
+  SNPinfo = SNPs,
+  popName = "Initial population"
+)
 ```
 
 ```{r setup_3.3}
@@ -183,9 +189,11 @@ exampleData$snpEffects[1:5]
 ```
 
 ```{r setup_trait.1.2}
-weight <- trait$new(name = "Weight",
-                    qtn = names(exampleData$snpEffects),
-                    qtnEff = exampleData$snpEffects)
+weight <- trait$new(
+  name = "Weight",
+  qtn = names(exampleData$snpEffects),
+  qtnEff = exampleData$snpEffects
+)
 ```
 
 ```{r}
@@ -197,12 +205,14 @@ This trait object contain the genetic effects but in order to simulate phenotypi
 The environmental effect will be stored in the `phenotyper` object. Here we create a phenotyper for which the mean of the phenotypic value is equal to 100 and the initial population have an heritability of 0.6, and the cost for phenotyping one plot is 150.
 
 ```{r setup_trait.2}
-phenolab <- phenotyper$new(name = "Pheno lab",
-                           traits = weight,
-                           plotCost = 150,
-                           mu = 100,
-                           he = 0.6,
-                           pop = initPop)
+phenolab <- phenotyper$new(
+  name = "Pheno lab",
+  traits = weight,
+  plotCost = 150,
+  mu = 100,
+  he = 0.6,
+  pop = initPop
+)
 ```
 
 ```{r setup_trait.2.1}
@@ -218,7 +228,7 @@ Now the simulation is setup, we can write the simulation code using the objects 
 First, let's phenotype the initial population
 
 ```{r}
-set.seed(1809) # set seed 
+set.seed(1809) # set seed
 
 pheno <- phenolab$trial(pop = initPop, rep = 3)
 pheno$data
@@ -236,19 +246,19 @@ Here we will just select the individuals with the highest phenotypic values.
 
 ```{r}
 # aggregate result by individual
-aggPheno <- aggregate(Weight ~ ind, data = pheno$data, mean) 
+aggPheno <- aggregate(Weight ~ ind, data = pheno$data, mean)
 
 # sort result by "Weight" in ascending order
-aggPheno <- aggPheno[order(aggPheno$Weight, decreasing = T),]
+aggPheno <- aggPheno[order(aggPheno$Weight, decreasing = T), ]
 
 # set selection intensity
-i = 0.1
+i <- 0.1
 
 # calculated number of selected individuals
-nSelected = floor(initPop$nInd * i)
-  
+nSelected <- floor(initPop$nInd * i)
+
 # get names of selected individuals
-selectedInds = aggPheno$ind[1:nSelected]
+selectedInds <- aggPheno$ind[1:nSelected]
 selectedInds
 ```
 
@@ -277,9 +287,11 @@ newIndsList <- makeCrosses(crossTable, initPop)
 We can integrate these new individuals in a new population:
 
 ```{r}
-newPop <- population$new(name = "generation 2",
-                         inds = newIndsList,
-                         verbose = FALSE)
+newPop <- population$new(
+  name = "generation 2",
+  inds = newIndsList,
+  verbose = FALSE
+)
 ```
 
 ## Automatisation
@@ -297,25 +309,28 @@ nNew <- 100 # number of new individual for each generation
 for (gen in 3:nGen) {
   print(gen)
   # phenotyping
-  pheno <- phenolab$trial(pop = popList[[gen-1]], rep = 3)
-  
+  pheno <- phenolab$trial(pop = popList[[gen - 1]], rep = 3)
+
   # select individuals
-  aggPheno <- aggregate(Weight ~ ind, data = pheno$data, mean) 
-  aggPheno <- aggPheno[order(aggPheno$Weight, decreasing = T),]
-  nSelected = floor(initPop$nInd * i)
-  selectedInds = aggPheno$ind[1:nSelected]
-  
+  aggPheno <- aggregate(Weight ~ ind, data = pheno$data, mean)
+  aggPheno <- aggPheno[order(aggPheno$Weight, decreasing = T), ]
+  nSelected <- floor(initPop$nInd * i)
+  selectedInds <- aggPheno$ind[1:nSelected]
+
   # cross individuals
-  crossTable <- randomMate(inds = selectedInds,
-                           n = nNew,
-                           names = paste0("gen-", gen,"_", seq(1:nNew)))
-  newIndsList <- makeCrosses(crossTable, popList[[gen-1]])
-  
+  crossTable <- randomMate(
+    inds = selectedInds,
+    n = nNew,
+    names = paste0("gen-", gen, "_", seq(1:nNew))
+  )
+  newIndsList <- makeCrosses(crossTable, popList[[gen - 1]])
+
   # create new population
-  popList[[gen]] <- population$new(name = paste("generation", gen),
-                                   inds = newIndsList,
-                                   verbose = FALSE)
-  
+  popList[[gen]] <- population$new(
+    name = paste("generation", gen),
+    inds = newIndsList,
+    verbose = FALSE
+  )
 }
 popList
 ```
@@ -324,7 +339,7 @@ Let's look at the true genetic values of each population:
 
 ```{r, fig.width=8, fig.height=6}
 # create data.table with all genetic values
-GVs <- do.call(rbind, lapply(popList, function(pop){
+GVs <- do.call(rbind, lapply(popList, function(pop) {
   data.frame(gvWeight = weight$gv(pop), pop = pop$name)
 }))
 
@@ -332,7 +347,7 @@ GVs <- do.call(rbind, lapply(popList, function(pop){
 GVs$pop <- factor(GVs$pop, levels = unique(GVs$pop))
 
 # create boxplot
-boxplot(gvWeight~pop,data=GVs)
+boxplot(gvWeight ~ pop, data = GVs)
 ```
 
 # Conclusion

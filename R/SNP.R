@@ -29,11 +29,13 @@ SNPinfo <- R6::R6Class(
     #'  \item{\code{linkMapPos}:} {SNP linkage map position on the chromosome}
     #'  \item{\code{SNPid}:} {SNP's IDs}
     #'  }
-    SNPcoord = data.frame(chr = c(),
-                          physPos = c(),
-                          linkMapPos = c(),
-                          SNPid = c(),
-                          stringsAsFactors = FALSE),
+    SNPcoord = data.frame(
+      chr = c(),
+      physPos = c(),
+      linkMapPos = c(),
+      SNPid = c(),
+      stringsAsFactors = FALSE
+    ),
 
     #' @field specie [specie class] Specie of the SNPs
     #'   (see:\link[breedSimulatR]{specie})
@@ -77,7 +79,6 @@ SNPinfo <- R6::R6Class(
     #' # create SNPinfo object
     #' SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
     initialize = function(SNPcoord, specie) {
-
       # CHECKS:
       # parameters classes
       if (class(specie)[1] != "Specie") {
@@ -93,25 +94,26 @@ SNPinfo <- R6::R6Class(
         }
         # add linkMapPos column
         SNPcoord$linkMapPos <- NA
-
       } else if (ncol(SNPcoord) == 4) {
         if (!all(c("chr", "physPos", "SNPid", "linkMapPos") %in% colnames(SNPcoord))) {
           stop('"colnames(SNPcoord)" must include "chr", "physPos" and "SNPid", and optionally "linkMapPos"')
         }
-        if (sum(is.na(SNPcoord$linkMapPos)) != 0
-            & sum(is.na(SNPcoord$linkMapPos)) != nrow(SNPcoord)) {
+        if (sum(is.na(SNPcoord$linkMapPos)) != 0 &
+          sum(is.na(SNPcoord$linkMapPos)) != nrow(SNPcoord)) {
           stop('"SNPcoord$linkMapPos" should either contains only NAs or none')
         }
       }
 
       # chr names match those in specie
       if (!all(unique(SNPcoord$chr) %in% specie$chrNames)) {
-        stop(paste0('"Chromosomes\'names specified in "SNPcoord" do ',
-                    'not match those specified in "specie"\n',
-                    'unique(SNPcoord$chr) = ',
-                    paste0(unique(SNPcoord$chr), collapse = " "), '\n',
-                    'specie$chrNames = ',
-                    paste0(specie$chrNames, collapse = " ")))
+        stop(paste0(
+          '"Chromosomes\'names specified in "SNPcoord" do ',
+          'not match those specified in "specie"\n',
+          "unique(SNPcoord$chr) = ",
+          paste0(unique(SNPcoord$chr), collapse = " "), "\n",
+          "specie$chrNames = ",
+          paste0(specie$chrNames, collapse = " ")
+        ))
       }
 
       # markers are unique
@@ -121,7 +123,7 @@ SNPinfo <- R6::R6Class(
 
       # physical position are integers
       if (!all.equal(SNPcoord$physPos, as.integer(SNPcoord$physPos))) {
-        stop('markers\'s physical position should all be integers.')
+        stop("markers's physical position should all be integers.")
       }
 
       # remove factors
@@ -133,22 +135,24 @@ SNPinfo <- R6::R6Class(
 
       # sort position in increasing order (needed for the function
       # "findInterval" in individual's generateGametes method)
-      SNPcoord <- SNPcoord[order(SNPcoord$SNPid),] # first order on unique values to be sure to always have the same order.
-      SNPcoord <- SNPcoord[order(SNPcoord$physPos),]
+      SNPcoord <- SNPcoord[order(SNPcoord$SNPid), ] # first order on unique values to be sure to always have the same order.
+      SNPcoord <- SNPcoord[order(SNPcoord$physPos), ]
 
       # reorder columns
-      SNPcoord <- SNPcoord[,c("chr", "SNPid", "physPos", "linkMapPos")]
+      SNPcoord <- SNPcoord[, c("chr", "SNPid", "physPos", "linkMapPos")]
       rownames(SNPcoord) <- SNPcoord$SNPid
 
       self$SNPcoord <- SNPcoord
       self$specie <- specie
-      self$SNPcoordList <- split(SNPcoord,
-                                 SNPcoord$chr)
-      self$SNPcoordList  <- self$SNPcoordList[specie$chrNames]
+      self$SNPcoordList <- split(
+        SNPcoord,
+        SNPcoord$chr
+      )
+      self$SNPcoordList <- self$SNPcoordList[specie$chrNames]
 
       # check SNP unicity and linkage map position order
-      lapply(self$SNPcoordList, function(subSNPcoord){
-        if (!identical(unique(subSNPcoord$physPos), subSNPcoord$physPos)){
+      lapply(self$SNPcoordList, function(subSNPcoord) {
+        if (!identical(unique(subSNPcoord$physPos), subSNPcoord$physPos)) {
           stop("Some SNPs have the same physical position.")
         }
         # check the linkMapPos are also sorted like the physical position
@@ -159,11 +163,10 @@ SNPinfo <- R6::R6Class(
       })
 
 
-      self$ids <- lapply(specie$chrNames, function(chr){
+      self$ids <- lapply(specie$chrNames, function(chr) {
         SNPcoord[SNPcoord$chr == chr, "SNPid"]
       })
       names(self$ids) <- specie$chrNames
-
     },
 
     #' @description
@@ -172,9 +175,10 @@ SNPinfo <- R6::R6Class(
     #' @examples
     #' SNPs$nSNP()
     #' SNPs$nSNP(c("Chr2","Chr3"))
-    nSNP = function(chr=NA) {
-
-      if (length(chr) == 1 && is.na(chr)) return(nrow(self$SNPcoord))
+    nSNP = function(chr = NA) {
+      if (length(chr) == 1 && is.na(chr)) {
+        return(nrow(self$SNPcoord))
+      }
 
       stopifnot((is.character(chr) || is.numeric(chr)))
 
@@ -182,9 +186,10 @@ SNPinfo <- R6::R6Class(
         chr <- self$specie$chrNames[chr]
       }
       stopifnot(chr %in% self$specie$chrNames)
-      vapply(chr, function(chr) nrow(self$SNPcoord[self$SNPcoord$chr == chr,]),
-             1)
-
+      vapply(
+        chr, function(chr) nrow(self$SNPcoord[self$SNPcoord$chr == chr, ]),
+        1
+      )
     },
     #' @description
     #' Get information about specific SNPs
@@ -193,7 +198,7 @@ SNPinfo <- R6::R6Class(
     #' SNPs$getInfo("SNP01")
     #' SNPs$getInfo(c("SNP01", "SNP03"))
     getInfo = function(SNPid) {
-      self$SNPcoord[match(SNPid, self$SNPcoord$SNPid),]
+      self$SNPcoord[match(SNPid, self$SNPcoord$SNPid), ]
     },
 
     #' @description Display summary information about the object: specie, number
@@ -207,7 +212,7 @@ SNPinfo <- R6::R6Class(
       print(self$nSNP(self$specie$chrNames))
       cat("SNPcoord:\n")
       df <- self$SNPcoord
-      df <- df[order(df$SNPid),]
+      df <- df[order(df$SNPid), ]
       print(df)
     },
 
@@ -218,29 +223,34 @@ SNPinfo <- R6::R6Class(
     #' @examples
     #' SNPs$plot(alpha = 1)
     plot = function(alpha = 0.01) {
-      if (requireNamespace("plotly", quietly=TRUE)) {
+      if (requireNamespace("plotly", quietly = TRUE)) {
         ends <- self$specie$lchr
 
-        p <- plotly::plot_ly(data = self$SNPcoord,
-                             x = ~chr,
-                             y = ~physPos,
-                             type = "scatter",
-                             mode = "markers",
-                             alpha = alpha,
-                             name = "SNPs",
-                             hoverinfo = 'text',
-                             text = apply(self$SNPcoord, 1, function(l) {
-                               paste(names(l), ":", l, collapse = "\n")
-                             }))
+        p <- plotly::plot_ly(
+          data = self$SNPcoord,
+          x = ~chr,
+          y = ~physPos,
+          type = "scatter",
+          mode = "markers",
+          alpha = alpha,
+          name = "SNPs",
+          hoverinfo = "text",
+          text = apply(self$SNPcoord, 1, function(l) {
+            paste(names(l), ":", l, collapse = "\n")
+          })
+        )
         p <- plotly::add_markers(p,
-                                 x = rep(names(ends), 2),
-                                 y = c(ends, rep(0,length(ends))),
-                                 alpha = 1,
-                                 name = "Chromosome's edges",
-                                 hoverinfo = 'text',
-                                 text = paste(rep(names(ends), 2),
-                                              ": length =",
-                                              rep(ends, 2)))
+          x = rep(names(ends), 2),
+          y = c(ends, rep(0, length(ends))),
+          alpha = 1,
+          name = "Chromosome's edges",
+          hoverinfo = "text",
+          text = paste(
+            rep(names(ends), 2),
+            ": length =",
+            rep(ends, 2)
+          )
+        )
       } else {
         stop("The package 'plotly' is needed to use the method 'plot'.")
       }

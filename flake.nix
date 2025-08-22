@@ -41,6 +41,8 @@
             styler
             tidyverse
             ggplot2
+            formatR
+            breedSimulatR
           ]
           ++ breedSimulatR_buildInputs;
         breedSimulatR = (

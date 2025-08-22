@@ -300,7 +300,6 @@ population <- R6::R6Class(
     #   (see:\link[breedSimulatR]{individual})
     # @return NULL
     addInd = function(ind) {
-
       # checks class
       if (class(ind)[1] != "individual") {
         stop('variable "ind" must be of class "individual".')

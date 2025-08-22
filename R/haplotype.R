@@ -57,38 +57,43 @@ haplotype <- R6::R6Class(
     #' haplo <- haplotype$new(SNPinfo = SNPs,
     #'                        haplo = rawHaplo)
     initialize = function(SNPinfo, haplo) {
-
       # checks
 
       # SNPinfo class
       if (class(SNPinfo)[1] != "SNPinfo") {
-        stop(paste('class(SNPinfo)[1] != "SNPinfo"\n"SNPinfo" must be a',
-             'SNPinfo object see: ?SNPinfo'))
+        stop(paste(
+          'class(SNPinfo)[1] != "SNPinfo"\n"SNPinfo" must be a',
+          "SNPinfo object see: ?SNPinfo"
+        ))
       }
       # haplo class
-      if (!is(haplo,"matrix")) {
+      if (!is(haplo, "matrix")) {
         stop('is(haplo,"matrix") is FALSE\n"haplo" must be a matrix')
       }
       # haplo ploidy
       if (nrow(haplo) != SNPinfo$specie$ploidy) {
         stop(
-          paste('nrow(haplo) != SNPinfo$specie$ploidy\nnrow(haplo) must be',
-             'equal to the specie ploidy'))
+          paste(
+            "nrow(haplo) != SNPinfo$specie$ploidy\nnrow(haplo) must be",
+            "equal to the specie ploidy"
+          )
+        )
       }
       # number of markers
       if (ncol(haplo) != nrow(SNPinfo$SNPcoord)) {
         stop(paste(
-          'ncol(haplo) != nrow(SNPinfo$SNPcoord)\nncol(haplo) must be equal to',
-          'the number of markers in SNPinfo'))
+          "ncol(haplo) != nrow(SNPinfo$SNPcoord)\nncol(haplo) must be equal to",
+          "the number of markers in SNPinfo"
+        ))
       }
       # markers names
       if (is.null(colnames(haplo))) {
-        stop('colnames(haplo) is NULL\nhaplo must be a named matrix')
+        stop("colnames(haplo) is NULL\nhaplo must be a named matrix")
       }
       if (!all(colnames(haplo) %in% SNPinfo$SNPcoord$SNPid)) {
         stop(paste(
-          'all(colnames(haplo) %in% SNPinfo$specie$chrNames)',
-          'is false\ncolnames(haplo) must be the names of the markers'
+          "all(colnames(haplo) %in% SNPinfo$specie$chrNames)",
+          "is false\ncolnames(haplo) must be the names of the markers"
         ))
       }
 
@@ -101,14 +106,12 @@ haplotype <- R6::R6Class(
         rownames(h) <- .charSeq("h", c(1:SNPinfo$specie$ploidy))
         self$values[[chr]] <- h
       }
-
-    }),
-
+    }
+  ),
   active = list(
     #' @field allelDose [numeric] vector of genotypes encoded in allele dose
-    allelDose = function(){
+    allelDose = function() {
       colSums(do.call(cbind, self$values))
     }
-
   )
 )
