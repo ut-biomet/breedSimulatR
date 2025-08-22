@@ -90,16 +90,16 @@ for each trait}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{phenotyper$new()}}
-\item \href{#method-print}{\code{phenotyper$print()}}
-\item \href{#method-trial}{\code{phenotyper$trial()}}
-\item \href{#method-he}{\code{phenotyper$he()}}
-\item \href{#method-clone}{\code{phenotyper$clone()}}
+\item \href{#method-phenotyper-new}{\code{phenotyper$new()}}
+\item \href{#method-phenotyper-print}{\code{phenotyper$print()}}
+\item \href{#method-phenotyper-trial}{\code{phenotyper$trial()}}
+\item \href{#method-phenotyper-he}{\code{phenotyper$he()}}
+\item \href{#method-phenotyper-clone}{\code{phenotyper$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-phenotyper-new"></a>}}
+\if{latex}{\out{\hypertarget{method-phenotyper-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new phenotyper object.
 \subsection{Usage}{
@@ -180,8 +180,8 @@ phenoLab2 <- phenotyper$new(name = "My phenoLab",
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-phenotyper-print"></a>}}
+\if{latex}{\out{\hypertarget{method-phenotyper-print}{}}}
 \subsection{Method \code{print()}}{
 Display informations about the object
 \subsection{Usage}{
@@ -190,8 +190,8 @@ Display informations about the object
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-trial"></a>}}
-\if{latex}{\out{\hypertarget{method-trial}{}}}
+\if{html}{\out{<a id="method-phenotyper-trial"></a>}}
+\if{latex}{\out{\hypertarget{method-phenotyper-trial}{}}}
 \subsection{Method \code{trial()}}{
 Phenotype a given population
 \subsection{Usage}{
@@ -241,8 +241,8 @@ summary(pheno3$data)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-he"></a>}}
-\if{latex}{\out{\hypertarget{method-he}{}}}
+\if{html}{\out{<a id="method-phenotyper-he"></a>}}
+\if{latex}{\out{\hypertarget{method-phenotyper-he}{}}}
 \subsection{Method \code{he()}}{
 Calculate the heritability of a given population
 \subsection{Usage}{
@@ -271,8 +271,8 @@ phenoLab2$he(example_pop)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-phenotyper-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-phenotyper-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

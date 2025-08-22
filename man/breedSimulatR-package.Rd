@@ -6,13 +6,13 @@
 \alias{breedSimulatR-package}
 \title{breedSimulatR: R Breeding Simulator}
 \description{
-R package providing classes and functions to simulate
-    breeding schemes.
+R package providing classes and functions to simulate breeding schemes.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/ut-biomet/breedSimulatR}
+  \item \url{https://ut-biomet.github.io/breedSimulatR/}
   \item Report bugs at \url{https://github.com/ut-biomet/breedSimulatR/issues}
 }
 

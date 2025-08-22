@@ -51,15 +51,15 @@ nucleotides (\code{length(qtn) == length(qtnEff)} must be \code{true})}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{trait$new()}}
-\item \href{#method-gv}{\code{trait$gv()}}
-\item \href{#method-print}{\code{trait$print()}}
-\item \href{#method-clone}{\code{trait$clone()}}
+\item \href{#method-trait-new}{\code{trait$new()}}
+\item \href{#method-trait-gv}{\code{trait$gv()}}
+\item \href{#method-trait-print}{\code{trait$print()}}
+\item \href{#method-trait-clone}{\code{trait$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-trait-new"></a>}}
+\if{latex}{\out{\hypertarget{method-trait-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new trait object.
 \subsection{Usage}{
@@ -108,8 +108,8 @@ myTrait <- trait$new(name = "myTrait",
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-gv"></a>}}
-\if{latex}{\out{\hypertarget{method-gv}{}}}
+\if{html}{\out{<a id="method-trait-gv"></a>}}
+\if{latex}{\out{\hypertarget{method-trait-gv}{}}}
 \subsection{Method \code{gv()}}{
 Calculate the genetic values of a population
 \subsection{Usage}{
@@ -138,8 +138,8 @@ myTrait$gv(example_pop)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-trait-print"></a>}}
+\if{latex}{\out{\hypertarget{method-trait-print}{}}}
 \subsection{Method \code{print()}}{
 Display information about the object
 \subsection{Usage}{
@@ -148,8 +148,8 @@ Display information about the object
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-trait-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-trait-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

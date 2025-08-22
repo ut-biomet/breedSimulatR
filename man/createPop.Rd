@@ -27,15 +27,21 @@ population object (see:\link[breedSimulatR]{population})
 Create population object from genotype data.frame
 }
 \examples{
-mySpec <- specie$new(nChr = 10,
-                     lchr = 10^6,
-                     lchrCm = 100,
-                     specName = "Geneticae Exempli")
-SNPs <- SNPinfo$new(SNPcoord = exampleData$snpCoord,
-                    specie = mySpec)
+mySpec <- specie$new(
+  nChr = 10,
+  lchr = 10^6,
+  lchrCm = 100,
+  specName = "Geneticae Exempli"
+)
+SNPs <- SNPinfo$new(
+  SNPcoord = exampleData$snpCoord,
+  specie = mySpec
+)
 
 print(exampleData$genotypes[1:5, 1:10])
-example_pop <- createPop(geno = exampleData$genotypes,
-                         SNPinfo = SNPs,
-                         popName = "Example population")
+example_pop <- createPop(
+  geno = exampleData$genotypes,
+  SNPinfo = SNPs,
+  popName = "Example population"
+)
 }

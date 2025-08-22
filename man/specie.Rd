@@ -54,16 +54,16 @@ mySpec$getChrLengthCm("Chr3")
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{specie$new()}}
-\item \href{#method-print}{\code{specie$print()}}
-\item \href{#method-getChrLength}{\code{specie$getChrLength()}}
-\item \href{#method-getChrLengthCm}{\code{specie$getChrLengthCm()}}
-\item \href{#method-clone}{\code{specie$clone()}}
+\item \href{#method-Specie-new}{\code{specie$new()}}
+\item \href{#method-Specie-print}{\code{specie$print()}}
+\item \href{#method-Specie-getChrLength}{\code{specie$getChrLength()}}
+\item \href{#method-Specie-getChrLengthCm}{\code{specie$getChrLengthCm()}}
+\item \href{#method-Specie-clone}{\code{specie$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-Specie-new"></a>}}
+\if{latex}{\out{\hypertarget{method-Specie-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new specie object.
 \subsection{Usage}{
@@ -112,8 +112,8 @@ print(mySpec)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-Specie-print"></a>}}
+\if{latex}{\out{\hypertarget{method-Specie-print}{}}}
 \subsection{Method \code{print()}}{
 Display information about the object
 \subsection{Usage}{
@@ -122,8 +122,8 @@ Display information about the object
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getChrLength"></a>}}
-\if{latex}{\out{\hypertarget{method-getChrLength}{}}}
+\if{html}{\out{<a id="method-Specie-getChrLength"></a>}}
+\if{latex}{\out{\hypertarget{method-Specie-getChrLength}{}}}
 \subsection{Method \code{getChrLength()}}{
 Get the chromosomes length
 \subsection{Usage}{
@@ -149,8 +149,8 @@ mySpec$getChrLength("Chr3")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getChrLengthCm"></a>}}
-\if{latex}{\out{\hypertarget{method-getChrLengthCm}{}}}
+\if{html}{\out{<a id="method-Specie-getChrLengthCm"></a>}}
+\if{latex}{\out{\hypertarget{method-Specie-getChrLengthCm}{}}}
 \subsection{Method \code{getChrLengthCm()}}{
 Get the chromosomes length in centimorgans
 \subsection{Usage}{
@@ -176,8 +176,8 @@ mySpec$getChrLengthCm("Chr3")
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-Specie-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-Specie-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

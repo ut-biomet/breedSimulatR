@@ -83,17 +83,17 @@ of all SNPs. for each chromosomes}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{SNPinfo$new()}}
-\item \href{#method-nSNP}{\code{SNPinfo$nSNP()}}
-\item \href{#method-getInfo}{\code{SNPinfo$getInfo()}}
-\item \href{#method-print}{\code{SNPinfo$print()}}
-\item \href{#method-plot}{\code{SNPinfo$plot()}}
-\item \href{#method-clone}{\code{SNPinfo$clone()}}
+\item \href{#method-SNPinfo-new}{\code{SNPinfo$new()}}
+\item \href{#method-SNPinfo-nSNP}{\code{SNPinfo$nSNP()}}
+\item \href{#method-SNPinfo-getInfo}{\code{SNPinfo$getInfo()}}
+\item \href{#method-SNPinfo-print}{\code{SNPinfo$print()}}
+\item \href{#method-SNPinfo-plot}{\code{SNPinfo$plot()}}
+\item \href{#method-SNPinfo-clone}{\code{SNPinfo$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-SNPinfo-new"></a>}}
+\if{latex}{\out{\hypertarget{method-SNPinfo-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new SNPinfo object.
 \subsection{Usage}{
@@ -146,8 +146,8 @@ SNPs <- SNPinfo$new(SNPcoord = SNPcoord, specie = mySpec)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-nSNP"></a>}}
-\if{latex}{\out{\hypertarget{method-nSNP}{}}}
+\if{html}{\out{<a id="method-SNPinfo-nSNP"></a>}}
+\if{latex}{\out{\hypertarget{method-SNPinfo-nSNP}{}}}
 \subsection{Method \code{nSNP()}}{
 Get the number of SNPs per chromosomes
 \subsection{Usage}{
@@ -172,8 +172,8 @@ SNPs$nSNP(c("Chr2","Chr3"))
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getInfo"></a>}}
-\if{latex}{\out{\hypertarget{method-getInfo}{}}}
+\if{html}{\out{<a id="method-SNPinfo-getInfo"></a>}}
+\if{latex}{\out{\hypertarget{method-SNPinfo-getInfo}{}}}
 \subsection{Method \code{getInfo()}}{
 Get information about specific SNPs
 \subsection{Usage}{
@@ -198,8 +198,8 @@ SNPs$getInfo(c("SNP01", "SNP03"))
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-SNPinfo-print"></a>}}
+\if{latex}{\out{\hypertarget{method-SNPinfo-print}{}}}
 \subsection{Method \code{print()}}{
 Display summary information about the object: specie, number
 of SNP, SNP coordinates.
@@ -209,8 +209,8 @@ of SNP, SNP coordinates.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-plot"></a>}}
-\if{latex}{\out{\hypertarget{method-plot}{}}}
+\if{html}{\out{<a id="method-SNPinfo-plot"></a>}}
+\if{latex}{\out{\hypertarget{method-SNPinfo-plot}{}}}
 \subsection{Method \code{plot()}}{
 plot chromosome map using the \pkg{plotly} package
 \subsection{Usage}{
@@ -234,8 +234,8 @@ plot chromosome map using the \pkg{plotly} package
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-SNPinfo-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-SNPinfo-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

@@ -59,13 +59,13 @@ SNPs (see:\link[breedSimulatR]{SNPinfo})}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{haplotype$new()}}
-\item \href{#method-clone}{\code{haplotype$clone()}}
+\item \href{#method-Haplotype-new}{\code{haplotype$new()}}
+\item \href{#method-Haplotype-clone}{\code{haplotype$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-Haplotype-new"></a>}}
+\if{latex}{\out{\hypertarget{method-Haplotype-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new Haplotype object.
 \subsection{Usage}{
@@ -120,8 +120,8 @@ haplo <- haplotype$new(SNPinfo = SNPs,
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-Haplotype-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-Haplotype-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

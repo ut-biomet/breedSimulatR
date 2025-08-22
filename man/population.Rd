@@ -127,17 +127,17 @@ encoded in allele doses. (individuals in row and markers in column)}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{population$new()}}
-\item \href{#method-addInds}{\code{population$addInds()}}
-\item \href{#method-remInds}{\code{population$remInds()}}
-\item \href{#method-writeVcf}{\code{population$writeVcf()}}
-\item \href{#method-print}{\code{population$print()}}
-\item \href{#method-clone}{\code{population$clone()}}
+\item \href{#method-population-new}{\code{population$new()}}
+\item \href{#method-population-addInds}{\code{population$addInds()}}
+\item \href{#method-population-remInds}{\code{population$remInds()}}
+\item \href{#method-population-writeVcf}{\code{population$writeVcf()}}
+\item \href{#method-population-print}{\code{population$print()}}
+\item \href{#method-population-clone}{\code{population$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-population-new"></a>}}
+\if{latex}{\out{\hypertarget{method-population-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new population object.
 \subsection{Usage}{
@@ -220,8 +220,8 @@ myPop <- population$new(name = "My Population 1",
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addInds"></a>}}
-\if{latex}{\out{\hypertarget{method-addInds}{}}}
+\if{html}{\out{<a id="method-population-addInds"></a>}}
+\if{latex}{\out{\hypertarget{method-population-addInds}{}}}
 \subsection{Method \code{addInds()}}{
 Add individuals to the population
 \subsection{Usage}{
@@ -264,8 +264,8 @@ print(myPop)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-remInds"></a>}}
-\if{latex}{\out{\hypertarget{method-remInds}{}}}
+\if{html}{\out{<a id="method-population-remInds"></a>}}
+\if{latex}{\out{\hypertarget{method-population-remInds}{}}}
 \subsection{Method \code{remInds()}}{
 Remove individuals from the population
 \subsection{Usage}{
@@ -291,8 +291,8 @@ print(myPop)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-writeVcf"></a>}}
-\if{latex}{\out{\hypertarget{method-writeVcf}{}}}
+\if{html}{\out{<a id="method-population-writeVcf"></a>}}
+\if{latex}{\out{\hypertarget{method-population-writeVcf}{}}}
 \subsection{Method \code{writeVcf()}}{
 Write a gzip compressed VCF file with population's individuals information
 \subsection{Usage}{
@@ -308,8 +308,8 @@ Write a gzip compressed VCF file with population's individuals information
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-population-print"></a>}}
+\if{latex}{\out{\hypertarget{method-population-print}{}}}
 \subsection{Method \code{print()}}{
 Display informations about the object
 \subsection{Usage}{
@@ -318,8 +318,8 @@ Display informations about the object
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-population-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-population-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

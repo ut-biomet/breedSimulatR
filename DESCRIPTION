@@ -2,7 +2,7 @@ Type: Package
 Package: breedSimulatR
 Title: R Breeding Simulator
 Version: 0.3.2
-Authors@R: 
+Authors@R:
     c(person(given = "Julien",
              family = "Diot",
              role = c("aut", "cre"),
@@ -18,9 +18,9 @@ License: MIT + file LICENSE
 URL: https://github.com/ut-biomet/breedSimulatR,
     https://ut-biomet.github.io/breedSimulatR/
 BugReports: https://github.com/ut-biomet/breedSimulatR/issues
-Depends: 
+Depends:
     R (>= 3.2.0)
-Imports: 
+Imports:
     base,
     data.table,
     R6,
@@ -38,7 +38,7 @@ Suggests:
     roxygen2,
     spelling,
     testthat
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Copyright: The University of Tokyo, Laboratory of Biometry and
     Bioinfomatics.
@@ -47,4 +47,4 @@ Language: en-US
 LazyData: true
 Maintainers@R: person("Julien", "Diot", email =
     "juliendiot@ut-biomet.org", role = c("aut", "cre"))
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2

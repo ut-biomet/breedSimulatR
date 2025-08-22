@@ -72,14 +72,14 @@ myInd$generateGametes(2)
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{individual$new()}}
-\item \href{#method-generateGametes}{\code{individual$generateGametes()}}
-\item \href{#method-clone}{\code{individual$clone()}}
+\item \href{#method-individual-new}{\code{individual$new()}}
+\item \href{#method-individual-generateGametes}{\code{individual$generateGametes()}}
+\item \href{#method-individual-clone}{\code{individual$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-individual-new"></a>}}
+\if{latex}{\out{\hypertarget{method-individual-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new individual object.
 \subsection{Usage}{
@@ -156,8 +156,8 @@ myInd <-  individual$new(name = "Ind 1",
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-generateGametes"></a>}}
-\if{latex}{\out{\hypertarget{method-generateGametes}{}}}
+\if{html}{\out{<a id="method-individual-generateGametes"></a>}}
+\if{latex}{\out{\hypertarget{method-individual-generateGametes}{}}}
 \subsection{Method \code{generateGametes()}}{
 Generate Gametes
 \subsection{Usage}{
@@ -185,8 +185,8 @@ myInd$generateGametes(2)
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-individual-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-individual-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
